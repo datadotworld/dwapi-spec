@@ -23,18 +23,6 @@ do_release() {
     : ${MVN_RELEASE_USER_EMAIL}
     : ${MVN_RELEASE_USER_NAME}
 
-    # These are environment variables that need to be configured within CircleCI on the project
-    : ${BINTRAY_USERNAME}
-    : ${BINTRAY_PASSWORD}
-    : ${BINTRAY_REPO_OWNER}
-    : ${BINTRAY_REPO}
-    : ${SONATYPE_USERNAME}
-    : ${SONATYPE_PASSWORD}
-    : ${CIRCLE_PROJECT_REPONAME}
-
-    # Passphrase associated with GPG key installed at Bintray to sign files
-    : ${GPG_PASSPHRASE}
-
     git config user.email "${MVN_RELEASE_USER_EMAIL}"
     git config user.name "${MVN_RELEASE_USER_NAME}"
 
