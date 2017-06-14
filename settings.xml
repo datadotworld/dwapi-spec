@@ -19,7 +19,7 @@ permissions and limitations under the License.
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <servers>
         <server>
-            <id>central</id>
+            <id>releases</id>
             <username>${ARTIFACTORY_USERNAME}</username>
             <password>${ARTIFACTORY_PASSWORD}</password>
         </server>
@@ -29,46 +29,6 @@ permissions and limitations under the License.
             <password>${ARTIFACTORY_PASSWORD}</password>
         </server>
     </servers>
-    <profiles>
-        <profile>
-            <id>artifactory</id>
-            <repositories>
-                <repository>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
-                    <id>central</id>
-                    <name>libs-release</name>
-                    <url>https://dataworld.artifactoryonline.com/dataworld/libs-release</url>
-                </repository>
-                <repository>
-                    <snapshots/>
-                    <releases>
-                        <enabled>false</enabled>
-                    </releases>
-                    <id>snapshots</id>
-                    <name>libs-snapshot</name>
-                    <url>https://dataworld.artifactoryonline.com/dataworld/libs-snapshot</url>
-                </repository>
-            </repositories>
-            <pluginRepositories>
-                <pluginRepository>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
-                    <id>central</id>
-                    <name>plugins-release</name>
-                    <url>https://dataworld.artifactoryonline.com/dataworld/plugins-release</url>
-                </pluginRepository>
-                <pluginRepository>
-                    <snapshots/>
-                    <id>snapshots</id>
-                    <name>plugins-snapshot</name>
-                    <url>https://dataworld.artifactoryonline.com/dataworld/plugins-snapshot</url>
-                </pluginRepository>
-            </pluginRepositories>
-        </profile>
-    </profiles>
     <activeProfiles>
         <activeProfile>artifactory</activeProfile>
     </activeProfiles>

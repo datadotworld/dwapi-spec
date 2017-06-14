@@ -2,7 +2,10 @@
   "swagger": "2.0",
   "info": {
     "version": "0.1-SNAPSHOT",
-    "title": "data.world Public API"
+    "title": "data.world Public API",
+    "x-stoplight": {
+      "id": "data-world/specs/data-world"
+    }
   },
   "host": "api.data.world",
   "basePath": "/v0",
@@ -132,10 +135,7 @@
             }
           },
           "400": {
-            "description": "Bad request",
-            "schema": {
-              "$ref": "#/definitions/ErrorMessage"
-            }
+            "$ref": "#/responses/StdErrors"
           },
           "401": {
             "description": "Unauthorized",
@@ -1470,6 +1470,14 @@
         "updated": {
           "type": "string"
         }
+      }
+    }
+  },
+  "responses": {
+    "StdErrors": {
+      "description": "",
+      "schema": {
+        "$ref": "#/definitions/ErrorMessage"
       }
     }
   }
