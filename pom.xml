@@ -64,14 +64,14 @@ permissions and limitations under the License.
 
     <distributionManagement>
         <repository>
-            <id>releases</id>
+            <id>release-local</id>
             <name>Internal Releases</name>
-            <url>https://dataworld.artifactoryonline.com/dataworld/libs-release</url>
+            <url>https://dataworld.artifactoryonline.com/dataworld/libs-release-local</url>
         </repository>
         <snapshotRepository>
-            <id>snapshots</id>
+            <id>snapshot-local</id>
             <name>Internal Snapshots</name>
-            <url>https://dataworld.artifactoryonline.com/dataworld/libs-snapshot</url>
+            <url>https://dataworld.artifactoryonline.com/dataworld/libs-snapshot-local</url>
         </snapshotRepository>
     </distributionManagement>
 </project>
