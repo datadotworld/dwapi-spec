@@ -29,7 +29,4 @@ permissions and limitations under the License.
             <password>${ARTIFACTORY_PASSWORD}</password>
         </server>
     </servers>
-    <activeProfiles>
-        <activeProfile>artifactory</activeProfile>
-    </activeProfiles>
 </settings>
