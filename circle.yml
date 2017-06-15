@@ -26,7 +26,7 @@ dependencies:
 test:
   override:
     - mvn clean verify -s settings.xml
-    - prism conduct --spec src/main/resources/world/data/api/swagger.json spec/* > $CIRCLE_TEST_REPORTS/prism.log
+    - prism conduct --spec src/main/resources/world/data/api/swagger.json spec/*
   post:
     # Stick the surefire test reports where CircleCI can read them
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
