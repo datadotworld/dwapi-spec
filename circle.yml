@@ -21,7 +21,7 @@ machine:
 
 dependencies:
   pre:
-    - curl https://raw.githubusercontent.com/stoplightio/prism/master/install.sh | sh
+    - curl https://raw.githubusercontent.com/stoplightio/prism/master/install.sh | sudo sh
 
 test:
   override:
