@@ -2,17 +2,18 @@
 
 ## General
 
-The following general rules apply on this project:
-
+* Keep in mind that this is a design project. Contributions of all kinds (issues, ideas, 
+proposals), not just code, are highly appreciated.
+* Pull requests are welcome with the understanding that changes proposed to actual operations, 
+parameters and responses will be carefully evaluated and discussed, and may not always be accepted.
 * All contributions including documentation, filenames and discussions should be written in English language.
 
 ## Issues
 
-Our [issue tracker](https://github.com/datadotworld/dwapi-specs/issues) can be used to discuss 
-problems or additions to the current or next version of the data.world API specification.
+Our [issue tracker](https://github.com/datadotworld/dwapi-specs/issues) can be used to report 
+issues and propose changes to the current or next version of the data.world API specification.
 
 Please follow these guidelines before opening an issue:
-
 * Make sure your issue is not a duplicate.
 * Make sure your issue is relevant to the specification.
 
