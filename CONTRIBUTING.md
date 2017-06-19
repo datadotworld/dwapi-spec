@@ -97,7 +97,12 @@ Go to https://github.com/[YOUR_GITHUB_NAME]/dwapi-spec and select your feature b
 
 ## Conventions
 
-**TBD**
+Due to limitations in swagger-maven-plugin 3.1.2 and or assertj-swagger, this swagger definition 
+must not include:
+
+1. Global `consumes` or `produces`. Those must be defined for each operation.
+2. JSON examples. Examples must be stringified JSON.
+3. Response references. The response schema can be a reference, but not the response itself.
 
 ## Thank you!
 
