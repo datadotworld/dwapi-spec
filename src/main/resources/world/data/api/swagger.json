@@ -5,9 +5,9 @@
     "title": "data.world API",
     "termsOfService": "https://data.world/terms",
     "contact": {
-      "name": "Rafael Pereira",
+      "name": "data.world",
       "url": "https://data.world",
-      "email": "rafael.pereira@data.world"
+      "email": "help@data.world"
     },
     "license": {
       "name": "Apache 2.0",
@@ -63,7 +63,7 @@
         ],
         "responses": {
           "200": {
-            "description": "__OK__\nThe request has succeeded.",
+            "description": "**OK**\nThe request has succeeded.",
             "schema": {
               "$ref": "#/definitions/CreateDatasetResponse"
             },
@@ -139,7 +139,7 @@
         ],
         "responses": {
           "200": {
-            "description": "__OK__\nThe request has succeeded.",
+            "description": "**OK**\nThe request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DatasetSummaryResponse"
             },
@@ -221,7 +221,7 @@
         ],
         "responses": {
           "200": {
-            "description": "__OK__\nThe request has succeeded.",
+            "description": "**OK**\nThe request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SuccessMessage"
             },
@@ -306,7 +306,7 @@
         ],
         "responses": {
           "200": {
-            "description": "__OK__\nThe request has succeeded.",
+            "description": "**OK**\nThe request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SuccessMessage"
             },
@@ -396,7 +396,7 @@
         ],
         "responses": {
           "200": {
-            "description": "__OK__\nThe request has succeeded.",
+            "description": "**OK**\nThe request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SuccessMessage"
             },
@@ -479,7 +479,7 @@
         ],
         "responses": {
           "200": {
-            "description": "__OK__\nThe request has succeeded.",
+            "description": "**OK**\nThe request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SuccessMessage"
             },
@@ -561,7 +561,7 @@
         ],
         "responses": {
           "200": {
-            "description": "__OK__\nThe request has succeeded.",
+            "description": "**OK**\nThe request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SuccessMessage"
             },
@@ -634,7 +634,7 @@
         ],
         "responses": {
           "200": {
-            "description": "__OK__\nThe request has succeeded.",
+            "description": "**OK**\nThe request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SuccessMessage"
             },
@@ -705,7 +705,7 @@
         ],
         "responses": {
           "200": {
-            "description": "__OK__\nThe request has succeeded.",
+            "description": "**OK**\nThe request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SuccessMessage"
             },
@@ -789,7 +789,7 @@
         ],
         "responses": {
           "200": {
-            "description": "__OK__\nThe request has succeeded.",
+            "description": "**OK**\nThe request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SuccessMessage"
             },
@@ -822,7 +822,7 @@
             "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
           },
           "413": {
-            "description": "__PAYLOAD TOO LARGE__\nThe server is refusing to process a request because the request payload is larger than the server is willing or able to process.",
+            "description": "**PAYLOAD TOO LARGE**\nThe server is refusing to process a request because the request payload is larger than the server is willing or able to process.",
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             }
@@ -881,7 +881,7 @@
         ],
         "responses": {
           "200": {
-            "description": "__OK__\nThe request has succeeded.",
+            "description": "**OK**\nThe request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SuccessMessage"
             },
@@ -914,7 +914,7 @@
             "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
           },
           "413": {
-            "description": "__PAYLOAD TOO LARGE__\nThe server is refusing to process a request because the request payload is larger than the server is willing or able to process.",
+            "description": "**PAYLOAD TOO LARGE**\nThe server is refusing to process a request because the request payload is larger than the server is willing or able to process.",
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             }
@@ -952,7 +952,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "__OK__\nThe request has succeeded.",
+            "description": "**OK**\nThe request has succeeded.",
             "schema": {
               "$ref": "#/definitions/UserDataResponse"
             },
@@ -1016,7 +1016,7 @@
         ],
         "responses": {
           "200": {
-            "description": "__OK__\nThe request has succeeded.",
+            "description": "**OK**\nThe request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PaginatedDatasetResults"
             },
@@ -1086,7 +1086,7 @@
         ],
         "responses": {
           "200": {
-            "description": "__OK__\nThe request has succeeded.",
+            "description": "**OK**\nThe request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PaginatedDatasetResults"
             },
@@ -1156,7 +1156,7 @@
         ],
         "responses": {
           "200": {
-            "description": "__OK__\nThe request has succeeded.",
+            "description": "**OK**\nThe request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PaginatedDatasetResults"
             },
