@@ -40,7 +40,7 @@
         "tags": [
           "datasets"
         ],
-        "summary": "Create a new dataset.",
+        "summary": "Create a dataset",
         "operationId": "createDataset",
         "produces": [
           "application/json"
@@ -124,7 +124,7 @@
         "tags": [
           "datasets"
         ],
-        "summary": "Retrieve a dataset.",
+        "summary": "Retrieve a dataset",
         "operationId": "getDataset",
         "produces": [
           "application/json"
@@ -195,7 +195,6 @@
         "tags": [
           "datasets"
         ],
-        "summary": "Replace an existing dataset.",
         "operationId": "replaceDataset",
         "produces": [
           "application/json"
@@ -274,13 +273,14 @@
         "consumes": [
           "application/json"
         ],
-        "description": "Completely rewrite an existing dataset, including any previously added files."
+        "description": "Completely rewrite an existing dataset, including any previously added files.",
+        "summary": "Replace a dataset"
       },
       "patch": {
         "tags": [
           "datasets"
         ],
-        "summary": "Update an existing dataset.",
+        "summary": "Update a dataset",
         "operationId": "patchDataset",
         "produces": [
           "application/json"
@@ -367,7 +367,7 @@
         "tags": [
           "datasets"
         ],
-        "summary": "Add or update files for a dataset.",
+        "summary": "Add files",
         "operationId": "addFilesBySource",
         "consumes": [
           "application/json"
@@ -452,7 +452,7 @@
         "tags": [
           "datasets"
         ],
-        "summary": "Delete files from a dataset.",
+        "summary": "Delete files",
         "operationId": "deleteFilesAndSyncSources",
         "produces": [
           "application/json"
@@ -537,7 +537,7 @@
         "tags": [
           "datasets"
         ],
-        "summary": "Delete a single file from a dataset.",
+        "summary": "Delete a file",
         "operationId": "deleteFileAndSyncSource",
         "produces": [
           "application/json"
@@ -619,7 +619,7 @@
         "tags": [
           "datasets"
         ],
-        "summary": "Fetch latest files from source and update dataset. Same as `POST:/sync`.",
+        "summary": "Sync files (via GET)",
         "operationId": "syncViaGet",
         "produces": [
           "application/json"
@@ -690,7 +690,7 @@
         "tags": [
           "datasets"
         ],
-        "summary": "Fetch latest files from source and update dataset.",
+        "summary": "Sync files",
         "operationId": "sync",
         "produces": [
           "application/json"
@@ -763,7 +763,7 @@
         "tags": [
           "uploads"
         ],
-        "summary": "Upload one or more files to a dataset.",
+        "summary": "Upload files",
         "description": "Upload multiple files at once to a dataset via multipart request.\nSwagger clients will limit this method of upload to one file at a time. Other HTTP clients capable of making multipart/form-data requests can be used to upload multiple files in a single request.",
         "operationId": "uploadFiles",
         "consumes": [
@@ -852,7 +852,7 @@
         "tags": [
           "uploads"
         ],
-        "summary": "Upload a file to a dataset.",
+        "summary": "Upload file",
         "description": "This method of upload is not supported by Swagger clients. Other HTTP clients can be used to supply the contents of the file directly in the body of the request",
         "operationId": "uploadFile",
         "consumes": [
@@ -944,7 +944,7 @@
         "tags": [
           "user"
         ],
-        "summary": "Get user data.",
+        "summary": "Get user data",
         "operationId": "getUserData",
         "produces": [
           "application/json"
@@ -998,7 +998,7 @@
         "tags": [
           "user"
         ],
-        "summary": "Fetch datasets on which the requesting user is a contributor.",
+        "summary": "List dataset as contributor",
         "operationId": "fetchContributingDatasets",
         "produces": [
           "application/json"
@@ -1068,7 +1068,7 @@
         "tags": [
           "user"
         ],
-        "summary": "Fetch datasets the requesting user likes.",
+        "summary": "List liked datasets",
         "operationId": "fetchLikedDatasets",
         "produces": [
           "application/json"
@@ -1138,7 +1138,7 @@
         "tags": [
           "user"
         ],
-        "summary": "Fetch datasets the requesting user owns",
+        "summary": "List datasets as owner",
         "operationId": "fetchDatasets",
         "produces": [
           "application/json"
