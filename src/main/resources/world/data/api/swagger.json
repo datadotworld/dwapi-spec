@@ -1820,6 +1820,7 @@
     },
     "PaginatedDatasetResults": {
       "type": "object",
+      "title": "Paginated Dataset Results",
       "properties": {
         "count": {
           "type": "integer",
@@ -1832,11 +1833,14 @@
             "$ref": "#/definitions/DatasetSummaryResponse"
           }
         },
-        "next": {
+        "nextPageToken": {
           "type": "string"
         }
       },
-      "title": "Paginated Dataset Results"
+      "required": [
+        "count",
+        "records"
+      ]
     }
   },
   "security": [
