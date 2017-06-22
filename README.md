@@ -12,13 +12,13 @@ https://docs.data.world/documentation/api/
 
 To run local (mock) instance of this API during development, use [Prism](http://stoplight.io/platform/prism/)
 ```bash
-curl https://raw.githubusercontent.com/stoplightio/prism/master/install.sh | sh &&
+curl https://raw.githubusercontent.com/stoplightio/prism/master/install.sh | sudo sh &&
   prism run --mock --list --spec src/main/resources/world/data/api/swagger.json
 ```
 
 ## Contributing
 
-The data.world API specification is an open source project. Community participation is encouraged.
+The data.world API specification is an open-source project. Community participation is encouraged.
 If you'd like to contribute, please follow the [Contributing Guidelines](CONTRIBUTING.md).
 
 ## License

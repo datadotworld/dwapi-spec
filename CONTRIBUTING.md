@@ -97,7 +97,8 @@ Go to https://github.com/[YOUR_GITHUB_NAME]/dwapi-spec and select your feature b
 
 ## Conventions
 
-Due to limitations in swagger-maven-plugin 3.1.2 and or assertj-swagger, this swagger definition 
+Due to limitations in swagger-maven-plugin 3.1.2 and or assertj-swagger (which are used in the 
+implementation of this design), this swagger definition 
 must not include:
 
 1. Global `consumes` or `produces`. Those must be defined for each operation.
