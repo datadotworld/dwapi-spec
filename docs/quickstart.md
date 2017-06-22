@@ -8,16 +8,16 @@ To create a dataset, use the #endpoint:93LqHoGaE2snXCCpu endpoint. For example, 
 
 ```bash
 curl --request POST \
-  --url 'https://api.data.world/v0/datasets/[USERNAME]' \
-  --header 'authorization: Bearer [YOUR_TOKEN]' \
-  --header 'content-type: application/json' \
+  --url "https://api.data.world/v0/datasets/${DW_USERNAME}" \
+  --header "authorization: Bearer ${DW_API_TOKEN}" \
+  --header "content-type: application/json" \
   --data '{"title":"API Sandbox","visibility":"PRIVATE"}'
 ```
 
 Where the following must be replaced:
 
-* `[USERNAME]`: your data.world username
-* `[YOUR_TOKEN]`: your API authentication token
+* `${DW_USERNAME}`: your data.world username
+* `${DW_API_TOKEN}`: your API authentication token
 
 As a result, the server response should look like this:
 
@@ -42,9 +42,9 @@ You can add that file to our `API Sandbox` dataset using the #endpoint:ujqwuHZYZ
 
 ```bash
 curl --request POST \
-  --url 'https://api.data.world/v0/datasets/[USERNAME]/api-sandbox/files' \
-  --header 'authorization: [API_TOKEN]' \
-  --header 'content-type: application/json' \
+  --url "https://api.data.world/v0/datasets/${DW_USERNAME}/api-sandbox/files" \
+  --header "authorization: Bearer ${DW_API_TOKEN}" \
+  --header "content-type: application/json" \
   --data '{"files":[{"name":"nyc-subways.csv","source":{"url":"https://data.cityofnewyork.us/api/views/kk4q-3rt2/rows.csv?accessType=DOWNLOAD"},"description":"List of NYC subway stations","labels":["raw data"]}]}'
 ```
 
@@ -75,13 +75,88 @@ As a result, the server response should look like this:
 
 Processing of uploaded files is asyncrhonous and finishes quickly. However, large files can take a few minutes to process. Once the dataset is in `LOADED` status, the data is ready to be consumed.
 
-Let's look at how SQL can be used to query the data we just uploaded.
+Let's look at how you can check the status of a dataset
+
+## Retrieving dataset info
+
+To retrieve dataset info, use the #endpoint:asFRaPWvQM5eDqeKt endpoint. For example:
+```bash
+curl --request GET \
+  --url "https://api.data.world/v0/datasets/${DW_USERNAME}/api-sandbox" \
+  --header "authorization: Bearer ${DW_API_TOKEN}" \
+  --header "content-type: application/json"
+```
+
+As a result, the server response should look like this:
+```json
+{
+  "owner": "rflprr",
+  "id": "api-sandbox",
+  "title": "API Sandbox",
+  "visibility": "PRIVATE",
+  "files": [
+    {
+      "name": "nyc-subways.csv",
+      "sizeInBytes": 64188,
+      "source": {
+        "url": "https://data.cityofnewyork.us/api/views/kk4q-3rt2/rows.csv?accessType=DOWNLOAD",
+        "syncStatus": "OK",
+        "lastSyncStart": "2017-06-21T14:53:17.038Z",
+        "lastSyncSuccess": "2017-06-21T14:53:17.045Z"
+      },
+      "created": "2017-06-21T14:53:15.806Z",
+      "updated": "2017-06-21T14:53:15.806Z",
+      "description": "List of NYC subway stations",
+      "labels": [
+        "raw data"
+      ]
+    }
+  ],
+  "status": "LOADED",
+  "created": "2017-06-21T14:51:41.096Z",
+  "updated": "2017-06-21T14:53:18.852Z"
+}
+```
+
+Note that `syncStatus` is `OK` and `status` is `LOADED`. That indicates that the file was synchronized correctly and that the dataset is ready to use.
 
 ## Querying with SQL
 
-TODO
+Now that the dataset is ready to be used, we can, for example, discover which NYC subway stations the `7 Express` train stops at using the `query.data.world` API. For example:
 
-# Things to Know
+```bash
+curl --request POST \
+  --url "https://query.data.world/sql/${DW_USERNAME}/api-sandbox" \
+  --header "authorization: Bearer ${DW_API_TOKEN}" \
+  --header "accept: text/csv" \
+  --data-urlencode 'query=SELECT NAME, LINE FROM `nyc-subways` WHERE LINE LIKE "%7 Express%"'
+```
+
+As a result, the server response shouldlook like this:
+```
+NAME,LINE
+Vernon Blvd - Jackson Ave,7-7 Express
+Queensboro Plz,7-7 Express-N-W
+Times Sq - 42nd St,7-7 Express
+Grand Central - 42nd St,7-7 Express
+Mets - Willets Point,7-7 Express
+Junction Blvd,7-7 Express
+Flushing - Main St,7-7 Express
+5th Ave - Bryant Pk,7-7 Express
+34th St - Hudson Yards,7-7 Express
+Woodside - 61st St,7-7 Express
+Court Sq,7-7 Express
+Hunters Point Ave,7-7 Express
+```
+
+## Next steps
+
+1. Take some time to read the "Conventions" section below and to explore more endpoints and their documentation.
+2. Find if you can benefit from existing integrations and skip using this API altogether, by checking our gallery at https://data.world/integrations. Come back often as we are constantly implementing new integrations.
+3. Check-out additional documentation and tutorials at https://help.data.world too.
+4. Let us know what cool things you create and make sure to reach out if you need support. We are at help@data.world and would love to hear from you!
+
+# Conventions
 
 ## Authentication
 All data.world API calls require an API token. After logging into data.world, find your token by navigating to your profile settings, under the Advanced tab or go to [https://data.world/settings/advanced](https://data.world/settings/advanced)

@@ -21,11 +21,13 @@ https://data.world/oauth/authorize?
 
 3. data.world redirects User back to the redirect_url with:  
   `code`  
+  `state`
 
 4. Application takes the `code` and exchanges it for an Access Token:  
   `client_id`  
   `client_secret`  
   `code`  
+  `redirect_uri` *Optional*  
   `grant_type = "authorization_code"`  
 
 **Example Token Request:**
@@ -40,6 +42,7 @@ https://data.world/oauth/authorize?
 5. If `client_id` and `client_secret` are valid data.world will respond with:  
   `access_token`  
   `expires_in`  
+  `refresh_token`  
   Alternatively, if a `redirect_url` was provided, `data.world` will invoke it passing the same list of attributes.
 
 6. Application stores `access_token` to use in subsequent requests by placing it into the request as an `Authorization: Bearer [access_token]` header string.

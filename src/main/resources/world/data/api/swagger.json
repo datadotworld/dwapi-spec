@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.2.0",
+    "version": "0.2.2",
     "title": "data.world API",
     "termsOfService": "https://data.world/terms",
     "contact": {
@@ -1236,7 +1236,7 @@
         },
         "tags": {
           "type": "array",
-          "description": "Dataset tags. Letters numbers and spaces only.",
+          "description": "Dataset tags. Letters numbers and spaces only (max 25 characters).",
           "uniqueItems": true,
           "items": {
             "type": "string",
@@ -1284,6 +1284,7 @@
     },
     "DatasetPatchRequest": {
       "type": "object",
+      "title": "Dataset Update Request",
       "properties": {
         "description": {
           "type": "string",
@@ -1299,7 +1300,7 @@
         },
         "tags": {
           "type": "array",
-          "description": "Dataset tags. Letters numbers and spaces only.",
+          "description": "Dataset tags. Letters numbers and spaces only (max 25 characters).",
           "uniqueItems": true,
           "items": {
             "type": "string",
@@ -1339,14 +1340,11 @@
             "$ref": "#/definitions/FileCreateOrUpdateRequest"
           }
         }
-      },
-      "title": "Dataset Update Request"
+      }
     },
     "DatasetPutRequest": {
       "type": "object",
-      "required": [
-        "visibility"
-      ],
+      "title": "Dataset Replace Request",
       "properties": {
         "description": {
           "type": "string",
@@ -1362,7 +1360,7 @@
         },
         "tags": {
           "type": "array",
-          "description": "Dataset tags. Letters numbers and spaces only.",
+          "description": "Dataset tags. Letters numbers and spaces only (max 25 characters).",
           "uniqueItems": true,
           "items": {
             "type": "string",
@@ -1403,7 +1401,9 @@
           }
         }
       },
-      "title": "Dataset Replace Request"
+      "required": [
+        "visibility"
+      ]
     },
     "DatasetSummaryResponse": {
       "type": "object",
@@ -1437,7 +1437,7 @@
         },
         "tags": {
           "type": "array",
-          "description": "Dataset tags. Letters numbers and spaces only.",
+          "description": "Dataset tags. Letters numbers and spaces only (max 25 characters).",
           "uniqueItems": true,
           "items": {
             "type": "string",
