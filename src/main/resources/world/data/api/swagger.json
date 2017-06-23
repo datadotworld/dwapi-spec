@@ -1286,6 +1286,12 @@
       "type": "object",
       "title": "Dataset Update Request",
       "properties": {
+        "title" : {
+          "type" : "string",
+          "minLength" : 0,
+          "maxLength" : 60,
+          "description": "Dataset name."
+        },
         "description": {
           "type": "string",
           "minLength": 0,
@@ -1346,6 +1352,12 @@
       "type": "object",
       "title": "Dataset Replace Request",
       "properties": {
+        "title" : {
+          "type" : "string",
+          "minLength" : 0,
+          "maxLength" : 60,
+          "description": "Dataset name."
+        },
         "description": {
           "type": "string",
           "minLength": 0,
