@@ -1384,6 +1384,12 @@
             "Other"
           ]
         },
+        "title": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 60,
+          "description": "Dataset name."
+        },
         "visibility": {
           "type": "string",
           "enum": [
@@ -1402,7 +1408,7 @@
         }
       },
       "required": [
-        "visibility"
+        "visibility","title"
       ]
     },
     "DatasetSummaryResponse": {
