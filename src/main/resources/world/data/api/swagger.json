@@ -273,8 +273,8 @@
         "consumes": [
           "application/json"
         ],
-        "description": "Completely rewrite an existing dataset, including any previously added files.",
-        "summary": "Replace a dataset"
+        "description": "Create a dataset with a given id or completely rewrite the dataset, including any previously added files, if one already exists with the given id",
+        "summary": "Create / Replace a dataset"
       },
       "patch": {
         "tags": [
