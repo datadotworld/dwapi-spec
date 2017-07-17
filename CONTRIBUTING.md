@@ -35,7 +35,7 @@ Ensure that you can build the project and run tests.
 
 Install [Prism](http://stoplight.io/platform/prism/) if necessary:
 ```bash
-curl https://raw.githubusercontent.com/stoplightio/prism/master/install.sh | sh
+curl https://raw.githubusercontent.com/stoplightio/prism/master/install.sh | sudo sh
 ```
 
 Run tests:
