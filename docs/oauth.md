@@ -50,7 +50,7 @@ https://data.world/oauth/access_token?
 
 6. Application stores `access_token` to use in subsequent requests by placing it into the request as an `Authorization: Bearer [access_token]` header string.
 
-This flow requires that your application run on a web server, so that step #3 and #4 can be perfomed while your `client_secret` remains protected behind a server environment.
+This flow requires that your application run on a web server, so that step #3 and #4 can be performed while your `client_secret` remains protected behind a server environment.
 
 **DO NOT** include your `client_secret` in source code that accessible to others or client-side apps as they can easily be reverse engineered. See the following section for additional instructions.
 
