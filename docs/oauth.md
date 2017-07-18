@@ -21,7 +21,7 @@ https://data.world/oauth/authorize?
 
 2. User logs into data.world and grants Application access.  
 
-3. data.world redirects User back to the redirect_url with:  
+3. data.world redirects User back to the redirect_uri with:  
   `code`  
   `state`
 
@@ -46,7 +46,7 @@ https://data.world/oauth/access_token?
   `access_token`  
   `expires_in`  
   `refresh_token`  
-  Alternatively, if a `redirect_url` was provided, `data.world` will invoke it passing the same list of attributes.
+  Alternatively, if a `redirect_uri` was provided, `data.world` will invoke it passing the same list of attributes.
 
 6. Application stores `access_token` to use in subsequent requests by placing it into the request as an `Authorization: Bearer [access_token]` header string.
 
