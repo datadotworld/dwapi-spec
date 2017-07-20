@@ -1,5 +1,7 @@
 data.world supports the OAuth 2.0 protocol for authentication and authorization. If you are new to OAuth 2.0, the [OAuth Bible](http://oauthbible.com/) is a good place to start and learn some of the theory. Presently, data.world only supports the Authorization Code Grant flow (a.k.a. 3-legged OAuth).
 
+To obtain Oauth keys email help@data.world
+
 # Auth Steps
 
 All applications follow a basic pattern when accessing a data.world API using OAuth 2.0.
@@ -19,7 +21,7 @@ https://data.world/oauth/authorize?
 
 2. User logs into data.world and grants Application access.  
 
-3. data.world redirects User back to the redirect_url with:  
+3. data.world redirects User back to the redirect_uri with:  
   `code`  
   `state`
 
@@ -32,7 +34,8 @@ https://data.world/oauth/authorize?
 
 **Example Token Request:**
 ```
-https://data.world/oauth/authorize?
+POST 
+https://data.world/oauth/access_token?
   code=zac4ZV2XbleQ2e&
   client_id=3MVG9lKcPoNINVB&
   client_secret=3iQF9BsWEr6nCf&
@@ -43,11 +46,11 @@ https://data.world/oauth/authorize?
   `access_token`  
   `expires_in`  
   `refresh_token`  
-  Alternatively, if a `redirect_url` was provided, `data.world` will invoke it passing the same list of attributes.
+  Alternatively, if a `redirect_uri` was provided, `data.world` will invoke it passing the same list of attributes.
 
 6. Application stores `access_token` to use in subsequent requests by placing it into the request as an `Authorization: Bearer [access_token]` header string.
 
-This flow requires that your application run on a web server, so that step #3 and #4 can be perfomed while your `client_secret` remains protected behind a server environment.
+This flow requires that your application run on a web server, so that step #3 and #4 can be performed while your `client_secret` remains protected behind a server environment.
 
 **DO NOT** include your `client_secret` in source code that accessible to others or client-side apps as they can easily be reverse engineered. See the following section for additional instructions.
 
