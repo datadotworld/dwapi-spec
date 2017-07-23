@@ -310,9 +310,7 @@
         "description" : "This endpoint executes SQL queries against a dataset.\nNew to SQL? Check out data.world's [SQL manual](https://docs.data.world/tutorials/dwsql/) .",
         "operationId" : "sqlGet",
         "produces": [
-          "text/csv",
-          "application/rdf+json",
-          "application/sparql-results+json"
+          "text/csv"
         ],
         "parameters": [
           {
@@ -377,9 +375,7 @@
         "operationId" : "sqlPost",
         "consumes" : [ "application/x-www-form-urlencoded" ],
         "produces": [
-          "text/csv",
-          "application/rdf+json",
-          "application/sparql-results+json"
+          "text/csv"
         ],
         "parameters": [
           {
