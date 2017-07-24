@@ -175,9 +175,7 @@
         "description" : "This endpoint executes SPARQL queries against a dataset.\nNew to SPARQL? Check out data.world's [SPARQL tutorial](https://docs.data.world/tutorials/sparql/) .",
         "operationId" : "sparqlGet",
         "produces": [
-          "text/csv",
-          "application/rdf+json",
-          "application/sparql-results+json"
+          "text/csv", "application/sparql-results+xml", "application/sparql-results+json", "text/tab-separated-values"
         ],
         "parameters": [
           {
@@ -241,11 +239,9 @@
         "description" : "This endpoint executes SPARQL queries against a dataset.\nNew to SPARQL? Check out data.world's [SPARQL tutorial](https://docs.data.world/tutorials/sparql/) .",
         "operationId" : "sparqlPost",
         "produces": [
-          "text/csv",
-          "application/rdf+json",
-          "application/sparql-results+json"
+          "text/csv", "application/sparql-results+xml", "application/sparql-results+json", "text/tab-separated-values"
         ],
-        "consumes" : [ "application/x-www-form-urlencoded" ],
+        "consumes" : [ "application/x-www-form-urlencoded"],
         "parameters": [
           {
             "$ref": "#/parameters/owner"
