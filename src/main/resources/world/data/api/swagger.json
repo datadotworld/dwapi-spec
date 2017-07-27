@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.2.2",
+    "version": "0.4.0",
     "title": "data.world API",
     "termsOfService": "https://data.world/terms",
     "contact": {
