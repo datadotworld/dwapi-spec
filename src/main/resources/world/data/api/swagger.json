@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.2.2",
+    "version": "0.4.0",
     "title": "data.world API",
     "termsOfService": "https://data.world/terms",
     "contact": {
@@ -25,7 +25,16 @@
       "name": "datasets"
     },
     {
+      "name": "download"
+    },
+    {
       "name": "uploads"
+    },
+    {
+      "name": "sparql"
+    },
+    {
+      "name": "sql"
     },
     {
       "name": "user"
@@ -35,6 +44,392 @@
     "https"
   ],
   "paths": {
+    "/download/{owner}/{id}" : {
+      "get" : {
+        "tags" : [ "download" ],
+        "summary" : "Download dataset",
+        "description" : "This endpoint will return a .zip of all files within the dataset.\"",
+        "operationId" : "downloadDataset",
+        "produces" : [ "application/zip" ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/datasetId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "__OK__\nThe request has succeeded."
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "422": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNPROCESSABLE ENTITY**\nThe server understands the content type of the request entity and the syntax of the request entity is correct, but was unable to process the contained instructions.\nFor example, this error may occur if the JSON body of the request doesn't match the expected schema."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "security" : [ {
+          "token" : [ ]
+        } ]
+      }
+    },
+    "/file_download/{owner}/{id}/{file}" : {
+      "get" : {
+        "tags" : [ "download" ],
+        "summary" : "Download file",
+        "description" : "This endpoint will return the file from the latest dataset version.",
+        "operationId" : "downloadFile",
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/datasetId"
+          },
+          {
+            "$ref": "#/parameters/file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "__OK__\nThe request has succeeded."
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "422": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNPROCESSABLE ENTITY**\nThe server understands the content type of the request entity and the syntax of the request entity is correct, but was unable to process the contained instructions.\nFor example, this error may occur if the JSON body of the request doesn't match the expected schema."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "security" : [ {
+          "token" : [ ]
+        } ]
+      }
+    },
+    "/sparql/{owner}/{id}" : {
+      "get" : {
+        "tags" : [ "sparql" ],
+        "summary" : "SPARQL query (via GET)",
+        "description" : "This endpoint executes SPARQL queries against a dataset.\nNew to SPARQL? Check out data.world's [SPARQL tutorial](https://docs.data.world/tutorials/sparql/) .",
+        "operationId" : "sparqlGet",
+        "produces": [
+          "text/csv", "application/sparql-results+xml", "application/sparql-results+json", "text/tab-separated-values"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/datasetId"
+          },
+          {
+            "$ref": "#/parameters/query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "__OK__\nThe request has succeeded."
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "422": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNPROCESSABLE ENTITY**\nThe server understands the content type of the request entity and the syntax of the request entity is correct, but was unable to process the contained instructions.\nFor example, this error may occur if the JSON body of the request doesn't match the expected schema."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "security" : [ {
+          "token" : [ ]
+        } ]
+      },
+      "post" : {
+        "tags" : [ "sparql" ],
+        "summary" : "SPARQL query",
+        "description" : "This endpoint executes SPARQL queries against a dataset.\nNew to SPARQL? Check out data.world's [SPARQL tutorial](https://docs.data.world/tutorials/sparql/) .",
+        "operationId" : "sparqlPost",
+        "produces": [
+          "text/csv", "application/sparql-results+xml", "application/sparql-results+json", "text/tab-separated-values"
+        ],
+        "consumes" : [ "application/x-www-form-urlencoded"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/datasetId"
+          },
+          {
+            "$ref": "#/parameters/formQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "__OK__\nThe request has succeeded."
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "422": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNPROCESSABLE ENTITY**\nThe server understands the content type of the request entity and the syntax of the request entity is correct, but was unable to process the contained instructions.\nFor example, this error may occur if the JSON body of the request doesn't match the expected schema."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "security" : [ {
+          "token" : [ ]
+        } ]
+      }
+    },
+    "/sql/{owner}/{id}" : {
+      "get" : {
+        "tags" : [ "sql" ],
+        "summary" : "SQL query (via GET)",
+        "description" : "This endpoint executes SQL queries against a dataset.\nNew to SQL? Check out data.world's [SQL manual](https://docs.data.world/tutorials/dwsql/) .",
+        "operationId" : "sqlGet",
+        "produces": [
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/datasetId"
+          },
+          {
+            "$ref": "#/parameters/query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "__OK__\nThe request has succeeded."
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "422": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNPROCESSABLE ENTITY**\nThe server understands the content type of the request entity and the syntax of the request entity is correct, but was unable to process the contained instructions.\nFor example, this error may occur if the JSON body of the request doesn't match the expected schema."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "security" : [ {
+          "token" : [ ]
+        } ]
+      },
+      "post" : {
+        "tags" : [ "sql" ],
+        "summary" : "SQL query",
+        "description" : "This endpoint executes SQL queries against a dataset.\nNew to SQL? Check out data.world's [SQL manual](https://docs.data.world/tutorials/dwsql/) .",
+        "operationId" : "sqlPost",
+        "consumes" : [ "application/x-www-form-urlencoded" ],
+        "produces": [
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/datasetId"
+          },
+          {
+            "$ref": "#/parameters/formQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "__OK__\nThe request has succeeded."
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "422": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNPROCESSABLE ENTITY**\nThe server understands the content type of the request entity and the syntax of the request entity is correct, but was unable to process the contained instructions.\nFor example, this error may occur if the JSON body of the request doesn't match the expected schema."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "security" : [ {
+          "token" : [ ]
+        } ]
+      }
+    },
     "/datasets/{owner}": {
       "post": {
         "tags": [
@@ -1874,6 +2269,24 @@
       "type": "string",
       "required": true,
       "description": "Dataset unique identifier.  \nFor example, in the URL: [https://data.world/jonloyens/an-intro-to-dataworld-dataset](https://data.world/jonloyens/an-intro-to-dataworld-dataset), an-intro-to-dataworld-dataset is the unique identifier of the dataset."
+    },
+    "file": {
+      "name": "file",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    },
+    "formQuery" : {
+      "name": "query",
+      "in": "formData",
+      "required": false,
+      "type": "string"
+    },
+    "query" : {
+      "name": "query",
+      "in": "query",
+      "required": false,
+      "type": "string"
     },
     "limit": {
       "name": "limit",
