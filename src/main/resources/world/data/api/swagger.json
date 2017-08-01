@@ -490,6 +490,12 @@
             },
             "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
           },
+          "409": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**CONFLICT**\nThe request could not be completed due to a conflict with the current state of the resource.\nFor example, this may occur for a short period of time after deleting a dataset with the same datasetId as the dataset being created."
+          },
           "422": {
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
@@ -515,6 +521,71 @@
       }
     },
     "/datasets/{owner}/{id}": {
+      "delete": {
+        "tags": [
+          "datasets"
+        ],
+        "operationId": "deleteDataset",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/datasetId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "**OK**\nThe request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
+            },
+            "examples": {
+              "application/json": "{\n  \"message\": \"Dataset has been successfully deleted.\"\n}"
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "description": "Permanently deletes a dataset and all data associated with it. This operation cannot be undone.\nFor a short time after a delete operation, users will receive a \"409 Conflict\" response when attempting to create a new dataset with the same datasetId while the system performs background cleanup tasks associated with the delete.",
+        "summary": "Delete a dataset"
+      },
       "get": {
         "tags": [
           "datasets"
