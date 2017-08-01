@@ -1,6 +1,6 @@
 data.world supports the OAuth 2.0 protocol for authentication and authorization. If you are new to OAuth 2.0, the [OAuth Bible](http://oauthbible.com/) is a good place to start and learn some of the theory. Presently, data.world only supports the Authorization Code Grant flow (a.k.a. 3-legged OAuth).
 
-To obtain Oauth keys email help@data.world
+To request client keys email <help@data.world>  
 
 # Auth Steps
 
@@ -10,6 +10,7 @@ All applications follow a basic pattern when accessing a data.world API using OA
   `client_id`  
   `redirect_uri`  
   `response_type = "code"`  
+  `state`
 
 **Example Authorization URL:**  
 ```
@@ -21,7 +22,7 @@ https://data.world/oauth/authorize?
 
 2. User logs into data.world and grants Application access.  
 
-3. data.world redirects User back to the redirect_uri with:  
+3. data.world redirects user back to the redirect_uri with:  
   `code`  
   `state`
 
@@ -34,8 +35,8 @@ https://data.world/oauth/authorize?
 
 **Example Token Request:**
 ```
-POST 
-https://data.world/oauth/access_token?
+POST
+https://data.world/oauth/authorize?
   code=zac4ZV2XbleQ2e&
   client_id=3MVG9lKcPoNINVB&
   client_secret=3iQF9BsWEr6nCf&
