@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.4.0",
+    "version": "0.5.0",
     "title": "data.world API",
     "termsOfService": "https://data.world/terms",
     "contact": {
@@ -583,7 +583,7 @@
             "token": []
           }
         ],
-        "description": "Permanently deletes a dataset and all data associated with it. This operation cannot be undone.\nFor a short time after a delete operation, users will receive a \"409 Conflict\" response when attempting to create a new dataset with the same datasetId while the system performs background cleanup tasks associated with the delete.",
+        "description": "Permanently deletes a dataset and all data associated with it. This operation cannot be undone, although a new dataset may be created with the same id.",
         "summary": "Delete a dataset"
       },
       "get": {
