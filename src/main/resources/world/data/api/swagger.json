@@ -13,7 +13,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0"
     },
-    "description": "data.world's mission is to build the most meaningful, collaborative, and abundant data resource in the world, so that people who work with data can solve problems faster.&nbsp;&nbsp;\nIn the context of that mission, this API ensures that our users are able to easily access data and manage their data projects regardless of system or tool preference.",
+    "description": "data.world's mission is to build the most meaningful, collaborative, and abundant data resource in the world, so that people who work with data can solve problems faster.\nIn the context of that mission, this API ensures that our users are able to easily access data and manage their data projects regardless of system or tool preference.",
     "x-stoplight": {
       "id": "data-world/specs/data-world"
     }
@@ -67,13 +67,13 @@
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
           },
           "401": {
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
           },
           "403": {
             "schema": {
@@ -130,13 +130,13 @@
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
           },
           "401": {
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
           },
           "403": {
             "schema": {
@@ -196,13 +196,13 @@
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
           },
           "401": {
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
           },
           "403": {
             "schema": {
@@ -261,13 +261,13 @@
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
           },
           "401": {
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
           },
           "403": {
             "schema": {
@@ -327,13 +327,13 @@
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
           },
           "401": {
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
           },
           "403": {
             "schema": {
@@ -392,13 +392,13 @@
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
           },
           "401": {
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
           },
           "403": {
             "schema": {
@@ -470,13 +470,13 @@
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
           },
           "401": {
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
           },
           "403": {
             "schema": {
@@ -551,13 +551,13 @@
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
           },
           "401": {
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
           },
           "403": {
             "schema": {
@@ -617,13 +617,13 @@
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
           },
           "401": {
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
           },
           "403": {
             "schema": {
@@ -698,13 +698,13 @@
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
           },
           "401": {
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
           },
           "403": {
             "schema": {
@@ -784,13 +784,13 @@
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
           },
           "401": {
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
           },
           "403": {
             "schema": {
@@ -874,13 +874,13 @@
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
           },
           "401": {
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
           },
           "403": {
             "schema": {
@@ -957,13 +957,13 @@
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
           },
           "401": {
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
           },
           "403": {
             "schema": {
@@ -1039,13 +1039,13 @@
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
           },
           "401": {
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
           },
           "403": {
             "schema": {
@@ -1112,13 +1112,13 @@
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
           },
           "401": {
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
           },
           "403": {
             "schema": {
@@ -1183,13 +1183,13 @@
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
           },
           "401": {
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
           },
           "403": {
             "schema": {
@@ -1267,13 +1267,13 @@
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
           },
           "401": {
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
           },
           "403": {
             "schema": {
@@ -1359,13 +1359,13 @@
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
           },
           "401": {
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
           },
           "403": {
             "schema": {
@@ -1430,7 +1430,7 @@
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
           },
           "403": {
             "schema": {
@@ -1494,13 +1494,13 @@
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
           },
           "401": {
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
           },
           "403": {
             "schema": {
@@ -1564,13 +1564,13 @@
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
           },
           "401": {
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
           },
           "403": {
             "schema": {
@@ -1634,13 +1634,13 @@
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**BAD REQUEST**&nbsp;\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
           },
           "401": {
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             },
-            "description": "**UNAUTHORIZED**&nbsp;&nbsp;\nThe request has not been applied because it lacks valid authentication credentials for the target resource.&nbsp;&nbsp;\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
           },
           "403": {
             "schema": {
