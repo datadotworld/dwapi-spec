@@ -371,7 +371,7 @@
         "operationId" : "sqlPost",
         "consumes" : [ "application/x-www-form-urlencoded" ],
         "produces": [
-          "text/csv"
+          "text/csv" , "application/json-l", "application/x-ndjson"
         ],
         "parameters": [
           {
