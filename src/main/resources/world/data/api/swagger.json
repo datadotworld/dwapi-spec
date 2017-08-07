@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.5.0",
+    "version": "0.6.0",
     "title": "data.world API",
     "termsOfService": "https://data.world/terms",
     "contact": {
@@ -306,7 +306,7 @@
         "description" : "This endpoint executes SQL queries against a dataset.\nNew to SQL? Check out data.world's [SQL manual](https://docs.data.world/tutorials/dwsql/) .",
         "operationId" : "sqlGet",
         "produces": [
-          "text/csv"
+          "text/csv" , "application/json-l", "application/x-ndjson"
         ],
         "parameters": [
           {
@@ -371,7 +371,7 @@
         "operationId" : "sqlPost",
         "consumes" : [ "application/x-www-form-urlencoded" ],
         "produces": [
-          "text/csv"
+          "text/csv" , "application/json-l", "application/x-ndjson"
         ],
         "parameters": [
           {
