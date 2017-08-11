@@ -1972,6 +1972,21 @@
         "updated": {
           "type": "string",
           "description": "Date and time when the dataset was last updated."
+        },
+        "isProject" : {
+          "type": "boolean",
+          "description": "Flag indicating if the dataset is also a project."
+        },
+        "accessLevel": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "DISCOVER",
+            "READ",
+            "WRITE",
+            "ADMIN"
+          ],
+          "description": "The level of access the authenticated user is allowed with respect to dataset: \n\n*`NONE` Not allowed anything. \n*`DISCOVER` Allowed to know the dataset exists.. \n* `READ` Allowed to view and download dataset files, in addition to what DISCOVER allows. \n* `WRITE` Allowed to update data and metadata, in addition to what READ allows. \n* `ADMIN` Allowed to delete and manage access, in addition to what WRITE allows."
         }
       },
       "required": [
@@ -1981,7 +1996,9 @@
         "visibility",
         "status",
         "created",
-        "updated"
+        "updated",
+        "isProject",
+        "accessLevel"
       ]
     },
     "ErrorMessage": {
