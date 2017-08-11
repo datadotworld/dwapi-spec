@@ -1973,9 +1973,9 @@
           "type": "string",
           "description": "Date and time when the dataset was last updated."
         },
-        "project" : {
+        "isProject" : {
           "type": "boolean",
-          "description": "indicate whether a dataset is a project."
+          "description": "Flag indicating if the dataset is also a project."
         },
         "accessLevel": {
           "type": "string",
@@ -1986,7 +1986,7 @@
             "WRITE",
             "ADMIN"
           ],
-          "description": "The level to which the requesting user have access. \n\n*`NONE` if the requesting user is not allowed to know anything about a dataset, even if it exists. \n*`DISCOVER` if the requesting user is allowed to know a dataset exists, but nothing else. \n* `READ` if the requesting user is allowed to view and download dataset files etc., but may not make modifications. \n* `WRITE` if the requesting user is allowed to upload new files and make other basic changes to datasets. \n* `ADMIN` if the requesting user is allowed to delete a dataset, admin contributor lists."
+          "description": "The level of access the authenticated user is allowed with respect to dataset: \n\n*`NONE` Not allowed anything. \n*`DISCOVER` Allowed to know the dataset exists.. \n* `READ` Allowed to view and download dataset files, in addition to what DISCOVER allows. \n* `WRITE` Allowed to update data and metadata, in addition to what READ allows. \n* `ADMIN` Allowed to delete and manage access, in addition to what WRITE allows."
         }
       },
       "required": [
@@ -1997,7 +1997,7 @@
         "status",
         "created",
         "updated",
-        "project",
+        "isProject",
         "accessLevel"
       ]
     },
