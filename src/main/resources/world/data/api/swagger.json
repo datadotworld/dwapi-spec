@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.6.0",
+    "version": "0.7.0",
     "title": "data.world API",
     "termsOfService": "https://data.world/terms",
     "contact": {
@@ -317,6 +317,9 @@
           },
           {
             "$ref": "#/parameters/query"
+          },
+          {
+            "$ref": "#/parameters/includeTableSchema"
           }
         ],
         "responses": {
@@ -382,6 +385,9 @@
           },
           {
             "$ref": "#/parameters/formQuery"
+          },
+          {
+            "$ref": "#/parameters/includeTableSchema"
           }
         ],
         "responses": {
@@ -2369,6 +2375,14 @@
       "in": "formData",
       "required": false,
       "type": "string"
+    },
+    "includeTableSchema" : {
+      "name": "includeTableSchema",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "default" : false,
+      "description": "Flags indicating to include table schema in the response."
     },
     "query" : {
       "name": "query",
