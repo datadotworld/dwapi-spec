@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.7.0",
+    "version": "0.8.1",
     "title": "data.world API",
     "termsOfService": "https://data.world/terms",
     "contact": {
@@ -13,7 +13,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0"
     },
-    "description": "data.world's mission is to build the most meaningful, collaborative, and abundant data resource in the world, so that people who work with data can solve problems faster.\nIn the context of that mission, this API ensures that our users are able to easily access data and manage their data projects regardless of system or tool preference.",
+    "description": "data.world is designed for data and the people who work with data.  From professional projects to open data, data.world helps you host and share your data, collaborate with your team, and capture context and conclusions as you work.  \nUsing this API users are able to easily access data and manage their data projects regardless of language or tool of preference. \nCheck out our [documentation](https://dwapi.apidocs.io) for tips on how to get started, tutorials and to interact with the API right within your browser.",
     "x-stoplight": {
       "id": "data-world/specs/data-world"
     }
@@ -44,13 +44,17 @@
     "https"
   ],
   "paths": {
-    "/download/{owner}/{id}" : {
-      "get" : {
-        "tags" : [ "download" ],
-        "summary" : "Download dataset",
-        "description" : "This endpoint will return a .zip of all files within the dataset.\"",
-        "operationId" : "downloadDataset",
-        "produces" : [ "application/zip" ],
+    "/download/{owner}/{id}": {
+      "get": {
+        "tags": [
+          "download"
+        ],
+        "summary": "Download dataset",
+        "description": "This endpoint will return a .zip containing all files within the dataset as originally uploaded.  \nIf you are interested retrieving clean data extracted from those files by data.world, check out `GET:/sql` and `GET:/sparql`.",
+        "operationId": "downloadDataset",
+        "produces": [
+          "application/zip"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/owner"
@@ -100,17 +104,21 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security" : [ {
-          "token" : [ ]
-        } ]
+        "security": [
+          {
+            "token": []
+          }
+        ]
       }
     },
-    "/file_download/{owner}/{id}/{file}" : {
-      "get" : {
-        "tags" : [ "download" ],
-        "summary" : "Download file",
-        "description" : "This endpoint will return the file from the latest dataset version.",
-        "operationId" : "downloadFile",
+    "/file_download/{owner}/{id}/{file}": {
+      "get": {
+        "tags": [
+          "download"
+        ],
+        "summary": "Download file",
+        "description": "This endpoint will return a file within the dataset as originally uploaded.  \nIf you are interested retrieving clean data extracted from those files by data.world, check out `GET:/sql` and `GET:/sparql`.",
+        "operationId": "downloadFile",
         "parameters": [
           {
             "$ref": "#/parameters/owner"
@@ -163,19 +171,26 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security" : [ {
-          "token" : [ ]
-        } ]
+        "security": [
+          {
+            "token": []
+          }
+        ]
       }
     },
-    "/sparql/{owner}/{id}" : {
-      "get" : {
-        "tags" : [ "sparql" ],
-        "summary" : "SPARQL query (via GET)",
-        "description" : "This endpoint executes SPARQL queries against a dataset.\nNew to SPARQL? Check out data.world's [SPARQL tutorial](https://docs.data.world/tutorials/sparql/) .",
-        "operationId" : "sparqlGet",
+    "/sparql/{owner}/{id}": {
+      "get": {
+        "tags": [
+          "sparql"
+        ],
+        "summary": "SPARQL query (via GET)",
+        "description": "This endpoint executes SPARQL queries against a dataset or data project.  \n\nSPARQL results are available in a variety of formats. By default, `application/sparql-results+json` will be returned. Set the `Accept` header to one of the following values in accordance with your preference:\n\n* `text/csv`\n* `text/tab-separated-values`\n* `application/sparql-results+xml`\n* `application/sparql-results+json`\n\nNew to SPARQL? Check out data.world's [SPARQL tutorial](https://docs.data.world/tutorials/sparql/).",
+        "operationId": "sparqlGet",
         "produces": [
-          "text/csv", "application/sparql-results+xml", "application/sparql-results+json", "text/tab-separated-values"
+          "text/csv",
+          "application/sparql-results+xml",
+          "application/sparql-results+json",
+          "text/tab-separated-values"
         ],
         "parameters": [
           {
@@ -229,19 +244,28 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security" : [ {
-          "token" : [ ]
-        } ]
+        "security": [
+          {
+            "token": []
+          }
+        ]
       },
-      "post" : {
-        "tags" : [ "sparql" ],
-        "summary" : "SPARQL query",
-        "description" : "This endpoint executes SPARQL queries against a dataset.\nNew to SPARQL? Check out data.world's [SPARQL tutorial](https://docs.data.world/tutorials/sparql/) .",
-        "operationId" : "sparqlPost",
-        "produces": [
-          "text/csv", "application/sparql-results+xml", "application/sparql-results+json", "text/tab-separated-values"
+      "post": {
+        "tags": [
+          "sparql"
         ],
-        "consumes" : [ "application/x-www-form-urlencoded"],
+        "summary": "SPARQL query",
+        "description": "This endpoint executes SPARQL queries against a dataset or data project.  \n\nSPARQL results are available in a variety of formats. By default, `application/sparql-results+json` will be returned. Set the `Accept` header to one of the following values in accordance with your preference:\n\n* `text/csv`\n* `text/tab-separated-values`\n* `application/sparql-results+xml`\n* `application/sparql-results+json`\n\nNew to SPARQL? Check out data.world's [SPARQL tutorial](https://docs.data.world/tutorials/sparql/).",
+        "operationId": "sparqlPost",
+        "produces": [
+          "text/csv",
+          "application/sparql-results+xml",
+          "application/sparql-results+json",
+          "text/tab-separated-values"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/owner"
@@ -255,7 +279,10 @@
         ],
         "responses": {
           "200": {
-            "description": "__OK__\nThe request has succeeded."
+            "description": "__OK__\nThe request has succeeded.",
+            "examples": {
+              "application/x-www-form-urlencoded": "{}"
+            }
           },
           "400": {
             "schema": {
@@ -294,19 +321,25 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security" : [ {
-          "token" : [ ]
-        } ]
+        "security": [
+          {
+            "token": []
+          }
+        ]
       }
     },
-    "/sql/{owner}/{id}" : {
-      "get" : {
-        "tags" : [ "sql" ],
-        "summary" : "SQL query (via GET)",
-        "description" : "This endpoint executes SQL queries against a dataset.\nNew to SQL? Check out data.world's [SQL manual](https://docs.data.world/tutorials/dwsql/) .",
-        "operationId" : "sqlGet",
+    "/sql/{owner}/{id}": {
+      "get": {
+        "tags": [
+          "sql"
+        ],
+        "summary": "SQL query (via GET)",
+        "description": "This endpoint executes SQL queries against a dataset.\n\nSQL results are available in a variety of formats. By default, `application/json` will be returned. Set the `Accept` header to one of the following values in accordance with your preference:\n\n* `text/csv`\n* `application/json`\n* `application/json-l`\n* `application/x-ndjson`\n\nNew to SQL? Check out data.world's [SQL manual](https://docs.data.world/tutorials/dwsql/) .",
+        "operationId": "sqlGet",
         "produces": [
-          "text/csv" , "application/json-l", "application/x-ndjson"
+          "text/csv",
+          "application/json-l",
+          "application/x-ndjson"
         ],
         "parameters": [
           {
@@ -363,18 +396,26 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security" : [ {
-          "token" : [ ]
-        } ]
+        "security": [
+          {
+            "token": []
+          }
+        ]
       },
-      "post" : {
-        "tags" : [ "sql" ],
-        "summary" : "SQL query",
-        "description" : "This endpoint executes SQL queries against a dataset.\nNew to SQL? Check out data.world's [SQL manual](https://docs.data.world/tutorials/dwsql/) .",
-        "operationId" : "sqlPost",
-        "consumes" : [ "application/x-www-form-urlencoded" ],
+      "post": {
+        "tags": [
+          "sql"
+        ],
+        "summary": "SQL query",
+        "description": "This endpoint executes SQL queries against a dataset.\n\nSQL results are available in a variety of formats. By default, `application/json` will be returned. Set the `Accept` header to one of the following values in accordance with your preference:\n\n* `text/csv`\n* `application/json`\n* `application/json-l`\n* `application/x-ndjson`\n\nNew to SQL? Check out data.world's [SQL manual](https://docs.data.world/tutorials/dwsql/) .",
+        "operationId": "sqlPost",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
         "produces": [
-          "text/csv" , "application/json-l", "application/x-ndjson"
+          "text/csv",
+          "application/json-l",
+          "application/x-ndjson"
         ],
         "parameters": [
           {
@@ -431,9 +472,11 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security" : [ {
-          "token" : [ ]
-        } ]
+        "security": [
+          {
+            "token": []
+          }
+        ]
       }
     },
     "/datasets/{owner}": {
@@ -616,7 +659,69 @@
               "$ref": "#/definitions/DatasetSummaryResponse"
             },
             "examples": {
-              "application/json": "{\r\n  \"owner\": \"sya\",\r\n  \"id\": \"trumpworld\",\r\n  \"title\": \"TrumpWorld\",\r\n  \"description\": \"TrumpWorld Data\",\r\n  \"summary\": \"From the Buzzfeed article [Help Us Map TrumpWorld](https://www.buzzfeed.com/johntemplon/help-us-map-trumpworld)\\n>No American president has taken office with a giant network of businesses, investments, and corporate connections like that amassed by Donald J. Trump. His family and advisers have touched a staggering number of ventures, from a hotel in Azerbaijan to a poker company in Las Vegas.\\n\\n\\nCheck out the data.world docs on how to Upload & sync files from [**Google Sheets**](https://docs.data.world/documentation/api/googleSync.html) and [**Github**](https://docs.data.world/documentation/api/githubSync.html)   \\n\\n\\nSource: [github.com/BuzzFeedNews](https://github.com/BuzzFeedNews/trumpworld/tree/master/data)   \\n\\n_If you have suggestions for expanding or improving the dataset, please email trump@buzzfeed.com. If you’d like to send your tip securely and anonymously, see these [instructions](https://tips.buzzfeed.com/)._\",\r\n  \"tags\": [\r\n    \"trump\",\r\n    \"trump world\",\r\n    \"president\",\r\n    \"connections\",\r\n    \"swamp\",\r\n    \"business network\"\r\n  ],\r\n  \"visibility\": \"OPEN\",\r\n  \"files\": [\r\n    {\r\n      \"name\": \"org-org-connections.csv\",\r\n      \"sizeInBytes\": 97658,\r\n      \"source\": {\r\n        \"id\": \"bfbac3bb-9cec-410a-9ac4-c904a56d65fe\",\r\n        \"url\": \"https://raw.githubusercontent.com/BuzzFeedNews/trumpworld/master/data/org-org-connections.csv\",\r\n        \"syncStatus\": \"OK\",\r\n        \"lastSyncStart\": \"2017-02-06T22:55:15.242Z\",\r\n        \"lastSyncSuccess\": \"2017-02-06T22:55:15.258Z\",\r\n        \"lastSyncFailure\": \"2017-02-01T23:47:47.667Z\"\r\n      },\r\n      \"created\": \"2017-02-01T23:45:12.379Z\",\r\n      \"updated\": \"2017-02-03T16:05:03.241Z\"\r\n    },\r\n    {\r\n      \"name\": \"person-org-connections.csv\",\r\n      \"sizeInBytes\": 231637,\r\n      \"source\": {\r\n        \"id\": \"91cf66e3-4bd7-422f-a8ec-7de1b68f8ee1\",\r\n        \"url\": \"https://raw.githubusercontent.com/BuzzFeedNews/trumpworld/master/data/person-org-connections.csv\",\r\n        \"syncStatus\": \"OK\",\r\n        \"lastSyncStart\": \"2017-02-06T22:55:15.242Z\",\r\n        \"lastSyncSuccess\": \"2017-02-06T22:55:15.310Z\"\r\n      },\r\n      \"created\": \"2017-02-01T23:51:02.777Z\",\r\n      \"updated\": \"2017-02-03T16:05:03.241Z\"\r\n    },\r\n    {\r\n      \"name\": \"person-person-connections.csv\",\r\n      \"sizeInBytes\": 32556,\r\n      \"source\": {\r\n        \"id\": \"b1e0659b-c282-408a-893a-14b5e5a1ae4c\",\r\n        \"url\": \"https://raw.githubusercontent.com/BuzzFeedNews/trumpworld/master/data/person-person-connections.csv\",\r\n        \"syncStatus\": \"OK\",\r\n        \"lastSyncStart\": \"2017-02-06T22:55:15.242Z\",\r\n        \"lastSyncSuccess\": \"2017-02-06T22:55:15.361Z\"\r\n      },\r\n      \"created\": \"2017-02-01T23:51:32.492Z\",\r\n      \"updated\": \"2017-02-03T16:05:03.241Z\"\r\n    }\r\n  ],\r\n  \"status\": \"LOADED\",\r\n  \"created\": \"2017-02-01T22:33:58.809Z\",\r\n  \"updated\": \"2017-02-06T22:55:19.128Z\"\r\n}"
+              "application/json": {
+                "owner": "sya",
+                "id": "trumpworld",
+                "title": "TrumpWorld",
+                "description": "TrumpWorld Data",
+                "summary": "From the Buzzfeed article [Help Us Map TrumpWorld](https://www.buzzfeed.com/johntemplon/help-us-map-trumpworld)\n>No American president has taken office with a giant network of businesses, investments, and corporate connections like that amassed by Donald J. Trump. His family and advisers have touched a staggering number of ventures, from a hotel in Azerbaijan to a poker company in Las Vegas.\n\n\nCheck out the data.world docs on how to Upload & sync files from [**Google Sheets**](https://docs.data.world/documentation/api/googleSync.html) and [**Github**](https://docs.data.world/documentation/api/githubSync.html)   \n\n\nSource: [github.com/BuzzFeedNews](https://github.com/BuzzFeedNews/trumpworld/tree/master/data)   \n\n_If you have suggestions for expanding or improving the dataset, please email trump@buzzfeed.com. If you’d like to send your tip securely and anonymously, see these [instructions](https://tips.buzzfeed.com/)._",
+                "tags": [
+                  "trump",
+                  "trump world",
+                  "president",
+                  "connections",
+                  "swamp",
+                  "business network"
+                ],
+                "visibility": "OPEN",
+                "files": [
+                  {
+                    "name": "org-org-connections.csv",
+                    "sizeInBytes": 97658,
+                    "source": {
+                      "id": "bfbac3bb-9cec-410a-9ac4-c904a56d65fe",
+                      "url": "https://raw.githubusercontent.com/BuzzFeedNews/trumpworld/master/data/org-org-connections.csv",
+                      "syncStatus": "OK",
+                      "lastSyncStart": "2017-02-06T22:55:15.242Z",
+                      "lastSyncSuccess": "2017-02-06T22:55:15.258Z",
+                      "lastSyncFailure": "2017-02-01T23:47:47.667Z"
+                    },
+                    "created": "2017-02-01T23:45:12.379Z",
+                    "updated": "2017-02-03T16:05:03.241Z"
+                  },
+                  {
+                    "name": "person-org-connections.csv",
+                    "sizeInBytes": 231637,
+                    "source": {
+                      "id": "91cf66e3-4bd7-422f-a8ec-7de1b68f8ee1",
+                      "url": "https://raw.githubusercontent.com/BuzzFeedNews/trumpworld/master/data/person-org-connections.csv",
+                      "syncStatus": "OK",
+                      "lastSyncStart": "2017-02-06T22:55:15.242Z",
+                      "lastSyncSuccess": "2017-02-06T22:55:15.310Z"
+                    },
+                    "created": "2017-02-01T23:51:02.777Z",
+                    "updated": "2017-02-03T16:05:03.241Z"
+                  },
+                  {
+                    "name": "person-person-connections.csv",
+                    "sizeInBytes": 32556,
+                    "source": {
+                      "id": "b1e0659b-c282-408a-893a-14b5e5a1ae4c",
+                      "url": "https://raw.githubusercontent.com/BuzzFeedNews/trumpworld/master/data/person-person-connections.csv",
+                      "syncStatus": "OK",
+                      "lastSyncStart": "2017-02-06T22:55:15.242Z",
+                      "lastSyncSuccess": "2017-02-06T22:55:15.361Z"
+                    },
+                    "created": "2017-02-01T23:51:32.492Z",
+                    "updated": "2017-02-03T16:05:03.241Z"
+                  }
+                ],
+                "status": "LOADED",
+                "created": "2017-02-01T22:33:58.809Z",
+                "updated": "2017-02-06T22:55:19.128Z",
+                "isProject": false,
+                "accessLevel": "READ"
+              }
             }
           },
           "400": {
@@ -745,7 +850,7 @@
         "consumes": [
           "application/json"
         ],
-        "description": "Create a dataset with a given id or completely rewrite the dataset, including any previously added files, if one already exists with the given id",
+        "description": "Create a dataset with a given id or completely rewrite the dataset, including any previously added files, if one already exists with the given id.",
         "summary": "Create / Replace a dataset"
       },
       "patch": {
@@ -828,7 +933,7 @@
             "token": []
           }
         ],
-        "description": "Update an existing dataset. Note that we only update the elements or files included in the request. All omitted elements or files will remain untouched.",
+        "description": "Update an existing dataset. Note that only elements or files included in the request will be updated. All omitted elements or files will remain untouched.",
         "consumes": [
           "application/json"
         ]
@@ -918,7 +1023,7 @@
             "token": []
           }
         ],
-        "description": "This method allows files published on the web to be added to a data.world dataset via their URL. The source URL will be stored so you can easily update your file anytime it changes via the *fetch latest* link on the [data.world](https://data.world/) dataset page or by triggering the GET:/sync endpoint."
+        "description": "This method allows files published on the web to be added to a data.world dataset via their URL. The source URL will be stored so you can easily update your file anytime it changes via the *fetch latest* link on the [data.world](https://data.world/) dataset page or by triggering the GET:/sync endpoint.  \nCheck-out or tutorials for tips on how to add Google Sheets, GitHub and S3 files via URL and how to use webhooks or scripts to keep them always in sync."
       },
       "delete": {
         "tags": [
@@ -1001,7 +1106,7 @@
             "token": []
           }
         ],
-        "description": "Delete one or more files from a dataset by their name, including files added via URL."
+        "description": "Delete one or more files from a dataset by their name, including files added via URL.   \n\n**Batching**  \nNote that the `name` parameter can be include multiple times in the query string, once for each file that is to be deleted together in a single request."
       }
     },
     "/datasets/{owner}/{id}/files/{name}": {
@@ -1156,7 +1261,7 @@
             "token": []
           }
         ],
-        "description": "Update all files within a dataset that have originally been added via URL (e.g. via /datasets endpoints or on data.world)."
+        "description": "Update all files within a dataset that have originally been added via URL (e.g. via /datasets endpoints or on data.world). \nCheck-out or tutorials for tips on how to add Google Sheets, GitHub and S3 files via URL and how to use webhooks or scripts to keep them always in sync."
       },
       "post": {
         "tags": [
@@ -1227,7 +1332,7 @@
             "token": []
           }
         ],
-        "description": "Update all files within a dataset that have originally been added via URL (e.g. via /datasets endpoints or on data.world)."
+        "description": "Update all files within a dataset that have originally been added via URL (e.g. via /datasets endpoints or on data.world).  \nCheck-out or tutorials for tips on how to add Google Sheets, GitHub and S3 files via URL and how to use webhooks or scripts to keep them always in sync."
       }
     },
     "/uploads/{owner}/{id}/files": {
@@ -1236,7 +1341,7 @@
           "uploads"
         ],
         "summary": "Upload files",
-        "description": "Upload multiple files at once to a dataset via multipart request.\nSwagger clients will limit this method of upload to one file at a time. Other HTTP clients capable of making multipart/form-data requests can be used to upload multiple files in a single request.",
+        "description": "Upload multiple files at once to a dataset via multipart request.\n\nThis endpoint expects requests of type `multipart/form-data` and you can include one or more parts named `file`, each containing a different file to be uploaded.\n\nFor example, assuming that, you want to upload two local files named `file1.csv` and `file2.csv` to a hypothetical dataset `https://data.world/awesome-user/awesome-dataset`, this is what the cURL command would look like.\n\n```bash\ncurl \\\n  -H \"Authorization: <YOUR_API_TOKEN>\" \\\n  -F \"file=@file1.csv\" \\\n  -F \"file=@file2.csv\" \\\n  https://api.data.world/v0/uploads/awesome-user/awesome-dataset/files\n```\n\nSwagger clients will limit this method of upload to one file at a time. Other HTTP clients capable of making multipart/form-data requests can be used to upload multiple files in a single request.",
         "operationId": "uploadFiles",
         "consumes": [
           "multipart/form-data"
@@ -1257,6 +1362,13 @@
             "description": "Multipart-encoded file contents",
             "required": true,
             "type": "file"
+          },
+          {
+            "in": "query",
+            "name": "expandArchives",
+            "type": "boolean",
+            "default": false,
+            "description": "Indicates whether compressed files should be expanded upon upload."
           }
         ],
         "responses": {
@@ -1325,7 +1437,7 @@
           "uploads"
         ],
         "summary": "Upload file",
-        "description": "This method of upload is not supported by Swagger clients. Other HTTP clients can be used to supply the contents of the file directly in the body of the request",
+        "description": "Upload one file at a time to a dataset.\n\nThis endpoint expects requests of type `application/octet-stream`.\n\nFor example, assuming that you want to upload a local file named `file1.csv` to a hypothetical dataset `https://data.world/awesome-user/awesome-dataset` and choose its name on data.world to be `better-name.csv`, this is what the cURL command would look like.\n\n```bash\ncurl \\\n  -H \"Authorization: <YOUR_API_TOKEN>\" \\\n  -X PUT -H \"Content-Type: application/octet-stream\" \\\n  --data-binary @file1.csv \\\n  https://api.data.world/v0/uploads/awesome-user/awesome-dataset/files/better-name.csv\n```\n\nThis method of upload is typically not supported by Swagger clients. Other HTTP clients can be used to supply the contents of the file directly in the body of the request.",
         "operationId": "uploadFile",
         "consumes": [
           "application/octet-stream",
@@ -1349,6 +1461,13 @@
             "type": "string",
             "maxItems": 128,
             "minItems": 1
+          },
+          {
+            "in": "query",
+            "name": "expandArchive",
+            "type": "boolean",
+            "default": false,
+            "description": "Indicates whether a compressed file should be expanded upon upload."
           }
         ],
         "responses": {
@@ -1680,7 +1799,8 @@
     "token": {
       "type": "apiKey",
       "name": "Authorization",
-      "in": "header"
+      "in": "header",
+      "description": "All data.world API calls require an API token. After logging into data.world, find your token by navigating to your profile settings, under the Advanced tab or go to [https://data.world/settings/advanced](*https://data.world/settings/advanced*)\n\nAuthentication must be provided in API requests via the `Authorization` header. For example, for a user whose API token is `my_api_token`, the request header should be `Authorization: Bearer my_api_token`."
     }
   },
   "definitions": {
@@ -1758,10 +1878,10 @@
       "type": "object",
       "title": "Dataset Update Request",
       "properties": {
-        "title" : {
-          "type" : "string",
-          "minLength" : 0,
-          "maxLength" : 60,
+        "title": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 60,
           "description": "Dataset name."
         },
         "description": {
@@ -1824,10 +1944,10 @@
       "type": "object",
       "title": "Dataset Replace Request",
       "properties": {
-        "title" : {
-          "type" : "string",
-          "minLength" : 0,
-          "maxLength" : 60,
+        "title": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 60,
           "description": "Dataset name."
         },
         "description": {
@@ -1979,9 +2099,9 @@
           "type": "string",
           "description": "Date and time when the dataset was last updated."
         },
-        "isProject" : {
+        "isProject": {
           "type": "boolean",
-          "description": "Flag indicating if the dataset is also a project."
+          "description": "Every data project on data.world comes with a default dataset linked to it. This flag indicates if the dataset is a project's default dataset. "
         },
         "accessLevel": {
           "type": "string",
@@ -1992,7 +2112,7 @@
             "WRITE",
             "ADMIN"
           ],
-          "description": "The level of access the authenticated user is allowed with respect to dataset: \n\n*`NONE` Not allowed anything. \n*`DISCOVER` Allowed to know the dataset exists.. \n* `READ` Allowed to view and download dataset files, in addition to what DISCOVER allows. \n* `WRITE` Allowed to update data and metadata, in addition to what READ allows. \n* `ADMIN` Allowed to delete and manage access, in addition to what WRITE allows."
+          "description": "The level of access the authenticated user is allowed with respect to dataset: \n\n* `NONE` Not allowed any access.  \n* `DISCOVER` Allowed to know that the dataset exists.  \n* `READ` Allowed to view and download data and metadata, in addition to what DISCOVER allows. \n* `WRITE` Allowed to update data and metadata, in addition to what READ allows. \n* `ADMIN` Allowed to delete dataset, in addition to what WRITE allows."
         }
       },
       "required": [
@@ -2370,24 +2490,24 @@
       "required": true,
       "type": "string"
     },
-    "formQuery" : {
+    "formQuery": {
       "name": "query",
       "in": "formData",
-      "required": false,
+      "required": true,
       "type": "string"
     },
-    "includeTableSchema" : {
+    "includeTableSchema": {
       "name": "includeTableSchema",
       "in": "query",
       "required": false,
       "type": "boolean",
-      "default" : false,
+      "default": false,
       "description": "Flags indicating to include table schema in the response."
     },
-    "query" : {
+    "query": {
       "name": "query",
       "in": "query",
-      "required": false,
+      "required": true,
       "type": "string"
     },
     "limit": {

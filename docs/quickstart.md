@@ -1,4 +1,6 @@
-data.world's mission is to build the most meaningful, collaborative, and abundant data resource in the world, so that people who work with data can solve problems faster. As part of that mission, we want to ensure that our users are able to easily access data and manage their data projects regardless of system or tool preference.
+data.world is designed for data and the people who work with data.  From professional projects to open data, data.world helps you host and share your data, collaborate with your team, and capture context and conclusions as you work.  
+
+Using this API users are able to easily access data and manage their data projects regardless of language or tool of preference. 
 
 # Quick Start
 
@@ -36,7 +38,7 @@ Now, let's see how files can be added to datasets.
 
 Files can be added to datasets via direct upload or by reference, using the URL of a file that is hosted publicly on the web.
 
-For example, we can get a complete list of NYC subway stations from data.cityofnewyork.us in CSV format at https://data.cityofnewyork.us/api/views/kk4q-3rt2/rows.csv?accessType=DOWNLOAD
+For example, we can get a complete list of NYC subway stations from data.cityofnewyork.us in CSV format at <https://data.cityofnewyork.us/api/views/kk4q-3rt2/rows.csv?accessType=DOWNLOAD>
 
 You can add that file to our `API Sandbox` dataset using the #endpoint:ujqwuHZYZP8yRKgcz endpoint with the following command:
 
@@ -75,7 +77,7 @@ As a result, the server response should look like this:
 
 Processing of uploaded files is asyncrhonous and finishes quickly. However, large files can take a few minutes to process. Once the dataset is in `LOADED` status, the data is ready to be consumed.
 
-Let's look at how you can check the status of a dataset
+Let's look at how you can check the status of a dataset.
 
 ## Retrieving dataset info
 
@@ -122,17 +124,17 @@ Note that `syncStatus` is `OK` and `status` is `LOADED`. That indicates that the
 
 ## Querying with SQL
 
-Now that the dataset is ready to be used, we can, for example, discover which NYC subway stations the `7 Express` train stops at using the `query.data.world` API. For example:
+Now that the dataset is ready to be used, we can, for example, discover which NYC subway stations the `7 Express` train stops at using the #endpoint:AYbqu2jrzNYYr9xsW endpoint. For example:
 
 ```bash
 curl --request POST \
-  --url "https://query.data.world/sql/${DW_USERNAME}/api-sandbox" \
+  --url "https://api.data.world/v0/sql/${DW_USERNAME}/api-sandbox" \
   --header "authorization: Bearer ${DW_API_TOKEN}" \
   --header "accept: text/csv" \
-  --data-urlencode 'query=SELECT NAME, LINE FROM `nyc-subways` WHERE LINE LIKE "%7 Express%"'
+  --data-urlencode 'query=SELECT name, line FROM nyc_subways WHERE line LIKE "%7 Express%"'
 ```
 
-As a result, the server response shouldlook like this:
+As a result, the server response should look like this:
 ```
 NAME,LINE
 Vernon Blvd - Jackson Ave,7-7 Express
@@ -149,12 +151,70 @@ Court Sq,7-7 Express
 Hunters Point Ave,7-7 Express
 ```
 
+### Additional query options
+
+Query results can be obtained in a variety of different formats, including:
+
+- `text/csv`: Comma-separated values
+- `text/tab-separated-values`: Tab-separated values
+- `application/json`: JSON array
+- `application/x-ndjson` and `application/json-l`: [JSON lines](http://jsonlines.org/)
+
+When requesting a JSON format, you can obtain schema information alongside the data.
+To do that, add `includeTableSchema=true` in the query string. 
+The schema information will be the first element or row in the response. 
+
+Here is what the previous request would look like if modified to produce JSON lines including schema information:
+```bash
+curl --request POST \
+  --url "https://api.data.world/v0/sql/${DW_USERNAME}/api-sandbox?includeTableSchema=true" \
+  --header "authorization: Bearer ${DW_API_TOKEN}" \
+  --header "accept: application/json-l" \
+  --data-urlencode 'query=SELECT name, line FROM nyc_subways WHERE line LIKE "%7 Express%"'
+```
+
+In this case, this is what the response will look like:
+```
+{"fields":[{"name":"name","type":"string","rdfType":"http://www.w3.org/2001/XMLSchema#string"},{"name":"line","type":"string","rdfType":"http://www.w3.org/2001/XMLSchema#string"}]}
+{"name":"Vernon Blvd - Jackson Ave","line":"7-7 Express"}
+{"name":"Queensboro Plz","line":"7-7 Express-N-W"}
+{"name":"Times Sq - 42nd St","line":"7-7 Express"}
+{"name":"Grand Central - 42nd St","line":"7-7 Express"}
+{"name":"Mets - Willets Point","line":"7-7 Express"}
+{"name":"Junction Blvd","line":"7-7 Express"}
+{"name":"Flushing - Main St","line":"7-7 Express"}
+{"name":"5th Ave - Bryant Pk","line":"7-7 Express"}
+{"name":"34th St - Hudson Yards","line":"7-7 Express"}
+{"name":"Woodside - 61st St","line":"7-7 Express"}
+{"name":"Court Sq","line":"7-7 Express"}
+{"name":"Hunters Point Ave","line":"7-7 Express"}
+```
+
+Notice that the first line is the [table schema](https://specs.frictionlessdata.io/table-schema/), as expected:
+```json
+{
+   "fields":[
+      {
+         "name":"name",
+         "type":"string",
+         "rdfType":"http://www.w3.org/2001/XMLSchema#string"
+      },
+      {
+         "name":"line",
+         "type":"string",
+         "rdfType":"http://www.w3.org/2001/XMLSchema#string"
+      }
+   ]
+}
+```
+
 ## Next steps
 
 1. Take some time to read the "Conventions" section below and to explore more endpoints and their documentation.
-2. Find if you can benefit from existing integrations and skip using this API altogether, by checking our gallery at https://data.world/integrations. Come back often as we are constantly implementing new integrations.
-3. Check-out additional documentation and tutorials at https://help.data.world too.
-4. Let us know what cool things you create and make sure to reach out if you need support. We are at help@data.world and would love to hear from you!
+2. Check out existing [integrations](https://data.world/integrations) to see if an integration for your favorite tools already exists, and skip using this API altogether. *Pro tip:* come back often as we are constantly implementing new integrations.
+3. Learn how easily you can generate #docTextSection:8NpYGToZm2LsA9A9J for the language of your choice.
+4. Browse all endpoints and use the **Try it out** feature to interact with them in your browser.
+5. Let us know what cool things you create and make sure to reach out if you need support. We are at <help@data.world> and would love to hear from you!
 
 # Conventions
 
@@ -163,7 +223,7 @@ All data.world API calls require an API token. After logging into data.world, fi
 
 Authentication must be provided in API requests via the `Authorization` header. For example, for a user whose API token is `my_api_token`, the request header should be `Authorization: Bearer my_api_token`.
 
-Those developing applications and integrations are encouraged to implement authentication directly within their apps via OAuth.
+Those developing applications and integrations are encouraged to implement authentication directly within their apps via #docTextSection:QRKZGmkzDw89ibrYm.
 
 ## Content type  
 By default, `application/json` is the content type used in request and response bodies. Exceptions are noted in respective endpoint documentation.
@@ -171,13 +231,6 @@ By default, `application/json` is the content type used in request and response 
 ## HTTPS only  
 Our APIs can only be accessed via HTTPS
 
-## APIs
-At the moment, there are two entry points for data.world APIs:
-
-* [api.data.world](./query.md)
-* [query.data.world](./datasets.md)
-
-These will soon be consolidated under `api.data.world`.
-
-## Feedback
-We will continue to introduce more endpoints and functionality as we can, but if there are areas that you'd like to see additional functionality, or if you've come across things not working as expected, please let us know by emailing [help@data.world](mailto:help@data.world).
+# Feedback
+This API will continue to evolve and we are working constantly to make it richer and better.
+If you've got your own ideas and would like to share with us, please email [help@data.world](mailto:help@data.world) or join us on [Slack](https://slack.data.world/).
