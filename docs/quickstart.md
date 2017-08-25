@@ -222,7 +222,7 @@ All data.world API calls require an API token. After logging into data.world, fi
 
 Authentication must be provided in API requests via the `Authorization` header. For example, for a user whose API token is `my_api_token`, the request header should be `Authorization: Bearer my_api_token`.
 
-Those developing applications and integrations are encouraged to implement authentication directly within their apps via OAuth.
+Those developing applications and integrations are encouraged to implement authentication directly within their apps via #docTextSection:QRKZGmkzDw89ibrYm.
 
 ## Content type  
 By default, `application/json` is the content type used in request and response bodies. Exceptions are noted in respective endpoint documentation.
