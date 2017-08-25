@@ -155,9 +155,10 @@ Hunters Point Ave,7-7 Express
 
 Query results can be obtained in a variety of different formats, including:
 
-- `text/tsv`: Tab-separated values
+- `text/csv`: Comma-separated values
+- `text/tab-separated-values`: Tab-separated values
 - `application/json`: JSON array
-- `application/x-ndjson` and `application/json-l`: JSON lines
+- `application/x-ndjson` and `application/json-l`: [JSON lines](http://jsonlines.org/)
 
 When requesting a JSON format, you can obtain schema information alongside the data.
 To do that, add `includeTableSchema=true` in the query string. 
@@ -210,7 +211,7 @@ Notice that the first line is the [table schema](https://specs.frictionlessdata.
 ## Next steps
 
 1. Take some time to read the "Conventions" section below and to explore more endpoints and their documentation.
-2. Check out existing [integrations](https://data.world/integrations) and to see if an integration for your favorite tools already exist, and skip using this API altogether. *Pro tip:* come back often as we are constantly implementing new integrations.
+2. Check out existing [integrations](https://data.world/integrations) to see if an integration for your favorite tools already exists, and skip using this API altogether. *Pro tip:* come back often as we are constantly implementing new integrations.
 3. Learn how easily you can generate #docTextSection:8NpYGToZm2LsA9A9J for the language of your choice.
 4. Browse all endpoints and use the **Try it out** feature to interact with them in your browser.
 5. Let us know what cool things you create and make sure to reach out if you need support. We are at <help@data.world> and would love to hear from you!
