@@ -35,13 +35,13 @@ For additional information and usage instructions, visit <https://github.com/dat
 
 To get the current released version from CRAN:
 
-```bash
+```r
 install.packages("data.world")
 ```
 
 To get the current development version from GitHub:
 
-```bash
+```r
 devtools::install_github("datadotworld/data.world-r", build_vignettes = TRUE)
 ```
 
@@ -58,13 +58,13 @@ For additional information and usage instructions, visit <https://github.com/dat
 The **OpenAPI Specification** (formerly Swagger Specification) is an API description format for REST APIs. An OpenAPI file allows you to describe your entire API, including:
 
 * Available endpoints (`/users`) and operations on each endpoint (`GET /users`, `POST /users`)
-* Operation parameters Input and output for each operation
+* Operation parameters (input and output) for each operation
 * Authentication methods
 * Contact information, license, terms of use and other information.
 
-API specifications can be written in YAML or JSON. The format is easy to learn and is both human-redable and machine-readable.
+API specifications can be written in YAML or JSON. The format is easy to learn and is both human-readable and machine-readable.
 
-data.world's public API especification is available at <https://api.data.world/v0/swagger.json>
+data.world's public API specification is available at <https://api.data.world/v0/swagger.json>
 
 The complete OpenAPI Specification can be found on GitHub:
 [OpenAPI 3.0 Specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md)
