@@ -38,12 +38,82 @@
     },
     {
       "name": "user"
+    },
+    {
+      "name": "streams"
     }
   ],
   "schemes": [
     "https"
   ],
   "paths": {
+    "/streams/{owner}/{id}/{streamId}" : {
+      "post" : {
+        "tags" : [ "streams" ],
+        "summary" : "Append records to a stream.",
+        "description" : "",
+        "operationId" : "appendRecords",
+        "consumes" : [ "application/json-l", "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/datasetId"
+          },
+          {
+            "$ref": "#/parameters/streamId"
+          } ],
+        "responses" : {
+          "202" : {
+            "description" : "Record(s) accepted.",
+            "schema" : {
+              "$ref" : "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "422": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNPROCESSABLE ENTITY**\nThe server understands the content type of the request entity and the syntax of the request entity is correct, but was unable to process the contained instructions.\nFor example, this error may occur if the JSON body of the request doesn't match the expected schema."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "security" : [ {
+          "token" : [ ]
+        } ]
+      }
+    },
     "/download/{owner}/{id}": {
       "get": {
         "tags": [
@@ -2529,6 +2599,13 @@
       "in": "query",
       "type": "string",
       "description": "Token from previous result page to be used when requesting a subsequent page."
+    },
+    "streamId": {
+      "name": "streamId",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "description": "Stream id."
     }
   }
 }
