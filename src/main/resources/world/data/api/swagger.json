@@ -44,6 +44,118 @@
     "https"
   ],
   "paths": {
+    "/stream/{agentid}/{datasetid}/{streamid}": {
+      "parameters": [
+        {
+          "name": "agentid",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "datasetid",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "streamid",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "operationId": "appendRecords",
+        "summary": "Append Records",
+        "tags": [
+          "Streams"
+        ],
+        "description": "append arrays of records into a dataset stream",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      },
+      "get": {
+        "operationId": "getRecords",
+        "summary": "Get Records",
+        "tags": [
+          "Streams"
+        ],
+        "description": "gets data records from a dataset stream",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    },
     "/download/{owner}/{id}": {
       "get": {
         "tags": [
