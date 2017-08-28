@@ -36,10 +36,28 @@ Now, let's see how files can be added to datasets.
 
 ## Uploading files
 
-Files can be added to datasets via direct upload or by reference, using the URL of a file that is hosted publicly on the web.
+Files can be added to datasets via direct upload (#endpoint:Q9ro4unMQB6rJfM46) or by reference (#endpoint:ujqwuHZYZP8yRKgcz), using the URL of a file that is hosted publicly on the web.
 
-For example, we can get a complete list of NYC subway stations from data.cityofnewyork.us in CSV format at <https://data.cityofnewyork.us/api/views/kk4q-3rt2/rows.csv?accessType=DOWNLOAD>
+### Direct Uploads
 
+The #endpoint:Q9ro4unMQB6rJfM46 endpoint allows direct upload os files from the local file system.  
+It expects requests of type `multipart/form-data` and you can include one or more parts named `file`, each containing a different file to be uploaded.
+
+For example, assuming that you want to upload two files in the current directory named `file1.csv` and `file2.csv` to the `API Sandbox` dataset you just created, this is what the cURL command would look like.
+
+```bash
+curl \
+  --header "Authorization: ${DW_API_TOKEN}" \
+  -F "file=@file1.csv" \
+  -F "file=@file2.csv" \
+  --url https://api.data.world/v0/uploads/${DW_USERNAME}/api-sandbox/files
+```
+
+### Upload via URL
+
+Alternatively, if you have the URL for a file hosted publicly on the web, you can skip the download/upload steps altogether.
+
+For example, we can get a complete list of NYC subway stations from data.cityofnewyork.us in CSV format at <https://data.cityofnewyork.us/api/views/kk4q-3rt2/rows.csv?accessType=DOWNLOAD>.  
 You can add that file to our `API Sandbox` dataset using the #endpoint:ujqwuHZYZP8yRKgcz endpoint with the following command:
 
 ```bash
