@@ -21,7 +21,7 @@ To add files using the GitHub URL use the #endpoint:ujqwuHZYZP8yRKgcz endpoint. 
   ```bash
   curl https://api.data.world/v0/datasets/<username>/<datasetName>/files \
     -H 'Content-Type: application/json' \
-    -H 'Authorization: Bearer <MY-API-TOKEN>' \
+    -H 'Authorization: Bearer ${DW_API_TOKEN}' \
     --data-binary '{"files": [
         { "name": "<fileName1>", "source": {"url": "<sourceURL1>" }},
         { "name": "<fileName2>", "source": {"url": "<sourceURL2>" }}
@@ -31,7 +31,7 @@ To add files using the GitHub URL use the #endpoint:ujqwuHZYZP8yRKgcz endpoint. 
   Where:
   * `username` is the dataset owner username. Note you must have permissions to modify the dataset if not the owner.
   * `datasetName` is the id of the dataset. This can be found in the URL path of the dataset.
-  * `MY-API-TOKEN` can be found under your profile settings within data.world, or by going to [https://data.world/settings/advanced](https://data.world/settings/advanced).
+  * `DW_API_TOKEN` can be found under your profile settings within data.world, or by going to [https://data.world/settings/advanced](https://data.world/settings/advanced).
   * `fileName` is what you'd like to name the file, and should include the file extension.
   * `sourceURL` is the github URL for the file.
 
