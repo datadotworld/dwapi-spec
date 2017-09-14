@@ -11,8 +11,8 @@ To create a dataset, use the #endpoint:93LqHoGaE2snXCCpu endpoint. For example, 
 ```bash
 curl --request POST \
   --url "https://api.data.world/v0/datasets/${DW_USERNAME}" \
-  --header "authorization: Bearer ${DW_API_TOKEN}" \
-  --header "content-type: application/json" \
+  --header "Authorization: Bearer ${DW_API_TOKEN}" \
+  --header "Content-type: application/json" \
   --data '{"title":"API Sandbox","visibility":"PRIVATE"}'
 ```
 
@@ -47,7 +47,7 @@ For example, assuming that you want to upload two files in the current directory
 
 ```bash
 curl \
-  --header "Authorization: ${DW_API_TOKEN}" \
+  --header "Authorization: Bearer ${DW_API_TOKEN}" \
   -F "file=@file1.csv" \
   -F "file=@file2.csv" \
   --url https://api.data.world/v0/uploads/${DW_USERNAME}/api-sandbox/files
@@ -63,8 +63,8 @@ You can add that file to our `API Sandbox` dataset using the #endpoint:ujqwuHZYZ
 ```bash
 curl --request POST \
   --url "https://api.data.world/v0/datasets/${DW_USERNAME}/api-sandbox/files" \
-  --header "authorization: Bearer ${DW_API_TOKEN}" \
-  --header "content-type: application/json" \
+  --header "Authorization: Bearer ${DW_API_TOKEN}" \
+  --header "Content-type: application/json" \
   --data '{"files":[{"name":"nyc-subways.csv","source":{"url":"https://data.cityofnewyork.us/api/views/kk4q-3rt2/rows.csv?accessType=DOWNLOAD"},"description":"List of NYC subway stations","labels":["raw data"]}]}'
 ```
 
@@ -103,8 +103,8 @@ To retrieve dataset info, use the #endpoint:asFRaPWvQM5eDqeKt endpoint. For exam
 ```bash
 curl --request GET \
   --url "https://api.data.world/v0/datasets/${DW_USERNAME}/api-sandbox" \
-  --header "authorization: Bearer ${DW_API_TOKEN}" \
-  --header "content-type: application/json"
+  --header "Authorization: Bearer ${DW_API_TOKEN}" \
+  --header "Content-type: application/json"
 ```
 
 As a result, the server response should look like this:
@@ -147,8 +147,8 @@ Now that the dataset is ready to be used, we can, for example, discover which NY
 ```bash
 curl --request POST \
   --url "https://api.data.world/v0/sql/${DW_USERNAME}/api-sandbox" \
-  --header "authorization: Bearer ${DW_API_TOKEN}" \
-  --header "accept: text/csv" \
+  --header "Authorization: Bearer ${DW_API_TOKEN}" \
+  --header "Accept: text/csv" \
   --data-urlencode 'query=SELECT name, line FROM nyc_subways WHERE line LIKE "%7 Express%"'
 ```
 
@@ -186,8 +186,8 @@ Here is what the previous request would look like if modified to produce JSON li
 ```bash
 curl --request POST \
   --url "https://api.data.world/v0/sql/${DW_USERNAME}/api-sandbox?includeTableSchema=true" \
-  --header "authorization: Bearer ${DW_API_TOKEN}" \
-  --header "accept: application/json-l" \
+  --header "Authorization: Bearer ${DW_API_TOKEN}" \
+  --header "Accept: application/json-l" \
   --data-urlencode 'query=SELECT name, line FROM nyc_subways WHERE line LIKE "%7 Express%"'
 ```
 
