@@ -74,6 +74,7 @@
           {
             "in": "body",
             "name": "body",
+            "required" : true,
             "schema": {
               "type": "object",
               "properties": {}
@@ -280,7 +281,7 @@
         "produces": [
           "application/sparql-results+json",
           "application/sparql-results+xml",
-          "applicatoin/rdf+json",
+          "application/rdf+json",
           "application/rdf+xml",
           "text/tab-separated-values",
           "text/csv"
@@ -353,7 +354,7 @@
         "produces": [
           "application/sparql-results+json",
           "application/sparql-results+xml",
-          "applicatoin/rdf+json",
+          "application/rdf+json",
           "application/rdf+xml",
           "text/tab-separated-values",
           "text/csv"
