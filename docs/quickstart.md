@@ -97,6 +97,32 @@ Processing of uploaded files is asyncrhonous and finishes quickly. However, larg
 
 Let's look at how you can check the status of a dataset.
 
+## Streaming data
+
+Data can be streamed to data.world one record at a time. data.world will accumulate stream data and periodically (at least once a day) process it, at which point the data becomes consumable with the related dataset.  
+A stream named `temperatures`, for example, will appear in the associated dataset as `temperatures.jsonl` once processed.
+
+As needed, users can force stream data to be processed, by invoking the endpoint:Lqji3375Xx5W3K2Pm endpoint.
+
+To create a stream, simply append the first row of data to a stream that didn't exist before. For example:
+```bash
+curl --request POST \
+  --url "https://api.data.world/v0/streams/${DW_USERNAME}/api-sandbox/temperatures" \
+  --header "Authorization: Bearer ${DW_API_TOKEN}" \
+  --header "Content-type: application/json" \
+  --data '{"temperature": 34, "location": "New York", "measurement_time": "2017-10-24T01:00:00Z"}'
+```
+
+It is also possible to append multiple records at once, so long as the content type in the request is set to `application/json-l`. For example:
+```bash
+curl --request POST \
+  --url "https://api.data.world/v0/streams/${DW_USERNAME}/api-sandbox/temperatures" \
+  --header "Authorization: Bearer ${DW_API_TOKEN}" \
+  --header "Content-type: application/json-l" \
+  --data '{"temperature": 37, "location": "New York", "measurement_time": "2017-10-24T02:00:00Z"}
+  {"temperature": 40, "location": "New York", "measurement_time": "2017-10-24T03:00:00Z"}'
+```
+
 ## Retrieving dataset info
 
 To retrieve dataset info, use the #endpoint:asFRaPWvQM5eDqeKt endpoint. For example:
@@ -120,21 +146,36 @@ As a result, the server response should look like this:
       "sizeInBytes": 64188,
       "source": {
         "url": "https://data.cityofnewyork.us/api/views/kk4q-3rt2/rows.csv?accessType=DOWNLOAD",
+        "expandArchive": false,
         "syncStatus": "OK",
-        "lastSyncStart": "2017-06-21T14:53:17.038Z",
-        "lastSyncSuccess": "2017-06-21T14:53:17.045Z"
+        "lastSyncStart": "2017-10-24T21:27:15.406Z",
+        "lastSyncSuccess": "2017-10-24T21:27:04.197Z"
       },
-      "created": "2017-06-21T14:53:15.806Z",
-      "updated": "2017-06-21T14:53:15.806Z",
+      "created": "2017-10-24T21:27:04.618Z",
+      "updated": "2017-10-24T21:27:04.618Z",
       "description": "List of NYC subway stations",
       "labels": [
         "raw data"
       ]
+    },
+    {
+      "name": "stream-temperatures.jsonl",
+      "sizeInBytes": 178,
+      "source": {
+        "url": "https://data.world/rflprr/d/api-sandbox/stream-temperatures",
+        "syncStatus": "OK",
+        "lastSyncStart": "2017-10-24T21:27:15.406Z",
+        "lastSyncSuccess": "2017-10-24T21:27:15.424Z"
+      },
+      "created": "2017-10-24T21:27:15.683Z",
+      "updated": "2017-10-24T21:27:15.683Z"
     }
   ],
   "status": "LOADED",
-  "created": "2017-06-21T14:51:41.096Z",
-  "updated": "2017-06-21T14:53:18.852Z"
+  "created": "2017-10-24T21:26:49.543Z",
+  "updated": "2017-10-24T21:27:18.658Z",
+  "accessLevel": "ADMIN",
+  "isProject": false
 }
 ```
 
