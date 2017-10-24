@@ -38,12 +38,103 @@
     },
     {
       "name": "user"
+    },
+    {
+      "name": "streams"
     }
   ],
   "schemes": [
     "https"
   ],
   "paths": {
+    "/streams/{owner}/{id}/{streamId}": {
+      "post": {
+        "tags": [
+          "streams"
+        ],
+        "summary": "Append records to a stream.",
+        "operationId": "appendRecords",
+        "consumes": [
+          "application/json-l",
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/datasetId"
+          },
+          {
+            "$ref": "#/parameters/streamId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            },
+            "x-examples": {
+              "application/json": "{\r\n  \"someProperty\": \"someValue\",\r\n  \"aNumericProperty\": 42,\r\n  \"aBooleanProperty\": false\r\n}"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Record(s) accepted.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "422": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNPROCESSABLE ENTITY**\nThe server understands the content type of the request entity and the syntax of the request entity is correct, but was unable to process the contained instructions.\nFor example, this error may occur if the JSON body of the request doesn't match the expected schema."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "description": "This endpoint appends JSON data to a data stream associated with a dataset.\n\nMultiple records can be appended at once by using JSON-L (`application/json-l`) as the request content type.\n\nCurrently, data uploaded to a dataset via a stream is not immediatelly processed. Instead, it is processed automatically a few times per day or as a result of a \"Sync files\" endpoint invocation.\n\nOnce processed, the contents of a stream will appear as part of the respective dataset as a `.jsonl` file (e.g. `my-stream` will produce a file named `my-stream.jsonl`)."
+      }
+    },
     "/download/{owner}/{id}": {
       "get": {
         "tags": [
@@ -184,13 +275,15 @@
           "sparql"
         ],
         "summary": "SPARQL query (via GET)",
-        "description": "This endpoint executes SPARQL queries against a dataset or data project.  \n\nSPARQL results are available in a variety of formats. By default, `application/sparql-results+json` will be returned. Set the `Accept` header to one of the following values in accordance with your preference:\n\n* `text/csv`\n* `text/tab-separated-values`\n* `application/sparql-results+xml`\n* `application/sparql-results+json`\n\nNew to SPARQL? Check out data.world's [SPARQL tutorial](https://docs.data.world/tutorials/sparql/).",
+        "description": "This endpoint executes SPARQL queries against a dataset or data project.\n\nSPARQL results are available in a variety of formats. By default, `application/sparql-results+json` will be returned. Set the `Accept` header to one of the following values in accordance with your preference:\n\n- `application/sparql-results+xml`\n- `application/sparql-results+json`\n- `application/rdf+json`\n- `application/rdf+xml`\n- `text/csv`\n- `text/tab-separated-values`\n\nNew to SPARQL? Check out data.world’s[SPARQL tutorial](https://docs.data.world/tutorials/sparql/).",
         "operationId": "sparqlGet",
         "produces": [
-          "text/csv",
-          "application/sparql-results+xml",
           "application/sparql-results+json",
-          "text/tab-separated-values"
+          "application/sparql-results+xml",
+          "applicatoin/rdf+json",
+          "application/rdf+xml",
+          "text/tab-separated-values",
+          "text/csv"
         ],
         "parameters": [
           {
@@ -255,13 +348,15 @@
           "sparql"
         ],
         "summary": "SPARQL query",
-        "description": "This endpoint executes SPARQL queries against a dataset or data project.  \n\nSPARQL results are available in a variety of formats. By default, `application/sparql-results+json` will be returned. Set the `Accept` header to one of the following values in accordance with your preference:\n\n* `text/csv`\n* `text/tab-separated-values`\n* `application/sparql-results+xml`\n* `application/sparql-results+json`\n\nNew to SPARQL? Check out data.world's [SPARQL tutorial](https://docs.data.world/tutorials/sparql/).",
+        "description": "This endpoint executes SPARQL queries against a dataset or data project.  \n\nSPARQL results are available in a variety of formats. By default, `application/sparql-results+json` will be returned. Set the `Accept` header to one of the following values in accordance with your preference:\n\n- `application/sparql-results+xml`\n- `application/sparql-results+json`\n- `application/rdf+json`\n- `application/rdf+xml`\n- `text/csv`\n- `text/tab-separated-values`\n\nNew to SPARQL? Check out data.world's [SPARQL tutorial](https://docs.data.world/tutorials/sparql/).",
         "operationId": "sparqlPost",
         "produces": [
-          "text/csv",
-          "application/sparql-results+xml",
           "application/sparql-results+json",
-          "text/tab-separated-values"
+          "application/sparql-results+xml",
+          "applicatoin/rdf+json",
+          "application/rdf+xml",
+          "text/tab-separated-values",
+          "text/csv"
         ],
         "consumes": [
           "application/x-www-form-urlencoded"
@@ -337,10 +432,10 @@
         "description": "This endpoint executes SQL queries against a dataset.\n\nSQL results are available in a variety of formats. By default, `application/json` will be returned. Set the `Accept` header to one of the following values in accordance with your preference:\n\n* `text/csv`\n* `application/json`\n* `application/json-l`\n* `application/x-ndjson`\n\nNew to SQL? Check out data.world's [SQL manual](https://docs.data.world/tutorials/dwsql/) .",
         "operationId": "sqlGet",
         "produces": [
-          "text/csv",
           "application/json",
           "application/json-l",
-          "application/x-ndjson"
+          "application/x-ndjson",
+          "text/csv"
         ],
         "parameters": [
           {
@@ -414,10 +509,10 @@
           "application/x-www-form-urlencoded"
         ],
         "produces": [
-          "text/csv",
           "application/json",
           "application/json-l",
-          "application/x-ndjson"
+          "application/x-ndjson",
+          "text/csv"
         ],
         "parameters": [
           {
@@ -2260,6 +2355,11 @@
           "minLength": 1,
           "maxLength": 4096,
           "pattern": "^https?.*"
+        },
+        "expandArchive": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indicates whether compressed files should be expanded upon upload."
         }
       },
       "required": [
@@ -2268,9 +2368,8 @@
     },
     "FileSourceCreateRequest": {
       "type": "object",
-      "required": [
-        "url"
-      ],
+      "description": "This model is utilized where source URLs can be specified for files only to be added.",
+      "title": "File Create Request",
       "properties": {
         "url": {
           "type": "string",
@@ -2278,10 +2377,16 @@
           "minLength": 1,
           "maxLength": 4096,
           "pattern": "^https?.*"
+        },
+        "expandArchive": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indicates whether compressed files should be expanded upon upload."
         }
       },
-      "description": "This model is utilized where source URLs can be specified for files only to be added.",
-      "title": "File Create Request"
+      "required": [
+        "url"
+      ]
     },
     "FileSourceSummaryResponse": {
       "type": "object",
@@ -2484,7 +2589,7 @@
       "in": "path",
       "type": "string",
       "required": true,
-      "description": "Dataset unique identifier.  \nFor example, in the URL: [https://data.world/jonloyens/an-intro-to-dataworld-dataset](https://data.world/jonloyens/an-intro-to-dataworld-dataset), an-intro-to-dataworld-dataset is the unique identifier of the dataset."
+      "description": "Dataset unique identifier.\nFor example, in the URL:[https://data.world/jonloyens/an-intro-to-dataworld-dataset](https://data.world/jonloyens/an-intro-to-dataworld-dataset), an-intro-to-dataworld-dataset is the unique identifier of the dataset."
     },
     "file": {
       "name": "file",
@@ -2529,6 +2634,13 @@
       "in": "query",
       "type": "string",
       "description": "Token from previous result page to be used when requesting a subsequent page."
+    },
+    "streamId": {
+      "name": "streamId",
+      "in": "path",
+      "type": "string",
+      "description": "Stream unique identifier.",
+      "required": true
     }
   }
 }
