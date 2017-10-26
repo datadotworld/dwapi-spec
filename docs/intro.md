@@ -20,7 +20,7 @@ Whether you are building tools for yourself, a new product or an extension to an
 - **Data storage**: Upload, stream, and sync data from disparate sources and multiple formats. Create a better experience by making data consumable, accessible, and portable.
 - **Publishing & collaboration**: Share reproducible conclusions, insights, and data subsets with collaborators throughout the life of data projects.
 
-In addition, you have the opportunity to get your product featured on data.world and reach a rapidly growing community of enthusiastic data users.
+In addition, you have the opportunity to get your product featured on data.world and reach an exciting and growing community of data users.
 
 ![Featured Integrations](https://cdn.filepicker.io/api/file/WpepbLkCTTOVJAQQYTsb "Featured")
 
@@ -33,7 +33,7 @@ There are many ways for you to get started:
 
 ## Getting Featured
 
-Before featuring your product on data.world, we evaluate:
+In order for your product to be featured, we first evaluate whether it meets our standards for:
 1. Value and utility
 1. Stability and finish
 1. Use of APIs and other toolkit functionality
@@ -41,9 +41,7 @@ Before featuring your product on data.world, we evaluate:
 1. Privacy policy and terms of use
 1. Content appropriateness
 
-Given that approval at this stage can be subjective, if you intend to get your product featured on 
-data.world, please [work closely with us](help@data.world) and align expectations 
-from the beginning of your project. data.world reserves the right to further define and change the above criteria at any time and without notice.
+Given that approval at this stage is subjective, if you intend to get your product featured on data.world, please  [work closely with us](help@data.world)  to align expectations from the beginning of your project. We reserve the right to further expand or change the above criteria at any time and without notice.
 
 ## Getting Early Access
 
