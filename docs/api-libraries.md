@@ -3,7 +3,7 @@ data.world maintains implementations of API libraries in **Python** and **R**.
 In addition, libraries can be automatically generated for many more languages using the Swagger Codegen tool, including: 
 ActionScript, Apex, Bash, C#, C++, Clojure, Dart, Elixir, Eiffel, Go, Groovy, Haskell, Java, Kotlin, Node.js, Objective-C, Perl, PHP, PowerShell, Ruby, Scala, Swift and Typescript.
 
-**Java Users**: Check our data.world's [JDBC driver](https://github.com/datadotworld/dw-jdbc), available on [Maven Central](https://search.maven.org/#search%7Cga%7C1%7Cdw-jdbc).
+**Java Users**: Check out our data.world's [JDBC driver](https://github.com/datadotworld/dw-jdbc), available on [Maven Central](https://search.maven.org/#search%7Cga%7C1%7Cdw-jdbc).
 
 # Python
 
