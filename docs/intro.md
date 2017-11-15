@@ -1,8 +1,8 @@
-data.world is designed for data and the people who work with data. From professional projects to 
-open data, data.world helps you host and share your data, collaborate with your team, and capture 
+data.world is designed for data and the people who work with data. From professional projects to
+open data, data.world helps you host and share your data, collaborate with your team, and capture
 context and conclusions as you work.  
 
-data.world is also designed to be extended by developers like you. Using our toolkit, you are 
+data.world is also designed to be extended by developers like you. Using our toolkit, you are
 empowered to integrate your data products or create brand new applications, in a variety of ways and in just a few hours.
 
 Our integration toolkit includes:
@@ -29,7 +29,7 @@ In addition, you have the opportunity to get your product featured on data.world
 There are many ways for you to get started:
 1. Proceed with the following sections of this portal (next: #docTextSection:cvoCa7rhnivqejQeq)
 1. Access the [source-code of our flagship open-source integrations](https://github.com/search?q=topic%3Areference-implementation+org%3Adatadotworld&type=Repositories) and learn by example
-1. Reach out, pitch your idea and get individualized support via <help@data.world> or our [Community Slack](https://slack.data.world)
+1. Reach out, pitch your idea, and get individualized support via our [help portal](https://help.data.world/hc/en-us/requests/new) or [Community Slack](https://slack.data.world)
 
 ## Getting Featured
 
@@ -41,13 +41,13 @@ In order for your product to be featured, we first evaluate whether it meets our
 1. Privacy policy and terms of use
 1. Content appropriateness
 
-Given that approval at this stage is subjective, if you intend to get your product featured on data.world, please  [work closely with us](help@data.world)  to align expectations from the beginning of your project. We reserve the right to further expand or change the above criteria at any time and without notice.
+Given that approval at this stage is subjective, if you intend to get your product featured on data.world, please [work closely with us](https://help.data.world/hc/en-us/requests/new) to align expectations from the beginning of your project. We reserve the right to further expand or change the above criteria at any time and without notice.
 
 ## Getting Early Access
 
-Some of our toolkit features are not yet available for general use. Should you need access to 
-_Preview_ features, please request it via <help@data.world>.
+Some of our toolkit features are not yet available for general use. Should you need access to
+_Preview_ features, please [contact us](https://help.data.world/hc/en-us/requests/new).
 
 ## Feedback
 Our toolkit will continue to evolve and we are working constantly to make it richer and better.
-If you've got your own ideas and would like to share with us, please email [help@data.world](mailto:help@data.world) or join us on [Slack](https://slack.data.world/).
+If you've got your own ideas and would like to share with us, please [contact us](https://help.data.world/hc/en-us/requests/new) or join us on [Slack](https://slack.data.world/).

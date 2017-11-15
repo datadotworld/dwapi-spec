@@ -1,5 +1,5 @@
-data.world supports the OAuth 2.0 protocol for authentication and authorization. If you are new to 
-OAuth 2.0, the [OAuth Bible](http://oauthbible.com/) is a good place to start and learn some of the 
+data.world supports the OAuth 2.0 protocol for authentication and authorization. If you are new to
+OAuth 2.0, the [OAuth Bible](http://oauthbible.com/) is a good place to start and learn some of the
 theory.
 
 Below is an example of what the user experience might look like in your product:
@@ -64,7 +64,7 @@ This flow requires that your application run on a web server, so that step #3 an
 
 ### Native applications (desktop, mobile, static sites, other)
 
-data.world supports the [Proof Key for Code Exchange protocol](https://tools.ietf.org/html/rfc7636) to make the native application flow more secure. 
+data.world supports the [Proof Key for Code Exchange protocol](https://tools.ietf.org/html/rfc7636) to make the native application flow more secure.
 A unique code verifier is created for every authorization request, and its transformed value, called `code_challenge`, is sent to the authorization server to obtain the authorization code.
 
 **Create the code verifier**
@@ -140,7 +140,7 @@ Look for the **Deploy to Heroku** button at the bottom of the README.md.
 
 ## Ready to get started?
 
-To request client keys email <help@data.world> including:
+To request client keys [submit a request](https://help.data.world/hc/en-us/requests/new?ticketType=oAuth) including:
  - App/Integration info
    - Name
    - Default permissions (one or more of: read, write, admin)
@@ -149,7 +149,7 @@ To request client keys email <help@data.world> including:
  - Developer info:
    - data.world user name
    - website
-   - logo or avatar (URL)
+   - logo or avatar
 
 We'll evaluate your request and usually respond within one business day.
 While you wait, you can start programming against our APIs using your personal API token which can be obtained at <https://data.world/settings/advanced>

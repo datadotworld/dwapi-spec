@@ -2,15 +2,15 @@
 
 ## General
 
-* Keep in mind that this is a design project. Contributions of all kinds (issues, ideas, 
+* Keep in mind that this is a design project. Contributions of all kinds (issues, ideas,
 proposals), not just code, are highly appreciated.
-* Pull requests are welcome with the understanding that changes proposed to actual operations, 
+* Pull requests are welcome with the understanding that changes proposed to actual operations,
 parameters and responses will be carefully evaluated and discussed, and may not always be accepted.
 * All contributions including documentation, filenames and discussions should be written in English language.
 
 ## Issues
 
-Our [issue tracker](https://github.com/datadotworld/dwapi-specs/issues) can be used to report 
+Our [issue tracker](https://github.com/datadotworld/dwapi-specs/issues) can be used to report
 issues and propose changes to the current or next version of the data.world API specification.
 
 Please follow these guidelines before opening an issue:
@@ -40,7 +40,7 @@ curl https://raw.githubusercontent.com/stoplightio/prism/master/install.sh | sud
 
 Run tests:
 ```bash
-prism conduct --spec src/main/resources/world/data/api/swagger.json spec/*.json
+prism conduct --spec src/main/resources/world/data/api/swagger.json src/test/spec/*.json
 ```
 
 ### Create a Feature Branch
@@ -55,7 +55,7 @@ git checkout -b my-feature-branch
 
 ### Write Tests
 
-Try to write a test that reproduces the problem you're trying to fix or describes a feature that you want to build. Add tests to [spec](spec).
+Try to write a test that reproduces the problem you're trying to fix or describes a feature that you want to build. Add tests to [spec](src/test/spec).
 
 We definitely appreciate pull requests that highlight or reproduce a problem, even without a fix.
 
@@ -63,7 +63,7 @@ We definitely appreciate pull requests that highlight or reproduce a problem, ev
 
 Implement your feature or bug fix.
 
-Make sure that `prism conduct --spec src/main/resources/world/data/api/swagger.json spec/*.json` completes without errors.
+Make sure that `prism conduct --spec src/main/resources/world/data/api/swagger.json src/test/spec/*.json` completes without errors.
 
 ### Write Documentation
 
@@ -97,8 +97,8 @@ Go to https://github.com/[YOUR_GITHUB_NAME]/dwapi-spec and select your feature b
 
 ## Conventions
 
-Due to limitations in swagger-maven-plugin 3.1.2 and or assertj-swagger (which are used in the 
-implementation of this design), this swagger definition 
+Due to limitations in swagger-maven-plugin 3.1.2 and or assertj-swagger (which are used in the
+implementation of this design), this swagger definition
 must not include:
 
 1. Global `consumes` or `produces`. Those must be defined for each operation.
