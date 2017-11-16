@@ -41,6 +41,9 @@
     },
     {
       "name": "streams"
+    },
+    {
+      "name": "projects"
     }
   ],
   "schemes": [
@@ -1891,6 +1894,589 @@
         ],
         "description": "Fetch datasets that the currently authenticated user has access to because he or she is the owner of the dataset."
       }
+    },
+    "/projects/{owner}/{id}": {
+      "get": {
+        "tags": [
+          "projects"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProjectSummaryResponse"
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "owner",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "put": {
+        "tags": [
+          "projects"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ProjectPutRequest"
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "422": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNPROCESSABLE ENTITY**\nThe server understands the content type of the request entity and the syntax of the request entity is correct, but was unable to process the contained instructions.\nFor example, this error may occur if the JSON body of the request doesn't match the expected schema."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ProjectCreateRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      },
+      "patch": {
+        "tags": [
+          "projects"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "422": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNPROCESSABLE ENTITY**\nThe server understands the content type of the request entity and the syntax of the request entity is correct, but was unable to process the contained instructions.\nFor example, this error may occur if the JSON body of the request doesn't match the expected schema."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ProjectPatchRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "projects"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/projects/{owner}/{id}/linkedDatasets/{datasetOwner}/{datasetId}": {
+      "delete": {
+        "tags": [
+          "projects"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "owner",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "datasetOwner",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "datasetId",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "put": {
+        "tags": [
+          "projects"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/LinkDatasetRequest"
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "422": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNPROCESSABLE ENTITY**\nThe server understands the content type of the request entity and the syntax of the request entity is correct, but was unable to process the contained instructions.\nFor example, this error may occur if the JSON body of the request doesn't match the expected schema."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/projects/{owner}": {
+      "post": {
+        "tags": [
+          "projects"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "422": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNPROCESSABLE ENTITY**\nThe server understands the content type of the request entity and the syntax of the request entity is correct, but was unable to process the contained instructions.\nFor example, this error may occur if the JSON body of the request doesn't match the expected schema."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ProjectCreateRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "owner",
+          "in": "path",
+          "type": "string",
+          "required": true
+        }
+      ]
+    },
+    "/user/projects/own": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PaginatedProjectResults"
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/user/projects/liked": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PaginatedProjectResults"
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/user/projects/contributing": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PaginatedProjectResults"
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
     }
   },
   "securityDefinitions": {
@@ -2569,6 +3155,275 @@
       "required": [
         "count",
         "records"
+      ]
+    },
+    "ProjectCreateRequest": {
+      "type": "object",
+      "title": "Project Creation Request",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "objective": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "license": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileCreateRequest"
+          }
+        },
+        "linkedDatasets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkDatasetRequest"
+          }
+        },
+        "visibility": {
+          "type": "string",
+          "enum": [
+            "OPEN",
+            "PRIVATE"
+          ]
+        }
+      },
+      "required": [
+        "title"
+      ]
+    },
+    "LinkedDatasetSummary": {
+      "type": "object",
+      "title": "Linked Dataset Summary",
+      "properties": {
+        "owner": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "visibility": {
+          "type": "string"
+        },
+        "license": {
+          "type": "string"
+        },
+        "accessLevel": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string"
+        }
+      }
+    },
+    "PaginatedProjectResults": {
+      "type": "object",
+      "title": "Project Pagination Response",
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProjectSummaryResponse"
+          }
+        },
+        "nextPageToken": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "count",
+        "records"
+      ]
+    },
+    "LinkDatasetRequest": {
+      "type": "object",
+      "title": "Link Dataset Request",
+      "properties": {
+        "owner": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "ProjectPutRequest": {
+      "type": "object",
+      "title": "Project Replace Request",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "objective": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "license": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileCreateRequest"
+          }
+        },
+        "linkedDatasets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkDatasetRequest"
+          }
+        },
+        "visibility": {
+          "type": "string",
+          "enum": [
+            "OPEN",
+            "PRIVATE"
+          ]
+        }
+      }
+    },
+    "ProjectPatchRequest": {
+      "type": "object",
+      "title": "Project Update Request",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "objective": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "license": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileCreateRequest"
+          }
+        },
+        "linkedDatasets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkDatasetRequest"
+          }
+        },
+        "visibility": {
+          "type": "string",
+          "enum": [
+            "OPEN",
+            "PRIVATE"
+          ]
+        }
+      }
+    },
+    "ProjectSummaryResponse": {
+      "type": "object",
+      "title": "Project Summary Response",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "objective": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "license": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileSummary"
+          }
+        },
+        "linkedDatasets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedDatasetSummary"
+          }
+        },
+        "insights": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InsightSummary"
+          }
+        },
+        "visibility": {
+          "type": "string",
+          "enum": [
+            "OPEN",
+            "PRIVATE"
+          ]
+        },
+        "owner": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string"
+        },
+        "accessLevel": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "READ",
+            "WRITE",
+            "ADMIN"
+          ]
+        }
+      },
+      "required": [
+        "title"
       ]
     }
   },
