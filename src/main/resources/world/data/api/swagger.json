@@ -2494,7 +2494,7 @@
       "properties": {
         "title": {
           "type": "string",
-          "minLength": 0,
+          "minLength": 1,
           "maxLength": 60,
           "description": "Dataset name."
         },
@@ -2690,6 +2690,7 @@
         }
       },
       "required": [
+        "title",
         "visibility"
       ]
     },
@@ -3200,12 +3201,13 @@
         }
       },
       "required": [
-        "title"
+        "title",
+        "visibility"
       ]
     },
-    "LinkedDatasetSummary": {
+    "LinkedDatasetSummaryResponse": {
       "type": "object",
-      "title": "Linked Dataset Summary",
+      "title": "Linked Dataset Summary Response",
       "properties": {
         "owner": {
           "type": "string"
@@ -3231,14 +3233,24 @@
         "updated": {
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "accessLevel",
+        "created",
+        "id",
+        "owner",
+        "title",
+        "visibility",
+        "updated"
+      ]
     },
     "PaginatedProjectResults": {
       "type": "object",
       "title": "Project Pagination Response",
       "properties": {
         "count": {
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "records": {
           "type": "array",
@@ -3265,7 +3277,11 @@
         "id": {
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "owner",
+        "id"
+      ]
     },
     "ProjectPutRequest": {
       "type": "object",
@@ -3308,7 +3324,11 @@
             "PRIVATE"
           ]
         }
-      }
+      },
+      "required": [
+        "title",
+        "visibility"
+      ]
     },
     "ProjectPatchRequest": {
       "type": "object",
@@ -3387,12 +3407,6 @@
             "$ref": "#/definitions/LinkedDatasetSummary"
           }
         },
-        "insights": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InsightSummary"
-          }
-        },
         "visibility": {
           "type": "string",
           "enum": [
@@ -3423,7 +3437,14 @@
         }
       },
       "required": [
-        "title"
+        "owner",
+        "id",
+        "title",
+        "visibility",
+        "status",
+        "created",
+        "updated",
+        "accessLevel"
       ]
     }
   },
