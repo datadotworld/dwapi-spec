@@ -2239,18 +2239,6 @@
       },
       "parameters": [
         {
-          "name": "owner",
-          "in": "path",
-          "type": "string",
-          "required": true
-        },
-        {
-          "name": "id",
-          "in": "path",
-          "type": "string",
-          "required": true
-        },
-        {
           "name": "linkedDatasetOwner",
           "in": "path",
           "type": "string",
