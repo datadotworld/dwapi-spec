@@ -20,9 +20,10 @@
   },
   "host": "api.data.world",
   "basePath": "/v0",
-  "tags": [{
-    "name": "datasets"
-  },
+  "tags": [
+    {
+      "name": "datasets"
+    },
     {
       "name": "download"
     },
@@ -63,9 +64,10 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [{
-          "$ref": "#/parameters/owner"
-        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
           {
             "$ref": "#/parameters/datasetId"
           },
@@ -129,9 +131,11 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security": [{
-          "token": []
-        }],
+        "security": [
+          {
+            "token": []
+          }
+        ],
         "description": "This endpoint appends JSON data to a stream associated with a dataset. Streams don't need to be created before you can append data to it. They will be created on-demand, the first time they are used.\n\nMultiple records can be appended at once by using JSON-L (`application/json-l`) as the request content type.\n\nCurrently, data uploaded to a dataset via a stream is not immediatelly processed. Instead, it is processed automatically at least once a day or as a result of a \"Sync files\" endpoint invocation.\n\nOnce processed, the contents of a stream will appear as part of the respective dataset as a `.jsonl` file (e.g. `my-stream` will produce a file named `my-stream.jsonl`)."
       }
     },
@@ -146,9 +150,10 @@
         "produces": [
           "application/zip"
         ],
-        "parameters": [{
-          "$ref": "#/parameters/owner"
-        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
           {
             "$ref": "#/parameters/datasetId"
           }
@@ -194,9 +199,11 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security": [{
-          "token": []
-        }]
+        "security": [
+          {
+            "token": []
+          }
+        ]
       }
     },
     "/file_download/{owner}/{id}/{file}": {
@@ -207,9 +214,10 @@
         "summary": "Download file",
         "description": "This endpoint will return a file within the dataset as originally uploaded.  \nIf you are interested retrieving clean data extracted from those files by data.world, check out `GET:/sql` and `GET:/sparql`.",
         "operationId": "downloadFile",
-        "parameters": [{
-          "$ref": "#/parameters/owner"
-        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
           {
             "$ref": "#/parameters/datasetId"
           },
@@ -258,9 +266,11 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security": [{
-          "token": []
-        }]
+        "security": [
+          {
+            "token": []
+          }
+        ]
       }
     },
     "/sparql/{owner}/{id}": {
@@ -279,9 +289,10 @@
           "text/tab-separated-values",
           "text/csv"
         ],
-        "parameters": [{
-          "$ref": "#/parameters/owner"
-        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
           {
             "$ref": "#/parameters/datasetId"
           },
@@ -330,9 +341,11 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security": [{
-          "token": []
-        }]
+        "security": [
+          {
+            "token": []
+          }
+        ]
       },
       "post": {
         "tags": [
@@ -352,9 +365,10 @@
         "consumes": [
           "application/x-www-form-urlencoded"
         ],
-        "parameters": [{
-          "$ref": "#/parameters/owner"
-        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
           {
             "$ref": "#/parameters/datasetId"
           },
@@ -406,9 +420,11 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security": [{
-          "token": []
-        }]
+        "security": [
+          {
+            "token": []
+          }
+        ]
       }
     },
     "/sql/{owner}/{id}": {
@@ -425,9 +441,10 @@
           "application/x-ndjson",
           "text/csv"
         ],
-        "parameters": [{
-          "$ref": "#/parameters/owner"
-        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
           {
             "$ref": "#/parameters/datasetId"
           },
@@ -479,9 +496,11 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security": [{
-          "token": []
-        }]
+        "security": [
+          {
+            "token": []
+          }
+        ]
       },
       "post": {
         "tags": [
@@ -499,9 +518,10 @@
           "application/x-ndjson",
           "text/csv"
         ],
-        "parameters": [{
-          "$ref": "#/parameters/owner"
-        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
           {
             "$ref": "#/parameters/datasetId"
           },
@@ -553,9 +573,11 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security": [{
-          "token": []
-        }]
+        "security": [
+          {
+            "token": []
+          }
+        ]
       }
     },
     "/datasets/{owner}": {
@@ -567,9 +589,10 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [{
-          "$ref": "#/parameters/owner"
-        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
           {
             "in": "body",
             "name": "body",
@@ -632,9 +655,11 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security": [{
-          "token": []
-        }],
+        "security": [
+          {
+            "token": []
+          }
+        ],
         "consumes": [
           "application/json"
         ],
@@ -651,9 +676,10 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [{
-          "$ref": "#/parameters/owner"
-        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
           {
             "$ref": "#/parameters/datasetId"
           }
@@ -699,9 +725,11 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security": [{
-          "token": []
-        }],
+        "security": [
+          {
+            "token": []
+          }
+        ],
         "description": "Permanently deletes a dataset and all data associated with it. This operation cannot be undone, although a new dataset may be created with the same id.",
         "summary": "Delete a dataset"
       },
@@ -714,9 +742,10 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [{
-          "$ref": "#/parameters/owner"
-        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
           {
             "$ref": "#/parameters/datasetId"
           }
@@ -743,20 +772,21 @@
                   "business network"
                 ],
                 "visibility": "OPEN",
-                "files": [{
-                  "name": "org-org-connections.csv",
-                  "sizeInBytes": 97658,
-                  "source": {
-                    "id": "bfbac3bb-9cec-410a-9ac4-c904a56d65fe",
-                    "url": "https://raw.githubusercontent.com/BuzzFeedNews/trumpworld/master/data/org-org-connections.csv",
-                    "syncStatus": "OK",
-                    "lastSyncStart": "2017-02-06T22:55:15.242Z",
-                    "lastSyncSuccess": "2017-02-06T22:55:15.258Z",
-                    "lastSyncFailure": "2017-02-01T23:47:47.667Z"
+                "files": [
+                  {
+                    "name": "org-org-connections.csv",
+                    "sizeInBytes": 97658,
+                    "source": {
+                      "id": "bfbac3bb-9cec-410a-9ac4-c904a56d65fe",
+                      "url": "https://raw.githubusercontent.com/BuzzFeedNews/trumpworld/master/data/org-org-connections.csv",
+                      "syncStatus": "OK",
+                      "lastSyncStart": "2017-02-06T22:55:15.242Z",
+                      "lastSyncSuccess": "2017-02-06T22:55:15.258Z",
+                      "lastSyncFailure": "2017-02-01T23:47:47.667Z"
+                    },
+                    "created": "2017-02-01T23:45:12.379Z",
+                    "updated": "2017-02-03T16:05:03.241Z"
                   },
-                  "created": "2017-02-01T23:45:12.379Z",
-                  "updated": "2017-02-03T16:05:03.241Z"
-                },
                   {
                     "name": "person-org-connections.csv",
                     "sizeInBytes": 231637,
@@ -829,9 +859,11 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security": [{
-          "token": []
-        }],
+        "security": [
+          {
+            "token": []
+          }
+        ],
         "description": "Return details on the dataset."
       },
       "put": {
@@ -842,9 +874,10 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [{
-          "$ref": "#/parameters/owner"
-        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
           {
             "$ref": "#/parameters/datasetId"
           },
@@ -907,9 +940,11 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security": [{
-          "token": []
-        }],
+        "security": [
+          {
+            "token": []
+          }
+        ],
         "consumes": [
           "application/json"
         ],
@@ -925,9 +960,10 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [{
-          "$ref": "#/parameters/owner"
-        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
           {
             "$ref": "#/parameters/datasetId"
           },
@@ -990,9 +1026,11 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security": [{
-          "token": []
-        }],
+        "security": [
+          {
+            "token": []
+          }
+        ],
         "description": "Update an existing dataset. Note that only elements or files included in the request will be updated. All omitted elements or files will remain untouched.",
         "consumes": [
           "application/json"
@@ -1012,9 +1050,10 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [{
-          "$ref": "#/parameters/owner"
-        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
           {
             "$ref": "#/parameters/datasetId"
           },
@@ -1077,9 +1116,11 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security": [{
-          "token": []
-        }],
+        "security": [
+          {
+            "token": []
+          }
+        ],
         "description": "This method allows files published on the web to be added to a data.world dataset via their URL. The source URL will be stored so you can easily update your file anytime it changes via the *fetch latest* link on the [data.world](https://data.world/) dataset page or by triggering the GET:/sync endpoint.  \nCheck-out or tutorials for tips on how to add Google Sheets, GitHub and S3 files via URL and how to use webhooks or scripts to keep them always in sync."
       },
       "delete": {
@@ -1091,9 +1132,10 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [{
-          "$ref": "#/parameters/owner"
-        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
           {
             "$ref": "#/parameters/datasetId"
           },
@@ -1157,9 +1199,11 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security": [{
-          "token": []
-        }],
+        "security": [
+          {
+            "token": []
+          }
+        ],
         "description": "Delete one or more files from a dataset by their name, including files added via URL.   \n\n**Batching**  \nNote that the `name` parameter can be include multiple times in the query string, once for each file that is to be deleted together in a single request."
       }
     },
@@ -1173,9 +1217,10 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [{
-          "$ref": "#/parameters/owner"
-        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
           {
             "$ref": "#/parameters/datasetId"
           },
@@ -1236,9 +1281,11 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security": [{
-          "token": []
-        }],
+        "security": [
+          {
+            "token": []
+          }
+        ],
         "description": "Delete a single file from a dataset by their name, including files added via URL."
       }
     },
@@ -1252,9 +1299,10 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [{
-          "$ref": "#/parameters/owner"
-        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
           {
             "$ref": "#/parameters/datasetId"
           }
@@ -1306,9 +1354,11 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security": [{
-          "token": []
-        }],
+        "security": [
+          {
+            "token": []
+          }
+        ],
         "description": "Update all files within a dataset that have originally been added via URL (e.g. via /datasets endpoints or on data.world). \nCheck-out or tutorials for tips on how to add Google Sheets, GitHub and S3 files via URL and how to use webhooks or scripts to keep them always in sync."
       },
       "post": {
@@ -1320,9 +1370,10 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [{
-          "$ref": "#/parameters/owner"
-        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
           {
             "$ref": "#/parameters/datasetId"
           }
@@ -1374,9 +1425,11 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security": [{
-          "token": []
-        }],
+        "security": [
+          {
+            "token": []
+          }
+        ],
         "description": "Update all files within a dataset that have originally been added via URL (e.g. via /datasets endpoints or on data.world).  \nCheck-out or tutorials for tips on how to add Google Sheets, GitHub and S3 files via URL and how to use webhooks or scripts to keep them always in sync."
       }
     },
@@ -1394,9 +1447,10 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [{
-          "$ref": "#/parameters/owner"
-        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
           {
             "$ref": "#/parameters/datasetId"
           },
@@ -1468,9 +1522,11 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security": [{
-          "token": []
-        }]
+        "security": [
+          {
+            "token": []
+          }
+        ]
       }
     },
     "/uploads/{owner}/{id}/files/{name}": {
@@ -1488,9 +1544,10 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [{
-          "$ref": "#/parameters/owner"
-        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
           {
             "$ref": "#/parameters/datasetId"
           },
@@ -1564,9 +1621,11 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security": [{
-          "token": []
-        }]
+        "security": [
+          {
+            "token": []
+          }
+        ]
       }
     },
     "/user": {
@@ -1615,9 +1674,11 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security": [{
-          "token": []
-        }],
+        "security": [
+          {
+            "token": []
+          }
+        ],
         "description": "Return profile information for the currently authenticated user."
       }
     },
@@ -1631,9 +1692,10 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [{
-          "$ref": "#/parameters/limit"
-        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/limit"
+          },
           {
             "$ref": "#/parameters/next"
           },
@@ -1682,9 +1744,11 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security": [{
-          "token": []
-        }],
+        "security": [
+          {
+            "token": []
+          }
+        ],
         "description": "Fetch datasets that the currently authenticated user has access to because he or she is a contributor."
       }
     },
@@ -1698,9 +1762,10 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [{
-          "$ref": "#/parameters/limit"
-        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/limit"
+          },
           {
             "$ref": "#/parameters/next"
           },
@@ -1749,9 +1814,11 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security": [{
-          "token": []
-        }],
+        "security": [
+          {
+            "token": []
+          }
+        ],
         "description": "Fetch datasets that the currently authenticated user likes."
       }
     },
@@ -1765,9 +1832,10 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [{
-          "$ref": "#/parameters/limit"
-        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/limit"
+          },
           {
             "$ref": "#/parameters/next"
           },
@@ -1816,9 +1884,11 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "security": [{
-          "token": []
-        }],
+        "security": [
+          {
+            "token": []
+          }
+        ],
         "description": "Fetch datasets that the currently authenticated user has access to because he or she is the owner of the dataset."
       }
     },
@@ -1870,12 +1940,15 @@
         ],
         "summary": "Retrieve a project",
         "operationId": "getProject",
-        "security": [{
-          "token": []
-        }],
-        "parameters": [{
-          "$ref": "#/parameters/owner"
-        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
           {
             "$ref": "#/parameters/projectId"
           }
@@ -1930,13 +2003,14 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "parameters": [{
-          "in": "body",
-          "name": "body",
-          "schema": {
-            "$ref": "#/definitions/ProjectCreateRequest"
-          }
-        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ProjectCreateRequest"
+            }
+          },
           {
             "$ref": "#/parameters/owner"
           },
@@ -1953,9 +2027,11 @@
         "summary": "Create / Replace a project",
         "description": "Create a project with a given id or completely rewrite the project, including any previously added files or linked datasets, if one already exists with the given id.",
         "operationId": "replaceProject",
-        "security": [{
-          "token": []
-        }]
+        "security": [
+          {
+            "token": []
+          }
+        ]
       },
       "patch": {
         "tags": [
@@ -2005,13 +2081,14 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "parameters": [{
-          "in": "body",
-          "name": "body",
-          "schema": {
-            "$ref": "#/definitions/ProjectPatchRequest"
-          }
-        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ProjectPatchRequest"
+            }
+          },
           {
             "$ref": "#/parameters/owner"
           },
@@ -2027,9 +2104,11 @@
         ],
         "summary": "Update a project",
         "operationId": "patchProject",
-        "security": [{
-          "token": []
-        }],
+        "security": [
+          {
+            "token": []
+          }
+        ],
         "description": "Update an existing project. Note that only elements, files or linked datasets included in the request will be updated. All omitted elements, files or linked datasets will remain untouched."
       },
       "delete": {
@@ -2078,12 +2157,15 @@
           "application/json"
         ],
         "operationId": "deleteProject",
-        "security": [{
-          "token": []
-        }],
-        "parameters": [{
-          "$ref": "#/parameters/owner"
-        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
           {
             "$ref": "#/parameters/projectId"
           }
@@ -2140,24 +2222,28 @@
         ],
         "summary": "Unlink dataset",
         "operationId": "removeLinkedDataset",
-        "security": [{
-          "token": []
-        }],
-        "parameters": [{
-          "$ref": "#/parameters/owner"
-        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
           {
             "$ref": "#/parameters/projectId"
           }
         ],
         "description": "Add a linked dataset to a project."
       },
-      "parameters": [{
-        "name": "owner",
-        "in": "path",
-        "type": "string",
-        "required": true
-      },
+      "parameters": [
+        {
+          "name": "owner",
+          "in": "path",
+          "type": "string",
+          "required": true
+        },
         {
           "name": "id",
           "in": "path",
@@ -2230,12 +2316,15 @@
         ],
         "description": "Remove a linked dataset from a project.",
         "operationId": "addLinkedDataset",
-        "security": [{
-          "token": []
-        }],
-        "parameters": [{
-          "$ref": "#/parameters/owner"
-        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
           {
             "$ref": "#/parameters/datasetId"
           }
@@ -2292,13 +2381,14 @@
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
           }
         },
-        "parameters": [{
-          "in": "body",
-          "name": "body",
-          "schema": {
-            "$ref": "#/definitions/ProjectCreateRequest"
-          }
-        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ProjectCreateRequest"
+            }
+          },
           {
             "$ref": "#/parameters/owner"
           }
@@ -2309,9 +2399,11 @@
         "produces": [
           "application/json"
         ],
-        "security": [{
-          "token": []
-        }],
+        "security": [
+          {
+            "token": []
+          }
+        ],
         "operationId": "createProject",
         "summary": "Create a project",
         "description": "Create a new project."
@@ -2366,9 +2458,11 @@
         "description": "Fetch projects that the currently authenticated user has access to because he or she is the owner of the project.",
         "summary": "List projects owned",
         "operationId": "fetchProjects",
-        "security": [{
-          "token": []
-        }]
+        "security": [
+          {
+            "token": []
+          }
+        ]
       }
     },
     "/user/projects/liked": {
@@ -2420,9 +2514,11 @@
         "summary": "List liked projects",
         "description": "Fetch projects that the currently authenticated user likes.",
         "operationId": "fetchLikedProjects",
-        "security": [{
-          "token": []
-        }]
+        "security": [
+          {
+            "token": []
+          }
+        ]
       }
     },
     "/user/projects/contributing": {
@@ -2474,9 +2570,11 @@
         "summary": "List projects as contributor",
         "description": "Fetch projects that the currently authenticated user has access to because he or she is a contributor.",
         "operationId": "fetchContributingProjects",
-        "security": [{
-          "token": []
-        }]
+        "security": [
+          {
+            "token": []
+          }
+        ]
       }
     }
   },
@@ -2626,8 +2724,74 @@
       }
     },
     "DatasetPutRequest": {
-      "$ref": "#/definitions/DatasetCreateRequest",
-      "title": "Dataset Replace Request"
+      "type": "object",
+      "title": "Dataset Replace Request",
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60,
+          "description": "Dataset name."
+        },
+        "description": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 120,
+          "description": "Short dataset description."
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 25000,
+          "description": "Long-form dataset summary (Markdown supported)."
+        },
+        "tags": {
+          "type": "array",
+          "description": "Dataset tags. Letters numbers and spaces only (max 25 characters).",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "maxLength": 25,
+            "pattern": "^[a-zA-Z0-9\\s]*"
+          }
+        },
+        "license": {
+          "type": "string",
+          "description": "Dataset license. Find additional info for allowed values [here](https://data.world/license-help).",
+          "enum": [
+            "Public Domain",
+            "PDDL",
+            "CC-0",
+            "CC-BY",
+            "ODC-BY",
+            "CC-BY-SA",
+            "ODC-ODbL",
+            "CC BY-NC",
+            "CC BY-NC-SA",
+            "Other"
+          ]
+        },
+        "visibility": {
+          "type": "string",
+          "enum": [
+            "OPEN",
+            "PRIVATE"
+          ],
+          "description": "Dataset visibility. `OPEN` if the dataset can be seen by any member of data.world. `PRIVATE` if the dataset can be seen by its owner and authorized collaborators."
+        },
+        "files": {
+          "type": "array",
+          "description": "Initial set of files. At dataset creation time, file uploads are not supported. However, this property can be used to add files via URL.",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/FileCreateRequest"
+          }
+        }
+      },
+      "required": [
+        "title",
+        "visibility"
+      ]
     },
     "DatasetSummaryResponse": {
       "type": "object",
@@ -3315,8 +3479,81 @@
       ]
     },
     "ProjectPutRequest": {
-      "$ref": "#/definitions/ProjectCreateRequest",
-      "title": "Project Replace Request"
+      "type": "object",
+      "title": "Project Replace Request",
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 60,
+          "description": "Project title."
+        },
+        "objective": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 120,
+          "description": "Short project objective."
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 25000,
+          "description": "Long-form project summary (Markdown supported)."
+        },
+        "tags": {
+          "type": "array",
+          "description": "Project tags. Letters numbers and spaces only (max 25 characters).",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "maxLength": 25,
+            "pattern": "^[a-zA-Z0-9\\s]*"
+          }
+        },
+        "license": {
+          "type": "string",
+          "description": "Project license. Find additional info for allowed values [here](https://data.world/license-help).",
+          "enum": [
+            "Public Domain",
+            "PDDL",
+            "CC-0",
+            "CC-BY",
+            "ODC-BY",
+            "CC-BY-SA",
+            "ODC-ODbL",
+            "CC BY-NC",
+            "CC BY-NC-SA",
+            "Other"
+          ]
+        },
+        "visibility": {
+          "type": "string",
+          "enum": [
+            "OPEN",
+            "PRIVATE"
+          ],
+          "description": "Project visibility. `OPEN` if the project can be seen by any member of data.world. `PRIVATE` if the project can be seen by its owner and authorized collaborators."
+        },
+        "files": {
+          "type": "array",
+          "description": "Initial set of files. At project creation time, file uploads are not supported. However, this property can be used to add files from URL.",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/FileCreateRequest"
+          }
+        },
+        "linkedDatasets": {
+          "type": "array",
+          "description": "List of linked datasets.",
+          "items": {
+            "$ref": "#/definitions/LinkedDatasetCreateOrUpdateRequest"
+          }
+        }
+      },
+      "required": [
+        "title",
+        "visibility"
+      ]
     },
     "ProjectPatchRequest": {
       "type": "object",
@@ -3364,28 +3601,28 @@
             "CC BY-NC",
             "CC BY-NC-SA",
             "Other"
+          ]
+        },
+        "visibility": {
+          "type": "string",
+          "enum": [
+            "OPEN",
+            "PRIVATE"
           ],
-          "visibility": {
-            "type": "string",
-            "enum": [
-              "OPEN",
-              "PRIVATE"
-            ],
-            "description": "Project visibility. `OPEN` if the project can be seen by any member of data.world. `PRIVATE` if the project can be seen by its owner and authorized collaborators."
-          },
-          "files": {
-            "type": "array",
-            "description": "Updated set of files. At project update time, file uploads are not supported. However, this property can be used to add files from URL or update metadata related to existing files.",
-            "uniqueItems": false,
-            "items": {
-              "$ref": "#/definitions/FileCreateOrUpdateRequest"
-            }
-          },
-          "linkedDatasets": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/LinkedDatasetCreateOrUpdateRequest"
-            }
+          "description": "Project visibility. `OPEN` if the project can be seen by any member of data.world. `PRIVATE` if the project can be seen by its owner and authorized collaborators."
+        },
+        "files": {
+          "type": "array",
+          "description": "Updated set of files. At project update time, file uploads are not supported. However, this property can be used to add files from URL or update metadata related to existing files.",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/FileCreateOrUpdateRequest"
+          }
+        },
+        "linkedDatasets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedDatasetCreateOrUpdateRequest"
           }
         }
       }
@@ -3493,9 +3730,11 @@
       ]
     }
   },
-  "security": [{
-    "token": []
-  }],
+  "security": [
+    {
+      "token": []
+    }
+  ],
   "parameters": {
     "owner": {
       "name": "owner",
