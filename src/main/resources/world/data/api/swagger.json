@@ -2212,7 +2212,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/LinkDatasetRequest"
+              "$ref": "#/definitions/LinkedDatasetCreateOrUpdateRequest"
             }
           },
           "400": {
@@ -3188,7 +3188,7 @@
         "linkedDatasets": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LinkDatasetRequest"
+            "$ref": "#/definitions/LinkedDatasetCreateOrUpdateRequest"
           }
         },
         "visibility": {
@@ -3255,9 +3255,9 @@
         "records"
       ]
     },
-    "LinkDatasetRequest": {
+    "LinkedDatasetCreateOrUpdateRequest": {
       "type": "object",
-      "title": "Link Dataset Request",
+      "title": "Linked Dataset Create Or Update Request",
       "properties": {
         "owner": {
           "type": "string"
@@ -3298,7 +3298,7 @@
         "linkedDatasets": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LinkDatasetRequest"
+            "$ref": "#/definitions/LinkedDatasetCreateOrUpdateRequest"
           }
         },
         "visibility": {
@@ -3341,7 +3341,7 @@
         "linkedDatasets": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LinkDatasetRequest"
+            "$ref": "#/definitions/LinkedDatasetCreateOrUpdateRequest"
           }
         },
         "visibility": {
