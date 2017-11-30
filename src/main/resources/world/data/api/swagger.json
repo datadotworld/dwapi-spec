@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.12.0",
+    "version": "0.12.1",
     "title": "data.world API",
     "termsOfService": "https://data.world/terms",
     "contact": {
@@ -2881,12 +2881,11 @@
           "type": "string",
           "enum": [
             "NONE",
-            "DISCOVER",
             "READ",
             "WRITE",
             "ADMIN"
           ],
-          "description": "The level of access the authenticated user is allowed with respect to dataset: \n\n* `NONE` Not allowed any access.  \n* `DISCOVER` Allowed to know that the dataset exists.  \n* `READ` Allowed to view and download data and metadata, in addition to what DISCOVER allows. \n* `WRITE` Allowed to update data and metadata, in addition to what READ allows. \n* `ADMIN` Allowed to delete dataset, in addition to what WRITE allows."
+          "description": "The level of access the authenticated user is allowed with respect to dataset: \n\n* `NONE` Not allowed any access.  \n* `READ` Allowed to view and download data and metadata. \n* `WRITE` Allowed to update data and metadata, in addition to what READ allows. \n* `ADMIN` Allowed to delete dataset, in addition to what WRITE allows."
         }
       },
       "required": [
