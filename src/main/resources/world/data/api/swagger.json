@@ -2593,7 +2593,7 @@
       "properties": {
         "title": {
           "type": "string",
-          "minLength": 0,
+          "minLength": 1,
           "maxLength": 60,
           "description": "Dataset name."
         },
@@ -2732,6 +2732,7 @@
     "DatasetPutRequest": {
       "$ref": "#/definitions/DatasetCreateRequest",
       "title": "Dataset Replace Request"
+      }
     },
     "DatasetSummaryResponse": {
       "type": "object",
@@ -3364,11 +3365,12 @@
         }
       },
       "required": [
-        "owner",
+        "accessLevel",
+        "created",
         "id",
+        "owner",
         "title",
         "visibility",
-        "created",
         "updated"
       ]
     },
@@ -3377,7 +3379,8 @@
       "title": "Paginated Project Results",
       "properties": {
         "count": {
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "records": {
           "type": "array",
@@ -3464,8 +3467,7 @@
             "CC BY-NC",
             "CC BY-NC-SA",
             "Other"
-          ]
-        },
+          ],
         "visibility": {
           "type": "string",
           "enum": [
@@ -3531,6 +3533,16 @@
             "PRIVATE"
           ]
         },
+        "status": {
+          "type": "string",
+          "enum": [
+            "NEW",
+            "INPROGRESS",
+            "LOADED",
+            "SYSTEMERROR"
+          ],
+          "description": "Processing status of project. This status can be checked periodically after changes are made to the project to determine the status of asynchronous processing.\n\n* `NEW`: Just created. Not yet processed.\n* `INPROGRESS`: Currently being processed.\n* `LOADED`: Successfully processed.\n* `SYSTEMERROR`: Error state due to processing failure."
+        },
         "owner": {
           "type": "string"
         },
@@ -3554,7 +3566,14 @@
         }
       },
       "required": [
-        "title"
+        "owner",
+        "id",
+        "title",
+        "visibility",
+        "status",
+        "created",
+        "updated",
+        "accessLevel"
       ]
     },
     "CreateProjectResponse": {
