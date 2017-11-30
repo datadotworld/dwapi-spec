@@ -2025,7 +2025,7 @@
           "application/json"
         ],
         "summary": "Create / Replace a project",
-        "description": "Create a project with a given id or completely rewrite the project, including any previously added files, if one already exists with the given id.",
+        "description": "Create a project with a given id or completely rewrite the project, including any previously added files or linked datasets, if one already exists with the given id.",
         "operationId": "replaceProject",
         "security": [
           {
@@ -2109,7 +2109,7 @@
             "token": []
           }
         ],
-        "description": "Update an existing project. Note that only elements or files included in the request will be updated. All omitted elements or files will remain untouched."
+        "description": "Update an existing project. Note that only elements, files or linked datasets included in the request will be updated. All omitted elements, files or linked datasets will remain untouched."
       },
       "delete": {
         "tags": [
