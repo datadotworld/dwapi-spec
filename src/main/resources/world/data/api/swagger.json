@@ -3414,6 +3414,16 @@
             "PRIVATE"
           ]
         },
+        "status": {
+          "type": "string",
+          "enum": [
+            "NEW",
+            "INPROGRESS",
+            "LOADED",
+            "SYSTEMERROR"
+          ],
+          "description": "Processing status of project. This status can be checked periodically after changes are made to the project to determine the status of asynchronous processing.\n\n* `NEW`: Just created. Not yet processed.\n* `INPROGRESS`: Currently being processed.\n* `LOADED`: Successfully processed.\n* `SYSTEMERROR`: Error state due to processing failure."
+        },
         "owner": {
           "type": "string"
         },
