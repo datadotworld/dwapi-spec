@@ -77,7 +77,7 @@
           {
             "in": "body",
             "name": "body",
-            "required" : true,
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {}
@@ -136,7 +136,7 @@
             "token": []
           }
         ],
-        "description": "This endpoint appends JSON data to a data stream associated with a dataset.\n\nMultiple records can be appended at once by using JSON-L (`application/json-l`) as the request content type.\n\nCurrently, data uploaded to a dataset via a stream is not immediatelly processed. Instead, it is processed automatically a few times per day or as a result of a \"Sync files\" endpoint invocation.\n\nOnce processed, the contents of a stream will appear as part of the respective dataset as a `.jsonl` file (e.g. `my-stream` will produce a file named `my-stream.jsonl`)."
+        "description": "This endpoint appends JSON data to a stream associated with a dataset. Streams don't need to be created before you can append data to it. They will be created on-demand, the first time they are used.\n\nMultiple records can be appended at once by using JSON-L (`application/json-l`) as the request content type.\n\nCurrently, data uploaded to a dataset via a stream is not immediatelly processed. Instead, it is processed automatically at least once a day or as a result of a \"Sync files\" endpoint invocation.\n\nOnce processed, the contents of a stream will appear as part of the respective dataset as a `.jsonl` file (e.g. `my-stream` will produce a file named `my-stream.jsonl`)."
       }
     },
     "/download/{owner}/{id}": {
@@ -586,7 +586,6 @@
           "datasets"
         ],
         "summary": "Create a dataset",
-        "operationId": "createDataset",
         "produces": [
           "application/json"
         ],
@@ -611,9 +610,6 @@
             "description": "**OK**\nThe request has succeeded.",
             "schema": {
               "$ref": "#/definitions/CreateDatasetResponse"
-            },
-            "examples": {
-              "application/json": "{\r\n  \"message\": \"Dataset has been successfully created. Sync in progress.\",\r\n  \"uri\": \"https://data.world/jonloyens/an-intro-to-dataworld-dataset\"\r\n}"
             }
           },
           "400": {
@@ -667,7 +663,8 @@
         "consumes": [
           "application/json"
         ],
-        "description": "Easily create a dataset and add metadata and files at the same time via the API."
+        "description": "Create a new dataset.",
+        "operationId": "createDataset"
       }
     },
     "/datasets/{owner}/{id}": {
@@ -1690,7 +1687,7 @@
         "tags": [
           "user"
         ],
-        "summary": "List dataset as contributor",
+        "summary": "List datasets as contributor",
         "operationId": "fetchContributingDatasets",
         "produces": [
           "application/json"
@@ -1940,22 +1937,24 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "summary": "Retrieve a project",
+        "operationId": "getProject",
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/projectId"
+          }
+        ],
+        "description": "Return details on a project."
       },
-      "parameters": [
-        {
-          "name": "owner",
-          "in": "path",
-          "type": "string",
-          "required": true
-        },
-        {
-          "name": "id",
-          "in": "path",
-          "type": "string",
-          "required": true
-        }
-      ],
       "put": {
         "tags": [
           "projects"
@@ -2011,6 +2010,12 @@
             "schema": {
               "$ref": "#/definitions/ProjectCreateRequest"
             }
+          },
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/projectId"
           }
         ],
         "consumes": [
@@ -2018,6 +2023,14 @@
         ],
         "produces": [
           "application/json"
+        ],
+        "summary": "Create / Replace a project",
+        "description": "Create a project with a given id or completely rewrite the project, including any previously added files or linked datasets, if one already exists with the given id.",
+        "operationId": "replaceProject",
+        "security": [
+          {
+            "token": []
+          }
         ]
       },
       "patch": {
@@ -2075,6 +2088,12 @@
             "schema": {
               "$ref": "#/definitions/ProjectPatchRequest"
             }
+          },
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/projectId"
           }
         ],
         "consumes": [
@@ -2082,7 +2101,15 @@
         ],
         "produces": [
           "application/json"
-        ]
+        ],
+        "summary": "Update a project",
+        "operationId": "patchProject",
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "description": "Update an existing project. Note that only elements, files or linked datasets included in the request will be updated. All omitted elements, files or linked datasets will remain untouched."
       },
       "delete": {
         "tags": [
@@ -2128,10 +2155,26 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "operationId": "deleteProject",
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/projectId"
+          }
+        ],
+        "description": "Permanently deletes a project and all data associated with it. This operation cannot be undone, although a new project may be created with the same id.",
+        "summary": "Delete a project"
       }
     },
-    "/projects/{owner}/{id}/linkedDatasets/{datasetOwner}/{datasetId}": {
+    "/projects/{owner}/{id}/linkedDatasets/{linkedDatasetOwner}/{linkedDatasetId}": {
       "delete": {
         "tags": [
           "projects"
@@ -2176,7 +2219,23 @@
         },
         "produces": [
           "application/json"
-        ]
+        ],
+        "summary": "Unlink dataset",
+        "operationId": "removeLinkedDataset",
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/projectId"
+          }
+        ],
+        "description": "Add a linked dataset to a project."
       },
       "parameters": [
         {
@@ -2192,13 +2251,13 @@
           "required": true
         },
         {
-          "name": "datasetOwner",
+          "name": "linkedDatasetOwner",
           "in": "path",
           "type": "string",
           "required": true
         },
         {
-          "name": "datasetId",
+          "name": "linkedDatasetId",
           "in": "path",
           "type": "string",
           "required": true
@@ -2255,9 +2314,22 @@
         "produces": [
           "application/json"
         ],
-        "consumes": [
-          "application/json"
-        ]
+        "description": "Remove a linked dataset from a project.",
+        "operationId": "addLinkedDataset",
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/datasetId"
+          }
+        ],
+        "summary": "Link dataset"
       }
     },
     "/projects/{owner}": {
@@ -2267,9 +2339,9 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "**OK**\nThe request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SuccessMessage"
+              "$ref": "#/definitions/CreateProjectResponse"
             }
           },
           "400": {
@@ -2316,6 +2388,9 @@
             "schema": {
               "$ref": "#/definitions/ProjectCreateRequest"
             }
+          },
+          {
+            "$ref": "#/parameters/owner"
           }
         ],
         "consumes": [
@@ -2323,16 +2398,16 @@
         ],
         "produces": [
           "application/json"
-        ]
-      },
-      "parameters": [
-        {
-          "name": "owner",
-          "in": "path",
-          "type": "string",
-          "required": true
-        }
-      ]
+        ],
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "operationId": "createProject",
+        "summary": "Create a project",
+        "description": "Create a new project."
+      }
     },
     "/user/projects/own": {
       "get": {
@@ -2379,6 +2454,14 @@
         },
         "produces": [
           "application/json"
+        ],
+        "description": "Fetch projects that the currently authenticated user has access to because he or she is the owner of the project.",
+        "summary": "List projects owned",
+        "operationId": "fetchProjects",
+        "security": [
+          {
+            "token": []
+          }
         ]
       }
     },
@@ -2427,6 +2510,14 @@
         },
         "produces": [
           "application/json"
+        ],
+        "summary": "List liked projects",
+        "description": "Fetch projects that the currently authenticated user likes.",
+        "operationId": "fetchLikedProjects",
+        "security": [
+          {
+            "token": []
+          }
         ]
       }
     },
@@ -2475,6 +2566,14 @@
         },
         "produces": [
           "application/json"
+        ],
+        "summary": "List projects as contributor",
+        "description": "Fetch projects that the currently authenticated user has access to because he or she is a contributor.",
+        "operationId": "fetchContributingProjects",
+        "security": [
+          {
+            "token": []
+          }
         ]
       }
     }
@@ -2616,83 +2715,24 @@
         },
         "files": {
           "type": "array",
-          "description": "Updated set of files. At dataset update time, file uploads are not supported. However, this property can be used to add files via URL or update metadata related to existing files.",
+          "description": "Updated set of files. At dataset update time, file uploads are not supported. However, this property can be used to add files from URL or update metadata related to existing files.",
           "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/FileCreateOrUpdateRequest"
+          }
+        },
+        "linkedDatasets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedDatasetCreateOrUpdateRequest"
           }
         }
       }
     },
     "DatasetPutRequest": {
-      "type": "object",
-      "title": "Dataset Replace Request",
-      "properties": {
-        "title": {
-          "type": "string",
-          "minLength": 0,
-          "maxLength": 60,
-          "description": "Dataset name."
-        },
-        "description": {
-          "type": "string",
-          "minLength": 0,
-          "maxLength": 120,
-          "description": "Short dataset description."
-        },
-        "summary": {
-          "type": "string",
-          "minLength": 0,
-          "maxLength": 25000,
-          "description": "Long-form dataset summary (Markdown supported)."
-        },
-        "tags": {
-          "type": "array",
-          "description": "Dataset tags. Letters numbers and spaces only (max 25 characters).",
-          "uniqueItems": true,
-          "items": {
-            "type": "string",
-            "maxLength": 25,
-            "pattern": "^[a-zA-Z0-9\\s]*"
-          }
-        },
-        "license": {
-          "type": "string",
-          "description": "Dataset license. Find additional info for allowed values [here](https://data.world/license-help).",
-          "enum": [
-            "Public Domain",
-            "PDDL",
-            "CC-0",
-            "CC-BY",
-            "ODC-BY",
-            "CC-BY-SA",
-            "ODC-ODbL",
-            "CC BY-NC",
-            "CC BY-NC-SA",
-            "Other"
-          ]
-        },
-        "visibility": {
-          "type": "string",
-          "enum": [
-            "OPEN",
-            "PRIVATE"
-          ],
-          "description": "Dataset visibility. `OPEN` if the dataset can be seen by any member of data.world. `PRIVATE` if the dataset can be seen by its owner and authorized collaborators."
-        },
-        "files": {
-          "type": "array",
-          "description": "Initial set of files. At dataset creation time, file uploads are not supported. However, this property can be used to add files via URL.",
-          "uniqueItems": false,
-          "items": {
-            "$ref": "#/definitions/FileCreateRequest"
-          }
-        }
-      },
-      "required": [
-        "title",
-        "visibility"
-      ]
+      "$ref": "#/definitions/DatasetCreateRequest",
+      "title": "Dataset Replace Request"
+      }
     },
     "DatasetSummaryResponse": {
       "type": "object",
@@ -2700,11 +2740,13 @@
       "properties": {
         "owner": {
           "type": "string",
-          "description": "User name and unique identifier of the creator of the dataset."
+          "description": "User name and unique identifier of the creator of the dataset.",
+          "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]"
         },
         "id": {
           "type": "string",
-          "description": "Unique identifier of dataset."
+          "description": "Unique identifier of dataset.",
+          "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]"
         },
         "title": {
           "type": "string",
@@ -2801,7 +2843,6 @@
         }
       },
       "required": [
-        "owner",
         "id",
         "title",
         "visibility",
@@ -3072,7 +3113,7 @@
         "created",
         "updated"
       ],
-      "title": "File Response"
+      "title": "File Summary Response"
     },
     "SuccessMessage": {
       "type": "object",
@@ -3122,6 +3163,7 @@
     },
     "CreateDatasetResponse": {
       "type": "object",
+      "title": "Dataset Create Response",
       "properties": {
         "message": {
           "type": "string",
@@ -3129,10 +3171,13 @@
           "maxLength": 256
         },
         "uri": {
-          "type": "string"
+          "type": "string",
+          "description": "URI of newly created dataset."
         }
       },
-      "title": "Dataset Create Response"
+      "required": [
+        "uri"
+      ]
     },
     "PaginatedDatasetResults": {
       "type": "object",
@@ -3140,7 +3185,6 @@
       "properties": {
         "count": {
           "type": "integer",
-          "format": "int32",
           "minimum": 0
         },
         "records": {
@@ -3160,44 +3204,74 @@
     },
     "ProjectCreateRequest": {
       "type": "object",
-      "title": "Project Creation Request",
+      "title": "Project Create Request",
       "properties": {
         "title": {
-          "type": "string"
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 60,
+          "description": "Project title."
         },
         "objective": {
-          "type": "string"
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 120,
+          "description": "Short project objective."
         },
         "summary": {
-          "type": "string"
-        },
-        "license": {
-          "type": "string"
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 25000,
+          "description": "Long-form project summary (Markdown supported)."
         },
         "tags": {
           "type": "array",
+          "description": "Project tags. Letters numbers and spaces only (max 25 characters).",
+          "uniqueItems": true,
           "items": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 25,
+            "pattern": "^[a-zA-Z0-9\\s]*"
           }
         },
-        "files": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FileCreateRequest"
-          }
-        },
-        "linkedDatasets": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LinkedDatasetCreateOrUpdateRequest"
-          }
+        "license": {
+          "type": "string",
+          "description": "Project license. Find additional info for allowed values [here](https://data.world/license-help).",
+          "enum": [
+            "Public Domain",
+            "PDDL",
+            "CC-0",
+            "CC-BY",
+            "ODC-BY",
+            "CC-BY-SA",
+            "ODC-ODbL",
+            "CC BY-NC",
+            "CC BY-NC-SA",
+            "Other"
+          ]
         },
         "visibility": {
           "type": "string",
           "enum": [
             "OPEN",
             "PRIVATE"
-          ]
+          ],
+          "description": "Project visibility. `OPEN` if the project can be seen by any member of data.world. `PRIVATE` if the project can be seen by its owner and authorized collaborators."
+        },
+        "files": {
+          "type": "array",
+          "description": "Initial set of files. At project creation time, file uploads are not supported. However, this property can be used to add files from URL.",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/FileCreateRequest"
+          }
+        },
+        "linkedDatasets": {
+          "type": "array",
+          "description": "List of linked datasets.",
+          "items": {
+            "$ref": "#/definitions/LinkedDatasetCreateOrUpdateRequest"
+          }
         }
       },
       "required": [
@@ -3210,28 +3284,84 @@
       "title": "Linked Dataset Summary Response",
       "properties": {
         "owner": {
-          "type": "string"
+          "type": "string",
+          "description": "User name and unique identifier of the creator of the dataset.",
+          "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]"
         },
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Unique identifier of dataset.",
+          "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]"
         },
         "title": {
-          "type": "string"
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 60,
+          "description": "Dataset name."
         },
-        "visibility": {
-          "type": "string"
+        "description": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 120,
+          "description": "Short dataset description."
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 25000,
+          "description": "Long-form dataset summary (Markdown supported)."
+        },
+        "tags": {
+          "type": "array",
+          "description": "Dataset tags. Letters numbers and spaces only (max 25 characters).",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "maxLength": 25,
+            "pattern": "^[a-zA-Z0-9\\s]*"
+          }
         },
         "license": {
-          "type": "string"
+          "type": "string",
+          "description": "Dataset license. Find additional info for allowed values [here](https://data.world/license-help).",
+          "enum": [
+            "Public Domain",
+            "PDDL",
+            "CC-0",
+            "CC-BY",
+            "ODC-BY",
+            "CC-BY-SA",
+            "ODC-ODbL",
+            "CC BY-NC",
+            "CC BY-NC-SA",
+            "Other"
+          ]
         },
-        "accessLevel": {
-          "type": "string"
+        "visibility": {
+          "type": "string",
+          "enum": [
+            "OPEN",
+            "PRIVATE"
+          ],
+          "description": "Dataset visibility. `OPEN` if the dataset can be seen by any member of data.world. `PRIVATE` if the dataset can be seen by its owner and authorized collaborators."
         },
         "created": {
-          "type": "string"
+          "type": "string",
+          "description": "Date and time when the dataset was created."
         },
         "updated": {
-          "type": "string"
+          "type": "string",
+          "description": "Date and time when the dataset was last updated."
+        },
+        "accessLevel": {
+          "type": "string",
+          "description": "The level of access the authenticated user is allowed with respect to dataset: \n\n* `NONE` Not allowed any access.  \n* `DISCOVER` Allowed to know that the dataset exists.  \n* `READ` Allowed to view and download data and metadata, in addition to what DISCOVER allows. \n* `WRITE` Allowed to update data and metadata, in addition to what READ allows. \n* `ADMIN` Allowed to delete dataset, in addition to what WRITE allows.",
+          "enum": [
+            "NONE",
+            "READ",
+            "WRITE",
+            "ADMIN"
+          ]
         }
       },
       "required": [
@@ -3246,7 +3376,7 @@
     },
     "PaginatedProjectResults": {
       "type": "object",
-      "title": "Project Pagination Response",
+      "title": "Paginated Project Results",
       "properties": {
         "count": {
           "type": "integer",
@@ -3269,13 +3399,17 @@
     },
     "LinkedDatasetCreateOrUpdateRequest": {
       "type": "object",
-      "title": "Linked Dataset Create Or Update Request",
+      "title": "Linked Dataset Create of Update Request",
       "properties": {
         "owner": {
-          "type": "string"
+          "type": "string",
+          "description": "User name and unique identifier of the creator of the dataset.",
+          "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]"
         },
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "Unique identifier of dataset.",
+          "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]"
         }
       },
       "required": [
@@ -3284,78 +3418,70 @@
       ]
     },
     "ProjectPutRequest": {
-      "type": "object",
-      "title": "Project Replace Request",
-      "properties": {
-        "title": {
-          "type": "string"
-        },
-        "objective": {
-          "type": "string"
-        },
-        "summary": {
-          "type": "string"
-        },
-        "license": {
-          "type": "string"
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "files": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FileCreateRequest"
-          }
-        },
-        "linkedDatasets": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LinkedDatasetCreateOrUpdateRequest"
-          }
-        },
-        "visibility": {
-          "type": "string",
-          "enum": [
-            "OPEN",
-            "PRIVATE"
-          ]
-        }
-      },
-      "required": [
-        "title",
-        "visibility"
-      ]
+      "$ref": "#/definitions/ProjectCreateRequest",
+      "title": "Project Replace Request"
     },
     "ProjectPatchRequest": {
       "type": "object",
       "title": "Project Update Request",
       "properties": {
         "title": {
-          "type": "string"
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 60,
+          "description": "Project title."
         },
         "objective": {
-          "type": "string"
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 120,
+          "description": "Short project objective."
         },
         "summary": {
-          "type": "string"
-        },
-        "license": {
-          "type": "string"
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 25000,
+          "description": "Long-form project summary (Markdown supported)."
         },
         "tags": {
           "type": "array",
+          "description": "Project tags. Letters numbers and spaces only (max 25 characters).",
+          "uniqueItems": true,
           "items": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 25,
+            "pattern": "^[a-zA-Z0-9\\s]*"
           }
+        },
+        "license": {
+          "type": "string",
+          "description": "Project license. Find additional info for allowed values [here](https://data.world/license-help).",
+          "enum": [
+            "Public Domain",
+            "PDDL",
+            "CC-0",
+            "CC-BY",
+            "ODC-BY",
+            "CC-BY-SA",
+            "ODC-ODbL",
+            "CC BY-NC",
+            "CC BY-NC-SA",
+            "Other"
+          ],
+        "visibility": {
+          "type": "string",
+          "enum": [
+            "OPEN",
+            "PRIVATE"
+          ],
+          "description": "Project visibility. `OPEN` if the project can be seen by any member of data.world. `PRIVATE` if the project can be seen by its owner and authorized collaborators."
         },
         "files": {
           "type": "array",
+          "description": "Updated set of files. At project update time, file uploads are not supported. However, this property can be used to add files from URL or update metadata related to existing files.",
+          "uniqueItems": false,
           "items": {
-            "$ref": "#/definitions/FileCreateRequest"
+            "$ref": "#/definitions/FileCreateOrUpdateRequest"
           }
         },
         "linkedDatasets": {
@@ -3363,13 +3489,6 @@
           "items": {
             "$ref": "#/definitions/LinkedDatasetCreateOrUpdateRequest"
           }
-        },
-        "visibility": {
-          "type": "string",
-          "enum": [
-            "OPEN",
-            "PRIVATE"
-          ]
         }
       }
     },
@@ -3398,13 +3517,13 @@
         "files": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FileSummary"
+            "$ref": "#/definitions/FileSummaryResponse"
           }
         },
         "linkedDatasets": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LinkedDatasetSummary"
+            "$ref": "#/definitions/LinkedDatasetSummaryResponse"
           }
         },
         "visibility": {
@@ -3456,6 +3575,24 @@
         "updated",
         "accessLevel"
       ]
+    },
+    "CreateProjectResponse": {
+      "type": "object",
+      "title": "Project Create Response",
+      "properties": {
+        "message": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        },
+        "uri": {
+          "type": "string",
+          "description": "URI of newly created project."
+        }
+      },
+      "required": [
+        "uri"
+      ]
     }
   },
   "security": [
@@ -3469,14 +3606,16 @@
       "in": "path",
       "type": "string",
       "required": true,
-      "description": "User name and unique identifier of the creator of the dataset.\nFor example, in the URL: [https://data.world/jonloyens/an-intro-to-dataworld-dataset](https://data.world/jonloyens/an-intro-to-dataworld-dataset), jonloyens is the unique identifier of the dataset."
+      "description": "User name and unique identifier of the creator of a dataset or project.\nFor example, in the URL: [https://data.world/jonloyens/an-intro-to-dataworld-dataset](https://data.world/jonloyens/an-intro-to-dataworld-dataset), jonloyens is the unique identifier of the owner.",
+      "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]"
     },
     "datasetId": {
       "name": "id",
       "in": "path",
       "type": "string",
       "required": true,
-      "description": "Dataset unique identifier.\nFor example, in the URL:[https://data.world/jonloyens/an-intro-to-dataworld-dataset](https://data.world/jonloyens/an-intro-to-dataworld-dataset), an-intro-to-dataworld-dataset is the unique identifier of the dataset."
+      "description": "Dataset unique identifier.\nFor example, in the URL:[https://data.world/jonloyens/an-intro-to-dataworld-dataset](https://data.world/jonloyens/an-intro-to-dataworld-dataset), an-intro-to-dataworld-dataset is the unique identifier of the dataset.",
+      "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]"
     },
     "file": {
       "name": "file",
@@ -3526,8 +3665,17 @@
       "name": "streamId",
       "in": "path",
       "type": "string",
-      "description": "Stream unique identifier.",
-      "required": true
+      "description": "Stream unique identifier as defined by the user the first time the stream was used. Only lower case letters, numbers and dashes are allowed. Maximum length of 95 characters.",
+      "required": true,
+      "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9]){1,93}[a-z0-9]"
+    },
+    "projectId": {
+      "name": "id",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "description": "Project unique identifier.\nFor example, in the URL:[https://data.world/government/how-to-add-depth-to-your-data-with-the-us-census-acs](https://data.world/government/how-to-add-depth-to-your-data-with-the-us-census-acs), how-to-add-depth-to-your-data-with-the-us-census-acs is the unique identifier of the project.",
+      "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]"
     }
   }
 }
