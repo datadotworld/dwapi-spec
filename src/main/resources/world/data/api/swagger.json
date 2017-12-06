@@ -3447,7 +3447,7 @@
     },
     "LinkedDatasetCreateOrUpdateRequest": {
       "type": "object",
-      "title": "Linked Dataset Create of Update Request",
+      "title": "Linked Dataset Create or Update Request",
       "properties": {
         "owner": {
           "type": "string",
