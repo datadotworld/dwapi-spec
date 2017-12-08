@@ -1,14 +1,14 @@
-**PREVIEW FEATURE**: This is a preview feature. Request early access via <help@data.world>.
+**PREVIEW FEATURE**: This is a preview feature. [Contact us](https://help.data.world/hc/en-us/requests/new) to request early access.
 
 ---
 
-data.world widgets speed up the development of rich integrations for data.world. They are fully 
-responsive drop-in web components that make it possible for users to browse data and author queries 
+data.world widgets speed up the development of rich integrations for data.world. They are fully
+responsive drop-in web components that make it possible for users to browse data and author queries
 right from your product.
 
 ## Data Finder
 
-With the Data Finder, users can look for an pick the dataset or data project they want to use 
+With the Data Finder, users can look for an pick the dataset or data project they want to use
 without leaving your product.
 
 !["Data Finder"](https://cdn.filepicker.io/api/file/n9bRCCrZTHa4I6jQ3H5y "Data Finder")
