@@ -4055,16 +4055,16 @@
         "description": {
           "type": "string"
         },
-        "display": {
+        "body": {
           "type": "string",
           "description": "Markdown \"embeddable\""
         },
-        "displaySource": {
+        "sourceLink": {
           "type": "string",
           "format": "uri",
           "description": "Permalink to source/system that generated this insight"
         },
-        "dataSources": {
+        "dataSourceLinks": {
           "type": "array",
           "format": "uri",
           "description": "Deeplink to the data used to produce this insight.",
@@ -4076,7 +4076,7 @@
       },
       "required": [
         "title",
-        "display"
+        "body"
       ]
     },
     "InsightSummaryResponse": {
@@ -4092,16 +4092,16 @@
         "description": {
           "type": "string"
         },
-        "display": {
+        "body": {
           "type": "string",
           "description": "Markdown \"embeddable\""
         },
-        "displaySource": {
+        "sourceLink": {
           "type": "string",
           "format": "uri",
           "description": "Permalink to source/system that generated this insight"
         },
-        "dataSources": {
+        "dataSourceLinks": {
           "type": "array",
           "description": "Deeplink to the data used to produce this insight.",
           "items": {
@@ -4130,16 +4130,16 @@
         "description": {
           "type": "string"
         },
-        "display": {
+        "body": {
           "type": "string",
           "description": "Markdown \"embeddable\""
         },
-        "displaySource": {
+        "sourceLink": {
           "type": "string",
           "format": "uri",
           "description": "Permalink to source/system that generated this insight"
         },
-        "dataSources": {
+        "dataSourceLinks": {
           "description": "Deeplink to the data used to produce this insight.",
           "type": "array",
           "items": {
