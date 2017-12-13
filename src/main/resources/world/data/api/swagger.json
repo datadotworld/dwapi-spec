@@ -4120,8 +4120,30 @@
           "type": "string"
         },
         "body": {
-          "type": "string",
-          "description": "Markdown \"embeddable\""
+          "allOf": [
+            {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/ImageInsightBody"
+                },
+                {
+                  "$ref": "#/definitions/EmbedInsightBody"
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "format": {
+                  "type": "string",
+                  "enum": [
+                    "IMAGE",
+                    "EMBED"
+                  ]
+                }
+              }
+            }
+          ]
         },
         "sourceLink": {
           "type": "string",
@@ -4154,8 +4176,30 @@
           "type": "string"
         },
         "body": {
-          "type": "string",
-          "description": "Markdown \"embeddable\""
+          "allOf": [
+            {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/ImageInsightBody"
+                },
+                {
+                  "$ref": "#/definitions/EmbedInsightBody"
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "format": {
+                  "type": "string",
+                  "enum": [
+                    "IMAGE",
+                    "EMBED"
+                  ]
+                }
+              }
+            }
+          ]
         },
         "sourceLink": {
           "type": "string",
@@ -4229,8 +4273,30 @@
           "type": "string"
         },
         "body": {
-          "type": "string",
-          "description": "Markdown \"embeddable\""
+          "allOf": [
+            {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/ImageInsightBody"
+                },
+                {
+                  "$ref": "#/definitions/EmbedInsightBody"
+                }
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "format": {
+                  "type": "string",
+                  "enum": [
+                    "IMAGE",
+                    "EMBED"
+                  ]
+                }
+              }
+            }
+          ]
         },
         "sourceLink": {
           "type": "string",
@@ -4286,6 +4352,38 @@
       },
       "required": [
         "uri"
+      ]
+    },
+    "ImageInsightBody": {
+      "type": "object",
+      "title": "Image Insight Body",
+      "properties": {
+        "imageUrl": {
+          "type": "string"
+        },
+        "altText": {
+          "type": "string",
+          "maxLength": 100
+        }
+      },
+      "required": [
+        "imageUrl"
+      ]
+    },
+    "EmbedInsightBody": {
+      "type": "object",
+      "title": "Embed Insight Body",
+      "properties": {
+        "embedUrl": {
+          "type": "string"
+        },
+        "altText": {
+          "type": "string",
+          "maxLength": 100
+        }
+      },
+      "required": [
+        "embedUrl"
       ]
     }
   },
