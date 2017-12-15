@@ -1,4 +1,4 @@
-Using this API users are able to easily access data and manage their data projects regardless of language or tool of preference. 
+Using this API users are able to easily access data and manage their data projects regardless of language or tool of preference.
 
 ## Creating Datasets
 
@@ -220,8 +220,8 @@ Query results can be obtained in a variety of different formats, including:
 - `application/x-ndjson` and `application/json-l`: [JSON lines](http://jsonlines.org/)
 
 When requesting a JSON format, you can obtain schema information alongside the data.
-To do that, add `includeTableSchema=true` in the query string. 
-The schema information will be the first element or row in the response. 
+To do that, add `includeTableSchema=true` in the query string.
+The schema information will be the first element or row in the response.
 
 Here is what the previous request would look like if modified to produce JSON lines including schema information:
 ```bash
@@ -273,7 +273,7 @@ Notice that the first line is the [table schema](https://specs.frictionlessdata.
 2. Check out existing [integrations](https://data.world/integrations) to see if an integration for your favorite tools already exists, and skip using this API altogether. *Pro tip:* come back often as we are constantly implementing new integrations.
 3. Learn how easily you can generate #docTextSection:8NpYGToZm2LsA9A9J for the language of your choice.
 4. Browse all endpoints and use the **Try it out** feature to interact with them in your browser.
-5. Let us know what cool things you create and make sure to reach out if you need support. We are at <help@data.world> and on [Slack](https://slack.data.world), and would love to hear from you!
+5. Let us know what cool things you create and make sure to reach out if you need support. We love to hear from you, so connect with us through our [help portal](https://help.data.world/hc/en-us/requests/new) or on [Slack](https://slack.data.world). 
 
 # Conventions
 

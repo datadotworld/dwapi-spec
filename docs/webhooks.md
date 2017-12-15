@@ -1,9 +1,9 @@
-**PREVIEW FEATURE**: *This is a preview feature. Request early access via <help@data.world>.*
+**PREVIEW FEATURE**: *This is a preview feature. [Contact us](https://help.data.world/hc/en-us/requests/new) to request early access.*
 
 ---
 
-Webhooks allow products to automatically respond to activity of interest performed on data.world. 
-For example, your product can notify users or trigger a job when data in a particular dataset is 
+Webhooks allow products to automatically respond to activity of interest performed on data.world.
+For example, your product can notify users or trigger a job when data in a particular dataset is
 updated.
 
 Once a webhook is configured it can be triggered for one or more of the following events:

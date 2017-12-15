@@ -1,12 +1,12 @@
 # data.world — Public API specification
 
-This repository contains the [OpenAPI](https://github.com/OAI/OpenAPI-Specification) (a.k.a. 
-Swagger) specification for the [data.world's API](https://docs.data.world/documentation/api/).
+This repository contains the [OpenAPI](https://github.com/OAI/OpenAPI-Specification) (a.k.a.
+Swagger) specification for the [data.world's API](https://apidocs.data.world/).
 
 ## Documentation
 
-Reference documentation and code examples for this API can be found at: 
-https://docs.data.world/documentation/api/
+Reference documentation and code examples for this API can be found at:
+https://apidocs.data.world/
 
 ## Development
 
