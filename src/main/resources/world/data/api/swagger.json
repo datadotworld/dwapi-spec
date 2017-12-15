@@ -2692,6 +2692,68 @@
       }
     },
     "/projects/{owner}/{id}/insights": {
+      "get": {
+        "tags": [
+          "projects"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PaginatedInsightResults"
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/projectId"
+          }
+        ],
+        "operationId": "fetchInsights",
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "List project insights",
+        "description": "Fetch project insights."
+      },
       "post": {
         "tags": [
           "projects"
@@ -4137,28 +4199,15 @@
           "description": "Insight description."
         },
         "body": {
-          "allOf": [
+          "oneOf": [
             {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/ImageInsightBody"
-                },
-                {
-                  "$ref": "#/definitions/EmbedInsightBody"
-                }
-              ]
+              "$ref": "#/definitions/ImageInsightBody"
             },
             {
-              "type": "object",
-              "properties": {
-                "format": {
-                  "type": "string",
-                  "enum": [
-                    "IMAGE",
-                    "EMBED"
-                  ]
-                }
-              }
+              "$ref": "#/definitions/EmbedInsightBody"
+            },
+            {
+              "$ref": "#/definitions/MarkdownInsightBody"
             }
           ]
         },
@@ -4178,8 +4227,8 @@
         }
       },
       "required": [
-        "title",
-        "body"
+        "body",
+        "title"
       ]
     },
     "InsightPutRequest": {
@@ -4198,28 +4247,15 @@
           "description": "Insight description."
         },
         "body": {
-          "allOf": [
+          "oneOf": [
             {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/ImageInsightBody"
-                },
-                {
-                  "$ref": "#/definitions/EmbedInsightBody"
-                }
-              ]
+              "$ref": "#/definitions/ImageInsightBody"
             },
             {
-              "type": "object",
-              "properties": {
-                "format": {
-                  "type": "string",
-                  "enum": [
-                    "IMAGE",
-                    "EMBED"
-                  ]
-                }
-              }
+              "$ref": "#/definitions/EmbedInsightBody"
+            },
+            {
+              "$ref": "#/definitions/MarkdownInsightBody"
             }
           ]
         },
@@ -4239,8 +4275,8 @@
         }
       },
       "required": [
-        "title",
-        "body"
+        "body",
+        "title"
       ]
     },
     "InsightSummaryResponse": {
@@ -4263,9 +4299,17 @@
           "description": "Insight description."
         },
         "body": {
-          "type": "string",
-          "description": "Insight body. Markdown containing a single element that must be either an image (in the format `![alt text](url)`) or a URL for embedding (in the format `@(url)`).",
-          "maxLength": 25000
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ImageInsightBody"
+            },
+            {
+              "$ref": "#/definitions/EmbedInsightBody"
+            },
+            {
+              "$ref": "#/definitions/MarkdownInsightBody"
+            }
+          ]
         },
         "sourceLink": {
           "type": "string",
@@ -4295,7 +4339,10 @@
         }
       },
       "required": [
+        "id",
         "author",
+        "title",
+        "body",
         "created",
         "updated"
       ]
@@ -4316,28 +4363,15 @@
           "description": "Insight description."
         },
         "body": {
-          "allOf": [
+          "oneOf": [
             {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/ImageInsightBody"
-                },
-                {
-                  "$ref": "#/definitions/EmbedInsightBody"
-                }
-              ]
+              "$ref": "#/definitions/ImageInsightBody"
             },
             {
-              "type": "object",
-              "properties": {
-                "format": {
-                  "type": "string",
-                  "enum": [
-                    "IMAGE",
-                    "EMBED"
-                  ]
-                }
-              }
+              "$ref": "#/definitions/EmbedInsightBody"
+            },
+            {
+              "$ref": "#/definitions/MarkdownInsightBody"
             }
           ]
         },
@@ -4378,37 +4412,124 @@
     "ImageInsightBody": {
       "type": "object",
       "title": "Image Insight Body",
-      "properties": {
-        "imageUrl": {
-          "type": "string",
-          "description": "Image URL."
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "imageUrl": {
+              "type": "string",
+              "format": "uri",
+              "description": "Image URL."
+            }
+          }
         },
-        "altText": {
-          "type": "string",
-          "maxLength": 100,
-          "description": "Image alt text."
+        {
+          "type": "object",
+          "properties": {
+            "format": {
+              "type": "string",
+              "enum": [
+                "IMAGE",
+                "EMBED",
+                "MARKDOWN"
+              ]
+            }
+          }
         }
-      },
+      ],
       "required": [
-        "imageUrl"
+        "imageUrl",
+        "format"
       ]
     },
     "EmbedInsightBody": {
       "type": "object",
       "title": "Embed Insight Body",
-      "properties": {
-        "embedUrl": {
-          "type": "string",
-          "description": "OEmbed URL"
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "embedUrl": {
+              "type": "string",
+              "format": "uri",
+              "description": "Embed URL."
+            }
+          }
         },
-        "altText": {
-          "type": "string",
-          "maxLength": 100,
-          "description": "Embed alt text"
+        {
+          "type": "object",
+          "properties": {
+            "format": {
+              "type": "string",
+              "enum": [
+                "IMAGE",
+                "EMBED",
+                "MARKDOWN"
+              ]
+            }
+          }
+        }
+      ],
+      "required": [
+        "embedUrl",
+        "format"
+      ]
+    },
+    "MarkdownInsightBody": {
+      "type": "object",
+      "title": "Markdown Insight Body",
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "body": {
+              "type": "string",
+              "description": "Markdown body.",
+              "minLength": 0,
+              "maxLength": 25000
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "format": {
+              "type": "string",
+              "enum": [
+                "IMAGE",
+                "EMBED",
+                "MARKDOWN"
+              ]
+            }
+          }
+        }
+      ],
+      "required": [
+        "body",
+        "format"
+      ]
+    },
+    "PaginatedInsightResults": {
+      "type": "object",
+      "title": "Paginated Insight Results",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InsightSummaryResponse"
+          }
+        },
+        "nextPageToken": {
+          "type": "string"
         }
       },
       "required": [
-        "embedUrl"
+        "count",
+        "records"
       ]
     }
   },
