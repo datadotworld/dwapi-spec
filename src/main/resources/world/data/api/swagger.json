@@ -1892,7 +1892,7 @@
         "description": "Fetch datasets that the currently authenticated user has access to because he or she is the owner of the dataset."
       }
     },
-    "/projects/{owner}/{id}": {
+    "/projects/{projectOwner}/{projectId}": {
       "get": {
         "tags": [
           "projects"
@@ -1947,7 +1947,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/owner"
+            "$ref": "#/parameters/projectOwner"
           },
           {
             "$ref": "#/parameters/projectId"
@@ -2012,7 +2012,7 @@
             }
           },
           {
-            "$ref": "#/parameters/owner"
+            "$ref": "#/parameters/projectOwner"
           },
           {
             "$ref": "#/parameters/projectId"
@@ -2090,7 +2090,7 @@
             }
           },
           {
-            "$ref": "#/parameters/owner"
+            "$ref": "#/parameters/projectOwner"
           },
           {
             "$ref": "#/parameters/projectId"
@@ -2164,7 +2164,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/owner"
+            "$ref": "#/parameters/projectOwner"
           },
           {
             "$ref": "#/parameters/projectId"
@@ -2174,7 +2174,7 @@
         "summary": "Delete a project"
       }
     },
-    "/projects/{owner}/{id}/linkedDatasets/{linkedDatasetOwner}/{linkedDatasetId}": {
+    "/projects/{projectOwner}/{projectId}/linkedDatasets/{linkedDatasetOwner}/{linkedDatasetId}": {
       "delete": {
         "tags": [
           "projects"
@@ -2229,28 +2229,26 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/owner"
+            "$ref": "#/parameters/projectOwner"
           },
           {
             "$ref": "#/parameters/projectId"
+          },
+          {
+            "name": "linkedDatasetOwner",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "linkedDatasetId",
+            "in": "path",
+            "type": "string",
+            "required": true
           }
         ],
         "description": "Add a linked dataset to a project."
       },
-      "parameters": [
-        {
-          "name": "linkedDatasetOwner",
-          "in": "path",
-          "type": "string",
-          "required": true
-        },
-        {
-          "name": "linkedDatasetId",
-          "in": "path",
-          "type": "string",
-          "required": true
-        }
-      ],
       "put": {
         "tags": [
           "projects"
@@ -2311,16 +2309,28 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/owner"
+            "$ref": "#/parameters/projectOwner"
           },
           {
-            "$ref": "#/parameters/datasetId"
+            "$ref": "#/parameters/projectId"
+          },
+          {
+            "name": "linkedDatasetOwner",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "linkedDatasetId",
+            "in": "path",
+            "type": "string",
+            "required": true
           }
         ],
         "summary": "Link dataset"
       }
     },
-    "/projects/{owner}": {
+    "/projects/{projectOwner}": {
       "post": {
         "tags": [
           "projects"
@@ -2378,7 +2388,7 @@
             }
           },
           {
-            "$ref": "#/parameters/owner"
+            "$ref": "#/parameters/projectOwner"
           }
         ],
         "consumes": [
@@ -2397,10 +2407,10 @@
         "description": "Create a new project."
       }
     },
-    "/projects/{owner}/{id}/insights/{insightId}": {
+    "/insights/{projectOwner}/{projectId}/{insightId}": {
       "get": {
         "tags": [
-          "projects"
+          "insights"
         ],
         "responses": {
           "200": {
@@ -2452,7 +2462,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/owner"
+            "$ref": "#/parameters/projectOwner"
           },
           {
             "$ref": "#/parameters/projectId"
@@ -2465,7 +2475,7 @@
       },
       "delete": {
         "tags": [
-          "projects"
+          "insights"
         ],
         "responses": {
           "200": {
@@ -2517,7 +2527,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/owner"
+            "$ref": "#/parameters/projectOwner"
           },
           {
             "$ref": "#/parameters/projectId"
@@ -2530,7 +2540,7 @@
       },
       "put": {
         "tags": [
-          "projects"
+          "insights"
         ],
         "responses": {
           "200": {
@@ -2591,7 +2601,7 @@
             }
           },
           {
-            "$ref": "#/parameters/owner"
+            "$ref": "#/parameters/projectOwner"
           },
           {
             "$ref": "#/parameters/projectId"
@@ -2611,7 +2621,7 @@
       },
       "patch": {
         "tags": [
-          "projects"
+          "insights"
         ],
         "responses": {
           "200": {
@@ -2672,7 +2682,7 @@
             }
           },
           {
-            "$ref": "#/parameters/owner"
+            "$ref": "#/parameters/projectOwner"
           },
           {
             "$ref": "#/parameters/projectId"
@@ -2691,10 +2701,81 @@
         "description": "Update an insight. Note that only elements included in the request will be updated. All omitted elements will remain untouched."
       }
     },
-    "/projects/{owner}/{id}/insights": {
+    "/insights/{projectOwner}/{projectId}": {
+      "get": {
+        "tags": [
+          "insights"
+        ],
+        "responses": {
+          "200": {
+            "description": "**OK**\nThe request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedInsightResults"
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/projectOwner"
+          },
+          {
+            "$ref": "#/parameters/projectId"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/next"
+          },
+          {
+            "$ref": "#/parameters/sort"
+          }
+        ],
+        "operationId": "getInsightsForProject",
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "Get insights for project.",
+        "description": "Get insights for a project."
+      },
       "post": {
         "tags": [
-          "projects"
+          "insights"
         ],
         "responses": {
           "200": {
@@ -2755,7 +2836,7 @@
             }
           },
           {
-            "$ref": "#/parameters/owner"
+            "$ref": "#/parameters/projectOwner"
           },
           {
             "$ref": "#/parameters/projectId"
@@ -2778,7 +2859,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "**OK**\nThe request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PaginatedProjectResults"
             }
@@ -3694,14 +3775,6 @@
           "items": {
             "$ref": "#/definitions/LinkedDatasetCreateOrUpdateRequest"
           }
-        },
-        "insights": {
-          "type": "array",
-          "maxItems": 30,
-          "description": "Initial set of insights.",
-          "items": {
-            "$ref": "#/definitions/InsightCreateRequest"
-          }
         }
       },
       "required": [
@@ -3917,13 +3990,6 @@
           "items": {
             "$ref": "#/definitions/LinkedDatasetCreateOrUpdateRequest"
           }
-        },
-        "insights": {
-          "type": "array",
-          "description": "Initial set of insights.",
-          "items": {
-            "$ref": "#/definitions/InsightCreateRequest"
-          }
         }
       },
       "required": [
@@ -4001,14 +4067,6 @@
           "items": {
             "$ref": "#/definitions/LinkedDatasetCreateOrUpdateRequest"
           }
-        },
-        "insights": {
-          "type": "array",
-          "description": "Updated set of insights. Insights included in this request will be added. Previously added insights will be preserved without modification.",
-          "maxItems": 30,
-          "items": {
-            "$ref": "#/definitions/InsightCreateRequest"
-          }
         }
       }
     },
@@ -4044,12 +4102,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LinkedDatasetSummaryResponse"
-          }
-        },
-        "insights": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InsightSummaryResponse"
           }
         },
         "visibility": {
@@ -4092,11 +4144,11 @@
         }
       },
       "required": [
-        "owner",
-        "id",
         "title",
         "visibility",
         "status",
+        "owner",
+        "id",
         "created",
         "updated",
         "accessLevel"
@@ -4135,17 +4187,8 @@
           "maxLength": 150,
           "description": "Insight description."
         },
-        "imageUrl": {
-          "type": "string",
-          "format": "uri"
-        },
-        "embedUrl": {
-          "type": "string",
-          "format": "uri"
-        },
-        "markdownBody": {
-          "type": "string",
-          "maxLength": 25000
+        "body": {
+          "$ref": "#/definitions/InsightBody"
         },
         "sourceLink": {
           "type": "string",
@@ -4163,6 +4206,7 @@
         }
       },
       "required": [
+        "body",
         "title"
       ]
     },
@@ -4181,17 +4225,8 @@
           "maxLength": 150,
           "description": "Insight description."
         },
-        "imageUrl": {
-          "type": "string",
-          "format": "uri"
-        },
-        "embedUrl": {
-          "type": "string",
-          "format": "uri"
-        },
-        "markdownBody": {
-          "type": "string",
-          "maxLength": 25000
+        "body": {
+          "$ref": "#/definitions/InsightBody"
         },
         "sourceLink": {
           "type": "string",
@@ -4209,6 +4244,7 @@
         }
       },
       "required": [
+        "body",
         "title"
       ]
     },
@@ -4231,17 +4267,8 @@
           "maxLength": 150,
           "description": "Insight description."
         },
-        "imageUrl": {
-          "type": "string",
-          "format": "uri"
-        },
-        "embedUrl": {
-          "type": "string",
-          "format": "uri"
-        },
-        "markdownBody": {
-          "type": "string",
-          "maxLength": 25000
+        "body": {
+          "$ref": "#/definitions/InsightBody"
         },
         "sourceLink": {
           "type": "string",
@@ -4272,8 +4299,9 @@
       },
       "required": [
         "id",
-        "author",
         "title",
+        "body",
+        "author",
         "created",
         "updated"
       ]
@@ -4293,17 +4321,8 @@
           "maxLength": 150,
           "description": "Insight description."
         },
-        "imageUrl": {
-          "type": "string",
-          "format": "uri"
-        },
-        "embedUrl": {
-          "type": "string",
-          "format": "uri"
-        },
-        "markdownBody": {
-          "type": "string",
-          "maxLength": 25000
+        "body": {
+          "$ref": "#/definitions/InsightBody"
         },
         "sourceLink": {
           "type": "string",
@@ -4339,6 +4358,44 @@
       "required": [
         "uri"
       ]
+    },
+    "PaginatedInsightResults": {
+      "type": "object",
+      "title": "Paginated Insight Results",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InsightSummaryResponse"
+          }
+        },
+        "nextPageToken": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "count",
+        "records"
+      ]
+    },
+    "InsightBody": {
+      "type": "object",
+      "title": "Insight Body",
+      "properties": {
+        "embedUrl": {
+          "type": "string"
+        },
+        "imageUrl": {
+          "type": "string"
+        },
+        "markdownBody": {
+          "type": "string"
+        }
+      }
     }
   },
   "security": [
@@ -4415,8 +4472,16 @@
       "required": true,
       "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9]){1,93}[a-z0-9]"
     },
+    "projectOwner": {
+      "name": "projectOwner",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "description": "User name and unique identifier of the creator of a project.\nFor example, in the URL: [https://data.world/jonloyens/an-example-project-that-shows-what-to-put-in-data-world](https://data.world/jonloyens/an-example-project-that-shows-what-to-put-in-data-world), jonloyens is the unique identifier of the owner.",
+      "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]"
+    },
     "projectId": {
-      "name": "id",
+      "name": "projectId",
       "in": "path",
       "type": "string",
       "required": true,
