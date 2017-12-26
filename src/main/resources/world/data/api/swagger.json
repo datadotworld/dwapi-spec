@@ -1892,7 +1892,7 @@
         "description": "Fetch datasets that the currently authenticated user has access to because he or she is the owner of the dataset."
       }
     },
-    "/projects/{projectOwner}/{projectId}": {
+    "/projects/{owner}/{id}": {
       "get": {
         "tags": [
           "projects"
@@ -2174,7 +2174,7 @@
         "summary": "Delete a project"
       }
     },
-    "/projects/{projectOwner}/{projectId}/linkedDatasets/{linkedDatasetOwner}/{linkedDatasetId}": {
+    "/projects/{owner}/{id}/linkedDatasets/{linkedDatasetOwner}/{linkedDatasetId}": {
       "delete": {
         "tags": [
           "projects"
@@ -2330,7 +2330,7 @@
         "summary": "Link dataset"
       }
     },
-    "/projects/{projectOwner}": {
+    "/projects/{owner}": {
       "post": {
         "tags": [
           "projects"
@@ -2407,7 +2407,7 @@
         "description": "Create a new project."
       }
     },
-    "/insights/{projectOwner}/{projectId}/{insightId}": {
+    "/insights/{projectOwner}/{projectId}/{id}": {
       "get": {
         "tags": [
           "insights"
@@ -2462,10 +2462,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/projectOwner"
+            "$ref": "#/parameters/insightProjectOwner"
           },
           {
-            "$ref": "#/parameters/projectId"
+            "$ref": "#/parameters/insightProjectId"
           },
           {
             "$ref": "#/parameters/insightId"
@@ -2527,10 +2527,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/projectOwner"
+            "$ref": "#/parameters/insightProjectOwner"
           },
           {
-            "$ref": "#/parameters/projectId"
+            "$ref": "#/parameters/insightProjectId"
           },
           {
             "$ref": "#/parameters/insightId"
@@ -2601,10 +2601,10 @@
             }
           },
           {
-            "$ref": "#/parameters/projectOwner"
+            "$ref": "#/parameters/insightProjectOwner"
           },
           {
-            "$ref": "#/parameters/projectId"
+            "$ref": "#/parameters/insightProjectId"
           },
           {
             "$ref": "#/parameters/insightId"
@@ -2682,10 +2682,10 @@
             }
           },
           {
-            "$ref": "#/parameters/projectOwner"
+            "$ref": "#/parameters/insightProjectOwner"
           },
           {
-            "$ref": "#/parameters/projectId"
+            "$ref": "#/parameters/insightProjectId"
           },
           {
             "$ref": "#/parameters/insightId"
@@ -2749,10 +2749,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/projectOwner"
+            "$ref": "#/parameters/insightProjectOwner"
           },
           {
-            "$ref": "#/parameters/projectId"
+            "$ref": "#/parameters/insightProjectId"
           },
           {
             "$ref": "#/parameters/limit"
@@ -2836,10 +2836,10 @@
             }
           },
           {
-            "$ref": "#/parameters/projectOwner"
+            "$ref": "#/parameters/insightProjectOwner"
           },
           {
-            "$ref": "#/parameters/projectId"
+            "$ref": "#/parameters/insightProjectId"
           }
         ],
         "operationId": "createInsight",
@@ -4479,23 +4479,39 @@
       "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9]){1,93}[a-z0-9]"
     },
     "projectOwner": {
-      "name": "projectOwner",
+      "name": "owner",
       "in": "path",
       "type": "string",
       "required": true,
-      "description": "User name and unique identifier of the creator of a project.\nFor example, in the URL: [https://data.world/jonloyens/an-example-project-that-shows-what-to-put-in-data-world](https://data.world/jonloyens/an-example-project-that-shows-what-to-put-in-data-world), jonloyens is the unique identifier of the owner.",
+      "description": "User name and unique identifier of the creator of a project.\nFor example, in the URL: [https://data.world/government/how-to-add-depth-to-your-data-with-the-us-census-acs](https://data.world/government/how-to-add-depth-to-your-data-with-the-us-census-acs), government is the unique identifier of the owner.",
       "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]"
     },
     "projectId": {
-      "name": "projectId",
+      "name": "id",
       "in": "path",
       "type": "string",
       "required": true,
       "description": "Project unique identifier.\nFor example, in the URL:[https://data.world/government/how-to-add-depth-to-your-data-with-the-us-census-acs](https://data.world/government/how-to-add-depth-to-your-data-with-the-us-census-acs), how-to-add-depth-to-your-data-with-the-us-census-acs is the unique identifier of the project.",
       "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]"
     },
+    "insightProjectOwner": {
+      "name": "projectOwner",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "description": "User name and unique identifier of the creator of a project.\nFor example, in the URL: [https://data.world/government/how-to-add-depth-to-your-data-with-the-us-census-acs](https://data.world/government/how-to-add-depth-to-your-data-with-the-us-census-acs), government is the unique identifier of the owner.",
+      "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]"
+    },
+    "insightProjectId": {
+      "name": "projectId",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "description": "User name and unique identifier of the creator of a project.\nFor example, in the URL: [https://data.world/government/how-to-add-depth-to-your-data-with-the-us-census-acs](https://data.world/government/how-to-add-depth-to-your-data-with-the-us-census-acs), government is the unique identifier of the owner.",
+      "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]"
+    },
     "insightId": {
-      "name": "insightId",
+      "name": "id",
       "in": "path",
       "type": "string",
       "required": true,
