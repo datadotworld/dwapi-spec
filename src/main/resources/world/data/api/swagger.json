@@ -4383,17 +4383,23 @@
       ]
     },
     "InsightBody": {
-      "type": "object",
       "title": "Insight Body",
+      "type": "object",
+      "description": "Defines the body of an insight. Must contain one, and only one of: `imageUrl`, `embedUrl` or `markdownBody` (deprecated).",
       "properties": {
-        "embedUrl": {
-          "type": "string"
-        },
         "imageUrl": {
-          "type": "string"
+          "type": "string",
+          "format": "uri",
+          "description": "Image URL"
+        },
+        "embedUrl": {
+          "type": "string",
+          "description": "oEmbed URL."
         },
         "markdownBody": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 25000,
+          "description": "Markdown (deprecated)"
         }
       }
     }
