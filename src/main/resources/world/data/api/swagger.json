@@ -1899,7 +1899,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "**OK**\nThe request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ProjectSummaryResponse"
             }
@@ -1947,7 +1947,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/owner"
+            "$ref": "#/parameters/projectOwner"
           },
           {
             "$ref": "#/parameters/projectId"
@@ -1961,7 +1961,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "**OK**\nThe request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ProjectPutRequest"
             }
@@ -2012,7 +2012,7 @@
             }
           },
           {
-            "$ref": "#/parameters/owner"
+            "$ref": "#/parameters/projectOwner"
           },
           {
             "$ref": "#/parameters/projectId"
@@ -2039,7 +2039,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "**OK**\nThe request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SuccessMessage"
             }
@@ -2090,7 +2090,7 @@
             }
           },
           {
-            "$ref": "#/parameters/owner"
+            "$ref": "#/parameters/projectOwner"
           },
           {
             "$ref": "#/parameters/projectId"
@@ -2117,7 +2117,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "**OK**\nThe request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SuccessMessage"
             }
@@ -2164,7 +2164,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/owner"
+            "$ref": "#/parameters/projectOwner"
           },
           {
             "$ref": "#/parameters/projectId"
@@ -2229,28 +2229,26 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/owner"
+            "$ref": "#/parameters/projectOwner"
           },
           {
             "$ref": "#/parameters/projectId"
+          },
+          {
+            "name": "linkedDatasetOwner",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "linkedDatasetId",
+            "in": "path",
+            "type": "string",
+            "required": true
           }
         ],
         "description": "Add a linked dataset to a project."
       },
-      "parameters": [
-        {
-          "name": "linkedDatasetOwner",
-          "in": "path",
-          "type": "string",
-          "required": true
-        },
-        {
-          "name": "linkedDatasetId",
-          "in": "path",
-          "type": "string",
-          "required": true
-        }
-      ],
       "put": {
         "tags": [
           "projects"
@@ -2311,10 +2309,22 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/owner"
+            "$ref": "#/parameters/projectOwner"
           },
           {
-            "$ref": "#/parameters/datasetId"
+            "$ref": "#/parameters/projectId"
+          },
+          {
+            "name": "linkedDatasetOwner",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "linkedDatasetId",
+            "in": "path",
+            "type": "string",
+            "required": true
           }
         ],
         "summary": "Link dataset"
@@ -2378,7 +2388,7 @@
             }
           },
           {
-            "$ref": "#/parameters/owner"
+            "$ref": "#/parameters/projectOwner"
           }
         ],
         "consumes": [
@@ -2397,6 +2407,451 @@
         "description": "Create a new project."
       }
     },
+    "/insights/{projectOwner}/{projectId}/{id}": {
+      "get": {
+        "tags": [
+          "insights"
+        ],
+        "responses": {
+          "200": {
+            "description": "**OK**\nThe request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/InsightSummaryResponse"
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "summary": "Retrieve an insight",
+        "operationId": "getInsight",
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/insightProjectOwner"
+          },
+          {
+            "$ref": "#/parameters/insightProjectId"
+          },
+          {
+            "$ref": "#/parameters/insightId"
+          }
+        ],
+        "description": "Retrieve an insight."
+      },
+      "delete": {
+        "tags": [
+          "insights"
+        ],
+        "responses": {
+          "200": {
+            "description": "**OK**\nThe request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "summary": "Delete an insight",
+        "operationId": "deleteInsight",
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/insightProjectOwner"
+          },
+          {
+            "$ref": "#/parameters/insightProjectId"
+          },
+          {
+            "$ref": "#/parameters/insightId"
+          }
+        ],
+        "description": "Delete an existing insight."
+      },
+      "put": {
+        "tags": [
+          "insights"
+        ],
+        "responses": {
+          "200": {
+            "description": "**OK**\nThe request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "422": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNPROCESSABLE ENTITY**\nThe server understands the content type of the request entity and the syntax of the request entity is correct, but was unable to process the contained instructions.\nFor example, this error may occur if the JSON body of the request doesn't match the expected schema."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/InsightPutRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/insightProjectOwner"
+          },
+          {
+            "$ref": "#/parameters/insightProjectId"
+          },
+          {
+            "$ref": "#/parameters/insightId"
+          }
+        ],
+        "summary": "Replace an insight",
+        "operationId": "replaceInsight",
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "description": "Replace an insight."
+      },
+      "patch": {
+        "tags": [
+          "insights"
+        ],
+        "responses": {
+          "200": {
+            "description": "**OK**\nThe request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "422": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNPROCESSABLE ENTITY**\nThe server understands the content type of the request entity and the syntax of the request entity is correct, but was unable to process the contained instructions.\nFor example, this error may occur if the JSON body of the request doesn't match the expected schema."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/InsightPatchRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/insightProjectOwner"
+          },
+          {
+            "$ref": "#/parameters/insightProjectId"
+          },
+          {
+            "$ref": "#/parameters/insightId"
+          }
+        ],
+        "summary": "Update an insight",
+        "operationId": "updateInsight",
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "description": "Update an insight. Note that only elements included in the request will be updated. All omitted elements will remain untouched."
+      }
+    },
+    "/insights/{projectOwner}/{projectId}": {
+      "get": {
+        "tags": [
+          "insights"
+        ],
+        "responses": {
+          "200": {
+            "description": "**OK**\nThe request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedInsightResults"
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/insightProjectOwner"
+          },
+          {
+            "$ref": "#/parameters/insightProjectId"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/next"
+          },
+          {
+            "$ref": "#/parameters/sort"
+          }
+        ],
+        "operationId": "getInsightsForProject",
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "Get insights for project.",
+        "description": "Get insights for a project."
+      },
+      "post": {
+        "tags": [
+          "insights"
+        ],
+        "responses": {
+          "200": {
+            "description": "**OK**\nThe request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CreateInsightResponse"
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "422": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNPROCESSABLE ENTITY**\nThe server understands the content type of the request entity and the syntax of the request entity is correct, but was unable to process the contained instructions.\nFor example, this error may occur if the JSON body of the request doesn't match the expected schema."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/InsightCreateRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/insightProjectOwner"
+          },
+          {
+            "$ref": "#/parameters/insightProjectId"
+          }
+        ],
+        "operationId": "createInsight",
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "Create an insight",
+        "description": "Create a new insight."
+      }
+    },
     "/user/projects/own": {
       "get": {
         "tags": [
@@ -2404,7 +2859,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "**OK**\nThe request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PaginatedProjectResults"
             }
@@ -3316,7 +3771,7 @@
         },
         "linkedDatasets": {
           "type": "array",
-          "description": "List of linked datasets.",
+          "description": "Initial set of linked datasets.",
           "items": {
             "$ref": "#/definitions/LinkedDatasetCreateOrUpdateRequest"
           }
@@ -3531,7 +3986,7 @@
         },
         "linkedDatasets": {
           "type": "array",
-          "description": "List of linked datasets.",
+          "description": "Initial set of linked datasets.",
           "items": {
             "$ref": "#/definitions/LinkedDatasetCreateOrUpdateRequest"
           }
@@ -3600,7 +4055,7 @@
         },
         "files": {
           "type": "array",
-          "description": "Updated set of files. At project update time, file uploads are not supported. However, this property can be used to add files from URL or update metadata related to existing files.",
+          "description": "Updated set of files. At project update time, file uploads are not supported. However, this property can be used to add files from URL or update metadata related to existing files. Files included in this request will be added. Previously added files will be preserved without modification.",
           "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/FileCreateOrUpdateRequest"
@@ -3608,6 +4063,7 @@
         },
         "linkedDatasets": {
           "type": "array",
+          "description": "Updated set of linked datasets. Datasets linked in this request will be added. Previously linked datasets will be preserved without modification.",
           "items": {
             "$ref": "#/definitions/LinkedDatasetCreateOrUpdateRequest"
           }
@@ -3688,11 +4144,11 @@
         }
       },
       "required": [
-        "owner",
-        "id",
         "title",
         "visibility",
         "status",
+        "owner",
+        "id",
         "created",
         "updated",
         "accessLevel"
@@ -3715,6 +4171,237 @@
       "required": [
         "uri"
       ]
+    },
+    "InsightCreateRequest": {
+      "type": "object",
+      "title": "Insight Create Request",
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "Insight title."
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 150,
+          "description": "Insight description."
+        },
+        "body": {
+          "$ref": "#/definitions/InsightBody"
+        },
+        "sourceLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "Permalink to source code or platform this insight was generated with. Allows others to replicate the steps originally used to produce the insight."
+        },
+        "dataSourceLinks": {
+          "type": "array",
+          "format": "uri",
+          "description": "One or more permalinks to the data sources used to generate this insight. Allows others to access the data originally used to produce the insight.",
+          "items": {
+            "format": "uri",
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "body",
+        "title"
+      ]
+    },
+    "InsightPutRequest": {
+      "type": "object",
+      "title": "Insight Replace Request",
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "Insight title."
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 150,
+          "description": "Insight description."
+        },
+        "body": {
+          "$ref": "#/definitions/InsightBody"
+        },
+        "sourceLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "Permalink to source code or platform this insight was generated with. Allows others to replicate the steps originally used to produce the insight."
+        },
+        "dataSourceLinks": {
+          "type": "array",
+          "format": "uri",
+          "description": "One or more permalinks to the data sources used to generate this insight. Allows others to access the data originally used to produce the insight.",
+          "items": {
+            "format": "uri",
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "body",
+        "title"
+      ]
+    },
+    "InsightSummaryResponse": {
+      "type": "object",
+      "title": "Insight Summary Response",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique Insight id."
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "Insight title."
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 150,
+          "description": "Insight description."
+        },
+        "body": {
+          "$ref": "#/definitions/InsightBody"
+        },
+        "sourceLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "Permalink to source code or platform this insight was generated with. Allows others to replicate the steps originally used to produce the insight."
+        },
+        "dataSourceLinks": {
+          "type": "array",
+          "format": "uri",
+          "description": "One or more permalinks to the data sources used to generate this insight. Allows others to access the data originally used to produce the insight.",
+          "items": {
+            "format": "uri",
+            "type": "string"
+          }
+        },
+        "author": {
+          "type": "string",
+          "description": "User name of the author of the insight."
+        },
+        "created": {
+          "type": "string",
+          "description": "Date and time when insight was created."
+        },
+        "updated": {
+          "type": "string",
+          "description": "Date and time when insight was last updated."
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "body",
+        "author",
+        "created",
+        "updated"
+      ]
+    },
+    "InsightPatchRequest": {
+      "type": "object",
+      "title": "Insight Update Request",
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "Insight title."
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 150,
+          "description": "Insight description."
+        },
+        "body": {
+          "$ref": "#/definitions/InsightBody"
+        },
+        "sourceLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "Permalink to source code or platform this insight was generated with. Allows others to replicate the steps originally used to produce the insight."
+        },
+        "dataSourceLinks": {
+          "type": "array",
+          "format": "uri",
+          "description": "One or more permalinks to the data sources used to generate this insight. Allows others to access the data originally used to produce the insight.",
+          "items": {
+            "format": "uri",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CreateInsightResponse": {
+      "type": "object",
+      "title": "Insight Create Response",
+      "properties": {
+        "message": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        },
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI of newly created insight."
+        }
+      },
+      "required": [
+        "uri"
+      ]
+    },
+    "PaginatedInsightResults": {
+      "type": "object",
+      "title": "Paginated Insight Results",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InsightSummaryResponse"
+          }
+        },
+        "nextPageToken": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "count",
+        "records"
+      ]
+    },
+    "InsightBody": {
+      "title": "Insight Body",
+      "type": "object",
+      "description": "Defines the body of an insight. Must contain one, and only one of: `imageUrl`, `embedUrl` or `markdownBody` (deprecated).",
+      "properties": {
+        "imageUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Image URL"
+        },
+        "embedUrl": {
+          "type": "string",
+          "description": "oEmbed URL."
+        },
+        "markdownBody": {
+          "type": "string",
+          "maxLength": 25000,
+          "description": "Markdown (deprecated)"
+        }
+      }
     }
   },
   "security": [
@@ -3791,6 +4478,14 @@
       "required": true,
       "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9]){1,93}[a-z0-9]"
     },
+    "projectOwner": {
+      "name": "owner",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "description": "User name and unique identifier of the creator of a project.\nFor example, in the URL: [https://data.world/government/how-to-add-depth-to-your-data-with-the-us-census-acs](https://data.world/government/how-to-add-depth-to-your-data-with-the-us-census-acs), government is the unique identifier of the owner.",
+      "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]"
+    },
     "projectId": {
       "name": "id",
       "in": "path",
@@ -3798,6 +4493,29 @@
       "required": true,
       "description": "Project unique identifier.\nFor example, in the URL:[https://data.world/government/how-to-add-depth-to-your-data-with-the-us-census-acs](https://data.world/government/how-to-add-depth-to-your-data-with-the-us-census-acs), how-to-add-depth-to-your-data-with-the-us-census-acs is the unique identifier of the project.",
       "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]"
+    },
+    "insightProjectOwner": {
+      "name": "projectOwner",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "description": "User name and unique identifier of the creator of a project.\nFor example, in the URL: [https://data.world/government/how-to-add-depth-to-your-data-with-the-us-census-acs](https://data.world/government/how-to-add-depth-to-your-data-with-the-us-census-acs), government is the unique identifier of the owner.",
+      "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]"
+    },
+    "insightProjectId": {
+      "name": "projectId",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "description": "User name and unique identifier of the creator of a project.\nFor example, in the URL: [https://data.world/government/how-to-add-depth-to-your-data-with-the-us-census-acs](https://data.world/government/how-to-add-depth-to-your-data-with-the-us-census-acs), government is the unique identifier of the owner.",
+      "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]"
+    },
+    "insightId": {
+      "name": "id",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "description": "Insight unique identifier."
     }
   }
 }
