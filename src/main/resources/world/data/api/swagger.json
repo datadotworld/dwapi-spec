@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.12.1",
+    "version": "0.13.1",
     "title": "data.world API",
     "termsOfService": "https://data.world/terms",
     "contact": {
@@ -3485,7 +3485,7 @@
           "description": "Source URL of file. Must be an http or https URL.",
           "minLength": 1,
           "maxLength": 4096,
-          "pattern": "^https?.*"
+          "enum": ["http", "https", "stream"]
         },
         "expandArchive": {
           "type": "boolean",
@@ -3507,7 +3507,7 @@
           "description": "Source URL of file. Must be an http or https URL.",
           "minLength": 1,
           "maxLength": 4096,
-          "pattern": "^https?.*"
+          "enum": ["http", "https", "stream"]
         },
         "expandArchive": {
           "type": "boolean",
@@ -3527,7 +3527,7 @@
           "description": "Source URL of file. Must be an http or https URL.",
           "minLength": 1,
           "maxLength": 4096,
-          "pattern": "^https?.*"
+          "enum": ["http", "https", "stream"]
         },
         "syncStatus": {
           "type": "string",
