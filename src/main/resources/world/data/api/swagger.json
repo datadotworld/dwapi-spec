@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.12.1",
+    "version": "0.13.2",
     "title": "data.world API",
     "termsOfService": "https://data.world/terms",
     "contact": {
@@ -1698,9 +1698,6 @@
           },
           {
             "$ref": "#/parameters/next"
-          },
-          {
-            "$ref": "#/parameters/sort"
           }
         ],
         "responses": {
@@ -1768,9 +1765,6 @@
           },
           {
             "$ref": "#/parameters/next"
-          },
-          {
-            "$ref": "#/parameters/sort"
           }
         ],
         "responses": {
@@ -1838,9 +1832,6 @@
           },
           {
             "$ref": "#/parameters/next"
-          },
-          {
-            "$ref": "#/parameters/sort"
           }
         ],
         "responses": {
@@ -2759,9 +2750,6 @@
           },
           {
             "$ref": "#/parameters/next"
-          },
-          {
-            "$ref": "#/parameters/sort"
           }
         ],
         "operationId": "getInsightsForProject",
@@ -4457,12 +4445,6 @@
       "in": "query",
       "type": "string",
       "description": "Maximum number of items to include in a page of results."
-    },
-    "sort": {
-      "name": "sort",
-      "in": "query",
-      "type": "string",
-      "description": "Property name to sort by.\nPrefix with `+` for ascending order or with `-` for descending order. For example, `-created` will return items sorted by the `created` property in descending order."
     },
     "next": {
       "name": "next",
