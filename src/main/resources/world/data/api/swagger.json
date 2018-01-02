@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.13.2",
+    "version": "0.13.3",
     "title": "data.world API",
     "termsOfService": "https://data.world/terms",
     "contact": {
@@ -3470,10 +3470,10 @@
       "properties": {
         "url": {
           "type": "string",
-          "description": "Source URL of file. Must be an http or https URL.",
+          "description": "Source URL of file. Must be an http, https, or stream URL.",
           "minLength": 1,
           "maxLength": 4096,
-          "pattern": "^https?.*"
+          "pattern": "^(https?|stream).*"
         },
         "expandArchive": {
           "type": "boolean",
@@ -3492,10 +3492,10 @@
       "properties": {
         "url": {
           "type": "string",
-          "description": "Source URL of file. Must be an http or https URL.",
+          "description": "Source URL of file. Must be an http, https, or stream URL.",
           "minLength": 1,
           "maxLength": 4096,
-          "pattern": "^https?.*"
+          "pattern": "^(https?|stream).*"
         },
         "expandArchive": {
           "type": "boolean",
@@ -3512,10 +3512,10 @@
       "properties": {
         "url": {
           "type": "string",
-          "description": "Source URL of file. Must be an http or https URL.",
+          "description": "Source URL of file. Must be an http, https, or stream URL.",
           "minLength": 1,
           "maxLength": 4096,
-          "pattern": "^https?.*"
+          "pattern": "^(https?|stream).*"
         },
         "syncStatus": {
           "type": "string",
