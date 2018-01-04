@@ -3492,10 +3492,10 @@
       "properties": {
         "url": {
           "type": "string",
-          "description": "Source URL of file. Must be an http, https, or stream URL.",
+          "description": "Source URL of file. Must be an http, https.",
           "minLength": 1,
           "maxLength": 4096,
-          "pattern": "^(https?|stream).*"
+          "pattern": "^https?.*"
         },
         "expandArchive": {
           "type": "boolean",
