@@ -89,10 +89,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Record(s) accepted.",
-            "schema": {
-              "$ref": "#/definitions/SuccessMessage"
-            }
+            "description": "Record(s) accepted."
           },
           "400": {
             "schema": {
