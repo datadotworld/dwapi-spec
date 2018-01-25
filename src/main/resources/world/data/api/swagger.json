@@ -3470,7 +3470,36 @@
           "description": "Source URL of file. Must be an http, https, or stream URL.",
           "minLength": 1,
           "maxLength": 4096,
-          "pattern": "^(https?|stream).*"
+          "pattern": "^(https?|stream):.*",
+          "format": "uri"
+        },
+        "method": {
+          "type": "string",
+          "enum": [
+            "GET",
+            "POST"
+          ],
+          "default": "GET"
+        },
+        "requestHeaders": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "A map of custom HTTP header name/value pairs to pass with the request.\n\nIf a `requestEntity` string is specified, this must contain a `Content-Type` header.\n\nAn `Authorization` header value will be converted to a `WebAuthorization` object and the credentials will be encrypted.\n\nThe total size of the url and custom headers must not exceed 4096 bytes in the HTTP request, including whitespace, colons and CRLF characters."
+        },
+        "requestEntity": {
+          "type": "string",
+          "maxLength": 10000
+        },
+        "oauthToken": {
+          "$ref": "#/definitions/OauthTokenReference"
+        },
+        "credentials": {
+          "$ref": "#/definitions/WebCredentials"
+        },
+        "authorization": {
+          "$ref": "#/definitions/WebAuthorization"
         },
         "expandArchive": {
           "type": "boolean",
@@ -3479,7 +3508,8 @@
         }
       },
       "required": [
-        "url"
+        "url",
+        "method"
       ]
     },
     "FileSourceCreateRequest": {
@@ -3492,7 +3522,36 @@
           "description": "Source URL of file. Must be an http, https.",
           "minLength": 1,
           "maxLength": 4096,
-          "pattern": "^https?.*"
+          "pattern": "^https?:.*",
+          "format": "uri"
+        },
+        "method": {
+          "type": "string",
+          "enum": [
+            "GET",
+            "POST"
+          ],
+          "default": "GET"
+        },
+        "requestHeaders": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "A map of custom HTTP header name/value pairs to pass with the request.\n\nIf a `requestEntity` string is specified, this must contain a `Content-Type` header.\n\nAn `Authorization` header value will be converted to a `WebAuthorization` object and the credentials will be encrypted.\n\nThe total size of the url and custom headers must not exceed 4096 bytes in the HTTP request, including whitespace, colons and CRLF characters."
+        },
+        "requestEntity": {
+          "type": "string",
+          "maxLength": 10000
+        },
+        "oauthToken": {
+          "$ref": "#/definitions/OauthTokenReference"
+        },
+        "credentials": {
+          "$ref": "#/definitions/WebCredentials"
+        },
+        "authorization": {
+          "$ref": "#/definitions/WebAuthorization"
         },
         "expandArchive": {
           "type": "boolean",
@@ -3501,18 +3560,49 @@
         }
       },
       "required": [
-        "url"
+        "url",
+        "method"
       ]
     },
     "FileSourceSummaryResponse": {
       "type": "object",
+      "title": "File Source Response",
       "properties": {
         "url": {
           "type": "string",
           "description": "Source URL of file. Must be an http, https, or stream URL.",
           "minLength": 1,
           "maxLength": 4096,
-          "pattern": "^(https?|stream).*"
+          "pattern": "^(https?|stream):.*",
+          "format": "uri"
+        },
+        "method": {
+          "type": "string",
+          "enum": [
+            "GET",
+            "POST"
+          ],
+          "default": "GET"
+        },
+        "requestHeaders": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "A map of custom HTTP header name/value pairs to pass with the request.\n\nIf a `requestEntity` string is specified, this must contain a `Content-Type` header."
+        },
+        "requestEntity": {
+          "type": "string",
+          "maxLength": 10000
+        },
+        "oauthToken": {
+          "$ref": "#/definitions/OauthTokenReference"
+        },
+        "credentials": {
+          "$ref": "#/definitions/WebCredentials"
+        },
+        "authorization": {
+          "$ref": "#/definitions/WebAuthorization"
         },
         "syncStatus": {
           "type": "string",
@@ -3543,9 +3633,9 @@
       },
       "required": [
         "url",
+        "method",
         "syncStatus"
-      ],
-      "title": "File Source Response"
+      ]
     },
     "FileSummaryResponse": {
       "type": "object",
@@ -4387,6 +4477,78 @@
           "description": "Markdown (deprecated)"
         }
       }
+    },
+    "WebCredentials": {
+      "type": "object",
+      "title": "Web Credentials",
+      "description": "A username and password suitable for use with HTTP Basic authentication.\n\nWhen used with a File Source this causes the HTTP request to include the following header:\n```\nAuthorization: Basic <base64-encoding-of(user:password)>\n```\n\nThe `password` field is write-only.  It is omitted by read operations.",
+      "properties": {
+        "user": {
+          "type": "string",
+          "description": "The name of the account to login to.",
+          "maxLength": 1024
+        },
+        "password": {
+          "type": "string",
+          "description": "The secret password.\n\nThis field is write-only. It is omitted by read operations.\n\nIf authorization is required, the `password` value must be provided whenever a File Source is created or modified. An update to a dataset that does not change the File Source may omit the `password` field--the update will preserve the previous value.",
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "user"
+      ]
+    },
+    "WebAuthorization": {
+      "type": "object",
+      "title": "Web Authorization",
+      "description": "An authorization type and credentials suitable for use in an HTTP `Authorization` header.\n\nWhen used with a File Source this causes the HTTP request to include the following header:\n```\nAuthorization: <type> <credentials>\n```\nThe `credentials` field is write-only.  It is omitted by read operations.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The authorization scheme.\n\nUsually this is \"Bearer\" but it could be other values like \"Token\" or \"Basic\" etc.",
+          "maxLength": 50,
+          "pattern": "[\\x21-\\x7E \\t]*"
+        },
+        "credentials": {
+          "type": "string",
+          "description": "The confidential portion of the `Authorization` header that follows the `type` field.\n\nThis field is write-only. It is omitted by read operations.\n\nIf authorization is required, the `credentials` value must be provided whenever a File Source is created or modified. An update to a dataset that does not change the File Source may omit the `credentials` field--the update will preserve the previous value.",
+          "minLength": 1,
+          "maxLength": 1024,
+          "pattern": "[\\x21-\\x7E \\t]*"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "OauthTokenReference": {
+      "type": "object",
+      "title": "OAuth Token Reference",
+      "description": "A reference to a 3rd-party OAuth 2.0 token stored by data.world.\n\nWhen creating or updating an OAuth token reference, the token must belong to the user making the update.",
+      "properties": {
+        "owner": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 31,
+          "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]",
+          "description": "User name of the owner of the OAuth token within data.world."
+        },
+        "site": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 255,
+          "pattern": "(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?\\.)+[a-z]{2,}(?:@[a-z0-9](?:[-.](?=[a-z0-9])|[a-z0-9]){0,29})?"
+        },
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        }
+      },
+      "required": [
+        "owner",
+        "site",
+        "id"
+      ]
     }
   },
   "security": [
