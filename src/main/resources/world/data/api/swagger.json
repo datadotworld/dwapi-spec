@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.13.4",
+    "version": "0.14.1",
     "title": "data.world API",
     "termsOfService": "https://data.world/terms",
     "contact": {
@@ -1951,7 +1951,7 @@
           "200": {
             "description": "**OK**\nThe request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ProjectPutRequest"
+              "$ref": "#/definitions/SuccessMessage"
             }
           },
           "400": {
@@ -2235,7 +2235,7 @@
             "required": true
           }
         ],
-        "description": "Add a linked dataset to a project."
+        "description": "Remove a linked dataset from a project."
       },
       "put": {
         "tags": [
@@ -2245,7 +2245,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/LinkedDatasetCreateOrUpdateRequest"
+              "$ref": "#/definitions/SuccessMessage"
             }
           },
           "400": {
@@ -2288,7 +2288,6 @@
         "produces": [
           "application/json"
         ],
-        "description": "Remove a linked dataset from a project.",
         "operationId": "addLinkedDataset",
         "security": [
           {
@@ -2315,7 +2314,8 @@
             "required": true
           }
         ],
-        "summary": "Link dataset"
+        "summary": "Link dataset",
+        "description": "Add a linked dataset to a project."
       }
     },
     "/projects/{owner}": {
@@ -3227,30 +3227,22 @@
       "properties": {
         "owner": {
           "type": "string",
-          "description": "User name and unique identifier of the creator of the dataset.",
-          "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]"
+          "description": "User name and unique identifier of the creator of the dataset."
         },
         "id": {
           "type": "string",
-          "description": "Unique identifier of dataset.",
-          "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]"
+          "description": "Unique identifier of dataset."
         },
         "title": {
           "type": "string",
-          "minLength": 0,
-          "maxLength": 60,
           "description": "Dataset name."
         },
         "description": {
           "type": "string",
-          "minLength": 0,
-          "maxLength": 120,
           "description": "Short dataset description."
         },
         "summary": {
           "type": "string",
-          "minLength": 0,
-          "maxLength": 25000,
           "description": "Long-form dataset summary (Markdown supported)."
         },
         "tags": {
@@ -3258,33 +3250,15 @@
           "description": "Dataset tags. Letters numbers and spaces only (max 25 characters).",
           "uniqueItems": true,
           "items": {
-            "type": "string",
-            "maxLength": 25,
-            "pattern": "^[a-zA-Z0-9\\s]*"
+            "type": "string"
           }
         },
         "license": {
           "type": "string",
-          "description": "Dataset license. Find additional info for allowed values [here](https://data.world/license-help).",
-          "enum": [
-            "Public Domain",
-            "PDDL",
-            "CC-0",
-            "CC-BY",
-            "ODC-BY",
-            "CC-BY-SA",
-            "ODC-ODbL",
-            "CC BY-NC",
-            "CC BY-NC-SA",
-            "Other"
-          ]
+          "description": "Dataset license. Find additional info for allowed values [here](https://data.world/license-help)."
         },
         "visibility": {
           "type": "string",
-          "enum": [
-            "OPEN",
-            "PRIVATE"
-          ],
           "description": "Dataset visibility. `OPEN` if the dataset can be seen by any member of data.world. `PRIVATE` if the dataset can be seen by its owner and authorized collaborators."
         },
         "files": {
@@ -3297,12 +3271,6 @@
         },
         "status": {
           "type": "string",
-          "enum": [
-            "NEW",
-            "INPROGRESS",
-            "LOADED",
-            "SYSTEMERROR"
-          ],
           "description": "Processing status of dataset.  This status can be checked periodically after changes are made to the dataset to determine the status of asynchronous processing.\n\n* `NEW`: Just created. Not yet processed.\n* `INPROGRESS`: Currently being processed.\n* `LOADED`: Successfully processed.\n* `SYSTEMERROR`: Error state due to processing failure."
         },
         "created": {
@@ -3319,12 +3287,6 @@
         },
         "accessLevel": {
           "type": "string",
-          "enum": [
-            "NONE",
-            "READ",
-            "WRITE",
-            "ADMIN"
-          ],
           "description": "The level of access the authenticated user is allowed with respect to dataset: \n\n* `NONE` Not allowed any access.  \n* `READ` Allowed to know that the dataset exists, view and download data and metadata. \n* `WRITE` Allowed to update data and metadata, in addition to what READ allows. \n* `ADMIN` Allowed to delete dataset, in addition to what WRITE allows."
         }
       },
@@ -3346,18 +3308,15 @@
       "properties": {
         "code": {
           "type": "integer",
-          "format": "int32",
-          "readOnly": true,
-          "description": "HTTP Error Code"
+          "description": "HTTP Error Code",
+          "format": "int32"
         },
         "message": {
           "type": "string",
-          "readOnly": true,
           "description": "Human-readable error message."
         },
         "details": {
           "type": "string",
-          "readOnly": true,
           "description": "Underlying error cause."
         }
       }
@@ -3571,18 +3530,10 @@
         "url": {
           "type": "string",
           "description": "Source URL of file. Must be an http, https, or stream URL.",
-          "minLength": 1,
-          "maxLength": 4096,
-          "pattern": "^(https?|stream):.*",
           "format": "uri"
         },
         "method": {
-          "type": "string",
-          "enum": [
-            "GET",
-            "POST"
-          ],
-          "default": "GET"
+          "type": "string"
         },
         "requestHeaders": {
           "type": "object",
@@ -3592,8 +3543,7 @@
           "description": "A map of custom HTTP header name/value pairs to pass with the request.\n\nIf a `requestEntity` string is specified, this must contain a `Content-Type` header."
         },
         "requestEntity": {
-          "type": "string",
-          "maxLength": 10000
+          "type": "string"
         },
         "oauthToken": {
           "$ref": "#/definitions/OauthTokenReference"
@@ -3606,12 +3556,6 @@
         },
         "syncStatus": {
           "type": "string",
-          "enum": [
-            "NEW",
-            "INPROGRESS",
-            "OK",
-            "SYSTEMERROR"
-          ],
           "description": "Synchronization status of the file.  This status can be checked periodically after changes are made to the dataset to determine the status of asynchronous syncronization.\n\n* `NEW`: Just created. Not yet synchronized.\n* `INPROGRESS`: Currently being synchronized.\n* `LOADED`: Successfully synchronized.\n* `SYSTEMERROR`: Error state due to synchronization failure."
         },
         "syncSummary": {
@@ -3639,12 +3583,10 @@
     },
     "FileSummaryResponse": {
       "type": "object",
+      "title": "File Summary Response",
       "properties": {
         "name": {
           "type": "string",
-          "minLength": 1,
-          "maxLength": 128,
-          "pattern": "^[^/]+$",
           "description": "File name. Should include type extension always when possible. Must not include slashes."
         },
         "source": {
@@ -3652,24 +3594,14 @@
         },
         "description": {
           "type": "string",
-          "description": "File description.",
-          "minLength": 1,
-          "maxLength": 240
+          "description": "File description."
         },
         "labels": {
           "type": "array",
           "description": "File labels.",
           "uniqueItems": true,
           "items": {
-            "type": "string",
-            "enum": [
-              "raw data",
-              "documentation",
-              "visualization",
-              "clean data",
-              "script",
-              "report"
-            ]
+            "type": "string"
           }
         },
         "sizeInBytes": {
@@ -3689,16 +3621,13 @@
         "name",
         "created",
         "updated"
-      ],
-      "title": "File Summary Response"
+      ]
     },
     "SuccessMessage": {
       "type": "object",
       "properties": {
         "message": {
-          "type": "string",
-          "minLength": 0,
-          "maxLength": 256
+          "type": "string"
         }
       },
       "title": "Success Message Response"
@@ -3709,14 +3638,10 @@
       "properties": {
         "avatarUrl": {
           "type": "string",
-          "minLength": 0,
-          "maxLength": 256,
           "description": "URL of profile image."
         },
         "displayName": {
           "type": "string",
-          "minLength": 0,
-          "maxLength": 128,
           "description": "User's name."
         },
         "id": {
@@ -3743,9 +3668,7 @@
       "title": "Dataset Create Response",
       "properties": {
         "message": {
-          "type": "string",
-          "minLength": 0,
-          "maxLength": 256
+          "type": "string"
         },
         "uri": {
           "type": "string",
@@ -3863,30 +3786,22 @@
       "properties": {
         "owner": {
           "type": "string",
-          "description": "User name and unique identifier of the creator of the dataset.",
-          "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]"
+          "description": "User name and unique identifier of the creator of the dataset."
         },
         "id": {
           "type": "string",
-          "description": "Unique identifier of dataset.",
-          "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]"
+          "description": "Unique identifier of dataset."
         },
         "title": {
           "type": "string",
-          "minLength": 0,
-          "maxLength": 60,
           "description": "Dataset name."
         },
         "description": {
           "type": "string",
-          "minLength": 0,
-          "maxLength": 120,
           "description": "Short dataset description."
         },
         "summary": {
           "type": "string",
-          "minLength": 0,
-          "maxLength": 25000,
           "description": "Long-form dataset summary (Markdown supported)."
         },
         "tags": {
@@ -3894,33 +3809,15 @@
           "description": "Dataset tags. Letters numbers and spaces only (max 25 characters).",
           "uniqueItems": true,
           "items": {
-            "type": "string",
-            "maxLength": 25,
-            "pattern": "^[a-zA-Z0-9\\s]*"
+            "type": "string"
           }
         },
         "license": {
           "type": "string",
-          "description": "Dataset license. Find additional info for allowed values [here](https://data.world/license-help).",
-          "enum": [
-            "Public Domain",
-            "PDDL",
-            "CC-0",
-            "CC-BY",
-            "ODC-BY",
-            "CC-BY-SA",
-            "ODC-ODbL",
-            "CC BY-NC",
-            "CC BY-NC-SA",
-            "Other"
-          ]
+          "description": "Dataset license. Find additional info for allowed values [here](https://data.world/license-help)."
         },
         "visibility": {
           "type": "string",
-          "enum": [
-            "OPEN",
-            "PRIVATE"
-          ],
           "description": "Dataset visibility. `OPEN` if the dataset can be seen by any member of data.world. `PRIVATE` if the dataset can be seen by its owner and authorized collaborators."
         },
         "created": {
@@ -3933,23 +3830,17 @@
         },
         "accessLevel": {
           "type": "string",
-          "enum": [
-            "NONE",
-            "READ",
-            "WRITE",
-            "ADMIN"
-          ],
           "description": "The level of access the authenticated user is allowed with respect to dataset: \n\n* `NONE` Not allowed any access.  \n* `READ` Allowed to know that the dataset exists, view and download data and metadata. \n* `WRITE` Allowed to update data and metadata, in addition to what READ allows. \n* `ADMIN` Allowed to delete dataset, in addition to what WRITE allows."
         }
       },
       "required": [
-        "accessLevel",
-        "created",
-        "id",
         "owner",
+        "id",
         "title",
         "visibility",
-        "updated"
+        "created",
+        "updated",
+        "accessLevel"
       ]
     },
     "PaginatedProjectResults": {
@@ -3993,83 +3884,6 @@
       "required": [
         "owner",
         "id"
-      ]
-    },
-    "ProjectPutRequest": {
-      "type": "object",
-      "title": "Project Replace Request",
-      "properties": {
-        "title": {
-          "type": "string",
-          "minLength": 0,
-          "maxLength": 60,
-          "description": "Project title."
-        },
-        "objective": {
-          "type": "string",
-          "minLength": 0,
-          "maxLength": 120,
-          "description": "Short project objective."
-        },
-        "summary": {
-          "type": "string",
-          "minLength": 0,
-          "maxLength": 25000,
-          "description": "Long-form project summary (Markdown supported)."
-        },
-        "tags": {
-          "type": "array",
-          "description": "Project tags. Letters numbers and spaces only (max 25 characters).",
-          "uniqueItems": true,
-          "items": {
-            "type": "string",
-            "maxLength": 25,
-            "pattern": "^[a-zA-Z0-9\\s]*"
-          }
-        },
-        "license": {
-          "type": "string",
-          "description": "Project license. Find additional info for allowed values [here](https://data.world/license-help).",
-          "enum": [
-            "Public Domain",
-            "PDDL",
-            "CC-0",
-            "CC-BY",
-            "ODC-BY",
-            "CC-BY-SA",
-            "ODC-ODbL",
-            "CC BY-NC",
-            "CC BY-NC-SA",
-            "Other"
-          ]
-        },
-        "visibility": {
-          "type": "string",
-          "enum": [
-            "OPEN",
-            "PRIVATE"
-          ],
-          "description": "Project visibility. `OPEN` if the project can be seen by any member of data.world. `PRIVATE` if the project can be seen by its owner and authorized collaborators."
-        },
-        "files": {
-          "type": "array",
-          "description": "Initial set of files. At project creation time, file uploads are not supported. However, this property can be used to add files from URL.",
-          "uniqueItems": false,
-          "items": {
-            "$ref": "#/definitions/FileCreateRequest"
-          }
-        },
-        "linkedDatasets": {
-          "type": "array",
-          "description": "Initial set of linked datasets.",
-          "items": {
-            "$ref": "#/definitions/LinkedDatasetCreateOrUpdateRequest"
-          }
-        }
-      },
-      "required": [
-        "title",
-        "visibility"
       ]
     },
     "ProjectPatchRequest": {
@@ -4180,20 +3994,10 @@
           }
         },
         "visibility": {
-          "type": "string",
-          "enum": [
-            "OPEN",
-            "PRIVATE"
-          ]
+          "type": "string"
         },
         "status": {
           "type": "string",
-          "enum": [
-            "NEW",
-            "INPROGRESS",
-            "LOADED",
-            "SYSTEMERROR"
-          ],
           "description": "Processing status of project. This status can be checked periodically after changes are made to the project to determine the status of asynchronous processing.\n\n* `NEW`: Just created. Not yet processed.\n* `INPROGRESS`: Currently being processed.\n* `LOADED`: Successfully processed.\n* `SYSTEMERROR`: Error state due to processing failure."
         },
         "owner": {
@@ -4209,13 +4013,7 @@
           "type": "string"
         },
         "accessLevel": {
-          "type": "string",
-          "enum": [
-            "NONE",
-            "READ",
-            "WRITE",
-            "ADMIN"
-          ]
+          "type": "string"
         }
       },
       "required": [
@@ -4234,9 +4032,7 @@
       "title": "Project Create Response",
       "properties": {
         "message": {
-          "type": "string",
-          "minLength": 0,
-          "maxLength": 256
+          "type": "string"
         },
         "uri": {
           "type": "string",
@@ -4333,13 +4129,10 @@
         },
         "title": {
           "type": "string",
-          "minLength": 1,
-          "maxLength": 128,
           "description": "Insight title."
         },
         "description": {
           "type": "string",
-          "maxLength": 150,
           "description": "Insight description."
         },
         "body": {
@@ -4420,13 +4213,10 @@
       "title": "Insight Create Response",
       "properties": {
         "message": {
-          "type": "string",
-          "minLength": 0,
-          "maxLength": 256
+          "type": "string"
         },
         "uri": {
           "type": "string",
-          "format": "uri",
           "description": "URI of newly created insight."
         }
       },
@@ -4464,16 +4254,16 @@
       "properties": {
         "imageUrl": {
           "type": "string",
-          "format": "uri",
-          "description": "Image URL"
+          "description": "Image URL",
+          "format": "uri"
         },
         "embedUrl": {
           "type": "string",
-          "description": "oEmbed URL."
+          "description": "oEmbed URL.",
+          "format": "uri"
         },
         "markdownBody": {
           "type": "string",
-          "maxLength": 25000,
           "description": "Markdown (deprecated)"
         }
       }
@@ -4640,7 +4430,7 @@
       "in": "path",
       "type": "string",
       "required": true,
-      "description": "User name and unique identifier of the creator of a project.\nFor example, in the URL: [https://data.world/government/how-to-add-depth-to-your-data-with-the-us-census-acs](https://data.world/government/how-to-add-depth-to-your-data-with-the-us-census-acs), government is the unique identifier of the owner.",
+      "description": "User name and unique identifier of the creator of a project.\nFor example, in the URL: [https://data.world/government/how-to-add-depth-to-your-data-with-the-us-census-acs](https://data.world/government/how-to-add-depth-to-your-data-with-the-us-census-acs), `government` is the unique identifier of the owner.",
       "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]"
     },
     "insightProjectId": {
@@ -4648,7 +4438,7 @@
       "in": "path",
       "type": "string",
       "required": true,
-      "description": "User name and unique identifier of the creator of a project.\nFor example, in the URL: [https://data.world/government/how-to-add-depth-to-your-data-with-the-us-census-acs](https://data.world/government/how-to-add-depth-to-your-data-with-the-us-census-acs), government is the unique identifier of the owner.",
+      "description": "User name and unique identifier of the project.\nFor example, in the URL: [https://data.world/government/how-to-add-depth-to-your-data-with-the-us-census-acs](https://data.world/government/how-to-add-depth-to-your-data-with-the-us-census-acs), `how-to-add-depth-to-your-data-with-the-us-census-acs` is the unique identifier of the owner.",
       "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]"
     },
     "insightId": {
