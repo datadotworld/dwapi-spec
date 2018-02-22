@@ -4790,7 +4790,7 @@
       "description": "Insight unique identifier."
     },
     "versionId": {
-      "name": "id",
+      "name": "versionId",
       "in": "path",
       "type": "string",
       "required": true,
