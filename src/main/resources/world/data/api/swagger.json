@@ -3638,7 +3638,8 @@
         "created",
         "updated",
         "isProject",
-        "accessLevel"
+        "accessLevel",
+        "version"
       ]
     },
     "ErrorMessage": {
