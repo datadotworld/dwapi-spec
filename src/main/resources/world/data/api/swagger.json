@@ -760,6 +760,7 @@
                 "title": "TrumpWorld",
                 "description": "TrumpWorld Data",
                 "summary": "From the Buzzfeed article [Help Us Map TrumpWorld](https://www.buzzfeed.com/johntemplon/help-us-map-trumpworld)\n>No American president has taken office with a giant network of businesses, investments, and corporate connections like that amassed by Donald J. Trump. His family and advisers have touched a staggering number of ventures, from a hotel in Azerbaijan to a poker company in Las Vegas.\n\n\nCheck out the data.world docs on how to Upload & sync files from [**Google Sheets**](https://docs.data.world/documentation/api/googleSync.html) and [**Github**](https://docs.data.world/documentation/api/githubSync.html)   \n\n\nSource: [github.com/BuzzFeedNews](https://github.com/BuzzFeedNews/trumpworld/tree/master/data)   \n\n_If you have suggestions for expanding or improving the dataset, please email trump@buzzfeed.com. If you’d like to send your tip securely and anonymously, see these [instructions](https://tips.buzzfeed.com/)._",
+                "version": "versionId",
                 "tags": [
                   "trump",
                   "trump world",
@@ -1068,6 +1069,7 @@
                 "title": "TrumpWorld",
                 "description": "TrumpWorld Data",
                 "summary": "From the Buzzfeed article [Help Us Map TrumpWorld](https://www.buzzfeed.com/johntemplon/help-us-map-trumpworld)\n>No American president has taken office with a giant network of businesses, investments, and corporate connections like that amassed by Donald J. Trump. His family and advisers have touched a staggering number of ventures, from a hotel in Azerbaijan to a poker company in Las Vegas.\n\n\nCheck out the data.world docs on how to Upload & sync files from [**Google Sheets**](https://docs.data.world/documentation/api/googleSync.html) and [**Github**](https://docs.data.world/documentation/api/githubSync.html)   \n\n\nSource: [github.com/BuzzFeedNews](https://github.com/BuzzFeedNews/trumpworld/tree/master/data)   \n\n_If you have suggestions for expanding or improving the dataset, please email trump@buzzfeed.com. If you’d like to send your tip securely and anonymously, see these [instructions](https://tips.buzzfeed.com/)._",
+                "version": "versionId",
                 "tags": [
                   "trump",
                   "trump world",
@@ -3578,6 +3580,10 @@
           "type": "string",
           "description": "Long-form dataset summary (Markdown supported)."
         },
+        "version": {
+          "type": "string",
+          "description": "Dataset version id"
+        },
         "tags": {
           "type": "array",
           "description": "Dataset tags. Letters numbers and spaces only (max 25 characters).",
@@ -4136,6 +4142,10 @@
         "summary": {
           "type": "string",
           "description": "Long-form dataset summary (Markdown supported)."
+        },
+        "version": {
+          "type": "string",
+          "description": "Dataset version id"
         },
         "tags": {
           "type": "array",
