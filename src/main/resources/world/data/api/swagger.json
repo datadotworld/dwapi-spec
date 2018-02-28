@@ -3766,10 +3766,10 @@
       "properties": {
         "url": {
           "type": "string",
-          "description": "Source URL of file. Must be an http, https, or stream URL.",
+          "description": "Source URL of file. Must be an http, https, ftp, ftps or stream URL.",
           "minLength": 1,
           "maxLength": 4096,
-          "pattern": "^(https?|stream):.*",
+          "pattern": "^(https?|ftps?|stream):.*",
           "format": "uri"
         },
         "method": {
@@ -3818,10 +3818,10 @@
       "properties": {
         "url": {
           "type": "string",
-          "description": "Source URL of file. Must be an http, https.",
+          "description": "Source URL of file. Must be an http, https, ftp, or ftps URL.",
           "minLength": 1,
           "maxLength": 4096,
-          "pattern": "^https?:.*",
+          "pattern": "^(https?|ftps?):.*",
           "format": "uri"
         },
         "method": {
