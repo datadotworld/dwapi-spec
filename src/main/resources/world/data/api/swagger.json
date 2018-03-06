@@ -284,6 +284,7 @@
           "application/rdf+json",
           "application/rdf+xml",
           "text/tab-separated-values",
+          "text/turtle",
           "text/csv"
         ],
         "parameters": [
@@ -357,6 +358,7 @@
           "application/rdf+json",
           "application/rdf+xml",
           "text/tab-separated-values",
+          "text/turtle",
           "text/csv"
         ],
         "consumes": [
