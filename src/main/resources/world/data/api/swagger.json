@@ -1035,6 +1035,81 @@
         ]
       }
     },
+    "/datasets/{owner}/{id}/queries" : {
+      "get" : {
+        "tags" : [
+          "datasets"
+        ],
+        "summary" : "Retrieve queries saved in a dataset.",
+        "operationId" : "getQueries",
+        "produces" : [
+          "application/json"
+        ],
+        "parameters" : [
+          {
+          "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/datasetId"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/next"
+          }
+        ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully retrieved queries saved in a dataset.",
+            "schema" : {
+              "$ref" : "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details."
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "422": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNPROCESSABLE ENTITY**\nThe server understands the content type of the request entity and the syntax of the request entity is correct, but was unable to process the contained instructions.\nFor example, this error may occur if the JSON body of the request doesn't match the expected schema."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "security" : [
+          {
+          "token" : []
+          }
+        ]
+      }
+    },
     "/datasets/{owner}/{id}/v/{versionId}": {
       "get": {
         "tags": [
@@ -3972,6 +4047,43 @@
       },
       "title": "Success Message Response"
     },
+    "QuerySummaryResponse" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "query unique identifier"
+        },
+        "owner" : {
+          "type" : "string",
+          "description": "User name and unique identifier of the creator of the dataset."
+        },
+        "language" : {
+          "type" : "string",
+          "description" : "Type of language in which this query is written. Can be either 'SPARQL' or 'SQL'."
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "Query name."
+        },
+        "body" : {
+          "type" : "string",
+          "description" : "Query body."
+        },
+        "version" : {
+          "type" : "string",
+          "description" : "Query version id."
+        },
+        "created" : {
+          "type": "string",
+          "description": "Date and time when the query was created."
+        },
+        "updated" : {
+          "type": "string",
+          "description": "Date and time when the query was updated."
+        }
+      }
+    },
     "UserDataResponse": {
       "type": "object",
       "title": "User Data Response",
@@ -4042,6 +4154,30 @@
         "count",
         "records"
       ]
+    },
+    "PaginatedQueryResults" : {
+      "type" : "object",
+      "required" : [
+        "count",
+        "records"
+      ],
+      "title": "Paginated Query Results",
+      "properties" : {
+        "count" : {
+          "type" : "integer",
+          "format" : "int32",
+          "minimum" : 0.0
+        },
+        "records" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/QuerySummaryResponse"
+          }
+        },
+        "nextPageToken" : {
+          "type" : "string"
+        }
+      }
     },
     "ProjectCreateRequest": {
       "type": "object",
