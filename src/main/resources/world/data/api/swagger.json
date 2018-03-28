@@ -40,6 +40,9 @@
       "name": "user"
     },
     {
+      "name": "users"
+    },
+    {
       "name": "streams"
     },
     {
@@ -1896,64 +1899,6 @@
         "description": "Return profile information for the currently authenticated user."
       }
     },
-    "/user/{account}": {
-      "get": {
-        "tags": [
-          "user"
-        ],
-        "summary": "Get a user account info.",
-        "operationId": "getAccount",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/accountId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "**OK**\nThe request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/UserDataResponse"
-            },
-            "examples": {
-              "application/json": "{\n    \"avatarUrl\": \"https://cdn.filepicker.io/api/file/m0Y31H2NRq6byi22ApUs\",\n    \"displayName\": \"Rafael Pereira\",\n    \"id\": \"rflprr\",\n    \"created\": \"2016-06-13T22:38:29.412Z\",\n    \"updated\": \"2017-01-31T17:01:49.847Z\"\n}"
-            }
-          },
-          "401": {
-            "schema": {
-              "$ref": "#/definitions/ErrorMessage"
-            },
-            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
-          },
-          "403": {
-            "schema": {
-              "$ref": "#/definitions/ErrorMessage"
-            },
-            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
-          },
-          "404": {
-            "schema": {
-              "$ref": "#/definitions/ErrorMessage"
-            },
-            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
-          },
-          "500": {
-            "schema": {
-              "$ref": "#/definitions/ErrorMessage"
-            },
-            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
-          }
-        },
-        "security": [
-          {
-            "token": []
-          }
-        ],
-        "description": "Return profile information for the specified account."
-      }
-    },
     "/user/datasets/contributing": {
       "get": {
         "tags": [
@@ -2153,6 +2098,64 @@
           }
         ],
         "description": "Fetch datasets that the currently authenticated user has access to because he or she is the owner of the dataset."
+      }
+    },
+    "/users/{account}": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get a user account info.",
+        "operationId": "getAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/accountId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "**OK**\nThe request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UserDataResponse"
+            },
+            "examples": {
+              "application/json": "{\n    \"avatarUrl\": \"https://cdn.filepicker.io/api/file/m0Y31H2NRq6byi22ApUs\",\n    \"displayName\": \"Rafael Pereira\",\n    \"id\": \"rflprr\",\n    \"created\": \"2016-06-13T22:38:29.412Z\",\n    \"updated\": \"2017-01-31T17:01:49.847Z\"\n}"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`."
+          },
+          "403": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation."
+          },
+          "404": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid."
+          },
+          "500": {
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            },
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request."
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "description": "Return profile information for the specified account."
       }
     },
     "/projects/{owner}/{id}": {
@@ -4124,10 +4127,10 @@
       "properties": {
         "url": {
           "type": "string",
-          "description": "Source URL of file. Must be an http, https, or stream URL.",
+          "description": "Source URL of file. Must be an http, https, ftp, ftps or stream URL.",
           "minLength": 1,
           "maxLength": 4096,
-          "pattern": "^(https?|stream):.*",
+          "pattern": "^(https?|ftps?|stream):.*",
           "format": "uri"
         },
         "method": {
@@ -4176,10 +4179,10 @@
       "properties": {
         "url": {
           "type": "string",
-          "description": "Source URL of file. Must be an http, https.",
+          "description": "Source URL of file. Must be an http, https, ftp, or ftps URL.",
           "minLength": 1,
           "maxLength": 4096,
-          "pattern": "^https?:.*",
+          "pattern": "^(https?|ftps?):.*",
           "format": "uri"
         },
         "method": {
