@@ -20,4 +20,4 @@ Your deeplink URL must support the following parameters:
 - `query` (open only): Query
 - `query_type` (open only): Query type (SQL or SPARQL)
 
-Your landing page should behave in accordance with the parameters passed to it. For example, a data visualization product receiving a `dataset_key` and `query`, should automatically set up the data source and pull in the data, saving the user steps and taking the user directly to the visualization editor.
+Your landing page should behave in accordance with the parameters passed to it. For example, a data visualization product receiving a `dataset` and `query`, should automatically set up the data source and pull in the data, saving the user steps and taking the user directly to the visualization editor.
