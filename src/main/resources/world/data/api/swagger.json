@@ -6265,7 +6265,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "URL-encoded file name."
+      "description": "File name. IMPORTANT: Failing to URL-encode this path parameter may result in errors."
     },
     "formQuery": {
       "name": "query",
