@@ -13,7 +13,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0"
     },
-    "description": "# data.world in a nutshell\n\ndata.world is a productive, secure platform for modern data teamwork.\n\nWe bring together your data practitioners, subject matter experts, and other stakeholders by removing costly barriers to data discovery, comprehension, integration, and sharing. \n\nEverything your team needs to quickly understand and use data stays with it. \n\nSocial features and integrations encourage collaborators to ask and answer questions, share discoveries, and coordinate closely while still using their preferred tools.\n\nOur focus on interoperability helps you enhance your own data with data from any source, including our vast and growing library of free public datasets. \n\nSophisticated permissions, auditing features, and more make it easy to manage who views your data and what they do with it.\n\n# Conventions\n\n## Authentication\n\nAll data.world API calls require an API token. \n\nOAuth2 is the preferred and most secure method for authenticating users of your data.world applications. Visit our <https://apidocs.data.world/toolkit/oauth> for additional information. Alternatively, you can obtain a token for _personal use or testing_ by navigating to your profile settings, under the Advanced tab (<https://data.world/settings/advanced](https://data.world/settings/advanced>).\n\nAuthentication must be provided in API requests via the `Authorization` header. For example, for a user whose API token is `my_api_token`, the request header should be `Authorization: Bearer my_api_token` (note the `Bearer` prefix).\n\n## Content type  \nBy default, `application/json` is the content type used in request and response bodies. Exceptions are noted in respective endpoint documentation.\n\n## HTTPS only  \nOur APIs can only be accessed via HTTPS.\n\n# Interested in building data.world apps?\n\nCheck out our [developer portal](https://apidocs.data.world) for tips on how to get started, tutorials, and to interact with the API endpoints right within your browser.",
+    "description": "# data.world in a nutshell\n\ndata.world is a productive, secure platform for modern data teamwork.\n\nWe bring together your data practitioners, subject matter experts, and other stakeholders by removing costly barriers to data discovery, comprehension, integration, and sharing. \n\nEverything your team needs to quickly understand and use data stays with it. \n\nSocial features and integrations encourage collaborators to ask and answer questions, share discoveries, and coordinate closely while still using their preferred tools.\n\nOur focus on interoperability helps you enhance your own data with data from any source, including our vast and growing library of free public datasets. \n\nSophisticated permissions, auditing features, and more make it easy to manage who views your data and what they do with it.\n\n# Conventions\n\n## Authentication\n\nAll data.world API calls require an API token. \n\nOAuth2 is the preferred and most secure method for authenticating users of your data.world applications. Visit our [oauth documentation](https://apidocs.data.world/toolkit/oauth) for additional information. Alternatively, you can obtain a token for _personal use or testing_ by navigating to your profile settings, under the Advanced tab ([https://data.world/settings/advanced](https://data.world/settings/advanced)).\n\nAuthentication must be provided in API requests via the `Authorization` header. For example, for a user whose API token is `my_api_token`, the request header should be `Authorization: Bearer my_api_token` (note the `Bearer` prefix).\n\n## Content type  \nBy default, `application/json` is the content type used in request and response bodies. Exceptions are noted in respective endpoint documentation.\n\n## HTTPS only  \nOur APIs can only be accessed via HTTPS.\n\n# Interested in building data.world apps?\n\nCheck out our [developer portal](https://apidocs.data.world) for tips on how to get started, tutorials, and to interact with the API endpoints right within your browser.",
     "x-stoplight": {
       "id": "data-world/specs/data-world"
     }
@@ -134,6 +134,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ],
         "consumes": [
@@ -221,6 +226,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ],
         "consumes": [
@@ -307,6 +317,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ],
         "description": "Update an existing dataset. Only elements or files included in the request will be updated. All omitted elements or files will remain untouched.",
@@ -438,6 +453,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ],
         "description": "Retrieve a dataset. The definition of the dataset will be returned, not its data. Use `GET:/download/{owner}/{id}` or `GET:/file_download/{owner}/{id}/{name}` to retrieve the original files content, or `POST:/sql/{owner}/{id}` or `POST:/sparql/{owner}/{id}` to query the data."
@@ -502,6 +522,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_admin"
+            ]
           }
         ],
         "description": "Delete a dataset and associated data. This operation cannot be undone, but you may recreate the dataset using the same id.",
@@ -636,6 +661,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ],
         "description": "Retrieve a version of a dataset. The definition of the dataset will be returned, not its data."
@@ -723,6 +753,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ],
         "description": "Add files from URLs to a dataset. This method allows files published on the web to be added to a data.world dataset via their URL. This method can also be used to retrieve data via web APIs, with advanced options for http method, request payload and authentication.\n\nThe source URL will be stored so you can easily update your file anytime it changes via the *fetch latest* link on the [data.world](https://data.world/) dataset page or by triggering the `GET:/sync` endpoint.  "
@@ -800,6 +835,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ],
         "description": "Delete one or more files from a dataset.   \n\n**Batching**  \nNote that the `name` parameter can be include multiple times in the query string, once for each file that is to be deleted together in a single request."
@@ -876,6 +916,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ],
         "description": "Delete a single file from a dataset."
@@ -943,6 +988,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ],
         "description": "Same as `POST:/dataset/{owner}/{id}/sync`."
@@ -1008,6 +1058,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ],
         "description": "Sync files within a dataset. This method will process the latest data available for files added from URLs or via streams."
@@ -1095,6 +1150,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ],
         "description": "List saved queries associated with a dataset. Query definitions will be returned, not the query results. To retrieve query results use `GET:/queries/{id}/results`."
@@ -1139,7 +1199,7 @@
             },
             "examples": {
               "application/json": {
-                "message": "Doi successfully added to dataset."
+                "message": "DOI successfully added to dataset."
               }
             }
           },
@@ -1177,6 +1237,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ]
       },
@@ -1256,6 +1321,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ]
       }
@@ -1305,7 +1375,7 @@
             },
             "examples": {
               "application/json": {
-                "message": "Doi successfully added to dataset version."
+                "message": "DOI successfully added to dataset version."
               }
             }
           },
@@ -1343,6 +1413,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ]
       },
@@ -1390,7 +1465,7 @@
             },
             "examples": {
               "application/json": {
-                "message": "Doi successfully removed from dataset version."
+                "message": "DOI successfully removed from dataset version."
               }
             }
           },
@@ -1428,6 +1503,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ]
       }
@@ -1511,6 +1591,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ],
         "operationId": "createProject",
@@ -1634,6 +1719,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ],
         "parameters": [
@@ -1729,6 +1819,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ]
       },
@@ -1814,6 +1909,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ],
         "description": "Update an existing project. Only elements included in the request will be updated. All omitted elements will remain untouched."
@@ -1872,6 +1972,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_admin"
+            ]
           }
         ],
         "parameters": [
@@ -2002,6 +2107,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ],
         "parameters": [
@@ -2074,6 +2184,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ],
         "parameters": [
@@ -2152,6 +2267,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ],
         "parameters": [
@@ -2260,6 +2380,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ],
         "description": "List saved queries associated with a project."
@@ -2351,6 +2476,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ],
         "summary": "List insights",
@@ -2438,6 +2568,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ],
         "summary": "Create an insight",
@@ -2512,6 +2647,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ],
         "parameters": [
@@ -2582,6 +2722,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ],
         "parameters": [
@@ -2682,6 +2827,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ],
         "description": "Replace an insight."
@@ -2771,6 +2921,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ],
         "description": "Update an insight. Note that only elements included in the request will be updated. All omitted elements will remain untouched."
@@ -2844,6 +2999,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ],
         "parameters": [
@@ -2929,6 +3089,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ]
       },
@@ -3006,6 +3171,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ]
       }
@@ -3076,6 +3246,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ]
       },
@@ -3154,6 +3329,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ]
       }
@@ -3226,6 +3406,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ],
         "description": "Retrieve a saved query. Query definitions will be returned, not query results. To retrieve query results use `GET:/queries/{id}/results`."
@@ -3303,6 +3488,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ]
       }
@@ -3314,7 +3504,7 @@
         ],
         "summary": "Execute a saved query",
         "description": "Execute a saved query.\n\nSQL results are available in a variety of formats. By default, `application/json` will be returned. Set the `Accept` header to one of the following values in accordance with your preference:\n\n* `text/csv`\n* `application/json`\n* `application/json-l`\n* `application/x-ndjson`\n\nSPARQL results are available in a variety of formats. By default, `application/sparql-results+json` will be returned. Set the `Accept` header to one of the following values in accordance with your preference:\n\n- `application/sparql-results+xml`\n- `application/sparql-results+json`\n- `application/rdf+json`\n- `application/rdf+xml`\n- `text/csv`\n- `text/tab-separated-values`\n- `text/turtle`",
-        "operationId": "getResults",
+        "operationId": "executeQuery",
         "produces": [
           "application/json",
           "text/csv",
@@ -3373,6 +3563,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ]
       }
@@ -3434,6 +3629,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ]
       }
@@ -3495,6 +3695,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ]
       }
@@ -3591,6 +3796,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ]
       }
@@ -3690,6 +3900,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ]
       }
@@ -3775,6 +3990,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ],
         "description": "Append JSON data to a stream associated with a dataset. \n\nStreams don't need to be created before you can append data to it. They will be created on-demand.\n\nMultiple records can be appended at once by using JSON-L (`application/json-l`) as the request content type.\n\nCurrently, data uploaded to a dataset via a stream is not immediatelly processed. Instead, it is processed automatically in accordance with the dataset settings (default: daily) or as a result calling `POST:/datasets/{owner}/{id}/sync`.\n\nOnce processed, the contents of a stream will appear as part of the respective dataset as a `.jsonl` file (e.g. `my-stream` will produce a file named `my-stream.jsonl`)."
@@ -3829,6 +4049,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ],
         "description": "Retrieve user profile information of the currently authenticated user."
@@ -3896,6 +4121,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ],
         "description": "List datasets that the currently authenticated user has access to because he or she is a contributor."
@@ -3963,6 +4193,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ],
         "description": "List datasets that the currently authenticated user liked (bookmarked)."
@@ -4030,6 +4265,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ],
         "description": "List datasets that the currently authenticated user has access to because he or she is the owner."
@@ -4157,6 +4397,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ],
         "parameters": [
@@ -4291,6 +4536,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ],
         "parameters": [
@@ -4425,6 +4675,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ],
         "parameters": [
@@ -4502,6 +4757,11 @@
         "security": [
           {
             "token": []
+          },
+          {
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ],
         "description": "Retrieve user profile information for the specified account."
@@ -4509,11 +4769,22 @@
     }
   },
   "securityDefinitions": {
-    "token": {
+    "oauth": {
       "type": "oauth2",
       "flow": "accessCode",
       "authorizationUrl": "https://data.world/oauth/authorize",
-      "tokenUrl": "https://data.world/oauth/access_token"
+      "tokenUrl": "https://data.world/oauth/access_token",
+      "scopes": {
+        "user_api_read": "Permission to read the data and metadata contained in datasets and data projects to which you have access.",
+        "user_api_write": "Permission to update the data and metadata contained in datasets and data projects to which you have write access.",
+        "user_api_admin": "Permission to access administrative features, including permission to delete datasets and data projects."
+      }
+    },
+    "token": {
+      "type": "apiKey",
+      "name": "Authentication",
+      "in": "header",
+      "description": "Deprecated security scheme. Use `oauth` instead."
     }
   },
   "definitions": {
@@ -4823,7 +5094,7 @@
     },
     "Doi": {
       "type": "object",
-      "title": "DOI",
+      "title": "Digital Object Identifier",
       "properties": {
         "doi": {
           "type": "string",
@@ -6001,7 +6272,7 @@
       "in": "formData",
       "required": true,
       "type": "string",
-      "description": "Form parameter used to submit the body of a SPARQL or SQL query."
+      "description": "Form parameter used to submit the body of a [SPARQL](https://docs.data.world/tutorials/sparql/) or [SQL](https://docs.data.world/documentation/sql/) query."
     },
     "includeTableSchema": {
       "name": "includeTableSchema",
@@ -6016,7 +6287,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The body of a query."
+      "description": "The body of a [SPARQL](https://docs.data.world/tutorials/sparql/) or [SQL](https://docs.data.world/documentation/sql/) query."
     },
     "limit": {
       "name": "limit",
