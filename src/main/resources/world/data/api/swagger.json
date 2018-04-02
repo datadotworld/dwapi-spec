@@ -133,9 +133,6 @@
         },
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_write"
             ]
@@ -225,9 +222,6 @@
         },
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_write"
             ]
@@ -315,9 +309,6 @@
           }
         },
         "security": [
-          {
-            "token": []
-          },
           {
             "oauth": [
               "user_api_write"
@@ -452,9 +443,6 @@
         },
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_read"
             ]
@@ -520,9 +508,6 @@
           }
         },
         "security": [
-          {
-            "token": []
-          },
           {
             "oauth": [
               "user_api_admin"
@@ -660,9 +645,6 @@
         },
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_read"
             ]
@@ -752,9 +734,6 @@
         },
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_write"
             ]
@@ -834,9 +813,6 @@
         },
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_write"
             ]
@@ -865,7 +841,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "URL-encoded name and unique idenfiier of file within the dataset.",
+            "description": "File name. IMPORTANT: Failing to URL-encode this path parameter may result in errors.",
             "required": true,
             "type": "string",
             "maxItems": 128,
@@ -914,9 +890,6 @@
           }
         },
         "security": [
-          {
-            "token": []
-          },
           {
             "oauth": [
               "user_api_write"
@@ -987,9 +960,6 @@
         },
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_write"
             ]
@@ -1056,9 +1026,6 @@
           }
         },
         "security": [
-          {
-            "token": []
-          },
           {
             "oauth": [
               "user_api_write"
@@ -1149,9 +1116,6 @@
         },
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_read"
             ]
@@ -1236,9 +1200,6 @@
         },
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_write"
             ]
@@ -1319,9 +1280,6 @@
           }
         },
         "security": [
-          {
-            "token": []
-          },
           {
             "oauth": [
               "user_api_write"
@@ -1412,9 +1370,6 @@
         },
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_write"
             ]
@@ -1502,9 +1457,6 @@
         },
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_write"
             ]
@@ -1589,9 +1541,6 @@
           "application/json"
         ],
         "security": [
-          {
-            "token": []
-          },
           {
             "oauth": [
               "user_api_write"
@@ -1718,9 +1667,6 @@
         "operationId": "getProject",
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_read"
             ]
@@ -1818,9 +1764,6 @@
         "operationId": "replaceProject",
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_write"
             ]
@@ -1908,9 +1851,6 @@
         "operationId": "patchProject",
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_write"
             ]
@@ -1970,9 +1910,6 @@
         ],
         "operationId": "deleteProject",
         "security": [
-          {
-            "token": []
-          },
           {
             "oauth": [
               "user_api_admin"
@@ -2106,9 +2043,6 @@
         "operationId": "getProjectByVersion",
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_read"
             ]
@@ -2182,9 +2116,6 @@
         "summary": "Unlink dataset",
         "operationId": "removeLinkedDataset",
         "security": [
-          {
-            "token": []
-          },
           {
             "oauth": [
               "user_api_write"
@@ -2265,9 +2196,6 @@
         ],
         "operationId": "addLinkedDataset",
         "security": [
-          {
-            "token": []
-          },
           {
             "oauth": [
               "user_api_write"
@@ -2379,9 +2307,6 @@
         },
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_read"
             ]
@@ -2475,9 +2400,6 @@
         "operationId": "getInsightsForProject",
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_read"
             ]
@@ -2567,9 +2489,6 @@
         "operationId": "createInsight",
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_write"
             ]
@@ -2646,9 +2565,6 @@
         "operationId": "getInsight",
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_read"
             ]
@@ -2720,9 +2636,6 @@
         "summary": "Delete an insight",
         "operationId": "deleteInsight",
         "security": [
-          {
-            "token": []
-          },
           {
             "oauth": [
               "user_api_write"
@@ -2826,9 +2739,6 @@
         "operationId": "replaceInsight",
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_write"
             ]
@@ -2920,9 +2830,6 @@
         "operationId": "updateInsight",
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_write"
             ]
@@ -2997,9 +2904,6 @@
         "summary": "Retrieve an insight version",
         "operationId": "getInsightByVersion",
         "security": [
-          {
-            "token": []
-          },
           {
             "oauth": [
               "user_api_read"
@@ -3088,9 +2992,6 @@
         },
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_read"
             ]
@@ -3170,9 +3071,6 @@
         },
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_read"
             ]
@@ -3244,9 +3142,6 @@
           }
         },
         "security": [
-          {
-            "token": []
-          },
           {
             "oauth": [
               "user_api_read"
@@ -3328,9 +3223,6 @@
         },
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_read"
             ]
@@ -3404,9 +3296,6 @@
           }
         },
         "security": [
-          {
-            "token": []
-          },
           {
             "oauth": [
               "user_api_read"
@@ -3487,9 +3376,6 @@
         },
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_read"
             ]
@@ -3562,9 +3448,6 @@
         },
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_read"
             ]
@@ -3628,9 +3511,6 @@
         },
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_read"
             ]
@@ -3693,9 +3573,6 @@
           }
         },
         "security": [
-          {
-            "token": []
-          },
           {
             "oauth": [
               "user_api_read"
@@ -3794,9 +3671,6 @@
           }
         },
         "security": [
-          {
-            "token": []
-          },
           {
             "oauth": [
               "user_api_write"
@@ -3899,9 +3773,6 @@
         },
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_write"
             ]
@@ -3989,9 +3860,6 @@
         },
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_write"
             ]
@@ -4047,9 +3915,6 @@
           }
         },
         "security": [
-          {
-            "token": []
-          },
           {
             "oauth": [
               "user_api_read"
@@ -4120,9 +3985,6 @@
         },
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_read"
             ]
@@ -4192,9 +4054,6 @@
         },
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_read"
             ]
@@ -4263,9 +4122,6 @@
           }
         },
         "security": [
-          {
-            "token": []
-          },
           {
             "oauth": [
               "user_api_read"
@@ -4395,9 +4251,6 @@
         "summary": "List projects owned",
         "operationId": "fetchProjects",
         "security": [
-          {
-            "token": []
-          },
           {
             "oauth": [
               "user_api_read"
@@ -4535,9 +4388,6 @@
         "operationId": "fetchLikedProjects",
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_read"
             ]
@@ -4674,9 +4524,6 @@
         "operationId": "fetchContributingProjects",
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_read"
             ]
@@ -4756,9 +4603,6 @@
         },
         "security": [
           {
-            "token": []
-          },
-          {
             "oauth": [
               "user_api_read"
             ]
@@ -4779,12 +4623,6 @@
         "user_api_write": "Permission to update the data and metadata contained in datasets and data projects to which you have write access.",
         "user_api_admin": "Permission to access administrative features, including permission to delete datasets and data projects."
       }
-    },
-    "token": {
-      "type": "apiKey",
-      "name": "Authentication",
-      "in": "header",
-      "description": "Deprecated security scheme. Use `oauth` instead."
     }
   },
   "definitions": {
