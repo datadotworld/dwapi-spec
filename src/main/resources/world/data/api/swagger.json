@@ -1244,7 +1244,7 @@
             },
             "examples": {
               "application/json": {
-                "message": "Doi successfully removed from dataset."
+                "message": "DOI successfully removed from dataset."
               }
             }
           },
