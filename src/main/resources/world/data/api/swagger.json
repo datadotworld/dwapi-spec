@@ -1619,6 +1619,7 @@
                 "objective": "Link to a dataset, extract some data from a PDF, make some insights!",
                 "owner": "jonloyens",
                 "status": "LOADED",
+                "version": "versionId",
                 "summary": "Overview\n-----------\nA sample project to show off the different kinds of files you might want to keep in a data.world dataset or project.  This project, based on a post on our blog:   **[What do I put in data.world?](https://meta.data.world/what-do-i-put-in-data-world-c6d3a478565d)**, demonstrates how you can use data.world to find unstructured data in a PDF, convert it to structured data with a Notebook, clean the data with Excel then generate insights and analytics while keep everything together in one place for other people to reuse your work.\n\n(Note: This sample project assumes some familiarity with using Python Notebooks and a working installation of Python and Jupyter Notebooks).\n\nIn this sample project we:\n\n1. Identify some raw data in a linked dataset [shown as a PDF](https://data.world/jonloyens/an-example-project-that-shows-what-to-put-in-data-world/workspace/file?agentid=uscg&datasetid=uscg-search-rescue-summary&filename=SAR+Sum+Stats+64-13.pdf).\n\n2. [Use a Python Notebook and Tabula.py](https://data.world/jonloyens/an-example-project-that-shows-what-to-put-in-data-world/workspace/file?filename=uscg-search-rescue-summary.ipynb) to create and [import raw structured data as a CSV](https://data.world/jonloyens/an-example-project-that-shows-what-to-put-in-data-world/workspace/file?filename=raw_USCG_data_import.csv).\n\n3. Load the [CSV into Excel and clean it up nicely](https://data.world/jonloyens/an-example-project-that-shows-what-to-put-in-data-world/workspace/file?filename=cleaned_USCG_data_import.xlsx) so it has nice headers and we can query it.\n\n4. [Use Insights](https://help.data.world/hc/en-us/articles/115010306647-Data-Projects-Share-insights) to document the process and do some basic exploratory analytics.\n\n",
                 "tags": [
                   "new feature"
@@ -1995,6 +1996,7 @@
                 "objective": "Link to a dataset, extract some data from a PDF, make some insights!",
                 "owner": "jonloyens",
                 "status": "LOADED",
+                "version": "versionId",
                 "summary": "Overview\n-----------\nA sample project to show off the different kinds of files you might want to keep in a data.world dataset or project.  This project, based on a post on our blog:   **[What do I put in data.world?](https://meta.data.world/what-do-i-put-in-data-world-c6d3a478565d)**, demonstrates how you can use data.world to find unstructured data in a PDF, convert it to structured data with a Notebook, clean the data with Excel then generate insights and analytics while keep everything together in one place for other people to reuse your work.\n\n(Note: This sample project assumes some familiarity with using Python Notebooks and a working installation of Python and Jupyter Notebooks).\n\nIn this sample project we:\n\n1. Identify some raw data in a linked dataset [shown as a PDF](https://data.world/jonloyens/an-example-project-that-shows-what-to-put-in-data-world/workspace/file?agentid=uscg&datasetid=uscg-search-rescue-summary&filename=SAR+Sum+Stats+64-13.pdf).\n\n2. [Use a Python Notebook and Tabula.py](https://data.world/jonloyens/an-example-project-that-shows-what-to-put-in-data-world/workspace/file?filename=uscg-search-rescue-summary.ipynb) to create and [import raw structured data as a CSV](https://data.world/jonloyens/an-example-project-that-shows-what-to-put-in-data-world/workspace/file?filename=raw_USCG_data_import.csv).\n\n3. Load the [CSV into Excel and clean it up nicely](https://data.world/jonloyens/an-example-project-that-shows-what-to-put-in-data-world/workspace/file?filename=cleaned_USCG_data_import.xlsx) so it has nice headers and we can query it.\n\n4. [Use Insights](https://help.data.world/hc/en-us/articles/115010306647-Data-Projects-Share-insights) to document the process and do some basic exploratory analytics.\n\n",
                 "tags": [
                   "new feature"
@@ -2521,6 +2523,7 @@
                 "dataSourceLinks": [
                   "https://data.world/jonloyens/intermediate-data-world/workspace/query?queryid=23e7f574-3020-4683-bc89-123e12cf039e"
                 ],
+                "version": "versionId",
                 "author": "someuser",
                 "updated": "2018-03-30T02:30:54.742Z",
                 "created": "2018-03-30T02:30:54.742Z"
@@ -2861,6 +2864,7 @@
                 "dataSourceLinks": [
                   "https://data.world/jonloyens/intermediate-data-world/workspace/query?queryid=23e7f574-3020-4683-bc89-123e12cf039e"
                 ],
+                "version": "versionId",
                 "author": "someuser",
                 "updated": "2018-03-30T02:30:54.742Z",
                 "created": "2018-03-30T02:30:54.742Z"
@@ -5686,6 +5690,10 @@
         "license": {
           "type": "string"
         },
+        "version": {
+          "type": "string",
+          "description": "Dataset version id"
+        },
         "tags": {
           "type": "array",
           "items": {
@@ -5845,6 +5853,10 @@
         "description": {
           "type": "string",
           "description": "Insight description."
+        },
+        "version": {
+          "type": "string",
+          "description": "Dataset version id"
         },
         "body": {
           "$ref": "#/definitions/InsightBody"
