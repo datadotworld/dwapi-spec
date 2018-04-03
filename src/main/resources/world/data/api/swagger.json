@@ -5741,6 +5741,7 @@
         "status",
         "owner",
         "id",
+        "version",
         "created",
         "updated",
         "accessLevel"
@@ -5894,7 +5895,8 @@
         "body",
         "author",
         "created",
-        "updated"
+        "updated",
+        "version"
       ]
     },
     "InsightPatchRequest": {
