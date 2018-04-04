@@ -4862,7 +4862,7 @@
         },
         "version": {
           "type": "string",
-          "description": "Dataset version id"
+          "description": "Insight version id"
         },
         "dois": {
           "type": "array",
@@ -5857,7 +5857,7 @@
         },
         "version": {
           "type": "string",
-          "description": "Dataset version id"
+          "description": "Insight version id"
         },
         "body": {
           "$ref": "#/definitions/InsightBody"
