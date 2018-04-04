@@ -4862,7 +4862,7 @@
         },
         "version": {
           "type": "string",
-          "description": "Insight version id"
+          "description": "Dataset version"
         },
         "dois": {
           "type": "array",
@@ -5517,7 +5517,7 @@
         },
         "version": {
           "type": "string",
-          "description": "Dataset version id"
+          "description": "Dataset version"
         },
         "tags": {
           "type": "array",
@@ -5692,7 +5692,7 @@
         },
         "version": {
           "type": "string",
-          "description": "Dataset version id"
+          "description": "Project version"
         },
         "tags": {
           "type": "array",
@@ -5857,7 +5857,7 @@
         },
         "version": {
           "type": "string",
-          "description": "Insight version id"
+          "description": "Insight version"
         },
         "body": {
           "$ref": "#/definitions/InsightBody"
