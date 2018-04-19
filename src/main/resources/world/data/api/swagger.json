@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.16.0",
+    "version": "0.17.0",
     "title": "data.world API",
     "termsOfService": "https://data.world/terms",
     "contact": {
@@ -5454,11 +5454,19 @@
             "PDDL",
             "CC-0",
             "CC-BY",
+            "CDLA-Permissive-1.0",
+            "CC-BY-IGO",
+            "CC-BY 3.0",
             "ODC-BY",
             "CC-BY-SA",
+            "CC-BY-SA 3.0",
+            "CDLA-Sharing-1.0",
             "ODC-ODbL",
             "CC BY-NC",
+            "CC BY-ND",
+            "CC BY-NC-ND",
             "CC BY-NC-SA",
+            "CC-BY-NC-SA 3.0",
             "Other"
           ]
         },
@@ -5641,11 +5649,19 @@
             "PDDL",
             "CC-0",
             "CC-BY",
+            "CDLA-Permissive-1.0",
+            "CC-BY-IGO",
+            "CC-BY 3.0",
             "ODC-BY",
             "CC-BY-SA",
+            "CC-BY-SA 3.0",
+            "CDLA-Sharing-1.0",
             "ODC-ODbL",
             "CC BY-NC",
+            "CC BY-ND",
+            "CC BY-NC-ND",
             "CC BY-NC-SA",
+            "CC-BY-NC-SA 3.0",
             "Other"
           ]
         },
