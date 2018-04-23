@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.16.0",
+    "version": "0.16.1",
     "title": "data.world API",
     "termsOfService": "https://data.world/terms",
     "contact": {
@@ -4670,10 +4670,14 @@
             "PDDL",
             "CC-0",
             "CC-BY",
+            "CDLA-Permissive-1.0",
             "ODC-BY",
             "CC-BY-SA",
+            "CDLA-Sharing-1.0",
             "ODC-ODbL",
             "CC BY-NC",
+            "CC BY-ND",
+            "CC BY-NC-ND",
             "CC BY-NC-SA",
             "Other"
           ]
@@ -4740,10 +4744,14 @@
             "PDDL",
             "CC-0",
             "CC-BY",
+            "CDLA-Permissive-1.0",
             "ODC-BY",
             "CC-BY-SA",
+            "CDLA-Sharing-1.0",
             "ODC-ODbL",
             "CC BY-NC",
+            "CC BY-ND",
+            "CC BY-NC-ND",
             "CC BY-NC-SA",
             "Other"
           ]
@@ -4806,10 +4814,14 @@
             "PDDL",
             "CC-0",
             "CC-BY",
+            "CDLA-Permissive-1.0",
             "ODC-BY",
             "CC-BY-SA",
+            "CDLA-Sharing-1.0",
             "ODC-ODbL",
             "CC BY-NC",
+            "CC BY-ND",
+            "CC BY-NC-ND",
             "CC BY-NC-SA",
             "Other"
           ]
@@ -5454,10 +5466,14 @@
             "PDDL",
             "CC-0",
             "CC-BY",
+            "CDLA-Permissive-1.0",
             "ODC-BY",
             "CC-BY-SA",
+            "CDLA-Sharing-1.0",
             "ODC-ODbL",
             "CC BY-NC",
+            "CC BY-ND",
+            "CC BY-NC-ND",
             "CC BY-NC-SA",
             "Other"
           ]
@@ -5641,10 +5657,14 @@
             "PDDL",
             "CC-0",
             "CC-BY",
+            "CDLA-Permissive-1.0",
             "ODC-BY",
             "CC-BY-SA",
+            "CDLA-Sharing-1.0",
             "ODC-ODbL",
             "CC BY-NC",
+            "CC BY-ND",
+            "CC BY-NC-ND",
             "CC BY-NC-SA",
             "Other"
           ]
