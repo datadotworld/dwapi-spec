@@ -5804,10 +5804,6 @@
         "body": {
           "$ref": "#/definitions/InsightBody"
         },
-        "thumbnail": {
-          "type": "string",
-          "description": "Insight thumbnail"
-        },
         "sourceLink": {
           "type": "string",
           "format": "uri",
@@ -5845,10 +5841,6 @@
         },
         "body": {
           "$ref": "#/definitions/InsightBody"
-        },
-        "thumbnail": {
-          "type": "string",
-          "description": "Insight thumbnail"
         },
         "sourceLink": {
           "type": "string",
@@ -5895,7 +5887,7 @@
         },
         "thumbnail": {
           "type": "string",
-          "description": "Insight thumbnail"
+          "description": "URL of insight thumbnai"
         },
         "sourceLink": {
           "type": "string",
