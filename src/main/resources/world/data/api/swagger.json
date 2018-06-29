@@ -5795,7 +5795,7 @@
         },
         "description": {
           "type": "string",
-          "maxLength": 150,
+          "maxLength": 25000,
           "description": "Insight description."
         },
         "body": {
@@ -5833,7 +5833,7 @@
         },
         "description": {
           "type": "string",
-          "maxLength": 150,
+          "maxLength": 25000,
           "description": "Insight description."
         },
         "body": {
@@ -5931,7 +5931,7 @@
         },
         "description": {
           "type": "string",
-          "maxLength": 150,
+          "maxLength": 25000,
           "description": "Insight description."
         },
         "body": {
