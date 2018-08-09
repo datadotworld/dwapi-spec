@@ -11,4 +11,4 @@ PAYLOAD="{
     }
 }"
 
-#curl -v -X POST -H "Content-Type: application/json" -d "${PAYLOAD}" "https://circleci.com/api/v1/project/datadotworld/dwapi-spec/tree/master?circle-token=${CIRCLE_TOKEN}"
+curl -v -X POST -H "Content-Type: application/json" -d "${PAYLOAD}" "https://circleci.com/api/v1/project/datadotworld/dwapi-spec/tree/master?circle-token=${CIRCLE_TOKEN}"
