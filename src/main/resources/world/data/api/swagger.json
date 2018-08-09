@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.16.1",
+    "version": "0.16.2",
     "title": "data.world API",
     "termsOfService": "https://data.world/terms",
     "contact": {
@@ -2339,6 +2339,7 @@
                     "body": {
                       "imageUrl": "https://example.com/image.png"
                     },
+                    "thumbnail": "https://example.com/thumbnail.png",
                     "sourceLink": "https://example.com/dashboard",
                     "dataSourceLinks": [
                       "https://data.world/jonloyens/intermediate-data-world/workspace/query?queryid=23e7f574-3020-4683-bc89-123e12cf039e"
@@ -2519,6 +2520,7 @@
                 "body": {
                   "imageUrl": "https://example.com/image.png"
                 },
+                "thumbnail": "https://example.com/thumbnail.png",
                 "sourceLink": "https://example.com/dashboard",
                 "dataSourceLinks": [
                   "https://data.world/jonloyens/intermediate-data-world/workspace/query?queryid=23e7f574-3020-4683-bc89-123e12cf039e"
@@ -2860,6 +2862,7 @@
                 "body": {
                   "imageUrl": "https://example.com/image.png"
                 },
+                "thumbnail": "https://example.com/thumbnail.png",
                 "sourceLink": "https://example.com/dashboard",
                 "dataSourceLinks": [
                   "https://data.world/jonloyens/intermediate-data-world/workspace/query?queryid=23e7f574-3020-4683-bc89-123e12cf039e"
@@ -5881,6 +5884,10 @@
         },
         "body": {
           "$ref": "#/definitions/InsightBody"
+        },
+        "thumbnail": {
+          "type": "string",
+          "description": "URL of insight thumbnai"
         },
         "sourceLink": {
           "type": "string",
