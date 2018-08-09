@@ -16,6 +16,15 @@ curl https://raw.githubusercontent.com/stoplightio/prism/master/install.sh | sud
   prism run --mock --list --spec src/main/resources/world/data/api/swagger.json
 ```
 
+## Release 
+
+Grab your CI token from [CircleCI API Token](https://circleci.com/account/api) then run the following command in the terminal.
+ * export CIRCLE_TOKEN= CircleCI API Token
+ * export DWAPISPEC_RELEASE_USER_EMAIL= Your email address
+ * export DWAPISPEC_NOW_VERSION= Version number for current release
+ * export DWAPISPEC_NEXT_VERSION= Version number to be used for snapshot
+ * ./dwapi-spec/release.sh 
+
 ## Contributing
 
 The data.world API specification is an open-source project. Community participation is encouraged.
