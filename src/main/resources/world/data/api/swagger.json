@@ -1879,14 +1879,6 @@
       "required": true,
       "type": "string"
     },
-    "queryVersionId": {
-      "description": "Query version unique identifier.",
-      "in": "path",
-      "name": "version",
-      "pattern": "[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}",
-      "required": true,
-      "type": "string"
-    },
     "streamId": {
       "description": "Stream unique identifier as defined by the user the first time the stream was used. Only lower case letters, numbers and dashes are allowed. Maximum length of 95 characters.",
       "in": "path",
@@ -5015,7 +5007,7 @@
         ]
       }
     },
-    "/queries/{id}/v/{version}": {
+    "/queries/{id}/v/{versionId}": {
       "get": {
         "description": "Retrieve a version of a saved query. Query definitions will be returned, not query results.",
         "operationId": "getQueryVersion",
@@ -5024,7 +5016,7 @@
             "$ref": "#/parameters/queryId"
           },
           {
-            "$ref": "#/parameters/queryVersionId"
+            "$ref": "#/parameters/versionId"
           }
         ],
         "produces": [
