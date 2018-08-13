@@ -1515,7 +1515,7 @@
       "type": "object",
       "title": "Query Summary Response"
     },
-    "SqlQueryRequestDto": {
+    "SqlQueryRequest": {
       "type": "object",
       "title": "SQL Query Request",
       "properties": {
@@ -5330,7 +5330,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/SqlQueryRequestDto"
+              "$ref": "#/definitions/SqlQueryRequest"
             }
           }
         ],
