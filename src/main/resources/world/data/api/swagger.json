@@ -142,25 +142,6 @@
         "owner"
       ]
     },
-    "DatasetIdentifierResponse": {
-      "type": "object",
-      "title": "Dataset or Project Identifier Response",
-      "description": "Fully qualified unique identifier, including owner and dataset or project IDs.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier of project or dataset"
-        },
-        "owner": {
-          "type": "string",
-          "description": "Name and unique identifier of account that owns the dataset or project."
-        }
-      },
-      "required": [
-        "id",
-        "owner"
-      ]
-    },
     "DatasetPatchRequest": {
       "properties": {
         "description": {
@@ -768,6 +749,8 @@
       "type": "object"
     },
     "InsightCreateRequest": {
+      "title": "Insight Create Request",
+      "type": "object",
       "properties": {
         "body": {
           "$ref": "#/definitions/InsightBody"
@@ -775,11 +758,11 @@
         "dataSourceLinks": {
           "description": "One or more permalinks to the data sources used to generate this insight. Allows others to access the data originally used to produce the insight.",
           "format": "uri",
+          "type": "array",
           "items": {
             "format": "uri",
             "type": "string"
-          },
-          "type": "array"
+          }
         },
         "description": {
           "description": "Insight description.",
@@ -788,7 +771,8 @@
         },
         "sourceLink": {
           "format": "uri",
-          "type": "string"
+          "type": "string",
+          "description": "Permalink to source code or platform this insight was generated with. Allows others to replicate the steps originally used to produce the insight."
         },
         "thumbnail": {
           "format": "uri",
@@ -804,11 +788,11 @@
       "required": [
         "body",
         "title"
-      ],
-      "title": "Insight Create Request",
-      "type": "object"
+      ]
     },
     "InsightPatchRequest": {
+      "title": "Insight Update Request",
+      "type": "object",
       "properties": {
         "body": {
           "$ref": "#/definitions/InsightBody"
@@ -816,11 +800,11 @@
         "dataSourceLinks": {
           "description": "One or more permalinks to the data sources used to generate this insight. Allows others to access the data originally used to produce the insight.",
           "format": "uri",
+          "type": "array",
           "items": {
             "format": "uri",
             "type": "string"
-          },
-          "type": "array"
+          }
         },
         "description": {
           "description": "Insight description.",
@@ -829,7 +813,8 @@
         },
         "sourceLink": {
           "format": "uri",
-          "type": "string"
+          "type": "string",
+          "description": "Permalink to source code or platform this insight was generated with. Allows others to replicate the steps originally used to produce the insight."
         },
         "thumbnail": {
           "format": "uri",
@@ -841,11 +826,11 @@
           "minLength": 1,
           "type": "string"
         }
-      },
-      "title": "Insight Update Request",
-      "type": "object"
+      }
     },
     "InsightPutRequest": {
+      "title": "Insight Replace Request",
+      "type": "object",
       "properties": {
         "body": {
           "$ref": "#/definitions/InsightBody"
@@ -853,11 +838,11 @@
         "dataSourceLinks": {
           "description": "One or more permalinks to the data sources used to generate this insight. Allows others to access the data originally used to produce the insight.",
           "format": "uri",
+          "type": "array",
           "items": {
             "format": "uri",
             "type": "string"
-          },
-          "type": "array"
+          }
         },
         "description": {
           "description": "Insight description.",
@@ -866,7 +851,8 @@
         },
         "sourceLink": {
           "format": "uri",
-          "type": "string"
+          "type": "string",
+          "description": "Permalink to source code or platform this insight was generated with. Allows others to replicate the steps originally used to produce the insight."
         },
         "thumbnail": {
           "format": "uri",
@@ -882,9 +868,7 @@
       "required": [
         "body",
         "title"
-      ],
-      "title": "Insight Replace Request",
-      "type": "object"
+      ]
     },
     "InsightSummaryResponse": {
       "properties": {
@@ -951,6 +935,8 @@
       "type": "object"
     },
     "LinkedDatasetCreateOrUpdateRequest": {
+      "title": "Linked Dataset Create or Update Request",
+      "type": "object",
       "properties": {
         "id": {
           "description": "Unique identifier of dataset.",
@@ -964,11 +950,9 @@
         }
       },
       "required": [
-        "owner",
-        "id"
-      ],
-      "title": "Linked Dataset Create or Update Request",
-      "type": "object"
+        "id",
+        "owner"
+      ]
     },
     "LinkedDatasetSummaryResponse": {
       "properties": {
@@ -1161,6 +1145,8 @@
       "type": "object"
     },
     "PaginatedSubscriptionResults": {
+      "type": "object",
+      "title": "Paginated Subscription Results",
       "properties": {
         "count": {
           "format": "int32",
@@ -1171,18 +1157,16 @@
           "type": "string"
         },
         "records": {
+          "type": "array",
           "items": {
-            "$ref": "#/definitions/SubscriptionResponse"
-          },
-          "type": "array"
+            "$ref": "#/definitions/Subscription"
+          }
         }
       },
       "required": [
         "count",
         "records"
-      ],
-      "type": "object",
-      "title": "Paginated Subscription Results"
+      ]
     },
     "ProjectCreateRequest": {
       "properties": {
@@ -1266,14 +1250,16 @@
       "type": "object"
     },
     "ProjectPatchRequest": {
+      "type": "object",
+      "title": "Project Update Request",
       "properties": {
         "files": {
           "description": "Updated set of files. At project update time, file uploads are not supported. However, this property can be used to add files from URL or update metadata related to existing files. Files included in this request will be added. Previously added files will be preserved without modification.",
+          "type": "array",
+          "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/FileCreateOrUpdateRequest"
-          },
-          "type": "array",
-          "uniqueItems": false
+          }
         },
         "license": {
           "description": "Project license. Find additional info for allowed values [here](https://data.world/license-help).",
@@ -1296,10 +1282,11 @@
           "type": "string"
         },
         "linkedDatasets": {
+          "type": "array",
+          "description": "Updated set of linked datasets. Datasets linked in this request will be added. Previously linked datasets will be preserved without modification.",
           "items": {
             "$ref": "#/definitions/LinkedDatasetCreateOrUpdateRequest"
-          },
-          "type": "array"
+          }
         },
         "objective": {
           "description": "Short project objective.",
@@ -1315,13 +1302,13 @@
         },
         "tags": {
           "description": "Project tags. Letters numbers and spaces only (max 25 characters).",
+          "type": "array",
+          "uniqueItems": true,
           "items": {
             "maxLength": 25,
             "pattern": "^[a-zA-Z0-9\\s]*",
             "type": "string"
-          },
-          "type": "array",
-          "uniqueItems": true
+          }
         },
         "title": {
           "description": "Project title.",
@@ -1337,9 +1324,7 @@
           ],
           "type": "string"
         }
-      },
-      "type": "object",
-      "title": "Project Update Request"
+      }
     },
     "ProjectPutRequest": {
       "title": "Project Create or Update Request",
@@ -1567,6 +1552,7 @@
     },
     "StreamSchemaPatchRequest": {
       "type": "object",
+      "title": "Stream Schema Update Request",
       "properties": {
         "primaryKeyFields": {
           "type": "array",
@@ -1577,7 +1563,7 @@
         },
         "sequenceField": {
           "type": "string",
-          "description": "A numeric or datetime field by which to sort records for the purpose of deduplication\n"
+          "description": "A numeric or datetime field by which to sort records for the purpose of deduplication.\n\nNumeric fields must fit in a 64-bit signed integer\ndatetime fields must use an ISO-8601 compatible format  (https://www.ietf.org/rfc/rfc3339.txt).\n"
         },
         "updateMethod": {
           "enum": [
@@ -1589,8 +1575,7 @@
       },
       "required": [
         "updateMethod"
-      ],
-      "title": "Stream Schema Update Request"
+      ]
     },
     "Subscription": {
       "type": "object",
@@ -1666,34 +1651,6 @@
       "type": "object",
       "title": "Subscription URIs"
     },
-    "SubscriptionResponse": {
-      "type": "object",
-      "title": "Subscription Response",
-      "properties": {
-        "dataset": {
-          "$ref": "#/definitions/DatasetIdentifierResponse"
-        },
-        "events": {
-          "type": "array",
-          "description": "Specifies which events should trigger API calls. Currently, only `ALL` is supported. Clients are free to ignore irrelevant events. For all supported events, see: https://apidocs.data.world/toolkit/webhooks",
-          "items": {
-            "type": "string"
-          }
-        },
-        "links": {
-          "$ref": "#/definitions/SubscriptionLinks"
-        },
-        "project": {
-          "$ref": "#/definitions/DatasetIdentifierResponse"
-        },
-        "user": {
-          "$ref": "#/definitions/UserIdentifierResponse"
-        }
-      },
-      "required": [
-        "events"
-      ]
-    },
     "SuccessMessage": {
       "properties": {
         "message": {
@@ -1745,18 +1702,6 @@
       ],
       "type": "object",
       "title": "User Identifier"
-    },
-    "UserIdentifierResponse": {
-      "properties": {
-        "id": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "id"
-      ],
-      "type": "object",
-      "title": "User Identifier Response"
     },
     "WebAuthorization": {
       "description": "An authorization type and credentials suitable for use in an HTTP `Authorization` header.\n\nWhen used with a File Source this causes the HTTP request to include the following header:\n```\nAuthorization: <type> <credentials>\n```\nThe `credentials` field is write-only.  It is omitted by read operations.",
@@ -1816,7 +1761,7 @@
     },
     "termsOfService": "https://data.world/terms",
     "title": "data.world API",
-    "version": "0.16.2",
+    "version": "0.17.0",
     "x-stoplight": {
       "id": "data-world/specs/data-world"
     }
@@ -5473,7 +5418,6 @@
           {
             "in": "body",
             "name": "body",
-            "required": true,
             "schema": {}
           }
         ],
