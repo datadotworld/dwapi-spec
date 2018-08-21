@@ -564,10 +564,6 @@
           "type": "string"
         }
       },
-      "required": [
-        "url",
-        "method"
-      ],
       "title": "File Source Create Or Update Request",
       "type": "object"
     },
@@ -616,10 +612,6 @@
           "type": "string"
         }
       },
-      "required": [
-        "url",
-        "method"
-      ],
       "title": "File Create Request",
       "type": "object"
     },
@@ -678,8 +670,6 @@
         }
       },
       "required": [
-        "url",
-        "method",
         "syncStatus"
       ],
       "title": "File Source Response",
