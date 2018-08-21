@@ -1751,7 +1751,7 @@
     },
     "termsOfService": "https://data.world/terms",
     "title": "data.world API",
-    "version": "0.17.0",
+    "version": "0.18.0",
     "x-stoplight": {
       "id": "data-world/specs/data-world"
     }
