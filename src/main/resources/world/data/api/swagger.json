@@ -564,10 +564,6 @@
           "type": "string"
         }
       },
-      "required": [
-        "url",
-        "method"
-      ],
       "title": "File Source Create Or Update Request",
       "type": "object"
     },
@@ -616,10 +612,6 @@
           "type": "string"
         }
       },
-      "required": [
-        "url",
-        "method"
-      ],
       "title": "File Create Request",
       "type": "object"
     },
@@ -678,8 +670,6 @@
         }
       },
       "required": [
-        "url",
-        "method",
         "syncStatus"
       ],
       "title": "File Source Response",
@@ -1761,7 +1751,7 @@
     },
     "termsOfService": "https://data.world/terms",
     "title": "data.world API",
-    "version": "0.17.0",
+    "version": "0.18.0",
     "x-stoplight": {
       "id": "data-world/specs/data-world"
     }
