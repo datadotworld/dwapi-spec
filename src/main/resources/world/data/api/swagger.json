@@ -1472,6 +1472,7 @@
       "properties": {
         "parameters": {
           "type": "object",
+          "description": "Specifies values for named query parameters. parameters must be map-like object (key-value pairs), where keys are the names of the parameters and values what those parameters should be set to when the query is executed.",
           "additionalProperties": {
             "type": "object"
           },
@@ -1492,7 +1493,8 @@
           "default": false
         },
         "maxRows": {
-          "type": "long"
+          "type": "long",
+          "description": "Limits the number of rows returned."
         }
       }
     },
@@ -5030,7 +5032,7 @@
         "tags": [
           "queries"
         ],
-        "description": "Execute a saved query (same as GET:/queries/{id}/results) but with a post body which can contain additional parameters request",
+        "description": "Execute a saved query (same as GET:/queries/{id}/results) with the option to specify named query parameters.",
         "operationId": "executeQueryWithPost",
         "consumes": [
           "application/json"
@@ -5049,10 +5051,7 @@
         ],
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/queryId"
           },
           {
             "in": "body",
