@@ -1467,6 +1467,33 @@
       "title": "Project Summary Response",
       "type": "object"
     },
+    "QueryExecutionRequest": {
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "example": {
+            "p1": 1,
+            "p2": 3.14,
+            "p3": "val",
+            "p4": true,
+            "p5": {
+              "value": "false",
+              "type": "literal",
+              "datatype": "http://www.w3.org/2001/XMLSchema#boolean"
+            }
+          }
+        },
+        "includeTableSchema": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+
     "QuerySummaryResponse": {
       "properties": {
         "body": {
@@ -1751,7 +1778,7 @@
     },
     "termsOfService": "https://data.world/terms",
     "title": "data.world API",
-    "version": "0.18.0",
+    "version": "0.19.0",
     "x-stoplight": {
       "id": "data-world/specs/data-world"
     }
@@ -4994,6 +5021,86 @@
         "summary": "Execute a saved query",
         "tags": [
           "queries"
+        ]
+      },
+      "post": {
+        "tags": [
+          "queries"
+        ],
+        "description": "Execute a saved query (same as GET:/queries/{id}/results) but with a post body which can contain additional parameters request",
+        "operationId": "executeQueryWithPost",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/csv",
+          "application/sparql-results+xml",
+          "application/sparql-results+json",
+          "text/tab-separated-values",
+          "application/rdf+json",
+          "text/turtle",
+          "application/rdf+xml",
+          "application/json-l",
+          "application/x-ndjson"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/QueryExecutionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "**OK**\nThe request has succeeded."
+          },
+          "400": {
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_read"
+            ]
+          }
         ]
       }
     },
