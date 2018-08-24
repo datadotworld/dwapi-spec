@@ -1467,7 +1467,7 @@
       "title": "Project Summary Response",
       "type": "object"
     },
-    "QueryExecutionRequest": {
+    "SavedQueryExecutionRequest": {
       "type": "object",
       "properties": {
         "parameters": {
@@ -1491,7 +1491,7 @@
           "type": "boolean",
           "default": false
         },
-        "maxRowsReturned": {
+        "maxRows": {
           "type": "long"
         }
       }
@@ -5059,7 +5059,7 @@
             "name": "body",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/QueryExecutionRequest"
+              "$ref": "#/definitions/SavedQueryExecutionRequest"
             }
           }
         ],
