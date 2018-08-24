@@ -1490,6 +1490,9 @@
         "includeTableSchema": {
           "type": "boolean",
           "default": false
+        },
+        "maxRowsReturned": {
+          "type": "long"
         }
       }
     },
@@ -5084,6 +5087,12 @@
           },
           "404": {
             "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "422": {
+            "description": "**UNPROCESSABLE ENTITY**\nThe server understands the content type of the request entity and the syntax of the request entity is correct, but was unable to process the contained instructions.\nFor example, this error may occur if the JSON body of the request doesn't match the expected schema.",
             "schema": {
               "$ref": "#/definitions/ErrorMessage"
             }
