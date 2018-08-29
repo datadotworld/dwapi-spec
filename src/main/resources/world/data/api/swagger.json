@@ -1498,7 +1498,6 @@
         }
       }
     },
-
     "QuerySummaryResponse": {
       "properties": {
         "body": {
@@ -5109,7 +5108,8 @@
               "user_api_read"
             ]
           }
-        ]
+        ],
+        "summary": "Execute a saved query (with parameters)"
       }
     },
     "/queries/{id}/v/{versionId}": {
