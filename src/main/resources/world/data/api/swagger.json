@@ -1467,6 +1467,19 @@
       "title": "Project Summary Response",
       "type": "object"
     },
+    "QueryParameter": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Parameter type. Can be either 'literal' or 'iri'",
+          "type": "string"
+        },
+        "dataType": {
+          "description": "Parameter datatype XML schema link. Can be empty if type is 'iri'",
+          "type": "string"
+        }
+      }
+    },
     "SavedQueryExecutionRequest": {
       "type": "object",
       "properties": {
@@ -1531,6 +1544,13 @@
         "version": {
           "description": "Query version id.",
           "type": "string"
+        },
+        "parameters": {
+          "description": "Parameters declared in the query body",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/QueryParameter"
+          }
         }
       },
       "type": "object",
@@ -2802,14 +2822,20 @@
                 "count": 1,
                 "records": [
                   {
-                    "body": "SELECT *\nFROM table\nLIMIT 5000",
+                    "body": "DECLARE metric AS BOOLEAN = true\nSELECT *\nFROM table\nLIMIT 5000",
                     "created": "2018-03-30T02:30:54.751Z",
                     "id": "d529a67d-a27a-4f88-86f0-c8c3003afed9",
                     "language": "SQL",
                     "name": "queryname",
                     "owner": "username",
                     "updated": "2018-03-30T02:30:54.742Z",
-                    "version": "9d634c59-ed52-4c62-b8ca-242dedcb39fa"
+                    "version": "9d634c59-ed52-4c62-b8ca-242dedcb39fa",
+                    "parameters": {
+                      "metric": {
+                        "type": "literal",
+                        "datatype": "<http://www.w3.org/2001/XMLSchema#boolean>"
+                      }
+                    }
                   }
                 ]
               }
@@ -4686,14 +4712,20 @@
                 "count": 1,
                 "records": [
                   {
-                    "body": "SELECT *\nFROM table\nLIMIT 5000",
+                    "body": "DECLARE metric AS BOOLEAN = true\nSELECT *\nFROM table\nLIMIT 5000",
                     "created": "2018-03-30T02:30:54.751Z",
                     "id": "d529a67d-a27a-4f88-86f0-c8c3003afed9",
                     "language": "SQL",
                     "name": "queryname",
                     "owner": "username",
                     "updated": "2018-03-30T02:30:54.742Z",
-                    "version": "9d634c59-ed52-4c62-b8ca-242dedcb39fa"
+                    "version": "9d634c59-ed52-4c62-b8ca-242dedcb39fa",
+                    "parameters": {
+                      "metric": {
+                        "type": "literal",
+                        "datatype": "<http://www.w3.org/2001/XMLSchema#boolean>"
+                      }
+                    }
                   }
                 ]
               }
@@ -4898,14 +4930,20 @@
             "description": "**OK**\nThe request has succeeded.",
             "examples": {
               "application/json": {
-                "body": "SELECT *\nFROM table\nLIMIT 5000",
+                "body": "DECLARE metric AS BOOLEAN = true\nSELECT *\nFROM table\nLIMIT 5000",
                 "created": "2018-03-30T02:30:54.751Z",
                 "id": "d529a67d-a27a-4f88-86f0-c8c3003afed9",
                 "language": "SQL",
                 "name": "queryname",
                 "owner": "username",
                 "updated": "2018-03-30T02:30:54.742Z",
-                "version": "9d634c59-ed52-4c62-b8ca-242dedcb39fa"
+                "version": "9d634c59-ed52-4c62-b8ca-242dedcb39fa",
+                "parameters": {
+                  "metric": {
+                    "type": "literal",
+                    "datatype": "<http://www.w3.org/2001/XMLSchema#boolean>"
+                  }
+                }
               }
             },
             "schema": {
@@ -5132,14 +5170,20 @@
             "description": "**OK**\nThe request has succeeded.",
             "examples": {
               "application/json": {
-                "body": "SELECT *\nFROM table\nLIMIT 5000",
+                "body": "DECLARE metric AS BOOLEAN = true\nSELECT *\nFROM table\nLIMIT 5000",
                 "created": "2018-03-30T02:30:54.751Z",
                 "id": "d529a67d-a27a-4f88-86f0-c8c3003afed9",
                 "language": "SQL",
                 "name": "queryname",
                 "owner": "username",
                 "updated": "2018-03-30T02:30:54.742Z",
-                "version": "9d634c59-ed52-4c62-b8ca-242dedcb39fa"
+                "version": "9d634c59-ed52-4c62-b8ca-242dedcb39fa",
+                "parameters": {
+                  "metric": {
+                    "type": "literal",
+                    "datatype": "<http://www.w3.org/2001/XMLSchema#boolean>"
+                  }
+                }
               }
             },
             "schema": {
