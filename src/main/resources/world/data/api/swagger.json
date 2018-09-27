@@ -1802,7 +1802,7 @@
     },
     "termsOfService": "https://data.world/terms",
     "title": "data.world API",
-    "version": "0.19.0",
+    "version": "0.20.0",
     "x-stoplight": {
       "id": "data-world/specs/data-world"
     }
