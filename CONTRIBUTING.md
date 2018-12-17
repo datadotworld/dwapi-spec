@@ -105,6 +105,34 @@ must not include:
 2. JSON examples. Examples must be stringified JSON.
 3. Response references. The response schema can be a reference, but not the response itself.
 
-## Thank you!
+## Development
+
+To run local (mock) instance of this API during development, use [Prism](http://stoplight.io/platform/prism/)
+```bash
+curl https://raw.githubusercontent.com/stoplightio/prism/master/install.sh | sudo sh &&
+  prism run --mock --list --spec src/main/resources/world/data/api/swagger.json
+```
+
+# Release (for maintainers)
+
+Checklist:
+
+- Update version in `pom.xml` and `src/main/resources/world/data/api/swagger.json`
+- Update Stoplight docs (<https://next.stoplight.io/data-world>)
+
+Create the release:
+
+1. Create a GitHub release and respective tag
+2. Grab your CI token from [CircleCI API Token](https://circleci.com/account/api) then run the following command in the terminal.
+  ```sh
+  export CIRCLE_TOKEN=[CircleCI API Token]
+  export DWAPISPEC_RELEASE_USER_EMAIL=[Your email address]
+  export DWAPISPEC_NOW_VERSION=[Version number for current release]
+  export DWAPISPEC_NEXT_VERSION=[Version number to be used for snapshot]
+  ./dwapi-spec/release.sh 
+  ```
+3. Use Stoplight to publish latest docs (<https://docs.stoplight.io/documentation/publishing>)
+
+# Thank you!
 
 Thank you in advance, for contributing to this project!
