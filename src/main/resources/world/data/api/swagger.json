@@ -2937,6 +2937,12 @@
               "$ref": "#/definitions/ErrorMessage"
             }
           },
+          "429": {
+            "description": "**TOO MANY REQUESTS**\nIndicates the user has sent too many requests in a given amount of time (\"rate limiting\").\nA `Retry-After` header will be included to this response indicating how long to wait (in seconds) before making a new request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
           "500": {
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request.",
             "schema": {
@@ -3004,6 +3010,13 @@
               "$ref": "#/definitions/ErrorMessage"
             }
           },
+          "429": {
+            "description": "**TOO MANY REQUESTS**\nIndicates the user has sent too many requests in a given amount of time (\"rate limiting\").\nA `Retry-After` header will be included to this response indicating how long to wait (in seconds) before making a new request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+
           "500": {
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request.",
             "schema": {
