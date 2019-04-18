@@ -49,6 +49,32 @@
       "title": "Project Create Response",
       "type": "object"
     },
+    "CreateQueryRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Query name",
+          "type": "string"
+        },
+        "content": {
+          "description": "Query body.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of language in which this query is written. Can be either 'SPARQL' or 'SQL'.",
+          "type": "string"
+        },
+        "published": {
+          "description": "Is query published.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "content",
+        "name",
+        "type"
+      ]
+    },
     "DatasetCreateRequest": {
       "properties": {
         "description": {
@@ -1467,7 +1493,20 @@
       "title": "Project Summary Response",
       "type": "object"
     },
-    "Query": {
+    "QueryParameter": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Parameter type. Can be either 'literal' or 'iri'",
+          "type": "string"
+        },
+        "datatype": {
+          "description": "Parameter datatype XML schema link. Can be empty if type is 'iri'",
+          "type": "string"
+        }
+      }
+    },
+    "QueryPutRequest": {
       "type": "object",
       "properties": {
         "name": {
@@ -1478,31 +1517,15 @@
           "description": "Query body.",
           "type": "string"
         },
-        "type": {
-          "description": "Type of language in which this query is written. Can be either 'SPARQL' or 'SQL'.",
-          "type": "string"
-        },
-        "parameters": {
-          "description": "Parameters declared in the query body",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/QueryParameter"
-          }
+        "published": {
+          "description": "Is query published.",
+          "type": "boolean"
         }
-      }
-    },
-    "QueryParameter": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Parameter type. Can be either 'literal' or 'iri'",
-          "type": "string"
-        },
-        "dataType": {
-          "description": "Parameter datatype XML schema link. Can be empty if type is 'iri'",
-          "type": "string"
-        }
-      }
+      },
+      "required": [
+        "content",
+        "name"
+      ]
     },
     "SavedQueryExecutionRequest": {
       "type": "object",
@@ -1933,6 +1956,14 @@
       "description": "The body of a [SPARQL](https://docs.data.world/tutorials/sparql/) or [SQL](https://docs.data.world/documentation/sql/) query.",
       "in": "query",
       "name": "query",
+      "required": true,
+      "type": "string"
+    },
+    "queryid": {
+      "description": "Query unique identifier for saved queries.",
+      "in": "path",
+      "name": "queryid",
+      "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9]){1,93}[a-z0-9]",
       "required": true,
       "type": "string"
     },
@@ -2929,10 +2960,10 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Query"
+              "$ref": "#/definitions/CreateQueryRequest"
             },
             "x-examples": {
-              "application/json": "{\r\n  \"name\": \"sample saved query\",\r\n  \"content\": \"DECLARE metric AS BOOLEAN = true\nSELECT *\nFROM table\nLIMIT 5000\",\r\n  \"type\": \"SQL\",\r\n  \"parameters\": \"{\r\n \"metric\": {\r\n \"type\": \"literal\",\r\n  \"datatype\": \"<http://www.w3.org/2001/XMLSchema#boolean>\" \r\n} \r\n}\" }"
+              "application/json": "{\r\n  \"name\": \"sample saved query\",\r\n  \"content\": \"DECLARE metric AS BOOLEAN = true\nSELECT *\nFROM table\nLIMIT 5000\",\r\n  \"type\": \"SQL\",\r\n \"published\": \"false\" }"
             }
           }
         ],
@@ -2951,13 +2982,7 @@
                 "name": "queryname",
                 "owner": "username",
                 "updated": "2018-03-30T02:30:54.742Z",
-                "version": "9d634c59-ed52-4c62-b8ca-242dedcb39fa",
-                "parameters": {
-                  "metric": {
-                    "type": "literal",
-                    "datatype": "<http://www.w3.org/2001/XMLSchema#boolean>"
-                  }
-                }
+                "version": "9d634c59-ed52-4c62-b8ca-242dedcb39fa"
               }
             },
             "schema": {
@@ -3020,7 +3045,7 @@
             "$ref": "#/parameters/datasetId"
           },
           {
-            "$ref": "#/parameters/queryId"
+            "$ref": "#/parameters/queryid"
           }
         ],
         "produces": [
@@ -3093,17 +3118,17 @@
             "$ref": "#/parameters/datasetId"
           },
           {
-            "$ref": "#/parameters/queryId"
+            "$ref": "#/parameters/queryid"
           },
           {
             "in": "body",
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Query"
+              "$ref": "#/definitions/QueryPutRequest"
             },
             "x-examples": {
-              "application/json": "{\r\n  \"name\": \"sample saved query\",\r\n  \"content\": \"DECLARE metric AS BOOLEAN = true\nSELECT *\nFROM table\nLIMIT 5000\",\r\n  \"parameters\": \"{\r\n \"metric\": {\r\n \"type\": \"literal\",\r\n  \"datatype\": \"<http://www.w3.org/2001/XMLSchema#boolean>\" \r\n} \r\n}\" }"
+              "application/json": "{\r\n  \"name\": \"sample saved query\",\r\n  \"content\": \"DECLARE metric AS BOOLEAN = true\nSELECT *\nFROM table\nLIMIT 5000\",\r\n \"published\": \"false\" }"
             }
           }
         ],
@@ -3122,13 +3147,7 @@
                 "name": "queryname",
                 "owner": "username",
                 "updated": "2018-03-30T02:30:54.742Z",
-                "version": "9d634c59-ed52-4c62-b8ca-242dedcb39fa",
-                "parameters": {
-                  "metric": {
-                    "type": "literal",
-                    "datatype": "<http://www.w3.org/2001/XMLSchema#boolean>"
-                  }
-                }
+                "version": "9d634c59-ed52-4c62-b8ca-242dedcb39fa"
               }
             },
             "schema": {
@@ -5099,10 +5118,10 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Query"
+              "$ref": "#/definitions/CreateQueryRequest"
             },
             "x-examples": {
-              "application/json": "{\r\n  \"name\": \"sample saved query\",\r\n  \"content\": \"DECLARE metric AS BOOLEAN = true\nSELECT *\nFROM table\nLIMIT 5000\",\r\n  \"type\": \"SQL\",\r\n  \"parameters\": \"{\r\n \"metric\": {\r\n \"type\": \"literal\",\r\n  \"datatype\": \"<http://www.w3.org/2001/XMLSchema#boolean>\" \r\n} \r\n}\" }"
+              "application/json": "{\r\n  \"name\": \"sample saved query\",\r\n  \"content\": \"DECLARE metric AS BOOLEAN = true\nSELECT *\nFROM table\nLIMIT 5000\",\r\n  \"type\": \"SQL\",\r\n \"published\": \"false\" }"
             }
           }
         ],
@@ -5121,13 +5140,7 @@
                 "name": "queryname",
                 "owner": "username",
                 "updated": "2018-03-30T02:30:54.742Z",
-                "version": "9d634c59-ed52-4c62-b8ca-242dedcb39fa",
-                "parameters": {
-                  "metric": {
-                    "type": "literal",
-                    "datatype": "<http://www.w3.org/2001/XMLSchema#boolean>"
-                  }
-                }
+                "version": "9d634c59-ed52-4c62-b8ca-242dedcb39fa"
               }
             },
             "schema": {
@@ -5190,7 +5203,7 @@
             "$ref": "#/parameters/datasetId"
           },
           {
-            "$ref": "#/parameters/queryId"
+            "$ref": "#/parameters/queryid"
           }
         ],
         "produces": [
@@ -5263,17 +5276,17 @@
             "$ref": "#/parameters/datasetId"
           },
           {
-            "$ref": "#/parameters/queryId"
+            "$ref": "#/parameters/queryid"
           },
           {
             "in": "body",
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Query"
+              "$ref": "#/definitions/QueryPutRequest"
             },
             "x-examples": {
-              "application/json": "{\r\n  \"name\": \"sample saved query\",\r\n  \"content\": \"DECLARE metric AS BOOLEAN = true\nSELECT *\nFROM table\nLIMIT 5000\",\r\n  \"parameters\": \"{\r\n \"metric\": {\r\n \"type\": \"literal\",\r\n  \"datatype\": \"<http://www.w3.org/2001/XMLSchema#boolean>\" \r\n} \r\n}\" }"
+              "application/json": "{\r\n  \"name\": \"sample saved query\",\r\n  \"content\": \"DECLARE metric AS BOOLEAN = true\nSELECT *\nFROM table\nLIMIT 5000\",\r\n \"published\": \"false\" }"
             }
           }
         ],
@@ -5292,13 +5305,7 @@
                 "name": "queryname",
                 "owner": "username",
                 "updated": "2018-03-30T02:30:54.742Z",
-                "version": "9d634c59-ed52-4c62-b8ca-242dedcb39fa",
-                "parameters": {
-                  "metric": {
-                    "type": "literal",
-                    "datatype": "<http://www.w3.org/2001/XMLSchema#boolean>"
-                  }
-                }
+                "version": "9d634c59-ed52-4c62-b8ca-242dedcb39fa"
               }
             },
             "schema": {
