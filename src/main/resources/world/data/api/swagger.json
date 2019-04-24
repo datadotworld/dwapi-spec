@@ -53,19 +53,19 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "Query name",
+          "description": "Query name.",
           "type": "string"
         },
         "content": {
-          "description": "Query body.",
+          "description": "The actual query text to be executed.",
           "type": "string"
         },
-        "type": {
-          "description": "Type of language in which this query is written. Can be either 'SPARQL' or 'SQL'.",
+        "language": {
+          "description": "The language in which this query is written. Can be either 'SPARQL' or 'SQL'.",
           "type": "string"
         },
         "published": {
-          "description": "Is query published.",
+          "description": "Indicates if this query should be visible to anyone with access to its dataset or project.",
           "type": "boolean"
         }
       },
@@ -1959,14 +1959,6 @@
       "required": true,
       "type": "string"
     },
-    "queryid": {
-      "description": "Query unique identifier for saved queries.",
-      "in": "path",
-      "name": "queryid",
-      "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9]){1,93}[a-z0-9]",
-      "required": true,
-      "type": "string"
-    },
     "queryId": {
       "description": "Query unique identifier for saved queries.",
       "in": "path",
@@ -2946,7 +2938,7 @@
         "consumes": [
           "application/json"
         ],
-        "description": "Create saved queries associated with a dataset.",
+        "description": "Create a saved query in a specified dataset.",
         "operationId": "createSavedQuery",
         "parameters": [
           {
@@ -3027,15 +3019,15 @@
             ]
           }
         ],
-        "summary": "Create a saved query for a dataset",
+        "summary": "Create a saved query in a specified dataset.",
         "tags": [
           "queries"
         ]
       }
     },
-    "/datasets/{owner}/{id}/queries/{queryid}": {
+    "/datasets/{owner}/{id}/queries/{queryId}": {
       "delete": {
-        "description": "Delete a saved query for a dataset",
+        "description": "Delete a saved query in a specified dataset.",
         "operationId": "deleteSavedQuery",
         "parameters": [
           {
@@ -3045,7 +3037,7 @@
             "$ref": "#/parameters/datasetId"
           },
           {
-            "$ref": "#/parameters/queryid"
+            "$ref": "#/parameters/queryId"
           }
         ],
         "produces": [
@@ -3099,7 +3091,7 @@
             ]
           }
         ],
-        "summary": "Delete a saved query",
+        "summary": "Delete a saved query in a specified dataset.",
         "tags": [
           "queries"
         ]
@@ -3108,7 +3100,7 @@
         "consumes": [
           "application/json"
         ],
-        "description": "Update a saved query for a dataset.",
+        "description": "Update a saved query in a specified dataset.",
         "operationId": "updateSavedQuery",
         "parameters": [
           {
@@ -3118,7 +3110,7 @@
             "$ref": "#/parameters/datasetId"
           },
           {
-            "$ref": "#/parameters/queryid"
+            "$ref": "#/parameters/queryId"
           },
           {
             "in": "body",
@@ -3192,7 +3184,7 @@
             ]
           }
         ],
-        "summary": "Update a saved query for a dataset",
+        "summary": "Update a saved query in a specified dataset.",
         "tags": [
           "queries"
         ]
@@ -5104,7 +5096,7 @@
         "consumes": [
           "application/json"
         ],
-        "description": "Create a saved query for a project.",
+        "description": "Create a saved query in a specified project.",
         "operationId": "createSavedQuery",
         "parameters": [
           {
@@ -5185,15 +5177,15 @@
             ]
           }
         ],
-        "summary": "Create a saved query for a project",
+        "summary": "Create a saved query in a specified project.",
         "tags": [
           "queries"
         ]
       }
     },
-    "/projects/{owner}/{id}/queries/{queryid}": {
+    "/projects/{owner}/{id}/queries/{queryId}": {
       "delete": {
-        "description": "Delete a saved query for a project",
+        "description": "Delete a saved query in a specified project.",
         "operationId": "deleteSavedQuery",
         "parameters": [
           {
@@ -5203,7 +5195,7 @@
             "$ref": "#/parameters/datasetId"
           },
           {
-            "$ref": "#/parameters/queryid"
+            "$ref": "#/parameters/queryId"
           }
         ],
         "produces": [
@@ -5257,7 +5249,7 @@
             ]
           }
         ],
-        "summary": "Delete a saved query for a project",
+        "summary": "Delete a saved query in a specified project.",
         "tags": [
           "queries"
         ]
@@ -5266,7 +5258,7 @@
         "consumes": [
           "application/json"
         ],
-        "description": "Update a saved query for a project.",
+        "description": "Update a saved query in a specified project.",
         "operationId": "updateSavedQuery",
         "parameters": [
           {
@@ -5276,7 +5268,7 @@
             "$ref": "#/parameters/datasetId"
           },
           {
-            "$ref": "#/parameters/queryid"
+            "$ref": "#/parameters/queryId"
           },
           {
             "in": "body",
@@ -5350,7 +5342,7 @@
             ]
           }
         ],
-        "summary": "Update a saved query for a project",
+        "summary": "Update a saved query in a specified project.",
         "tags": [
           "queries"
         ]
