@@ -72,7 +72,7 @@
       "required": [
         "content",
         "name",
-        "type"
+        "language"
       ]
     },
     "DatasetCreateRequest": {
@@ -1849,7 +1849,7 @@
     },
     "termsOfService": "https://data.world/terms",
     "title": "data.world API",
-    "version": "0.20.1",
+    "version": "0.21.0",
     "x-stoplight": {
       "id": "data-world/specs/data-world"
     }
@@ -1868,6 +1868,14 @@
       "in": "path",
       "name": "id",
       "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]",
+      "required": true,
+      "type": "string"
+    },
+    "datasetQueryId": {
+      "description": "Dataset saved query unique identifier.",
+      "in": "path",
+      "name": "queryId",
+      "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9]){1,93}[a-z0-9]",
       "required": true,
       "type": "string"
     },
@@ -1949,6 +1957,14 @@
       "in": "path",
       "name": "owner",
       "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]",
+      "required": true,
+      "type": "string"
+    },
+    "projectQueryId": {
+      "description": "Project saved query unique identifier.",
+      "in": "path",
+      "name": "queryId",
+      "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9]){1,93}[a-z0-9]",
       "required": true,
       "type": "string"
     },
@@ -3037,7 +3053,7 @@
             "$ref": "#/parameters/datasetId"
           },
           {
-            "$ref": "#/parameters/queryId"
+            "$ref": "#/parameters/datasetQueryId"
           }
         ],
         "produces": [
@@ -3110,7 +3126,7 @@
             "$ref": "#/parameters/datasetId"
           },
           {
-            "$ref": "#/parameters/queryId"
+            "$ref": "#/parameters/datasetQueryId"
           },
           {
             "in": "body",
@@ -5195,7 +5211,7 @@
             "$ref": "#/parameters/datasetId"
           },
           {
-            "$ref": "#/parameters/queryId"
+            "$ref": "#/parameters/projectQueryId"
           }
         ],
         "produces": [
@@ -5268,7 +5284,7 @@
             "$ref": "#/parameters/datasetId"
           },
           {
-            "$ref": "#/parameters/queryId"
+            "$ref": "#/parameters/projectQueryId"
           },
           {
             "in": "body",
