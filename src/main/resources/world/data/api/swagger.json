@@ -1514,11 +1514,11 @@
           "type": "string"
         },
         "content": {
-          "description": "Query body.",
+          "description": "The actual query text to be executed.",
           "type": "string"
         },
         "published": {
-          "description": "Is query published.",
+          "description": "Indicates if this query should be visible to anyone with access to its dataset or project.",
           "type": "boolean"
         }
       },
