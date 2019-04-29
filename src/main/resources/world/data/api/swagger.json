@@ -49,6 +49,32 @@
       "title": "Project Create Response",
       "type": "object"
     },
+    "CreateQueryRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Query name.",
+          "type": "string"
+        },
+        "content": {
+          "description": "The actual query text to be executed.",
+          "type": "string"
+        },
+        "language": {
+          "description": "The language in which this query is written. Can be either 'SPARQL' or 'SQL'.",
+          "type": "string"
+        },
+        "published": {
+          "description": "Indicates if this query should be visible to anyone with access to its dataset or project.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "content",
+        "name",
+        "language"
+      ]
+    },
     "DatasetCreateRequest": {
       "properties": {
         "description": {
@@ -1474,11 +1500,32 @@
           "description": "Parameter type. Can be either 'literal' or 'iri'",
           "type": "string"
         },
-        "dataType": {
+        "datatype": {
           "description": "Parameter datatype XML schema link. Can be empty if type is 'iri'",
           "type": "string"
         }
       }
+    },
+    "QueryPutRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Query name",
+          "type": "string"
+        },
+        "content": {
+          "description": "The actual query text to be executed.",
+          "type": "string"
+        },
+        "published": {
+          "description": "Indicates if this query should be visible to anyone with access to its dataset or project.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "content",
+        "name"
+      ]
     },
     "SavedQueryExecutionRequest": {
       "type": "object",
@@ -1802,7 +1849,7 @@
     },
     "termsOfService": "https://data.world/terms",
     "title": "data.world API",
-    "version": "0.20.0",
+    "version": "0.21.0",
     "x-stoplight": {
       "id": "data-world/specs/data-world"
     }
@@ -1821,6 +1868,14 @@
       "in": "path",
       "name": "id",
       "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]",
+      "required": true,
+      "type": "string"
+    },
+    "datasetQueryId": {
+      "description": "Dataset saved query unique identifier.",
+      "in": "path",
+      "name": "queryId",
+      "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9]){1,93}[a-z0-9]",
       "required": true,
       "type": "string"
     },
@@ -1902,6 +1957,14 @@
       "in": "path",
       "name": "owner",
       "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]",
+      "required": true,
+      "type": "string"
+    },
+    "projectQueryId": {
+      "description": "Project saved query unique identifier.",
+      "in": "path",
+      "name": "queryId",
+      "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9]){1,93}[a-z0-9]",
       "required": true,
       "type": "string"
     },
@@ -2883,6 +2946,261 @@
           }
         ],
         "summary": "List saved queries",
+        "tags": [
+          "queries"
+        ]
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Create a saved query in a specified dataset.",
+        "operationId": "createSavedQuery",
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/datasetId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateQueryRequest"
+            },
+            "x-examples": {
+              "application/json": "{\r\n  \"name\": \"sample saved query\",\r\n  \"content\": \"DECLARE metric AS BOOLEAN = true\nSELECT *\nFROM table\nLIMIT 5000\",\r\n  \"type\": \"SQL\",\r\n \"published\": \"false\" }"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "**OK**\nThe request has succeeded.",
+            "examples": {
+              "application/json": {
+                "body": "DECLARE metric AS BOOLEAN = true\nSELECT *\nFROM table\nLIMIT 5000",
+                "created": "2018-03-30T02:30:54.751Z",
+                "id": "d529a67d-a27a-4f88-86f0-c8c3003afed9",
+                "language": "SQL",
+                "name": "queryname",
+                "owner": "username",
+                "updated": "2018-03-30T02:30:54.742Z",
+                "version": "9d634c59-ed52-4c62-b8ca-242dedcb39fa"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/QuerySummaryResponse"
+            }
+          },
+          "400": {
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_write"
+            ]
+          }
+        ],
+        "summary": "Create a saved query in a specified dataset.",
+        "tags": [
+          "queries"
+        ]
+      }
+    },
+    "/datasets/{owner}/{id}/queries/{queryId}": {
+      "delete": {
+        "description": "Delete a saved query in a specified dataset.",
+        "operationId": "deleteSavedQuery",
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/datasetId"
+          },
+          {
+            "$ref": "#/parameters/datasetQueryId"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "**OK**\nThe request has succeeded.",
+            "examples": {
+              "application/json": "{\n  \"message\": \"query deleted.\"\n}"
+            },
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_write"
+            ]
+          }
+        ],
+        "summary": "Delete a saved query in a specified dataset.",
+        "tags": [
+          "queries"
+        ]
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Update a saved query in a specified dataset.",
+        "operationId": "updateSavedQuery",
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/datasetId"
+          },
+          {
+            "$ref": "#/parameters/datasetQueryId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryPutRequest"
+            },
+            "x-examples": {
+              "application/json": "{\r\n  \"name\": \"sample saved query\",\r\n  \"content\": \"DECLARE metric AS BOOLEAN = true\nSELECT *\nFROM table\nLIMIT 5000\",\r\n \"published\": \"false\" }"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "**OK**\nThe request has succeeded.",
+            "examples": {
+              "application/json": {
+                "body": "DECLARE metric AS BOOLEAN = true\nSELECT *\nFROM table\nLIMIT 5000",
+                "created": "2018-03-30T02:30:54.751Z",
+                "id": "d529a67d-a27a-4f88-86f0-c8c3003afed9",
+                "language": "SQL",
+                "name": "queryname",
+                "owner": "username",
+                "updated": "2018-03-30T02:30:54.742Z",
+                "version": "9d634c59-ed52-4c62-b8ca-242dedcb39fa"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/QuerySummaryResponse"
+            }
+          },
+          "400": {
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_write"
+            ]
+          }
+        ],
+        "summary": "Update a saved query in a specified dataset.",
         "tags": [
           "queries"
         ]
@@ -4786,6 +5104,261 @@
           }
         ],
         "summary": "List saved queries",
+        "tags": [
+          "queries"
+        ]
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Create a saved query in a specified project.",
+        "operationId": "createSavedQuery",
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/datasetId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateQueryRequest"
+            },
+            "x-examples": {
+              "application/json": "{\r\n  \"name\": \"sample saved query\",\r\n  \"content\": \"DECLARE metric AS BOOLEAN = true\nSELECT *\nFROM table\nLIMIT 5000\",\r\n  \"type\": \"SQL\",\r\n \"published\": \"false\" }"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "**OK**\nThe request has succeeded.",
+            "examples": {
+              "application/json": {
+                "body": "DECLARE metric AS BOOLEAN = true\nSELECT *\nFROM table\nLIMIT 5000",
+                "created": "2018-03-30T02:30:54.751Z",
+                "id": "d529a67d-a27a-4f88-86f0-c8c3003afed9",
+                "language": "SQL",
+                "name": "queryname",
+                "owner": "username",
+                "updated": "2018-03-30T02:30:54.742Z",
+                "version": "9d634c59-ed52-4c62-b8ca-242dedcb39fa"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/QuerySummaryResponse"
+            }
+          },
+          "400": {
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_write"
+            ]
+          }
+        ],
+        "summary": "Create a saved query in a specified project.",
+        "tags": [
+          "queries"
+        ]
+      }
+    },
+    "/projects/{owner}/{id}/queries/{queryId}": {
+      "delete": {
+        "description": "Delete a saved query in a specified project.",
+        "operationId": "deleteSavedQuery",
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/datasetId"
+          },
+          {
+            "$ref": "#/parameters/projectQueryId"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "**OK**\nThe request has succeeded.",
+            "examples": {
+              "application/json": "{\n  \"message\": \"query deleted.\"\n}"
+            },
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_write"
+            ]
+          }
+        ],
+        "summary": "Delete a saved query in a specified project.",
+        "tags": [
+          "queries"
+        ]
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Update a saved query in a specified project.",
+        "operationId": "updateSavedQuery",
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/datasetId"
+          },
+          {
+            "$ref": "#/parameters/projectQueryId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryPutRequest"
+            },
+            "x-examples": {
+              "application/json": "{\r\n  \"name\": \"sample saved query\",\r\n  \"content\": \"DECLARE metric AS BOOLEAN = true\nSELECT *\nFROM table\nLIMIT 5000\",\r\n \"published\": \"false\" }"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "**OK**\nThe request has succeeded.",
+            "examples": {
+              "application/json": {
+                "body": "DECLARE metric AS BOOLEAN = true\nSELECT *\nFROM table\nLIMIT 5000",
+                "created": "2018-03-30T02:30:54.751Z",
+                "id": "d529a67d-a27a-4f88-86f0-c8c3003afed9",
+                "language": "SQL",
+                "name": "queryname",
+                "owner": "username",
+                "updated": "2018-03-30T02:30:54.742Z",
+                "version": "9d634c59-ed52-4c62-b8ca-242dedcb39fa"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/QuerySummaryResponse"
+            }
+          },
+          "400": {
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_write"
+            ]
+          }
+        ],
+        "summary": "Update a saved query in a specified project.",
         "tags": [
           "queries"
         ]
