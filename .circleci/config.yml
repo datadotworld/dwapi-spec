@@ -65,7 +65,7 @@ jobs:
         paths:
         - project
 
-  deploy:
+  release_build:
     <<: *defaults
     steps:
       - checkout
