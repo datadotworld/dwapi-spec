@@ -7,7 +7,8 @@ PAYLOAD="{
         \"MVN_RELEASE_VER\": \"${DWAPISPEC_NOW_VERSION}\",
         \"MVN_RELEASE_DEV_VER\": \"${DWAPISPEC_NEXT_VERSION}-SNAPSHOT\",
         \"MVN_RELEASE_USER_EMAIL\": \"${DWAPISPEC_RELEASE_USER_EMAIL}\",
-        \"MVN_RELEASE_USER_NAME\": \"Via CircleCI\"
+        \"MVN_RELEASE_USER_NAME\": \"Via CircleCI\",
+        \"CIRCLE_JOB\": \"deploy\"
     }
 }"
 curl -v -X POST -H "Content-Type: application/json" -d "${PAYLOAD}" "https://circleci.com/api/v1.1/project/github/datadotworld/dwapi-spec/tree/master?circle-token=${CIRCLE_TOKEN}"

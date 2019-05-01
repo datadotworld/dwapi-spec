@@ -68,26 +68,22 @@ jobs:
   deploy:
     <<: *defaults
     steps:
-    - attach_workspace:
-        at: /home/circleci/
+      - checkout
+      - *setup_env
 
-    - deploy:
-        name: Maven deploy
-        command: mvn deploy -s settings.xml
+      - restore_cache:
+          key: dependency-cache-{{ checksum "pom.xml" }}
 
-    - deploy:
-        name: Maven release
-        command: ./mvn-release.sh
+      - deploy:
+          name: Maven deploy
+          command: mvn deploy -s settings.xml
+
+      - deploy:
+          name: Maven release
+          command: ./mvn-release.sh
 
 workflows:
   version: 2
-  build-and-deploy:
+  build:
     jobs:
-    - build
-    - deploy:
-        requires:
-        - build
-        filters:
-          branches:
-            only:
-            - master
+      - build
