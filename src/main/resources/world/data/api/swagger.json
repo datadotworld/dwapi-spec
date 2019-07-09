@@ -2955,7 +2955,7 @@
           "application/json"
         ],
         "description": "Create a saved query in a specified dataset.",
-        "operationId": "createSavedQuery",
+        "operationId": "createDatasetSavedQuery",
         "parameters": [
           {
             "$ref": "#/parameters/owner"
@@ -3044,7 +3044,7 @@
     "/datasets/{owner}/{id}/queries/{queryId}": {
       "delete": {
         "description": "Delete a saved query in a specified dataset.",
-        "operationId": "deleteSavedQuery",
+        "operationId": "deleteDatasetSavedQuery",
         "parameters": [
           {
             "$ref": "#/parameters/owner"
@@ -3117,7 +3117,7 @@
           "application/json"
         ],
         "description": "Update a saved query in a specified dataset.",
-        "operationId": "updateSavedQuery",
+        "operationId": "updateDatasetSavedQuery",
         "parameters": [
           {
             "$ref": "#/parameters/owner"
@@ -5113,7 +5113,7 @@
           "application/json"
         ],
         "description": "Create a saved query in a specified project.",
-        "operationId": "createSavedQuery",
+        "operationId": "createProjectSavedQuery",
         "parameters": [
           {
             "$ref": "#/parameters/owner"
@@ -5202,7 +5202,7 @@
     "/projects/{owner}/{id}/queries/{queryId}": {
       "delete": {
         "description": "Delete a saved query in a specified project.",
-        "operationId": "deleteSavedQuery",
+        "operationId": "deleteProjectSavedQuery",
         "parameters": [
           {
             "$ref": "#/parameters/owner"
@@ -5275,7 +5275,7 @@
           "application/json"
         ],
         "description": "Update a saved query in a specified project.",
-        "operationId": "updateSavedQuery",
+        "operationId": "updateProjectSavedQuery",
         "parameters": [
           {
             "$ref": "#/parameters/owner"
