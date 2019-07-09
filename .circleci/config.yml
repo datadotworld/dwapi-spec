@@ -25,7 +25,7 @@ resources:
   setup_env: &setup_env
     run:
       name: Install prism
-      command: curl https://raw.githubusercontent.com/stoplightio/prism/master/install.sh | sudo sh
+      command: curl https://raw.githubusercontent.com/stoplightio/prism/master/install | sudo sh
 
 jobs:
 
