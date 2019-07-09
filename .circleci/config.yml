@@ -44,7 +44,7 @@ jobs:
 
     - run:
         name: Prism
-        command: prism conduct --spec src/main/resources/world/data/api/swagger.json spec/*
+        command: prism conduct --spec src/main/resources/world/data/api/swagger.json src/test/spec/*.json
 
     - save_cache:
         key: dependency-cache-{{ checksum "pom.xml" }}
