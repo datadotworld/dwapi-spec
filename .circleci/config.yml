@@ -25,7 +25,7 @@ resources:
   setup_env: &setup_env
     run:
       name: Install prism
-      command: curl https://raw.githubusercontent.com/stoplightio/prism/master/install.sh | sudo sh
+      command: curl https://raw.githubusercontent.com/stoplightio/prism/2.x/install.sh | sudo sh
 
 jobs:
 
@@ -44,7 +44,7 @@ jobs:
 
     - run:
         name: Prism
-        command: prism conduct --spec src/main/resources/world/data/api/swagger.json spec/*
+        command: prism conduct --spec src/main/resources/world/data/api/swagger.json src/test/spec/*.json
 
     - save_cache:
         key: dependency-cache-{{ checksum "pom.xml" }}
