@@ -140,6 +140,10 @@
             "PRIVATE"
           ],
           "type": "string"
+        },
+        "properties": {
+          "description": "Custom metadata properties. See [/toolkit/custom-metadata](/toolkit/custom-metadata) for more information.",
+          "type": "object"
         }
       },
       "required": [
@@ -233,6 +237,10 @@
             "PRIVATE"
           ],
           "type": "string"
+        },
+        "properties": {
+          "description": "Custom metadata properties. See [/toolkit/custom-metadata](/toolkit/custom-metadata) for more information.",
+          "type": "object"
         }
       },
       "title": "Dataset Update Request",
@@ -303,6 +311,10 @@
             "PRIVATE"
           ],
           "type": "string"
+        },
+        "properties": {
+          "description": "Custom metadata properties. See [/toolkit/custom-metadata](/toolkit/custom-metadata) for more information.",
+          "type": "object"
         }
       },
       "required": [
@@ -393,6 +405,10 @@
         "visibility": {
           "description": "Dataset visibility. `OPEN` if the dataset can be seen by any member of data.world. `PRIVATE` if the dataset can be seen by its owner and authorized collaborators.",
           "type": "string"
+        },
+        "properties": {
+          "description": "Custom metadata properties. See [/toolkit/custom-metadata](/toolkit/custom-metadata) for more information.",
+          "type": "object"
         }
       },
       "required": [
@@ -459,6 +475,14 @@
       },
       "title": "File Create or Update Batch",
       "type": "object"
+    },
+    "CustomDatasetOrProjectMetadataRequest": {
+      "properties": {
+        "properties": {
+          "description": "Custom defined metadata for datasets and projects.",
+          "type": "object"
+        }
+      }
     },
     "FileCreateOrUpdateRequest": {
       "description": "This model is utilized where sets of files can be specified to be added or updated (e.g. `PATCH:/dataset/{owner}` and `POST:/dataset/{owner}/{id}/files`).",
@@ -2027,7 +2051,64 @@
               "$ref": "#/definitions/DatasetCreateRequest"
             },
             "x-examples": {
-              "application/json": "{\r\n  \"title\": \"data.world basketball team\",\r\n  \"description\": \"Fake data.world basketball team players and stats\",\r\n  \"summary\": \"This dataset involves some fake information about the totally fake data.world intramural basketball team.\",\r\n  \"tags\": [\r\n    \"sports\", \"datadotworld\", \"basketball\"\r\n  ],\r\n  \"license\": \"PDDL\",\r\n  \"visibility\": \"OPEN\",\r\n  \"files\": [\r\n    {\r\n      \"name\": \"DataDotWorldBBallTeam.csv\",\r\n      \"source\": {\r\n        \"url\": \"https://docs.google.com/spreadsheets/d/1UheyB6pxTCfLpRmIGITM0fKb8jHVEvPuajmuejxxRyE/pub?gid=1371600687&single=true&output=csv\"\r\n      },\r\n      \"description\": \"Stats about about our purely fictitious basketball team\",\r\n      \"labels\": [\r\n        \"raw data\", \"clean data\"\r\n      ]\r\n    }\r\n  ]\r\n}"
+              "Normal example": {
+                "title": "data.world basketball team",
+                "description": "Fake data.world basketball team players and stats",
+                "summary": "This dataset involves some fake information about the totally fake data.world intramural basketball team.",
+                "tags": [
+                  "sports",
+                  "datadotworld",
+                  "basketball"
+                ],
+                "license": "PDDL",
+                "visibility": "OPEN",
+                "files": [
+                  {
+                    "name": "DataDotWorldBBallTeam.csv",
+                    "source": {
+                      "url": "https://docs.google.com/spreadsheets/d/1UheyB6pxTCfLpRmIGITM0fKb8jHVEvPuajmuejxxRyE/pub?gid=1371600687&single=true&output=csv"
+                    },
+                    "description": "Stats about about our purely fictitious basketball team",
+                    "labels": [
+                      "raw data",
+                      "clean data"
+                    ]
+                  }
+                ]
+              },
+              "Example with custom metadata": {
+                "title": "data.world basketball team",
+                "description": "Fake data.world basketball team players and stats",
+                "summary": "This dataset involves some fake information about the totally fake data.world intramural basketball team.",
+                "tags": [
+                  "sports",
+                  "datadotworld",
+                  "basketball"
+                ],
+                "properties": {
+                  "dataCollectionMechanism": "Python script from sports data aggregator API",
+                  "dataCollectionLanguages": [
+                    "python",
+                    "julia",
+                    "javascript"
+                  ]
+                },
+                "license": "PDDL",
+                "visibility": "OPEN",
+                "files": [
+                  {
+                    "name": "DataDotWorldBBallTeam.csv",
+                    "source": {
+                      "url": "https://docs.google.com/spreadsheets/d/1UheyB6pxTCfLpRmIGITM0fKb8jHVEvPuajmuejxxRyE/pub?gid=1371600687&single=true&output=csv"
+                    },
+                    "description": "Stats about about our purely fictitious basketball team",
+                    "labels": [
+                      "raw data",
+                      "clean data"
+                    ]
+                  }
+                ]
+              }
             }
           }
         ],
@@ -2183,10 +2264,82 @@
           "200": {
             "description": "**OK**\nThe request has succeeded.",
             "examples": {
-              "application/json": {
+              "Normal example": {
                 "accessLevel": "READ",
                 "created": "2017-02-01T22:33:58.809Z",
                 "description": "TrumpWorld Data",
+                "files": [
+                  {
+                    "created": "2017-02-01T23:45:12.379Z",
+                    "name": "org-org-connections.csv",
+                    "sizeInBytes": 97658,
+                    "source": {
+                      "id": "bfbac3bb-9cec-410a-9ac4-c904a56d65fe",
+                      "lastSyncFailure": "2017-02-01T23:47:47.667Z",
+                      "lastSyncStart": "2017-02-06T22:55:15.242Z",
+                      "lastSyncSuccess": "2017-02-06T22:55:15.258Z",
+                      "syncStatus": "OK",
+                      "url": "https://raw.githubusercontent.com/BuzzFeedNews/trumpworld/master/data/org-org-connections.csv"
+                    },
+                    "updated": "2017-02-03T16:05:03.241Z"
+                  },
+                  {
+                    "created": "2017-02-01T23:51:02.777Z",
+                    "name": "person-org-connections.csv",
+                    "sizeInBytes": 231637,
+                    "source": {
+                      "id": "91cf66e3-4bd7-422f-a8ec-7de1b68f8ee1",
+                      "lastSyncStart": "2017-02-06T22:55:15.242Z",
+                      "lastSyncSuccess": "2017-02-06T22:55:15.310Z",
+                      "syncStatus": "OK",
+                      "url": "https://raw.githubusercontent.com/BuzzFeedNews/trumpworld/master/data/person-org-connections.csv"
+                    },
+                    "updated": "2017-02-03T16:05:03.241Z"
+                  },
+                  {
+                    "created": "2017-02-01T23:51:32.492Z",
+                    "name": "person-person-connections.csv",
+                    "sizeInBytes": 32556,
+                    "source": {
+                      "id": "b1e0659b-c282-408a-893a-14b5e5a1ae4c",
+                      "lastSyncStart": "2017-02-06T22:55:15.242Z",
+                      "lastSyncSuccess": "2017-02-06T22:55:15.361Z",
+                      "syncStatus": "OK",
+                      "url": "https://raw.githubusercontent.com/BuzzFeedNews/trumpworld/master/data/person-person-connections.csv"
+                    },
+                    "updated": "2017-02-03T16:05:03.241Z"
+                  }
+                ],
+                "id": "trumpworld",
+                "isProject": false,
+                "owner": "sya",
+                "status": "LOADED",
+                "summary": "From the Buzzfeed article [Help Us Map TrumpWorld](https://www.buzzfeed.com/johntemplon/help-us-map-trumpworld)\n>No American president has taken office with a giant network of businesses, investments, and corporate connections like that amassed by Donald J. Trump. His family and advisers have touched a staggering number of ventures, from a hotel in Azerbaijan to a poker company in Las Vegas.\n\n\nCheck out the data.world docs on how to Upload & sync files from [**Google Sheets**](https://docs.data.world/documentation/api/googleSync.html) and [**Github**](https://docs.data.world/documentation/api/githubSync.html)   \n\n\nSource: [github.com/BuzzFeedNews](https://github.com/BuzzFeedNews/trumpworld/tree/master/data)   \n\n_If you have suggestions for expanding or improving the dataset, please email trump@buzzfeed.com. If you’d like to send your tip securely and anonymously, see these [instructions](https://tips.buzzfeed.com/)._",
+                "tags": [
+                  "trump",
+                  "trump world",
+                  "president",
+                  "connections",
+                  "swamp",
+                  "business network"
+                ],
+                "title": "TrumpWorld",
+                "updated": "2017-02-06T22:55:19.128Z",
+                "version": "versionId",
+                "visibility": "OPEN"
+              },
+              "Example with catalog metadata": {
+                "accessLevel": "READ",
+                "created": "2017-02-01T22:33:58.809Z",
+                "description": "TrumpWorld Data",
+                "properties": {
+                  "dataCollectionMechanism": "Python script from social media API",
+                  "dataCollectionLanguages": [
+                    "python",
+                    "r",
+                    "java"
+                  ]
+                },
                 "files": [
                   {
                     "created": "2017-02-01T23:45:12.379Z",
@@ -2316,7 +2469,53 @@
               "$ref": "#/definitions/DatasetPatchRequest"
             },
             "x-examples": {
-              "application/json": "{\r\n  \"description\": \"2017 data.world basketball program\",\r\n  \"summary\": \"Fake data.world basketball team players and stats. Includes 2016 and 2017 team\",\r\n  \"tags\": [\r\n    \"basketball\"\r\n  ],\r\n  \"files\": [\r\n    {\r\n      \"name\": \"DataDotWorld2017BBallTeam.csv\",\r\n      \"source\": {\r\n        \"url\": \"https://docs.google.com/spreadsheets/d/1UheyB6pxTCfLpRmIGITM0fKb8jHVEvPuajmuejxxRyE/pub?gid=1371600687&single=true&output=csv\"\r\n      },\r\n      \"description\": \"Purely fictitious performance data on our purely fictitious data.world basketball team.\",\r\n      \"labels\": [\r\n        \"raw data\", \"clean data\"\r\n      ]\r\n    }\r\n  ]\r\n}"
+              "Normal example": {
+                "description": "2017 data.world basketball program",
+                "summary": "Fake data.world basketball team players and stats. Includes 2016 and 2017 team",
+                "tags": [
+                  "basketball"
+                ],
+                "files": [
+                  {
+                    "name": "DataDotWorld2017BBallTeam.csv",
+                    "source": {
+                      "url": "https://docs.google.com/spreadsheets/d/1UheyB6pxTCfLpRmIGITM0fKb8jHVEvPuajmuejxxRyE/pub?gid=1371600687&single=true&output=csv"
+                    },
+                    "description": "Purely fictitious performance data on our purely fictitious data.world basketball team.",
+                    "labels": [
+                      "raw data",
+                      "clean data"
+                    ]
+                  }
+                ]
+              },
+              "Example with custom metadata": {
+                "description": "2017 data.world basketball program",
+                "summary": "Fake data.world basketball team players and stats. Includes 2016 and 2017 team",
+                "properties": {
+                  "dataCollectionMechanism": "Python script from sports data aggregator API",
+                  "dataCollectionLanguages": [
+                    "python",
+                    "julia"
+                  ]
+                },
+                "tags": [
+                  "basketball"
+                ],
+                "files": [
+                  {
+                    "name": "DataDotWorld2017BBallTeam.csv",
+                    "source": {
+                      "url": "https://docs.google.com/spreadsheets/d/1UheyB6pxTCfLpRmIGITM0fKb8jHVEvPuajmuejxxRyE/pub?gid=1371600687&single=true&output=csv"
+                    },
+                    "description": "Purely fictitious performance data on our purely fictitious data.world basketball team.",
+                    "labels": [
+                      "raw data",
+                      "clean data"
+                    ]
+                  }
+                ]
+              }
             }
           }
         ],
@@ -2403,7 +2602,55 @@
               "$ref": "#/definitions/DatasetPutRequest"
             },
             "x-examples": {
-              "application/json": "{\n  \"description\": \"2017 data.world basketball program\",\n  \"summary\": \"Fake data.world basketball team players and stats. Includes 2016 and 2017 team\",\n  \"tags\": [\n    \"basketball\"\n  ],\n  \"visibility\": \"OPEN\",\n  \"files\": [\n    {\n      \"name\": \"DataDotWorld2017BBallTeam.csv\",\n      \"source\": {\n        \"url\": \"https://docs.google.com/spreadsheets/d/1UheyB6pxTCfLpRmIGITM0fKb8jHVEvPuajmuejxxRyE/pub?gid=1371600687&single=true&output=csv\"\n      },\n      \"description\": \"Purely fictitious performance data on our purely fictitious data.world basketball team.\",\n      \"labels\": [\n        \"raw data\", \"clean data\"\n      ]\n    }\n  ]\n}"
+              "Normal example": {
+                "description": "2017 data.world basketball program",
+                "summary": "Fake data.world basketball team players and stats. Includes 2016 and 2017 team",
+                "tags": [
+                  "basketball"
+                ],
+                "visibility": "OPEN",
+                "files": [
+                  {
+                    "name": "DataDotWorld2017BBallTeam.csv",
+                    "source": {
+                      "url": "https://docs.google.com/spreadsheets/d/1UheyB6pxTCfLpRmIGITM0fKb8jHVEvPuajmuejxxRyE/pub?gid=1371600687&single=true&output=csv"
+                    },
+                    "description": "Purely fictitious performance data on our purely fictitious data.world basketball team.",
+                    "labels": [
+                      "raw data",
+                      "clean data"
+                    ]
+                  }
+                ]
+              },
+              "Example with custom metadata": {
+                "description": "2017 data.world basketball program",
+                "summary": "Fake data.world basketball team players and stats. Includes 2016 and 2017 team",
+                "properties": {
+                  "dataCollectionMechanism": "Python script from sports data aggregator API",
+                  "dataCollectionLanguages": [
+                    "python",
+                    "julia"
+                  ]
+                },
+                "tags": [
+                  "basketball"
+                ],
+                "visibility": "OPEN",
+                "files": [
+                  {
+                    "name": "DataDotWorld2017BBallTeam.csv",
+                    "source": {
+                      "url": "https://docs.google.com/spreadsheets/d/1UheyB6pxTCfLpRmIGITM0fKb8jHVEvPuajmuejxxRyE/pub?gid=1371600687&single=true&output=csv"
+                    },
+                    "description": "Purely fictitious performance data on our purely fictitious data.world basketball team.",
+                    "labels": [
+                      "raw data",
+                      "clean data"
+                    ]
+                  }
+                ]
+              }
             }
           }
         ],
@@ -3334,7 +3581,6 @@
               "$ref": "#/definitions/ErrorMessage"
             }
           },
-
           "500": {
             "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request.",
             "schema": {
