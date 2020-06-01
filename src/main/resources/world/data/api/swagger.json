@@ -2037,7 +2037,7 @@
   "paths": {
     "/datasets/{owner}": {
       "get": {
-        "description": "List datasets that the currently authenticated user has access to, for the specified owner; when the dataset is open, private but discoverable by the authenticated user or the authenticated user is a contibutor with discover visibility",
+        "description": "List datasets that the currently authenticated user has access to, for the specified owner; when the dataset is open, private (but discoverable by the authenticated user) or the authenticated user is a contibutor with discover visibility",
         "operationId": "getDatasetsByOwner",
         "parameters": [
           {
