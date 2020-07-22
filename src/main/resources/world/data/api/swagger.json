@@ -2036,6 +2036,78 @@
   },
   "paths": {
     "/datasets/{owner}": {
+      "get": {
+        "description": "List datasets that the currently authenticated user has access to, for the specified owner; when the dataset is open, private (but discoverable by the authenticated user) or the authenticated user is a contributor with discover visibility",
+        "operationId": "getDatasetsByOwner",
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/next"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "**OK**\nThe request has succeeded.",
+            "examples": {
+              "application/json": "{\n  \"count\": 2,\n  \"records\": [\n    {\n      \"owner\": \"bryonjacob\",\n      \"id\": \"f-o-o\",\n      \"title\": \"f-o-o\",\n      \"description\": \"why do my datasets have to be at least 5 chars in length\",\n      \"tags\": [],\n      \"license\": \"CC-0\",\n      \"visibility\": \"PRIVATE\",\n      \"files\": [\n        {\n          \"name\": \"foo.csv\",\n          \"sizeInBytes\": 56,\n          \"created\": \"2016-06-09T21:56:06.943Z\",\n          \"updated\": \"2016-06-09T21:56:06.943Z\"\n        }\n      ],\n      \"status\": \"LOADED\",\n      \"created\": \"2016-06-09T21:55:58.002Z\",\n      \"updated\": \"2017-04-19T15:35:30.791Z\"\n    },\n    {\n      \"owner\": \"eric-capps\",\n      \"id\": \"zooblesnarb\",\n      \"title\": \"zooblesnarb\",\n      \"description\": \"test\",\n      \"tags\": [\n        \"bap\"\n      ],\n      \"visibility\": \"OPEN\",\n      \"files\": [],\n      \"created\": \"2016-11-02T21:18:58.696Z\",\n      \"updated\": \"2016-11-11T16:56:30.714Z\"\n    }\n  ],\n  \"next\": \"eyJyZXNvdXJjZSI6eyJzIjoiZGF0YXNldDplcmljLWNhcHBzL3pvb2JsZXNuYXJiIn0sInBhcnR5Ijp7InMiOiJhZ2VudDp1c2VyOCJ9fQ==\"\n}"
+            },
+            "schema": {
+              "$ref": "#/definitions/PaginatedDatasetResults"
+            }
+          },
+          "400": {
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_read"
+            ]
+          }
+        ],
+        "summary": "List datasets for a specified owner",
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/datasets/{owner}": {
       "post": {
         "consumes": [
           "application/json"
@@ -4631,6 +4703,145 @@
         "summary": "Retrieve an insight version",
         "tags": [
           "insights"
+        ]
+      }
+    },
+    "/projects/{owner}": {
+      "get": {
+        "description": "List projects that the currently authenticated user has access to, for the specified owner; when the project is open, or when project is private but has view/edit/manage permissions for the authenticated user",
+        "operationId": "getProjectsByOwner",
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/limit"
+          },
+          {
+            "$ref": "#/parameters/next"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "**OK**\nThe request has succeeded.",
+            "examples": {
+              "application/json": {
+                "count": 1,
+                "records": [
+                  {
+                    "accessLevel": "READ",
+                    "created": "2017-08-08T18:40:27.270Z",
+                    "files": [
+                      {
+                        "created": "2017-08-09T17:11:11.225Z",
+                        "description": "Cleaned up column headers and empty cells using Excel",
+                        "labels": [
+                          "clean data"
+                        ],
+                        "name": "cleaned_USCG_data_import.xlsx",
+                        "sizeInBytes": 42430,
+                        "updated": "2017-08-09T17:11:11.225Z"
+                      },
+                      {
+                        "created": "2017-08-09T16:44:02.861Z",
+                        "description": "Data loaded using Tablua from: https://data.world/jonloyens/an-example-project-that-shows-what-to-put-in-data-world/workspace/file?agentid=uscg&datasetid=uscg-search-rescue-summary&filename=SAR+Sum+Stats+64-13.pdf",
+                        "labels": [
+                          "raw data"
+                        ],
+                        "name": "raw_USCG_data_import.csv",
+                        "sizeInBytes": 3097,
+                        "updated": "2017-08-09T16:44:02.861Z"
+                      },
+                      {
+                        "created": "2017-08-09T16:51:55.176Z",
+                        "name": "uscg-search-rescue-summary.ipynb",
+                        "sizeInBytes": 26786,
+                        "updated": "2018-03-27T23:27:46.167Z"
+                      }
+                    ],
+                    "id": "an-example-project-that-shows-what-to-put-in-data-world",
+                    "linkedDatasets": [
+                      {
+                        "accessLevel": "READ",
+                        "created": "2016-11-17T15:10:00.033Z",
+                        "description": "USCG Search and Rescue Summary Statistics",
+                        "id": "uscg-search-rescue-summary",
+                        "license": "Public Domain",
+                        "owner": "uscg",
+                        "summary": "Datasets include statistics on search and rescue cases by fiscal year.\n\nSource: https://catalog.data.gov/dataset/uscg-search-and-rescue-summary-statistics",
+                        "tags": [
+                          "boat",
+                          "communication",
+                          "search and rescue sar"
+                        ],
+                        "title": "USCG Search Rescue Summary",
+                        "updated": "2016-11-17T15:18:37.403Z",
+                        "version": "7f38fbbb-55b3-4fde-bfa5-44ace690c835",
+                        "visibility": "OPEN"
+                      }
+                    ],
+                    "objective": "Link to a dataset, extract some data from a PDF, make some insights!",
+                    "owner": "jonloyens",
+                    "status": "LOADED",
+                    "summary": "Overview\n-----------\nA sample project to show off the different kinds of files you might want to keep in a data.world dataset or project.  This project, based on a post on our blog:   **[What do I put in data.world?](https://meta.data.world/what-do-i-put-in-data-world-c6d3a478565d)**, demonstrates how you can use data.world to find unstructured data in a PDF, convert it to structured data with a Notebook, clean the data with Excel then generate insights and analytics while keep everything together in one place for other people to reuse your work.\n\n(Note: This sample project assumes some familiarity with using Python Notebooks and a working installation of Python and Jupyter Notebooks).\n\nIn this sample project we:\n\n1. Identify some raw data in a linked dataset [shown as a PDF](https://data.world/jonloyens/an-example-project-that-shows-what-to-put-in-data-world/workspace/file?agentid=uscg&datasetid=uscg-search-rescue-summary&filename=SAR+Sum+Stats+64-13.pdf).\n\n2. [Use a Python Notebook and Tabula.py](https://data.world/jonloyens/an-example-project-that-shows-what-to-put-in-data-world/workspace/file?filename=uscg-search-rescue-summary.ipynb) to create and [import raw structured data as a CSV](https://data.world/jonloyens/an-example-project-that-shows-what-to-put-in-data-world/workspace/file?filename=raw_USCG_data_import.csv).\n\n3. Load the [CSV into Excel and clean it up nicely](https://data.world/jonloyens/an-example-project-that-shows-what-to-put-in-data-world/workspace/file?filename=cleaned_USCG_data_import.xlsx) so it has nice headers and we can query it.\n\n4. [Use Insights](https://help.data.world/hc/en-us/articles/115010306647-Data-Projects-Share-insights) to document the process and do some basic exploratory analytics.\n\n",
+                    "tags": [
+                      "new feature"
+                    ],
+                    "title": "An Example Project that Shows What To Put in data.world",
+                    "updated": "2018-03-27T23:27:51.006Z",
+                    "visibility": "OPEN"
+                  }
+                ]
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/PaginatedProjectResults"
+            }
+          },
+          "400": {
+            "description": "**BAD REQUEST**\nThe server cannot or will not process the request due to something that is perceived to be a client error.\nFor example, this error may occur when the request doesn’t satisfy validation rules. See response for additional details.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "**UNAUTHORIZED**\nThe request has not been applied because it lacks valid authentication credentials for the target resource.\nFor example, this may occur if a token is invalid or hasn’t been provided. Make sure that you have a valid token and that is provided via the `Authorization` header including the `Bearer` prefix. For example, if your token is `xyz`, your header should be `Authorization: Bearer xyz`.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "**FORBIDDEN**\nThe server understood the request but refuses to authorize it.\nFor example, this error may occur you are not authorized to perform this operation.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "**NOT FOUND**\nThe origin server did not find a current representation for the target resource or is not willing to disclose that one exists.\nFor example, this error may occur when the URL is invalid.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "**INTERNAL SERVER ERROR**\nThe server encountered an unexpected condition that prevented it from fulfilling the request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_read"
+            ]
+          }
+        ],
+        "summary": "List projects for a specified owner",
+        "tags": [
+          "user"
         ]
       }
     },
