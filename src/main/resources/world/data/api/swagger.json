@@ -5804,7 +5804,7 @@
     "/metadata/analysis/{owner}": {
       "get": {
         "tags": [
-          "metadata"
+          "metadata/analysis"
         ],
         "summary": "Gets metadata analysis by owner.",
         "description": "",
@@ -5981,7 +5981,7 @@
     "/metadata/analysis/{owner}/{id}": {
       "get": {
         "tags": [
-          "metadata"
+          "metadata/analysis"
         ],
         "summary": "Get an individual metadata analysis",
         "description": "",
@@ -6279,7 +6279,7 @@
     "/metadata/glossary/{owner}": {
       "get": {
         "tags": [
-          "metadata"
+          "metadata/glossary"
         ],
         "summary": "Gets metadata glossary by owner.",
         "description": "",
@@ -6456,7 +6456,7 @@
     "/metadata/glossary/{owner}/{id}": {
       "get": {
         "tags": [
-          "metadata"
+          "metadata/glossary"
         ],
         "summary": "Get an individual metadata glossary",
         "description": "",
@@ -6754,7 +6754,7 @@
     "/metadata/relationships/{owner}": {
       "post": {
         "tags": [
-          "metadata"
+          "metadata/relationships"
         ],
         "summary": "Creates a relationship between two catalog resources",
         "description": "",
@@ -6828,7 +6828,7 @@
     "/metadata/relationships/{owner}/delete": {
       "post": {
         "tags": [
-          "metadata"
+          "metadata/relationships"
         ],
         "summary": "Deletes a relationship between two catalog resources",
         "description": "",
@@ -6902,7 +6902,7 @@
     "/metadata/relationships/{owner}/resource/{resourceId}": {
       "post": {
         "tags": [
-          "metadata"
+          "metadata/relationships"
         ],
         "summary": "Get resources (data, analysis, and glossaries) that are related to a resource",
         "description": "",
@@ -6997,7 +6997,7 @@
     "/metadata/relationships/{owner}/table/{sourceId}/{tableId}": {
       "post": {
         "tags": [
-          "metadata"
+          "metadata/relationships"
         ],
         "summary": "Get resources (data, analysis, and glossaries) that are related to a table",
         "description": "",
@@ -11028,7 +11028,13 @@
       "name": "files"
     },
     {
-      "name": "metadata"
+      "name": "metadata/analysis"
+    },
+    {
+      "name": "metadata/glossary"
+    },
+    {
+      "name": "metadata/relationships"
     },
     {
       "name": "search"
