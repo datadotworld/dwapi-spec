@@ -888,6 +888,38 @@
       "title": "Digital Object Identifier",
       "type": "object"
     },
+    "EditActivitiesResultDto": {
+      "type": "object",
+      "properties": {
+        "activityBatchId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "timeStarted": {
+          "$ref": "#/definitions/Instant"
+        },
+        "timeEnded": {
+          "$ref": "#/definitions/Instant"
+        },
+        "activityResults": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EntryType": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
     "ErrorMessage": {
       "properties": {
         "code": {
@@ -1462,6 +1494,105 @@
       "title": "Insight Summary Response",
       "type": "object"
     },
+    "JsonNode": {
+      "type": "object",
+      "properties": {
+        "boolean": {
+          "type": "boolean",
+          "default": false
+        },
+        "int": {
+          "type": "boolean",
+          "default": false
+        },
+        "bigDecimal": {
+          "type": "boolean",
+          "default": false
+        },
+        "bigInteger": {
+          "type": "boolean",
+          "default": false
+        },
+        "double": {
+          "type": "boolean",
+          "default": false
+        },
+        "long": {
+          "type": "boolean",
+          "default": false
+        },
+        "valueNode": {
+          "type": "boolean",
+          "default": false
+        },
+        "containerNode": {
+          "type": "boolean",
+          "default": false
+        },
+        "missingNode": {
+          "type": "boolean",
+          "default": false
+        },
+        "object": {
+          "type": "boolean",
+          "default": false
+        },
+        "pojo": {
+          "type": "boolean",
+          "default": false
+        },
+        "integralNumber": {
+          "type": "boolean",
+          "default": false
+        },
+        "floatingPointNumber": {
+          "type": "boolean",
+          "default": false
+        },
+        "short": {
+          "type": "boolean",
+          "default": false
+        },
+        "textual": {
+          "type": "boolean",
+          "default": false
+        },
+        "binary": {
+          "type": "boolean",
+          "default": false
+        },
+        "float": {
+          "type": "boolean",
+          "default": false
+        },
+        "nodeType": {
+          "type": "string",
+          "enum": [
+            "ARRAY",
+            "BINARY",
+            "BOOLEAN",
+            "MISSING",
+            "NULL",
+            "NUMBER",
+            "OBJECT",
+            "POJO",
+            "STRING"
+          ]
+        },
+        "number": {
+          "type": "boolean",
+          "default": false
+        },
+        "array": {
+          "type": "boolean",
+          "default": false
+        },
+        "null": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
     "LinkedDatasetCreateOrUpdateRequest": {
       "title": "Linked Dataset Create or Update Request",
       "type": "object",
@@ -1548,6 +1679,95 @@
       ],
       "title": "Linked Dataset Summary Response",
       "type": "object"
+    },
+    "MetadataResourceDto": {
+      "type": "object",
+      "required": [
+        "created",
+        "id",
+        "owner",
+        "visibility"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "table": {
+          "$ref": "#/definitions/TableId"
+        },
+        "category": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "rootParentType": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "visibility": {
+          "type": "string",
+          "enum": [
+            "DISCOVERABLE",
+            "OPEN",
+            "PRIVATE"
+          ]
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "collections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CatalogId"
+          }
+        },
+        "relationshipTypes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "externalUrls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "assetStatus": {
+          "$ref": "#/definitions/AssetStatus"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
     },
     "OauthTokenReference": {
       "description": "A reference to a 3rd-party OAuth 2.0 token stored by data.world.\n\nWhen creating or updating an OAuth token reference, the token must belong to the user making the update.",
@@ -2093,6 +2313,185 @@
         "name"
       ]
     },
+    "RdfTerm": {
+      "type": "object",
+      "required": [
+        "type",
+        "value"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "literal",
+            "uri"
+          ]
+        },
+        "value": {
+          "type": "string"
+        },
+        "datatype": {
+          "type": "string",
+          "readOnly": true
+        },
+        "xml:lang": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RelationshipCreateOrDeleteRequest": {
+      "type": "object",
+      "required": [
+        "relationshipType",
+        "sourceId",
+        "sourceType",
+        "targetId",
+        "targetType"
+      ],
+      "properties": {
+        "relationshipType": {
+          "type": "string",
+          "enum": [
+            "USES_DATASET",
+            "REFERENCE_BUSINESS_TERM",
+            "RELATED_TO_BUSINESS_TERM",
+            "USES_DATA_FROM"
+          ]
+        },
+        "sourceDatasetId": {
+          "type": "string",
+          "description": "If source is a table or column, populate with dataset ID that contains table."
+        },
+        "sourceId": {
+          "type": "string"
+        },
+        "sourceTableId": {
+          "type": "string",
+          "description": "If source is a column, populate with table ID that contains column."
+        },
+        "sourceType": {
+          "type": "string",
+          "enum": [
+            "CATALOG",
+            "ANALYSIS",
+            "BUSINESS_TERM",
+            "COLUMN",
+            "DATA_TYPE",
+            "DATASET",
+            "PROJECT",
+            "TABLE"
+          ]
+        },
+        "targetDatasetId": {
+          "type": "string",
+          "description": "If target is a table or column, populate with dataset ID that contains table."
+        },
+        "targetId": {
+          "type": "string"
+        },
+        "targetTableId": {
+          "type": "string",
+          "description": "If target is a column, populate with table ID that contains column."
+        },
+        "targetType": {
+          "type": "string",
+          "enum": [
+            "CATALOG",
+            "ANALYSIS",
+            "BUSINESS_TERM",
+            "COLUMN",
+            "DATA_TYPE",
+            "DATASET",
+            "PROJECT",
+            "TABLE"
+          ]
+        }
+      }
+    },
+    "RelationshipGetRequest": {
+      "type": "object",
+      "required": [
+        "resourceType"
+      ],
+      "properties": {
+        "byResourceTypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "CATALOG",
+              "ANALYSIS",
+              "BUSINESS_TERM",
+              "COLUMN",
+              "DATA_TYPE",
+              "DATASET",
+              "PROJECT",
+              "TABLE"
+            ]
+          }
+        },
+        "byRelationTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resourceType": {
+          "type": "string",
+          "enum": [
+            "CATALOG",
+            "ANALYSIS",
+            "BUSINESS_TERM",
+            "COLUMN",
+            "DATA_TYPE",
+            "DATASET",
+            "PROJECT",
+            "TABLE"
+          ]
+        }
+      }
+    },
+    "RelationshipGetTableRequest": {
+      "type": "object",
+      "properties": {
+        "byResourceTypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "CATALOG",
+              "ANALYSIS",
+              "BUSINESS_TERM",
+              "COLUMN",
+              "DATA_TYPE",
+              "DATASET",
+              "PROJECT",
+              "TABLE"
+            ]
+          }
+        },
+        "byRelationTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ResourceRelationshipDto": {
+      "type": "object",
+      "properties": {
+        "contributor": {
+          "type": "boolean",
+          "default": false
+        },
+        "liked": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
     "SavedQueryExecutionRequest": {
       "type": "object",
       "properties": {
@@ -2237,6 +2636,17 @@
         "includeCommunityResults": {
           "type": "boolean",
           "default": false
+        }
+      }
+    },
+    "SourceId": {
+      "type": "object",
+      "properties": {
+        "agentid": {
+          "type": "string"
+        },
+        "sourceid": {
+          "type": "string"
         }
       }
     },
@@ -5442,7 +5852,9 @@
         },
         "security": [
           {
-            "oauth": []
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ]
       },
@@ -5527,7 +5939,9 @@
         },
         "security": [
           {
-            "oauth": []
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ]
       }
@@ -5579,7 +5993,9 @@
         },
         "security": [
           {
-            "oauth": []
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ]
       },
@@ -5664,7 +6080,9 @@
         },
         "security": [
           {
-            "oauth": []
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ]
       },
@@ -5732,7 +6150,9 @@
         },
         "security": [
           {
-            "oauth": []
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ]
       },
@@ -5817,7 +6237,9 @@
         },
         "security": [
           {
-            "oauth": []
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ]
       }
@@ -5905,7 +6327,9 @@
         },
         "security": [
           {
-            "oauth": []
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ]
       },
@@ -5990,7 +6414,9 @@
         },
         "security": [
           {
-            "oauth": []
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ]
       }
@@ -6042,7 +6468,9 @@
         },
         "security": [
           {
-            "oauth": []
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ]
       },
@@ -6127,7 +6555,9 @@
         },
         "security": [
           {
-            "oauth": []
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ]
       },
@@ -6195,7 +6625,9 @@
         },
         "security": [
           {
-            "oauth": []
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ]
       },
@@ -6280,7 +6712,9 @@
         },
         "security": [
           {
-            "oauth": []
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ]
       }
@@ -6352,7 +6786,9 @@
         },
         "security": [
           {
-            "token": []
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ]
       }
@@ -6424,7 +6860,9 @@
         },
         "security": [
           {
-            "token": []
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ]
       }
@@ -6517,7 +6955,9 @@
         },
         "security": [
           {
-            "token": []
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ]
       }
@@ -6616,7 +7056,9 @@
         },
         "security": [
           {
-            "token": []
+            "oauth": [
+              "user_api_write"
+            ]
           }
         ]
       }
@@ -8272,7 +8714,9 @@
         },
         "security": [
           {
-            "token": []
+            "oauth": [
+              "user_api_read"
+            ]
           }
         ]
       }
