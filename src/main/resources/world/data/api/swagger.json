@@ -1,6 +1,406 @@
 {
   "basePath": "/v0",
   "definitions": {
+    "AgentHydrationDto": {
+      "type": "object",
+      "properties": {
+        "agentid": {
+          "type": "string"
+        },
+        "avatarUrl": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        }
+      }
+    },
+    "AnalysisImage": {
+      "type": "object",
+      "properties": {
+        "externalUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "AssetStatus": {
+      "type": "object",
+      "properties": {
+        "assetStatusLabel": {
+          "type": "string"
+        },
+        "dispositionLabel": {
+          "type": "string"
+        }
+      }
+    },
+    "CatalogAnalysisHydrationDto": {
+      "type": "object",
+      "properties": {
+        "agentid": {
+          "type": "string"
+        },
+        "analysisid": {
+          "type": "string"
+        },
+        "assetStatus": {
+          "$ref": "#/definitions/AssetStatus"
+        },
+        "catalogs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CatalogId"
+          }
+        },
+        "createdBy": {
+          "$ref": "#/definitions/AgentHydrationDto"
+        },
+        "description": {
+          "type": "string"
+        },
+        "entryTypeHierarchy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntryType"
+          }
+        },
+        "entryTypeLabel": {
+          "type": "string"
+        },
+        "previewImage": {
+          "$ref": "#/definitions/AnalysisImage"
+        },
+        "referent": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "CatalogAnalysisRequest": {
+      "type": "object",
+      "properties": {
+        "catalogs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "type": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 120
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonNode"
+          }
+        }
+      }
+    },
+    "CatalogBusinessTermHydrationDto": {
+      "type": "object",
+      "properties": {
+        "abstract_": {
+          "type": "string"
+        },
+        "agentid": {
+          "type": "string"
+        },
+        "assetStatus": {
+          "$ref": "#/definitions/AssetStatus"
+        },
+        "businessTermid": {
+          "type": "string"
+        },
+        "catalogs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CatalogId"
+          }
+        },
+        "createdBy": {
+          "$ref": "#/definitions/AgentHydrationDto"
+        },
+        "description": {
+          "type": "string"
+        },
+        "entryTypeHierarchy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntryType"
+          }
+        },
+        "entryTypeLabel": {
+          "type": "string"
+        },
+        "referent": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "CatalogColumnHydrationDto": {
+      "type": "object",
+      "properties": {
+        "agentid": {
+          "type": "string"
+        },
+        "assetStatus": {
+          "$ref": "#/definitions/AssetStatus"
+        },
+        "columnid": {
+          "type": "string"
+        },
+        "createdBy": {
+          "$ref": "#/definitions/AgentHydrationDto"
+        },
+        "description": {
+          "type": "string"
+        },
+        "entryTypeHierarchy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntryType"
+          }
+        },
+        "entryTypeLabel": {
+          "type": "string"
+        },
+        "referent": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "CatalogConceptHydrationDto": {
+      "type": "object",
+      "properties": {
+        "agentid": {
+          "type": "string"
+        },
+        "altLabel": {
+          "type": "string"
+        },
+        "conceptHierarchy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConceptEntry"
+          }
+        },
+        "createdBy": {
+          "$ref": "#/definitions/AgentHydrationDto"
+        },
+        "iri": {
+          "type": "string"
+        },
+        "prefLabel": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "CatalogGlossaryRequest": {
+      "type": "object",
+      "properties": {
+        "catalogs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "type": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 120
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonNode"
+          }
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 120
+        }
+      }
+    },
+    "CatalogHydrationDto": {
+      "type": "object",
+      "properties": {
+        "agentid": {
+          "type": "string"
+        },
+        "catalogid": {
+          "type": "string"
+        },
+        "createdBy": {
+          "$ref": "#/definitions/AgentHydrationDto"
+        },
+        "description": {
+          "type": "string"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SourceId"
+          }
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "CatalogId": {
+      "type": "object",
+      "required": [
+        "collectionId",
+        "owner"
+      ],
+      "properties": {
+        "owner": {
+          "type": "string"
+        },
+        "collectionId": {
+          "type": "string"
+        }
+      }
+    },
+    "CatalogTableHydrationDto": {
+      "type": "object",
+      "properties": {
+        "agentid": {
+          "type": "string"
+        },
+        "catalogs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CatalogId"
+          }
+        },
+        "createdBy": {
+          "$ref": "#/definitions/AgentHydrationDto"
+        },
+        "description": {
+          "type": "string"
+        },
+        "entryTypeHierarchy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntryType"
+          }
+        },
+        "entryTypeLabel": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "referent": {
+          "type": "string"
+        },
+        "sourceId": {
+          "$ref": "#/definitions/SourceId"
+        },
+        "tableid": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "ConceptEntry": {
+      "type": "object",
+      "properties": {
+        "altLabel": {
+          "type": "string"
+        },
+        "iri": {
+          "type": "string"
+        },
+        "prefLabel": {
+          "type": "string"
+        }
+      }
+    },
     "CreateDatasetResponse": {
       "properties": {
         "message": {
@@ -153,6 +553,47 @@
       ],
       "title": "Dataset Create Request",
       "type": "object"
+    },
+    "DatasetHydrationDto": {
+      "type": "object",
+      "properties": {
+        "agentid": {
+          "type": "string"
+        },
+        "createdBy": {
+          "$ref": "#/definitions/AgentHydrationDto"
+        },
+        "datasetid": {
+          "type": "string"
+        },
+        "headline": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "project": {
+          "type": "boolean",
+          "default": false
+        },
+        "relationship": {
+          "$ref": "#/definitions/ResourceRelationshipDto"
+        },
+        "type": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "userUpdated": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "abstract": {
+          "type": "string"
+        }
+      }
     },
     "DatasetIdentifier": {
       "type": "object",
@@ -833,6 +1274,50 @@
         "title"
       ]
     },
+    "InsightHydrationDto": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "string"
+        },
+        "createdBy": {
+          "$ref": "#/definitions/AgentHydrationDto"
+        },
+        "dataset": {
+          "$ref": "#/definitions/DatasetHydrationDto"
+        },
+        "datasetid": {
+          "type": "string"
+        },
+        "dataSources": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "insightid": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string",
+          "format": "uri"
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "InsightPatchRequest": {
       "title": "Insight Update Request",
       "type": "object",
@@ -1186,6 +1671,37 @@
       ],
       "title": "Paginated Query Results",
       "type": "object"
+    },
+    "PaginatedSearchResultsDto": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0.0
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "next": {
+          "type": "string"
+        },
+        "facets": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/SearchFacetResult"
+            }
+          }
+        },
+        "hydrations": {
+          "$ref": "#/definitions/SearchHydrations"
+        }
+      }
     },
     "PaginatedSubscriptionResults": {
       "type": "object",
@@ -1582,6 +2098,122 @@
         "maxRows": {
           "type": "long",
           "description": "Limits the number of rows returned."
+        }
+      }
+    },
+    "SearchFacetResult": {
+      "type": "object",
+      "properties": {
+        "term": {
+          "type": "string"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "SearchHydrations": {
+      "type": "object",
+      "properties": {
+        "agents": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AgentHydrationDto"
+          }
+        },
+        "catalogConcepts": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/CatalogConceptHydrationDto"
+          }
+        },
+        "catalogs": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/CatalogHydrationDto"
+          }
+        },
+        "catalogAnalysis": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/CatalogAnalysisHydrationDto"
+          }
+        },
+        "catalogBusinessTerms": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/CatalogBusinessTermHydrationDto"
+          }
+        },
+        "catalogTables": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/CatalogTableHydrationDto"
+          }
+        },
+        "catalogColumns": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/CatalogColumnHydrationDto"
+          }
+        },
+        "datasets": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/DatasetHydrationDto"
+          }
+        },
+        "insights": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/InsightHydrationDto"
+          }
+        }
+      }
+    },
+    "SimpleSearchRequest": {
+      "type": "object",
+      "required": [
+        "query"
+      ],
+      "properties": {
+        "query": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "catalogAnalysis",
+              "catalogBusinessTerm",
+              "catalogDataset",
+              "catalogDataType",
+              "catalogTable",
+              "collection",
+              "comment",
+              "dataset",
+              "datatable",
+              "file",
+              "insight",
+              "integration",
+              "project",
+              "query"
+            ]
+          }
+        },
+        "includeCommunityResults": {
+          "type": "boolean",
+          "default": false
         }
       }
     },
@@ -6280,6 +6912,90 @@
         ]
       }
     },
+    "/search/resources": {
+      "post": {
+        "tags": [
+          "search"
+        ],
+        "summary": "Simple search on resources.",
+        "description": "",
+        "operationId": "searchResources",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SimpleSearchRequest"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/PaginatedSearchResultsDto"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ]
+      }
+    },
     "/sparql/{owner}/{id}": {
       "get": {
         "description": "Same as `POST:/sparql`.",
@@ -8553,6 +9269,12 @@
     },
     {
       "name": "files"
+    },
+    {
+      "name": "metadata"
+    },
+    {
+      "name": "search"
     },
     {
       "name": "streams"
