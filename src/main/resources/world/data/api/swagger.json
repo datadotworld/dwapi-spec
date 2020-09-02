@@ -1494,6 +1494,19 @@
       "title": "Insight Summary Response",
       "type": "object"
     },
+    "Instant": {
+      "type": "object",
+      "properties": {
+        "nano": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "epochSecond": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
     "JsonNode": {
       "type": "object",
       "properties": {
@@ -2839,6 +2852,25 @@
       },
       "title": "Success Message Response",
       "type": "object"
+    },
+    "TableId": {
+      "type": "object",
+      "required": [
+        "owner",
+        "sourceId",
+        "tableId"
+      ],
+      "properties": {
+        "owner": {
+          "type": "string"
+        },
+        "sourceId": {
+          "type": "string"
+        },
+        "tableId": {
+          "type": "string"
+        }
+      }
     },
     "UserDataResponse": {
       "properties": {
