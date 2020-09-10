@@ -5944,6 +5944,41 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/CatalogAnalysisRequest"
+            },
+            "x-examples": {
+              "Minimal data": {
+                "title": "Predictive Analysis",
+                "catalogs": [ "crypto_snowflake"]
+              },
+              "Standard fields": {
+                "title": "Prescriptive Analysis",
+                "catalogs": [ "crypto_snowflake", "use-case-org-catalog"],
+                "typeLabel": "Tableau dashboard",
+                "description": "Fake tableau dashboard utilizing state of the art data practices",
+                "tags": [
+                  "prescriptive",
+                  "AI",
+                  "DataDriven"
+                ]
+              },
+              "With custom properties": {
+                "title": "Descriptive Analysis",
+                "catalogs": [ "crypto_snowflake", "use-case-org-catalog"],
+                "typeLabel": "Tableau dashboard",
+                "description": "Fake KPI dashboard and monthly revenue reports",
+                "tags": [
+                  "descriptive",
+                  "fakekpi"
+                ],
+                "properties": {
+                  "Impact Potential": "Grassroot Impact with paradigm shift",
+                  "Customer Segmentation": [
+                    "floater",
+                    "regular",
+                    "champion"
+                  ]
+                }
+              }
             }
           }
         ],
@@ -6091,6 +6126,41 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/CatalogAnalysisRequest"
+            },
+            "x-examples": {
+              "Minimal data": {
+                "title": "Predictive Analysis",
+                "catalogs": [ "crypto_snowflake"]
+              },
+              "Standard fields": {
+                "title": "Prescriptive Analysis",
+                "catalogs": [ "crypto_snowflake", "use-case-org-catalog"],
+                "typeLabel": "Tableau dashboard",
+                "description": "Fake tableau dashboard utilizing state of the art data practices",
+                "tags": [
+                  "prescriptive",
+                  "AI",
+                  "DataDriven"
+                ]
+              },
+              "With custom properties": {
+                "title": "Descriptive Analysis",
+                "catalogs": [ "crypto_snowflake", "use-case-org-catalog"],
+                "typeLabel": "Tableau dashboard",
+                "description": "Fake KPI dashboard and monthly revenue reports",
+                "tags": [
+                  "descriptive",
+                  "fakekpi"
+                ],
+                "properties": {
+                  "Impact Potential": "Grassroot Impact with paradigm shift",
+                  "Customer Segmentation": [
+                    "floater",
+                    "regular",
+                    "champion"
+                  ]
+                }
+              }
             }
           }
         ],
@@ -6248,6 +6318,40 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/CatalogAnalysisRequest"
+            },
+            "x-examples": {
+              "Simple": {
+                "title": "Predictive Analysis",
+              },
+              "Standard fields": {
+                "title": "Prescriptive Analysis",
+                "catalogs": [ "crypto_snowflake", "use-case-org-catalog"],
+                "typeLabel": "Tableau dashboard",
+                "description": "Fake tableau dashboard utilizing state of the art data practices",
+                "tags": [
+                  "prescriptive",
+                  "AI",
+                  "DataDriven"
+                ]
+              },
+              "With custom properties": {
+                "title": "Descriptive Analysis",
+                "catalogs": [ "crypto_snowflake", "use-case-org-catalog"],
+                "typeLabel": "Tableau dashboard",
+                "description": "Fake KPI dashboard and monthly revenue reports",
+                "tags": [
+                  "descriptive",
+                  "fakekpi"
+                ],
+                "properties": {
+                  "Impact Potential": "Grassroot Impact with paradigm shift",
+                  "Customer Segmentation": [
+                    "floater",
+                    "regular",
+                    "champion"
+                  ]
+                }
+              }
             }
           }
         ],
@@ -6425,6 +6529,39 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/CatalogGlossaryRequest"
+            },
+            "x-examples": {
+              "Minimal data": {
+                "title": "Adverse Selection",
+                "catalogs": [ "crypto_snowflake"]
+              },
+              "Standard fields": {
+                "title": "Actuarial Report",
+                "catalogs": [ "crypto_snowflake", "use-case-org-catalog"],
+                "typeLabel": "Business term",
+                "summary": "Actuarial memorandum submitted to the state regulatory authority",
+                "description": "Consists of actuary's professional conclusions and recommendations, of recording and communicating the methods and procedures, of assuring that the parties addressed are aware of the significance of the actuary's opinion or findings",
+                "tags": [
+                  "AReport",
+                  "AMemo",
+                  "RiskMgmt"
+                ]
+              },
+              "With custom properties": {
+                "title": "Asset",
+                "catalogs": [ "crypto_snowflake", "use-case-org-catalog"],
+                "typeLabel": "Business term",
+                "summary": "Embodiment of future benefit leading to net cash inflow in combination with other assets",
+                "tags": [
+                  "Category1Depreciation",
+                  "FakeAsset"
+                ],
+                "properties": {
+                  "Future Benefit": "Not Singly, only in combination with other assets",
+                  "Contribution": "Directly or Indirectly to future net cash inflows",
+                  "Risk": "Only Assigned, no asset risk as per risk based capital formula"
+                }
+              }
             }
           }
         ],
@@ -6572,6 +6709,39 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/CatalogGlossaryRequest"
+            },
+            "x-examples": {
+              "Minimal data": {
+                "title": "Adverse Selection",
+                "catalogs": [ "crypto_snowflake"]
+              },
+              "Standard fields": {
+                "title": "Actuarial Report",
+                "catalogs": [ "crypto_snowflake", "use-case-org-catalog"],
+                "typeLabel": "Business term",
+                "summary": "Actuarial memorandum submitted to the state regulatory authority",
+                "description": "Consists of actuary's professional conclusions and recommendations, of recording and communicating the methods and procedures, of assuring that the parties addressed are aware of the significance of the actuary's opinion or findings",
+                "tags": [
+                  "AReport",
+                  "AMemo",
+                  "RiskMgmt"
+                ]
+              },
+              "With custom properties": {
+                "title": "Asset",
+                "catalogs": [ "crypto_snowflake", "use-case-org-catalog"],
+                "typeLabel": "Business term",
+                "summary": "Embodiment of future benefit leading to net cash inflow in combination with other assets",
+                "tags": [
+                  "Category1Depreciation",
+                  "FakeAsset"
+                ],
+                "properties": {
+                  "Future Benefit": "Not Singly, only in combination with other assets",
+                  "Contribution": "Directly or Indirectly to future net cash inflows",
+                  "Risk": "Only Assigned, no asset risk as per risk based capital formula"
+                }
+              }
             }
           }
         ],
@@ -6729,6 +6899,38 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/CatalogGlossaryRequest"
+            },
+            "x-examples": {
+              "Simple": {
+                "title": "Adverse Selection",
+              },
+              "Standard fields": {
+                "title": "Actuarial Report",
+                "catalogs": [ "crypto_snowflake", "use-case-org-catalog"],
+                "typeLabel": "Business term",
+                "summary": "Actuarial memorandum submitted to the state regulatory authority",
+                "description": "Consists of actuary's professional conclusions and recommendations, of recording and communicating the methods and procedures, of assuring that the parties addressed are aware of the significance of the actuary's opinion or findings",
+                "tags": [
+                  "AReport",
+                  "AMemo",
+                  "RiskMgmt"
+                ]
+              },
+              "With custom properties": {
+                "title": "Asset",
+                "catalogs": [ "crypto_snowflake", "use-case-org-catalog"],
+                "typeLabel": "Business term",
+                "summary": "Embodiment of future benefit leading to net cash inflow in combination with other assets",
+                "tags": [
+                  "Category1Depreciation",
+                  "FakeAsset"
+                ],
+                "properties": {
+                  "Future Benefit": "Not Singly, only in combination with other assets",
+                  "Contribution": "Directly or Indirectly to future net cash inflows",
+                  "Risk": "Only Assigned, no asset risk as per risk based capital formula"
+                }
+              }
             }
           }
         ],
