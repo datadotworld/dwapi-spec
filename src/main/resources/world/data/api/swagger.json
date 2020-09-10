@@ -99,7 +99,7 @@
           "minLength": 1,
           "maxLength": 60
         },
-        "type": {
+        "typeLabel": {
           "type": "string"
         },
         "description": {
@@ -261,7 +261,7 @@
           "minLength": 1,
           "maxLength": 60
         },
-        "type": {
+        "typeLabel": {
           "type": "string"
         },
         "description": {
@@ -474,6 +474,22 @@
         "name",
         "language"
       ]
+    },
+    "CreateResponse": {
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "uri": {
+          "description": "URI of newly created resource.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "uri"
+      ],
+      "title": "Create Response",
+      "type": "object"
     },
     "DatasetCreateRequest": {
       "properties": {
@@ -1714,10 +1730,16 @@
         "category": {
           "type": "string"
         },
-        "type": {
+        "typeLabel": {
           "type": "string"
         },
-        "rootParentType": {
+        "typeIri": {
+          "type": "string"
+        },
+        "rootParentTypeLabel": {
+          "type": "string"
+        },
+        "rootParentTypeIri": {
           "type": "string"
         },
         "owner": {
@@ -5923,7 +5945,7 @@
           "200": {
             "description": "Analysis Metadata created successfully.",
             "schema": {
-              "$ref": "#/definitions/CreateDatasetResponse"
+              "$ref": "#/definitions/CreateResponse"
             }
           },
           "400": {
@@ -6398,7 +6420,7 @@
           "200": {
             "description": "Glossary Metadata created successfully.",
             "schema": {
-              "$ref": "#/definitions/CreateDatasetResponse"
+              "$ref": "#/definitions/CreateResponse"
             }
           },
           "400": {
