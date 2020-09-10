@@ -5842,7 +5842,13 @@
             "type": "string"
           },
           {
-            "name": "type",
+            "name": "typelabel",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "typeiri",
             "in": "query",
             "required": false,
             "type": "string"
@@ -6317,7 +6323,13 @@
             "type": "string"
           },
           {
-            "name": "type",
+            "name": "typelabel",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "typeiri",
             "in": "query",
             "required": false,
             "type": "string"
