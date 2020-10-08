@@ -1,6 +1,519 @@
 {
   "basePath": "/v0",
   "definitions": {
+    "AgentHydrationDto": {
+      "type": "object",
+      "properties": {
+        "agentid": {
+          "type": "string"
+        },
+        "avatarUrl": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        }
+      }
+    },
+    "AnalysisImage": {
+      "type": "object",
+      "properties": {
+        "externalUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "AssetStatus": {
+      "type": "object",
+      "properties": {
+        "assetStatusLabel": {
+          "type": "string"
+        },
+        "dispositionLabel": {
+          "type": "string"
+        }
+      }
+    },
+    "CatalogAnalysisHydrationDto": {
+      "type": "object",
+      "properties": {
+        "agentid": {
+          "type": "string"
+        },
+        "analysisid": {
+          "type": "string"
+        },
+        "assetStatus": {
+          "$ref": "#/definitions/AssetStatus"
+        },
+        "catalogs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CatalogId"
+          }
+        },
+        "createdBy": {
+          "$ref": "#/definitions/AgentHydrationDto"
+        },
+        "description": {
+          "type": "string"
+        },
+        "entryTypeHierarchy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntryType"
+          }
+        },
+        "entryTypeLabel": {
+          "type": "string"
+        },
+        "previewImage": {
+          "$ref": "#/definitions/AnalysisImage"
+        },
+        "referent": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "CatalogAnalysisRequest": {
+      "type": "object",
+      "properties": {
+        "catalogs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "typeLabel": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 120
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonNode"
+          }
+        }
+      }
+    },
+    "CatalogBusinessTermHydrationDto": {
+      "type": "object",
+      "properties": {
+        "abstract_": {
+          "type": "string"
+        },
+        "agentid": {
+          "type": "string"
+        },
+        "assetStatus": {
+          "$ref": "#/definitions/AssetStatus"
+        },
+        "businessTermid": {
+          "type": "string"
+        },
+        "catalogs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CatalogId"
+          }
+        },
+        "createdBy": {
+          "$ref": "#/definitions/AgentHydrationDto"
+        },
+        "description": {
+          "type": "string"
+        },
+        "entryTypeHierarchy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntryType"
+          }
+        },
+        "entryTypeLabel": {
+          "type": "string"
+        },
+        "referent": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "CatalogColumnHydrationDto": {
+      "type": "object",
+      "properties": {
+        "agentid": {
+          "type": "string"
+        },
+        "assetStatus": {
+          "$ref": "#/definitions/AssetStatus"
+        },
+        "columnid": {
+          "type": "string"
+        },
+        "createdBy": {
+          "$ref": "#/definitions/AgentHydrationDto"
+        },
+        "description": {
+          "type": "string"
+        },
+        "entryTypeHierarchy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntryType"
+          }
+        },
+        "entryTypeLabel": {
+          "type": "string"
+        },
+        "referent": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "CatalogColumnRequest": {
+      "type": "object",
+      "properties": {
+        "catalogs": {
+          "type": "array",
+          "example": [
+            "Aid Option"
+          ],
+          "description": "Catalogs to which this metadata resource is added. Required for POST and PUT.Available catalogs can be discovered via appropriate discovery endpoints.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "title": {
+          "type": "string",
+          "example": "crypto.snowflake",
+          "description": "Title of the metadata resource. Required for POST and PUT.",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "typeLabel": {
+          "type": "string",
+          "example": "Tableau dashboard",
+          "description": "Indicates the type of metadata resource. Some examples of valid values are Report, Tableau dashboard, Glossary, Table, Database view etc. Default values will be assumed if not provided. Defaults to Report for analysis resources, Glossary for Glossary resources, Table for Table resources and Column for Column resources. Once specified during creation, this cannot be changed via PATCH. Only a PUT can change the type "
+        },
+        "description": {
+          "type": "string",
+          "example": "Aid given to charity is an option that can be exercised by individuals and corporations",
+          "description": "A short, but descriptive statement about the metadata resource.",
+          "minLength": 0,
+          "maxLength": 120
+        },
+        "tags": {
+          "type": "array",
+          "example": [
+            "HumanitarianAid"
+          ],
+          "description": "A collection of tags to identify the relevance of metadata resource. Tags with no spaces is defacto standard",
+          "items": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Custom properties for the metadata resource mapped to API BindingsCan be simple name-value string pairs or nested values for a string name. See examples for details.",
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonNode"
+          }
+        },
+        "dataType": {
+          "type": "string",
+          "example": "BIGINT",
+          "description": "Data Type name for column. Required for POST and PUT."
+        },
+        "columnIndex": {
+          "type": "integer",
+          "format": "int32",
+          "example": "5",
+          "description": "Column index values from 1 and upwards. 0 is default."
+        }
+      }
+    },
+    "CatalogConceptHydrationDto": {
+      "type": "object",
+      "properties": {
+        "agentid": {
+          "type": "string"
+        },
+        "altLabel": {
+          "type": "string"
+        },
+        "conceptHierarchy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConceptEntry"
+          }
+        },
+        "createdBy": {
+          "$ref": "#/definitions/AgentHydrationDto"
+        },
+        "iri": {
+          "type": "string"
+        },
+        "prefLabel": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "CatalogGlossaryRequest": {
+      "type": "object",
+      "properties": {
+        "catalogs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "typeLabel": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 120
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonNode"
+          }
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 120
+        }
+      }
+    },
+    "CatalogHydrationDto": {
+      "type": "object",
+      "properties": {
+        "agentid": {
+          "type": "string"
+        },
+        "catalogid": {
+          "type": "string"
+        },
+        "createdBy": {
+          "$ref": "#/definitions/AgentHydrationDto"
+        },
+        "description": {
+          "type": "string"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SourceId"
+          }
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "CatalogId": {
+      "type": "object",
+      "required": [
+        "collectionId",
+        "owner"
+      ],
+      "properties": {
+        "owner": {
+          "type": "string"
+        },
+        "collectionId": {
+          "type": "string"
+        }
+      }
+    },
+    "CatalogTableHydrationDto": {
+      "type": "object",
+      "properties": {
+        "agentid": {
+          "type": "string"
+        },
+        "catalogs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CatalogId"
+          }
+        },
+        "createdBy": {
+          "$ref": "#/definitions/AgentHydrationDto"
+        },
+        "description": {
+          "type": "string"
+        },
+        "entryTypeHierarchy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntryType"
+          }
+        },
+        "entryTypeLabel": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "referent": {
+          "type": "string"
+        },
+        "sourceId": {
+          "$ref": "#/definitions/SourceId"
+        },
+        "tableid": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "CatalogTableRequest": {
+      "type": "object",
+      "properties": {
+        "catalogs": {
+          "type": "array",
+          "example": [
+            "Aid Option"
+          ],
+          "description": "Catalogs to which this metadata resource is added. Required for POST and PUT.Available catalogs can be discovered via appropriate discovery endpoints.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "title": {
+          "type": "string",
+          "example": "crypto.snowflake",
+          "description": "Title of the metadata resource. Required for POST and PUT.",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "typeLabel": {
+          "type": "string",
+          "example": "Tableau dashboard",
+          "description": "Indicates the type of metadata resource. Some examples of valid values are Report, Tableau dashboard, Glossary, Table, Database view etc. Default values will be assumed if not provided. Defaults to Report for analysis resources, Glossary for Glossary resources, Table for Table resources and Column for Column resources. Once specified during creation, this cannot be changed via PATCH. Only a PUT can change the type "
+        },
+        "description": {
+          "type": "string",
+          "example": "Aid given to charity is an option that can be exercised by individuals and corporations",
+          "description": "A short, but descriptive statement about the metadata resource.",
+          "minLength": 0,
+          "maxLength": 120
+        },
+        "tags": {
+          "type": "array",
+          "example": [
+            "HumanitarianAid"
+          ],
+          "description": "A collection of tags to identify the relevance of metadata resource. Tags with no spaces is defacto standard",
+          "items": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Custom properties for the metadata resource mapped to API BindingsCan be simple name-value string pairs or nested values for a string name. See examples for details.",
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonNode"
+          }
+        }
+      }
+    },
+    "ConceptEntry": {
+      "type": "object",
+      "properties": {
+        "altLabel": {
+          "type": "string"
+        },
+        "iri": {
+          "type": "string"
+        },
+        "prefLabel": {
+          "type": "string"
+        }
+      }
+    },
     "CreateDatasetResponse": {
       "properties": {
         "message": {
@@ -74,6 +587,57 @@
         "name",
         "language"
       ]
+    },
+    "CreateResponse": {
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "uri": {
+          "description": "URI of newly created resource.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "uri"
+      ],
+      "title": "Create Response",
+      "type": "object"
+    },
+    "DatabaseDbo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "environment": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "server": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "catalog": {
+          "type": "string"
+        },
+        "schema": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
     },
     "DatasetCreateRequest": {
       "properties": {
@@ -153,6 +717,47 @@
       ],
       "title": "Dataset Create Request",
       "type": "object"
+    },
+    "DatasetHydrationDto": {
+      "type": "object",
+      "properties": {
+        "agentid": {
+          "type": "string"
+        },
+        "createdBy": {
+          "$ref": "#/definitions/AgentHydrationDto"
+        },
+        "datasetid": {
+          "type": "string"
+        },
+        "headline": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "project": {
+          "type": "boolean",
+          "default": false
+        },
+        "relationship": {
+          "$ref": "#/definitions/ResourceRelationshipDto"
+        },
+        "type": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "userUpdated": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "abstract": {
+          "type": "string"
+        }
+      }
     },
     "DatasetIdentifier": {
       "type": "object",
@@ -446,6 +1051,38 @@
       ],
       "title": "Digital Object Identifier",
       "type": "object"
+    },
+    "EditActivitiesResultDto": {
+      "type": "object",
+      "properties": {
+        "activityBatchId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "timeStarted": {
+          "$ref": "#/definitions/Instant"
+        },
+        "timeEnded": {
+          "$ref": "#/definitions/Instant"
+        },
+        "activityResults": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EntryType": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
     },
     "ErrorMessage": {
       "properties": {
@@ -833,6 +1470,50 @@
         "title"
       ]
     },
+    "InsightHydrationDto": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "string"
+        },
+        "createdBy": {
+          "$ref": "#/definitions/AgentHydrationDto"
+        },
+        "dataset": {
+          "$ref": "#/definitions/DatasetHydrationDto"
+        },
+        "datasetid": {
+          "type": "string"
+        },
+        "dataSources": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "insightid": {
+          "type": "string"
+        },
+        "thumbnail": {
+          "type": "string",
+          "format": "uri"
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "InsightPatchRequest": {
       "title": "Insight Update Request",
       "type": "object",
@@ -977,6 +1658,118 @@
       "title": "Insight Summary Response",
       "type": "object"
     },
+    "Instant": {
+      "type": "object",
+      "properties": {
+        "nano": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "epochSecond": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "JsonNode": {
+      "type": "object",
+      "properties": {
+        "boolean": {
+          "type": "boolean",
+          "default": false
+        },
+        "int": {
+          "type": "boolean",
+          "default": false
+        },
+        "bigDecimal": {
+          "type": "boolean",
+          "default": false
+        },
+        "bigInteger": {
+          "type": "boolean",
+          "default": false
+        },
+        "double": {
+          "type": "boolean",
+          "default": false
+        },
+        "long": {
+          "type": "boolean",
+          "default": false
+        },
+        "valueNode": {
+          "type": "boolean",
+          "default": false
+        },
+        "containerNode": {
+          "type": "boolean",
+          "default": false
+        },
+        "missingNode": {
+          "type": "boolean",
+          "default": false
+        },
+        "object": {
+          "type": "boolean",
+          "default": false
+        },
+        "pojo": {
+          "type": "boolean",
+          "default": false
+        },
+        "integralNumber": {
+          "type": "boolean",
+          "default": false
+        },
+        "floatingPointNumber": {
+          "type": "boolean",
+          "default": false
+        },
+        "short": {
+          "type": "boolean",
+          "default": false
+        },
+        "textual": {
+          "type": "boolean",
+          "default": false
+        },
+        "binary": {
+          "type": "boolean",
+          "default": false
+        },
+        "float": {
+          "type": "boolean",
+          "default": false
+        },
+        "nodeType": {
+          "type": "string",
+          "enum": [
+            "ARRAY",
+            "BINARY",
+            "BOOLEAN",
+            "MISSING",
+            "NULL",
+            "NUMBER",
+            "OBJECT",
+            "POJO",
+            "STRING"
+          ]
+        },
+        "number": {
+          "type": "boolean",
+          "default": false
+        },
+        "array": {
+          "type": "boolean",
+          "default": false
+        },
+        "null": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
     "LinkedDatasetCreateOrUpdateRequest": {
       "title": "Linked Dataset Create or Update Request",
       "type": "object",
@@ -1064,6 +1857,101 @@
       "title": "Linked Dataset Summary Response",
       "type": "object"
     },
+    "MetadataResourceDto": {
+      "type": "object",
+      "required": [
+        "created",
+        "id",
+        "owner",
+        "visibility"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "table": {
+          "$ref": "#/definitions/TableId"
+        },
+        "category": {
+          "type": "string"
+        },
+        "typeLabel": {
+          "type": "string"
+        },
+        "typeIri": {
+          "type": "string"
+        },
+        "rootParentTypeLabel": {
+          "type": "string"
+        },
+        "rootParentTypeIri": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "visibility": {
+          "type": "string",
+          "enum": [
+            "DISCOVERABLE",
+            "OPEN",
+            "PRIVATE"
+          ]
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "collections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CatalogId"
+          }
+        },
+        "relationshipTypes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "externalUrls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "assetStatus": {
+          "$ref": "#/definitions/AssetStatus"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
+    },
     "OauthTokenReference": {
       "description": "A reference to a 3rd-party OAuth 2.0 token stored by data.world.\n\nWhen creating or updating an OAuth token reference, the token must belong to the user making the update.",
       "properties": {
@@ -1140,6 +2028,29 @@
       "title": "Paginated Insight Results",
       "type": "object"
     },
+    "PaginatedMetadataResourceResults": {
+      "type": "object",
+      "required": [
+        "count",
+        "records"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetadataResourceDto"
+          }
+        },
+        "nextPageToken": {
+          "type": "string"
+        }
+      }
+    },
     "PaginatedProjectResults": {
       "properties": {
         "count": {
@@ -1186,6 +2097,37 @@
       ],
       "title": "Paginated Query Results",
       "type": "object"
+    },
+    "PaginatedSearchResultsDto": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "next": {
+          "type": "string"
+        },
+        "facets": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/SearchFacetResult"
+            }
+          }
+        },
+        "hydrations": {
+          "$ref": "#/definitions/SearchHydrations"
+        }
+      }
     },
     "PaginatedSubscriptionResults": {
       "type": "object",
@@ -1554,6 +2496,185 @@
         "name"
       ]
     },
+    "RdfTerm": {
+      "type": "object",
+      "required": [
+        "type",
+        "value"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "literal",
+            "uri"
+          ]
+        },
+        "value": {
+          "type": "string"
+        },
+        "datatype": {
+          "type": "string",
+          "readOnly": true
+        },
+        "xml:lang": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RelationshipCreateOrDeleteRequest": {
+      "type": "object",
+      "required": [
+        "relationshipType",
+        "sourceId",
+        "sourceType",
+        "targetId",
+        "targetType"
+      ],
+      "properties": {
+        "relationshipType": {
+          "type": "string",
+          "enum": [
+            "USES_DATASET",
+            "REFERENCE_BUSINESS_TERM",
+            "RELATED_TO_BUSINESS_TERM",
+            "USES_DATA_FROM"
+          ]
+        },
+        "sourceDatasetId": {
+          "type": "string",
+          "description": "If source is a table or column, populate with dataset ID that contains table."
+        },
+        "sourceId": {
+          "type": "string"
+        },
+        "sourceTableId": {
+          "type": "string",
+          "description": "If source is a column, populate with table ID that contains column."
+        },
+        "sourceType": {
+          "type": "string",
+          "enum": [
+            "CATALOG",
+            "ANALYSIS",
+            "BUSINESS_TERM",
+            "COLUMN",
+            "DATA_TYPE",
+            "DATASET",
+            "PROJECT",
+            "TABLE"
+          ]
+        },
+        "targetDatasetId": {
+          "type": "string",
+          "description": "If target is a table or column, populate with dataset ID that contains table."
+        },
+        "targetId": {
+          "type": "string"
+        },
+        "targetTableId": {
+          "type": "string",
+          "description": "If target is a column, populate with table ID that contains column."
+        },
+        "targetType": {
+          "type": "string",
+          "enum": [
+            "CATALOG",
+            "ANALYSIS",
+            "BUSINESS_TERM",
+            "COLUMN",
+            "DATA_TYPE",
+            "DATASET",
+            "PROJECT",
+            "TABLE"
+          ]
+        }
+      }
+    },
+    "RelationshipGetRequest": {
+      "type": "object",
+      "required": [
+        "resourceType"
+      ],
+      "properties": {
+        "byResourceTypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "CATALOG",
+              "ANALYSIS",
+              "BUSINESS_TERM",
+              "COLUMN",
+              "DATA_TYPE",
+              "DATASET",
+              "PROJECT",
+              "TABLE"
+            ]
+          }
+        },
+        "byRelationTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resourceType": {
+          "type": "string",
+          "enum": [
+            "CATALOG",
+            "ANALYSIS",
+            "BUSINESS_TERM",
+            "COLUMN",
+            "DATA_TYPE",
+            "DATASET",
+            "PROJECT",
+            "TABLE"
+          ]
+        }
+      }
+    },
+    "RelationshipGetTableRequest": {
+      "type": "object",
+      "properties": {
+        "byResourceTypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "CATALOG",
+              "ANALYSIS",
+              "BUSINESS_TERM",
+              "COLUMN",
+              "DATA_TYPE",
+              "DATASET",
+              "PROJECT",
+              "TABLE"
+            ]
+          }
+        },
+        "byRelationTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ResourceRelationshipDto": {
+      "type": "object",
+      "properties": {
+        "contributor": {
+          "type": "boolean",
+          "default": false
+        },
+        "liked": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
     "SavedQueryExecutionRequest": {
       "type": "object",
       "properties": {
@@ -1582,6 +2703,231 @@
         "maxRows": {
           "type": "long",
           "description": "Limits the number of rows returned."
+        }
+      }
+    },
+    "SearchFacetResult": {
+      "type": "object",
+      "properties": {
+        "term": {
+          "type": "string"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "SearchHydrations": {
+      "type": "object",
+      "properties": {
+        "agents": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AgentHydrationDto"
+          }
+        },
+        "catalogConcepts": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/CatalogConceptHydrationDto"
+          }
+        },
+        "catalogs": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/CatalogHydrationDto"
+          }
+        },
+        "catalogAnalysis": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/CatalogAnalysisHydrationDto"
+          }
+        },
+        "catalogBusinessTerms": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/CatalogBusinessTermHydrationDto"
+          }
+        },
+        "catalogTables": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/CatalogTableHydrationDto"
+          }
+        },
+        "catalogColumns": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/CatalogColumnHydrationDto"
+          }
+        },
+        "datasets": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/DatasetHydrationDto"
+          }
+        },
+        "insights": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/InsightHydrationDto"
+          }
+        }
+      }
+    },
+    "SearchRequest": {
+      "type": "object",
+      "required": [
+        "query"
+      ],
+      "properties": {
+        "query": {
+          "type": "string"
+        },
+        "category": {
+          "type": "array",
+          "description": "Filter by categories.",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "catalogAnalysis",
+              "catalogBusinessTerm",
+              "catalogDataset",
+              "catalogDataType",
+              "catalogTable",
+              "collection",
+              "comment",
+              "dataset",
+              "datatable",
+              "file",
+              "insight",
+              "integration",
+              "project",
+              "query"
+            ]
+          }
+        },
+        "resourceId": {
+          "type": "array",
+          "description": "Filter by resource IDs.",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "type": "array",
+          "description": "Filter by type of metadata resource. Both IRI and label are accepted.",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "owner": {
+          "type": "array",
+          "description": "Filter by owners. Owners are identified by their IDs.",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "minAccessLevel": {
+          "type": "string",
+          "description": "Minimum access level to filter by.",
+          "enum": [
+            "NONE",
+            "SAML_GATED",
+            "DISCOVER",
+            "READ",
+            "WRITE",
+            "ADMIN"
+          ]
+        },
+        "tag": {
+          "type": "array",
+          "description": "Filter by tags.",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "visibility": {
+          "type": "string",
+          "description": "Filter by visibility.",
+          "enum": [
+            "DISCOVERABLE",
+            "OPEN",
+            "PRIVATE"
+          ]
+        },
+        "createdRange": {
+          "description": "Filter by range of date that the resource was created.",
+          "$ref": "#/definitions/Range"
+        },
+        "updatedRange": {
+          "description": "Filter by range of date that the resource was updated.",
+          "$ref": "#/definitions/Range"
+        }
+      }
+    },
+    "SimpleSearchRequest": {
+      "type": "object",
+      "required": [
+        "query"
+      ],
+      "properties": {
+        "query": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "array",
+          "description": "Filter by owners. Owners are identified by their IDs.",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "category": {
+          "type": "array",
+          "description": "Filter by categories.",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "catalogAnalysis",
+              "catalogBusinessTerm",
+              "catalogDataset",
+              "catalogDataType",
+              "catalogTable",
+              "collection",
+              "comment",
+              "dataset",
+              "datatable",
+              "file",
+              "insight",
+              "integration",
+              "project",
+              "query"
+            ]
+          }
+        },
+        "includeCommunityResults": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "SourceId": {
+      "type": "object",
+      "properties": {
+        "agentid": {
+          "type": "string"
+        },
+        "sourceid": {
+          "type": "string"
         }
       }
     },
@@ -1629,6 +2975,19 @@
       },
       "type": "object",
       "title": "Query Summary Response"
+    },
+    "Range": {
+      "type": "object",
+      "properties": {
+        "endDate": {
+          "type": "string",
+          "description": "Inclusive. Format is YYYY-MM-DD in UTC. If inputted by itself (without startDate), it will match all dates before this date and this date."
+        },
+        "startDate": {
+          "type": "string",
+          "description": "Inclusive. Format is YYYY-MM-DD in UTC. If inputted by itself (without endDate),it will match all dates after this date and this date."
+        }
+      }
     },
     "SqlQueryRequest": {
       "type": "object",
@@ -1774,6 +3133,25 @@
       },
       "title": "Success Message Response",
       "type": "object"
+    },
+    "TableId": {
+      "type": "object",
+      "required": [
+        "owner",
+        "sourceId",
+        "tableId"
+      ],
+      "properties": {
+        "owner": {
+          "type": "string"
+        },
+        "sourceId": {
+          "type": "string"
+        },
+        "tableId": {
+          "type": "string"
+        }
+      }
     },
     "UserDataResponse": {
       "properties": {
@@ -1964,7 +3342,7 @@
       "type": "string"
     },
     "owner": {
-      "description": "User name and unique identifier of the creator of a dataset or project.\nFor example, in the URL: [https://data.world/jonloyens/an-intro-to-dataworld-dataset](https://data.world/jonloyens/an-intro-to-dataworld-dataset), jonloyens is the unique identifier of the owner.",
+      "description": "User name and unique identifier of the user or organization a resource belongs to.\nFor example, in the URL: [https://data.world/jonloyens/an-intro-to-dataworld-dataset](https://data.world/jonloyens/an-intro-to-dataworld-dataset), jonloyens is the unique identifier of the owner.",
       "in": "path",
       "name": "owner",
       "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9])+[a-z0-9]",
@@ -2032,9 +3410,99 @@
       "required": true,
       "pattern": "10.\\\\d{4,9}/[-._;()/:a-zA-Z0-9]+",
       "description": "DOI ([Digital Object Identifier](https://www.doi.org/))"
+    },
+    "id": {
+      "name": "id",
+      "in": "path",
+      "type": "string",
+      "description": "Unique identifier for the resource as displayed in the resource URL on data.world",
+      "required": true
     }
   },
   "paths": {
+    "/datasets/search": {
+      "get": {
+        "tags": [
+          "datasets"
+        ],
+        "summary": "Search for datasets",
+        "description": "Simple Dataset Search. Available for single tenant only.",
+        "operationId": "search",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "next",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved dataset",
+            "schema": {
+              "$ref": "#/definitions/PaginatedDatasetResults"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": []
+          }
+        ],
+        "x-private": true
+      }
+    },
     "/datasets/{owner}": {
       "get": {
         "description": "List datasets that the currently authenticated user has access to, for the specified owner; when the dataset is open, private (but discoverable by the authenticated user) or the authenticated user is a contributor with discover visibility",
@@ -2103,11 +3571,9 @@
         ],
         "summary": "List datasets for a specified owner",
         "tags": [
-          "user"
+          "datasets"
         ]
-      }
-    },
-    "/datasets/{owner}": {
+      },
       "post": {
         "consumes": [
           "application/json"
@@ -4706,6 +6172,2730 @@
         ]
       }
     },
+    "/metadata/data/sources/{owner}": {
+      "get": {
+        "tags": [
+          "metadata/data"
+        ],
+        "summary": "Gets datasources by owner.",
+        "description": "Gets datasources by owner.",
+        "operationId": "getDatabases",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "description": "id of the user or organization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved datasource metadata",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_read"
+            ]
+          }
+        ],
+        "x-private": true
+      }
+    },
+    "/metadata/data/sources/{owner}/{sourceid}": {
+      "get": {
+        "tags": [
+          "metadata/data"
+        ],
+        "summary": "Get an individual datasource metadata",
+        "description": "Get an individual datasource metadata",
+        "operationId": "getDatabase",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "description": "id of the user or organization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sourceid",
+            "in": "path",
+            "description": "database source id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/DatabaseDbo"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_read"
+            ]
+          }
+        ],
+        "x-private": true
+      }
+    },
+    "/metadata/data/sources/{owner}/{sourceid}/tables": {
+      "get": {
+        "tags": [
+          "metadata/data"
+        ],
+        "summary": "Get tables for a data source",
+        "description": "Get tables for a data source",
+        "operationId": "getTables",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "description": "id of the user or organization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sourceid",
+            "in": "path",
+            "description": "database source id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "typelabel",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "typeiri",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved tables metadata",
+            "schema": {
+              "$ref": "#/definitions/PaginatedMetadataResourceResults"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_read"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "metadata/data"
+        ],
+        "summary": "Create a new table metadata",
+        "description": "Create a new table metadata.",
+        "operationId": "createCatalogTable",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "description": "id of the user or organization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sourceid",
+            "in": "path",
+            "description": "database source id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CatalogTableRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Table Metadata created successfully.",
+            "schema": {
+              "$ref": "#/definitions/CreateResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "422": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_read"
+            ]
+          }
+        ]
+      }
+    },
+    "/metadata/data/sources/{owner}/{sourceid}/tables/{tableid}": {
+      "get": {
+        "tags": [
+          "metadata/data"
+        ],
+        "summary": "Get an individual table metadata",
+        "description": "Get an individual table metadata",
+        "operationId": "getTable",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "description": "id of the user or organization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sourceid",
+            "in": "path",
+            "description": "database source id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/MetadataResourceDto"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_read"
+            ]
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "metadata/data"
+        ],
+        "summary": "Replace an existing table",
+        "description": "Replace an existing table",
+        "operationId": "replaceCatalogTable",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "description": "id of the user or organization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sourceid",
+            "in": "path",
+            "description": "database source id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CatalogTableRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Table replaced successfully.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "422": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_read"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "metadata/data"
+        ],
+        "summary": "Delete a table",
+        "description": "Delete a table.",
+        "operationId": "deleteCatalogTable",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "description": "id of the user or organization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sourceid",
+            "in": "path",
+            "description": "database source id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Table has been successfully deleted.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_read"
+            ]
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "metadata/data"
+        ],
+        "summary": "Update an existing table",
+        "description": "Update an existing table.",
+        "operationId": "patchCatalogTable",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "description": "id of the user or organization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sourceid",
+            "in": "path",
+            "description": "database source id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CatalogTableRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Table updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "422": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_read"
+            ]
+          }
+        ]
+      }
+    },
+    "/metadata/data/sources/{owner}/{sourceid}/tables/{tableid}/columns": {
+      "get": {
+        "tags": [
+          "metadata/data"
+        ],
+        "summary": "Get columns for a given table",
+        "description": "Get columns for a given table",
+        "operationId": "getTableColumns",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "description": "id of the user or organization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sourceid",
+            "in": "path",
+            "description": "database source id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved metadata analysis",
+            "schema": {
+              "$ref": "#/definitions/PaginatedMetadataResourceResults"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_read"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "metadata/data"
+        ],
+        "summary": "Create a Column",
+        "description": "Create a Column.",
+        "operationId": "createCatalogColumn",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "description": "id of the user or organization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sourceid",
+            "in": "path",
+            "description": "database source id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CatalogColumnRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Column Metadata created successfully.",
+            "schema": {
+              "$ref": "#/definitions/CreateResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "422": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_read"
+            ]
+          }
+        ]
+      }
+    },
+    "/metadata/data/sources/{owner}/{sourceid}/tables/{tableid}/columns/{columnid}": {
+      "get": {
+        "tags": [
+          "metadata/data"
+        ],
+        "summary": "Get an individual column metadata",
+        "description": "Get an individual column metadata",
+        "operationId": "getTableColumn",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "description": "id of the user or organization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sourceid",
+            "in": "path",
+            "description": "database source id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "columnid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/MetadataResourceDto"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_read"
+            ]
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "metadata/data"
+        ],
+        "summary": "Replace an existing column",
+        "description": "Replace an existing column",
+        "operationId": "replaceCatalogColumn",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "description": "id of the user or organization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sourceid",
+            "in": "path",
+            "description": "database source id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "columnid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CatalogColumnRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Column replaced successfully.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "422": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_read"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "metadata/data"
+        ],
+        "summary": "Delete a Column",
+        "description": "Delete a Column.",
+        "operationId": "deleteCatalogColumn",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "description": "id of the user or organization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sourceid",
+            "in": "path",
+            "description": "database source id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "columnid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Column has been successfully deleted.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_read"
+            ]
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "metadata/data"
+        ],
+        "summary": "Update an existing Column",
+        "description": "Update an existing Column.",
+        "operationId": "patchCatalogColumn",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "description": "id of the user or organization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sourceid",
+            "in": "path",
+            "description": "database source id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "columnid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CatalogColumnRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Column updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "422": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_read"
+            ]
+          }
+        ]
+      }
+    },
+    "/metadata/analysis/{owner}": {
+      "get": {
+        "tags": [
+          "metadata/analysis"
+        ],
+        "summary": "List analysis resources by owner",
+        "description": "List analysis resources by owner",
+        "operationId": "getMetadataAnalysisByOwner",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "typelabel",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "typeiri",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/owner"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved metadata analysis",
+            "schema": {
+              "$ref": "#/definitions/PaginatedMetadataResourceResults"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_read"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "metadata/analysis"
+        ],
+        "summary": "Create a new analysis resource",
+        "description": "Create a new analysis resource",
+        "operationId": "createCatalogAnalysis",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CatalogAnalysisRequest"
+            },
+            "x-examples": {
+              "Minimal data": {
+                "title": "Predictive Analysis",
+                "catalogs": [
+                  "crypto_snowflake"
+                ]
+              },
+              "Standard fields": {
+                "title": "Prescriptive Analysis",
+                "catalogs": [
+                  "crypto_snowflake",
+                  "use-case-org-catalog"
+                ],
+                "typeLabel": "Tableau dashboard",
+                "description": "Fake tableau dashboard utilizing state of the art data practices",
+                "tags": [
+                  "prescriptive",
+                  "AI",
+                  "DataDriven"
+                ]
+              },
+              "With custom properties": {
+                "title": "Descriptive Analysis",
+                "catalogs": [
+                  "crypto_snowflake",
+                  "use-case-org-catalog"
+                ],
+                "typeLabel": "Tableau dashboard",
+                "description": "Fake KPI dashboard and monthly revenue reports",
+                "tags": [
+                  "descriptive",
+                  "fakekpi"
+                ],
+                "properties": {
+                  "Impact Potential": "Grassroot Impact with paradigm shift",
+                  "Customer Segmentation": [
+                    "floater",
+                    "regular",
+                    "champion"
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Analysis Metadata created successfully.",
+            "schema": {
+              "$ref": "#/definitions/CreateResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "422": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_write"
+            ]
+          }
+        ]
+      }
+    },
+    "/metadata/analysis/{owner}/{id}": {
+      "get": {
+        "tags": [
+          "metadata/analysis"
+        ],
+        "summary": "Get an analysis resource by id",
+        "description": "Get an analysis resource by id",
+        "operationId": "getMetadataAnalysis",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/MetadataResourceDto"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_read"
+            ]
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "metadata/analysis"
+        ],
+        "summary": "Overwrite an existing analysis resource",
+        "description": "Overwrite an existing analysis resource",
+        "operationId": "replaceCatalogAnalysis",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/id"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CatalogAnalysisRequest"
+            },
+            "x-examples": {
+              "Minimal data": {
+                "title": "Predictive Analysis",
+                "catalogs": [
+                  "crypto_snowflake"
+                ]
+              },
+              "Standard fields": {
+                "title": "Prescriptive Analysis",
+                "catalogs": [
+                  "crypto_snowflake",
+                  "use-case-org-catalog"
+                ],
+                "typeLabel": "Tableau dashboard",
+                "description": "Fake tableau dashboard utilizing state of the art data practices",
+                "tags": [
+                  "prescriptive",
+                  "AI",
+                  "DataDriven"
+                ]
+              },
+              "With custom properties": {
+                "title": "Descriptive Analysis",
+                "catalogs": [
+                  "crypto_snowflake",
+                  "use-case-org-catalog"
+                ],
+                "typeLabel": "Tableau dashboard",
+                "description": "Fake KPI dashboard and monthly revenue reports",
+                "tags": [
+                  "descriptive",
+                  "fakekpi"
+                ],
+                "properties": {
+                  "Impact Potential": "Grassroot Impact with paradigm shift",
+                  "Customer Segmentation": [
+                    "floater",
+                    "regular",
+                    "champion"
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Analysis replaced successfully.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "422": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_write"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "metadata/analysis"
+        ],
+        "summary": "Delete an analysis resource",
+        "description": "Delete an analysis resource",
+        "operationId": "deleteCatalogAnalysis",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Analysis has been successfully deleted.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_write"
+            ]
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "metadata/analysis"
+        ],
+        "summary": "Update an existing analysis resource",
+        "description": "Update an existing analysis resource",
+        "operationId": "patchCatalogAnalysis",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/id"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CatalogAnalysisRequest"
+            },
+            "x-examples": {
+              "Simple": {
+                "title": "Predictive Analysis"
+              },
+              "Standard fields": {
+                "title": "Prescriptive Analysis",
+                "catalogs": [
+                  "crypto_snowflake",
+                  "use-case-org-catalog"
+                ],
+                "typeLabel": "Tableau dashboard",
+                "description": "Fake tableau dashboard utilizing state of the art data practices",
+                "tags": [
+                  "prescriptive",
+                  "AI",
+                  "DataDriven"
+                ]
+              },
+              "With custom properties": {
+                "title": "Descriptive Analysis",
+                "catalogs": [
+                  "crypto_snowflake",
+                  "use-case-org-catalog"
+                ],
+                "typeLabel": "Tableau dashboard",
+                "description": "Fake KPI dashboard and monthly revenue reports",
+                "tags": [
+                  "descriptive",
+                  "fakekpi"
+                ],
+                "properties": {
+                  "Impact Potential": "Grassroot Impact with paradigm shift",
+                  "Customer Segmentation": [
+                    "floater",
+                    "regular",
+                    "champion"
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Analysis updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "422": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_write"
+            ]
+          }
+        ]
+      }
+    },
+    "/metadata/glossary/{owner}": {
+      "get": {
+        "tags": [
+          "metadata/glossary"
+        ],
+        "summary": "List business glossary entries by owner",
+        "description": "List business glossary resources by owner",
+        "operationId": "getMetadataGlossaryByOwner",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "name": "typelabel",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "typeiri",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved metadata glossary",
+            "schema": {
+              "$ref": "#/definitions/PaginatedMetadataResourceResults"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_read"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "metadata/glossary"
+        ],
+        "summary": "Create a new business glossary resource",
+        "description": "Create a new business glossary resource",
+        "operationId": "createCatalogGlossary",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CatalogGlossaryRequest"
+            },
+            "x-examples": {
+              "Minimal data": {
+                "title": "Adverse Selection",
+                "catalogs": [
+                  "crypto_snowflake"
+                ]
+              },
+              "Standard fields": {
+                "title": "Actuarial Report",
+                "catalogs": [
+                  "crypto_snowflake",
+                  "use-case-org-catalog"
+                ],
+                "typeLabel": "Business term",
+                "summary": "Actuarial memorandum submitted to the state regulatory authority",
+                "description": "Consists of actuary's professional conclusions and recommendations, of recording and communicating the methods and procedures, of assuring that the parties addressed are aware of the significance of the actuary's opinion or findings",
+                "tags": [
+                  "AReport",
+                  "AMemo",
+                  "RiskMgmt"
+                ]
+              },
+              "With custom properties": {
+                "title": "Asset",
+                "catalogs": [
+                  "crypto_snowflake",
+                  "use-case-org-catalog"
+                ],
+                "typeLabel": "Business term",
+                "summary": "Embodiment of future benefit leading to net cash inflow in combination with other assets",
+                "tags": [
+                  "Category1Depreciation",
+                  "FakeAsset"
+                ],
+                "properties": {
+                  "Future Benefit": "Not Singly, only in combination with other assets",
+                  "Contribution": "Directly or Indirectly to future net cash inflows",
+                  "Risk": "Only Assigned, no asset risk as per risk based capital formula"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Glossary Metadata created successfully.",
+            "schema": {
+              "$ref": "#/definitions/CreateResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "422": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_write"
+            ]
+          }
+        ]
+      }
+    },
+    "/metadata/glossary/{owner}/{id}": {
+      "get": {
+        "tags": [
+          "metadata/glossary"
+        ],
+        "summary": "Get a business glossary resource by id",
+        "description": "Get a business glossary resource by id",
+        "operationId": "getMetadataGlossary",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/MetadataResourceDto"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_read"
+            ]
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "metadata/glossary"
+        ],
+        "summary": "Overwrite an existing business glossary resource",
+        "description": "Overwrite an existing business glossary resource",
+        "operationId": "replaceCatalogGlossary",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/id"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CatalogGlossaryRequest"
+            },
+            "x-examples": {
+              "Minimal data": {
+                "title": "Adverse Selection",
+                "catalogs": [
+                  "crypto_snowflake"
+                ]
+              },
+              "Standard fields": {
+                "title": "Actuarial Report",
+                "catalogs": [
+                  "crypto_snowflake",
+                  "use-case-org-catalog"
+                ],
+                "typeLabel": "Business term",
+                "summary": "Actuarial memorandum submitted to the state regulatory authority",
+                "description": "Consists of actuary's professional conclusions and recommendations, of recording and communicating the methods and procedures, of assuring that the parties addressed are aware of the significance of the actuary's opinion or findings",
+                "tags": [
+                  "AReport",
+                  "AMemo",
+                  "RiskMgmt"
+                ]
+              },
+              "With custom properties": {
+                "title": "Asset",
+                "catalogs": [
+                  "crypto_snowflake",
+                  "use-case-org-catalog"
+                ],
+                "typeLabel": "Business term",
+                "summary": "Embodiment of future benefit leading to net cash inflow in combination with other assets",
+                "tags": [
+                  "Category1Depreciation",
+                  "FakeAsset"
+                ],
+                "properties": {
+                  "Future Benefit": "Not Singly, only in combination with other assets",
+                  "Contribution": "Directly or Indirectly to future net cash inflows",
+                  "Risk": "Only Assigned, no asset risk as per risk based capital formula"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Glossary replaced successfully.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "422": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_write"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "metadata/glossary"
+        ],
+        "summary": "Delete a business glossary resource",
+        "description": "Delete a business glossary resource",
+        "operationId": "deleteCatalogGlossary",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Glossary has been successfully deleted.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_write"
+            ]
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "metadata/glossary"
+        ],
+        "summary": "Update an existing business glossary resource",
+        "description": "Update an existing business glossary resource",
+        "operationId": "patchCatalogGlossary",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "$ref": "#/parameters/id"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CatalogGlossaryRequest"
+            },
+            "x-examples": {
+              "Simple": {
+                "title": "Adverse Selection"
+              },
+              "Standard fields": {
+                "title": "Actuarial Report",
+                "catalogs": [
+                  "crypto_snowflake",
+                  "use-case-org-catalog"
+                ],
+                "typeLabel": "Business term",
+                "summary": "Actuarial memorandum submitted to the state regulatory authority",
+                "description": "Consists of actuary's professional conclusions and recommendations, of recording and communicating the methods and procedures, of assuring that the parties addressed are aware of the significance of the actuary's opinion or findings",
+                "tags": [
+                  "AReport",
+                  "AMemo",
+                  "RiskMgmt"
+                ]
+              },
+              "With custom properties": {
+                "title": "Asset",
+                "catalogs": [
+                  "crypto_snowflake",
+                  "use-case-org-catalog"
+                ],
+                "typeLabel": "Business term",
+                "summary": "Embodiment of future benefit leading to net cash inflow in combination with other assets",
+                "tags": [
+                  "Category1Depreciation",
+                  "FakeAsset"
+                ],
+                "properties": {
+                  "Future Benefit": "Not Singly, only in combination with other assets",
+                  "Contribution": "Directly or Indirectly to future net cash inflows",
+                  "Risk": "Only Assigned, no asset risk as per risk based capital formula"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Glossary updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "422": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_write"
+            ]
+          }
+        ]
+      }
+    },
+    "/metadata/relationships/{owner}": {
+      "post": {
+        "tags": [
+          "metadata/relationships"
+        ],
+        "summary": "Create a relationship between two resources",
+        "description": "Create a relationship between two resources. ",
+        "operationId": "createRelationship",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RelationshipCreateOrDeleteRequest"
+            },
+            "x-examples": {
+              "relate a business term to analysis": "/*\nrelate analysis https://data.world/myOrganization/catalog/analysis/myAnalysisId\n\nto business term https://data.world/myOrganization/catalog/glossary/myBusinessTermId\n*/\n\n{\n  \"relationshipType\": \"REFERENCE_BUSINESS_TERM\",\n  \"sourceId\": \"myAnalysisId\",\n  \"sourceType\": \"ANALYSIS\",\n  \"targetId\": \"myBusinessTermId\",\n  \"targetType\": \"BUSINESS_TERM\"\n}",
+              "relate table to analysis": "/*\nrelate analysis https://data.world/myOrganization/catalog/analysis/myAnalysisId\n\nto table https://data.world/myOrganization/catalog/sources/myTableDataSourceId/tables/myTableId\n*/\n\n{\n  \"relationshipType\": \"USES_DATA_FROM\",\n  \"sourceId\": \"myAnalysisId\",\n  \"sourceType\": \"ANALYSIS\",\n  \"targetId\": \"myTableId\",\n  \"targetDatasetId\": \"myTableDataSourceId\",\n  \"targetType\": \"TABLE\"\n}",
+              "relate table to dataset": "/*\nrelate table https://data.world/myOrganization/catalog/sources/myTableDataSourceId/tables/myTableId\n\nto dataset https://data.world/myOrganization/myDatatsetId\n*/\n\n{\n  \"relationshipType\": \"USES_DATASET\",\n  \"sourceDatasetId\": \"myTableDataSourceId\",\n  \"sourceId\": \"myTableId\",\n  \"sourceType\": \"TABLE\",\n  \"targetId\": \"myDatasetId\",\n  \"targetType\": \"DATASET\"\n}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/EditActivitiesResultDto"
+            },
+            "examples": {
+              "application/json": {
+                "activityBatchId": "95620de3-xxxx-4e2d-9ea8-cxxxxxc8934f",
+                "activityResults": [
+                  "https://my-organization.linked.data.world/d/my-dataset"
+                ],
+                "timeEnded": "2020-10-07T20:23:48.896716Z",
+                "timeStarted": "2020-10-07T20:23:48.847900Z"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_write"
+            ]
+          }
+        ]
+      }
+    },
+    "/metadata/relationships/{owner}/delete": {
+      "post": {
+        "tags": [
+          "metadata/relationships"
+        ],
+        "summary": "Delete a relationship between two resources",
+        "description": "Delete a relationship between two resources",
+        "operationId": "deleteRelationship",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RelationshipCreateOrDeleteRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/EditActivitiesResultDto"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_write"
+            ]
+          }
+        ]
+      }
+    },
+    "/metadata/relationships/{owner}/resource/{resourceId}": {
+      "post": {
+        "tags": [
+          "metadata/relationships"
+        ],
+        "summary": "Get related resources for a given resource id",
+        "description": "Get a list of resources related to a particular resource specified by id. For example, you may use this endpoint to retrieve a list of business glossary terms related to an analysis dashboard. The resourceType param in the request body is required. Results may be filtered by resource type (byResourceTypes) or by relationship type (byRelationTypes).",
+        "operationId": "getRelationships",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "name": "resourceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier for the resource you would like to retrieve related resources for. The resourceid can be found in the URL for the resource in the data.world UI."
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RelationshipGetRequest"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "next",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/PaginatedMetadataResourceResults"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_write"
+            ]
+          }
+        ]
+      }
+    },
+    "/metadata/relationships/{owner}/table/{sourceId}/{tableId}": {
+      "post": {
+        "tags": [
+          "metadata/relationships"
+        ],
+        "summary": "Get resources related to a table",
+        "description": "Get resources related to a table",
+        "operationId": "getTableRelationships",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/owner"
+          },
+          {
+            "name": "sourceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/RelationshipGetTableRequest"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "next",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/PaginatedMetadataResourceResults"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_write"
+            ]
+          }
+        ]
+      }
+    },
     "/projects/{owner}": {
       "get": {
         "description": "List projects that the currently authenticated user has access to, for the specified owner; when the project is open, or when project is private but has view/edit/manage permissions for the authenticated user",
@@ -4841,11 +9031,9 @@
         ],
         "summary": "List projects for a specified owner",
         "tags": [
-          "user"
+          "projects"
         ]
-      }
-    },
-    "/projects/{owner}": {
+      },
       "post": {
         "consumes": [
           "application/json"
@@ -6280,6 +10468,178 @@
         ]
       }
     },
+    "/search": {
+      "post": {
+        "tags": [
+          "search"
+        ],
+        "summary": "Advanced search on resources",
+        "description": "Advanced search on resources",
+        "operationId": "searchResourcesAdvanced",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchRequest"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/PaginatedSearchResultsDto"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_read"
+            ]
+          }
+        ]
+      }
+    },
+    "/search/resources": {
+      "post": {
+        "tags": [
+          "search"
+        ],
+        "summary": "Simple search on resources",
+        "description": "Simple search is a light weight API implementation exposing similar search capabilities as our main platform search UI.\n\nBy default, the search response will return mixed result types including metadata resources, datasets, projects, queries, insights, tables, and comments.\n\nA free-text search term is required. Simple search does not support complex keyword or logical operator grammar.\nLight weight filters for resource owner and resource category are supported. You may optionally specify the includeCommunityResults param to query for resources in the data.world open data community.",
+        "operationId": "searchResources",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SimpleSearchRequest"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/PaginatedSearchResultsDto"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_read"
+            ]
+          }
+        ]
+      }
+    },
     "/sparql/{owner}/{id}": {
       "get": {
         "description": "Same as `POST:/sparql`.",
@@ -7339,7 +11699,7 @@
         ],
         "summary": "List datasets as owner",
         "tags": [
-          "user"
+          "datasets"
         ]
       }
     },
@@ -8553,6 +12913,21 @@
     },
     {
       "name": "files"
+    },
+    {
+      "name": "metadata/analysis"
+    },
+    {
+      "name": "metadata/glossary"
+    },
+    {
+      "name": "metadata/data"
+    },
+    {
+      "name": "metadata/relationships"
+    },
+    {
+      "name": "search"
     },
     {
       "name": "streams"
