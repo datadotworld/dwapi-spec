@@ -3652,7 +3652,7 @@
           "connections"
         ],
         "summary": "Get connections by owner.",
-        "description": "Get connections by owner.",
+        "description": "Get a list of configured virtual connections by owner. For increased security, connection endpoints require an Enterprise Admin Token. This token can be found under [Advanced Settings](https://data.world/settings/advanced). ",
         "operationId": "getConnectionsByOwner",
         "produces": [
           "application/json"
@@ -3723,17 +3723,18 @@
         },
         "security": [
           {
-            "oauth": []
+            "oauth": [
+              "user_api_enterprise_admin"
+            ]
           }
-        ],
-        "x-private": true
+        ]
       },
       "post": {
         "tags": [
           "connections"
         ],
         "summary": "Create a new connection.",
-        "description": "Create a new connection.",
+        "description": "Create a new virtual connection. For increased security, connection endpoints require an Enterprise Admin Token. This token can be found under [Advanced Settings](https://data.world/settings/advanced). ",
         "operationId": "createConnection",
         "consumes": [
           "application/json"
@@ -3809,10 +3810,11 @@
         },
         "security": [
           {
-            "oauth": []
+            "oauth": [
+              "user_api_enterprise_admin"
+            ]
           }
-        ],
-        "x-private": true
+        ]
       }
     },
     "/connections/{owner}/{id}": {
@@ -3821,7 +3823,7 @@
           "connections"
         ],
         "summary": "Get an individual connection",
-        "description": "Get an individual connection",
+        "description": "Get details for an individual virtual connection. For increased security, connection endpoints require an Enterprise Admin Token. This token can be found under [Advanced Settings](https://data.world/settings/advanced). ",
         "operationId": "getConnection",
         "produces": [
           "application/json"
@@ -3863,7 +3865,9 @@
         },
         "security": [
           {
-            "oauth": []
+            "oauth": [
+              "user_api_enterprise_admin"
+            ]
           }
         ],
         "x-private": true
@@ -3873,7 +3877,7 @@
           "connections"
         ],
         "summary": "Delete a Connection.",
-        "description": "Delete a Connection.",
+        "description": "Delete a Connection. For increased security, connection endpoints require an Enterprise Admin Token. This token can be found under [Advanced Settings](https://data.world/settings/advanced). ",
         "operationId": "deleteConnection",
         "produces": [
           "application/json"
@@ -3933,10 +3937,11 @@
         },
         "security": [
           {
-            "oauth": []
+            "oauth": [
+              "user_api_enterprise_admin"
+            ]
           }
-        ],
-        "x-private": true
+        ]
       }
     },
     "/datasets/search": {
