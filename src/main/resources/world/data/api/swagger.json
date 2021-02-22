@@ -795,6 +795,23 @@
         }
       }
     },
+    "DatabaseSourceReference": {
+      "type": "object",
+      "properties": {
+        "owner": {
+          "description": "Owner Agent",
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "[a-z0-9](?:-(?!-)|[a-z0-9]){1,29}[a-z0-9]",
+          "type": "string"
+        },
+        "id": {
+          "description": "data.world database connection identifier ",
+          "format": "uuid",
+          "type": "string"
+        }
+      }
+    },
     "DatasetCreateRequest": {
       "properties": {
         "description": {
@@ -3099,6 +3116,38 @@
         }
       }
     },
+    "SingleTableMetadataSpec": {
+      "description": "Virtual or extracted table details",
+      "type": "object",
+      "properties": {
+        "database": {
+          "description": "Database name",
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "schema": {
+          "description": "Schema name",
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "table": {
+          "description": "Table name",
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "tableType": {
+          "description": "Table type",
+          "enum": [
+            "EXTRACT",
+            "VIRTUAL"
+          ],
+          "type": "string"
+        }
+      }
+    },
     "SourceId": {
       "type": "object",
       "properties": {
@@ -3349,6 +3398,19 @@
       "title": "Success Message Response",
       "type": "object"
     },
+    "TableBatchUpdateRequest": {
+      "properties": {
+        "tables": {
+          "description": "Updated set of tables. Tables can be virtual or extract",
+          "items": {
+            "$ref": "#/definitions/TableCreateOrUpdateRequest"
+          },
+          "type": "array"
+        }
+      },
+      "title": "Table Create or Update Batch",
+      "type": "object"
+    },
     "TableId": {
       "type": "object",
       "required": [
@@ -3367,6 +3429,45 @@
           "type": "string"
         }
       }
+    },
+    "TableCreateOrUpdateRequest": {
+      "description": "This model is utilized where sets of tables can be specified to be added.",
+      "properties": {
+        "description": {
+          "description": "Table description.",
+          "maxLength": 240,
+          "minLength": 1,
+          "type": "string"
+        },
+        "name": {
+          "description": "Table name",
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[^/]+$",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/definitions/TableSourceCreateOrUpdateRequest"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "Table Create Or Update Request",
+      "type": "object"
+    },
+    "TableSourceCreateOrUpdateRequest": {
+      "description": "This model is utilized where source URLs can be specified for files to be added or updated.",
+      "properties": {
+        "databaseSource": {
+          "$ref": "#/definitions/DatabaseSourceReference"
+        },
+        "tableSpec": {
+          "$ref": "#/definitions/SingleTableMetadataSpec"
+        }
+      },
+      "title": "Table Source Create Or Update Request",
+      "type": "object"
     },
     "Tag": {
       "type": "object",
@@ -5664,6 +5765,144 @@
         "tags": [
           "files"
         ]
+      }
+    },
+    "/datasets/{owner}/{id}/tables": {
+      "post": {
+        "tags": [
+          "tables"
+        ],
+        "summary": "Add live or extracted tables from a virtual connection",
+        "description": "Add tables from an established virtual connection. For increased security, endpoints that interact with external connection sources require an Enterprise Admin Token. This token can be found under [Advanced Settings](https://data.world/settings/advanced). To learn more about the virtual connections data.world supports, please visit our [help protal](https://help.data.world/hc/en-us/sections/360009504254-Create-and-manage-virtual-connections).",
+        "operationId": "createNewTables",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TableBatchUpdateRequest"
+            },
+            "x-examples": {
+              "Live/Virtual Table": {
+                "tables": [
+                  {
+                    "name": "cust_extract",
+                    "description": "Dummy customer extract table",
+                    "source": {
+                      "databaseSource": {
+                        "owner": "user8888",
+                        "id": "1f54da2f-2e07-40c2-9241-7dde9c418f1f"
+                      },
+                      "tableSpec": {
+                        "database": "SNOWFLAKE_SAMPLE_DATA",
+                        "schema": "TPCH_SF1",
+                        "table": "LINEITEM",
+                        "tableType": "VIRTUAL"
+                      }
+                    }
+                  }
+                ]
+              },
+              "Extract based Table": {
+                "tables": [
+                  {
+                    "name": "cust_extract",
+                    "description": "Dummy customer extract table",
+                    "source": {
+                      "databaseSource": {
+                        "owner": "user8888",
+                        "id": "1f54da2f-2e07-40c2-9241-7dde9c418f1f"
+                      },
+                      "tableSpec": {
+                        "database": "SNOWFLAKE_SAMPLE_DATA",
+                        "schema": "TPCH_SF1",
+                        "table": "LINEITEM",
+                        "tableType": "EXTRACT"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Table created successfully.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "422": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": [
+              "user_api_enterprise_admin"
+            ]
+          }
+        ],
+        "x-private": true
       }
     },
     "/datasets/{owner}/{id}/v/{versionId}": {
@@ -13976,6 +14215,9 @@
     },
     {
       "name": "streams"
+    },
+    {
+      "name": "tables"
     },
     {
       "name": "user"
