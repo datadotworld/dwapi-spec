@@ -3141,7 +3141,6 @@
         "tableType": {
           "description": "Table type",
           "enum": [
-            "EXTRACT",
             "VIRTUAL"
           ],
           "type": "string"
@@ -5772,8 +5771,8 @@
         "tags": [
           "tables"
         ],
-        "summary": "Add live or extracted tables from a virtual connection",
-        "description": "Add tables from an established virtual connection. For increased security, endpoints that interact with external connection sources require an Enterprise Admin Token. This token can be found under [Advanced Settings](https://data.world/settings/advanced). To learn more about the virtual connections data.world supports, please visit our [help protal](https://help.data.world/hc/en-us/sections/360009504254-Create-and-manage-virtual-connections).",
+        "summary": "Add live tables from a virtual connection",
+        "description": "Add tables from an established virtual connection. For increased security, endpoints that interact with external connection sources require an Enterprise Admin Token. This token can be found under [Advanced Settings](https://data.world/settings/advanced). To learn more about the virtual connections data.world supports, please visit our [help portal](https://help.data.world/hc/en-us/sections/360009504254-Create-and-manage-virtual-connections).",
         "operationId": "createNewTables",
         "consumes": [
           "application/json"
@@ -5901,8 +5900,7 @@
               "user_api_enterprise_admin"
             ]
           }
-        ],
-        "x-private": true
+        ]
       }
     },
     "/datasets/{owner}/{id}/v/{versionId}": {
