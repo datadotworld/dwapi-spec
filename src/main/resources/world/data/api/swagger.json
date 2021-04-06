@@ -3314,6 +3314,9 @@
         "updateMethod"
       ]
     },
+    "StreamsResource": {
+      "type": "object"
+    },
     "Subscription": {
       "type": "object",
       "properties": {
@@ -12334,7 +12337,9 @@
           {
             "in": "body",
             "name": "body",
-            "schema": {}
+            "schema": {
+              "$ref": "#/definitions/StreamsResource"
+            }
           }
         ],
         "produces": [
