@@ -2901,7 +2901,8 @@
           "description": "Limits the number of rows returned."
         },
         "queryRunToken" : {
-          "type" : "string"
+          "type" : "string",
+          "description": "Unique token for cancelling a running query."
         }
       }
     },
@@ -3233,7 +3234,8 @@
           "description": "Specifies whether or not schema should be included with the response."
         },
         "queryRunToken" : {
-          "type" : "string"
+          "type" : "string",
+          "description": "Unique token for cancelling a running query."
         }
       },
       "required": [
@@ -3764,7 +3766,7 @@
   "paths": {
     "/cancel" : {
       "post" : {
-        "tags" : [ "cancel" ],
+        "tags" : [ "queries" ],
         "summary" : "Cancel a query",
         "description" : "Cancel a running query.",
         "operationId" : "cancel",
@@ -14334,9 +14336,6 @@
   },
   "swagger": "2.0",
   "tags": [
-    {
-      "name" : "cancel"
-    },
     {
       "name": "connections"
     },
