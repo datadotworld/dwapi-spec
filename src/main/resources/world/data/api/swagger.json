@@ -2899,6 +2899,9 @@
         "maxRows": {
           "type": "long",
           "description": "Limits the number of rows returned."
+        },
+        "queryRunToken" : {
+          "type" : "string"
         }
       }
     },
@@ -3228,6 +3231,9 @@
           "type": "boolean",
           "default": false,
           "description": "Specifies whether or not schema should be included with the response."
+        },
+        "queryRunToken" : {
+          "type" : "string"
         }
       },
       "required": [
@@ -3717,6 +3723,13 @@
       "required": true,
       "type": "string"
     },
+    "queryRunToken": {
+      "description": "Unique token for cancelling a running query.",
+      "in" : "query",
+      "name" : "queryruntoken",
+      "required" : false,
+      "type" : "string"
+    },
     "streamId": {
       "description": "Stream unique identifier as defined by the user the first time the stream was used. Only lower case letters, numbers and dashes are allowed. Maximum length of 95 characters.",
       "in": "path",
@@ -3749,6 +3762,39 @@
     }
   },
   "paths": {
+    "/cancel" : {
+      "post" : {
+        "tags" : [ "cancel" ],
+        "summary" : "Cancel a query",
+        "description" : "Cancel a running query.",
+        "operationId" : "cancel",
+        "parameters" : [
+          {
+            "$ref": "#/parameters/queryRunToken"
+          }
+        ],
+        "responses" : {
+          "200": {
+            "description": "**OK**\nThe request has succeeded."
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorMessage"
+            }
+          },
+          "404" : {
+            "description" : "Not found",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth" : [ ]
+        } ]
+      }
+    },
     "/connections/{owner}": {
       "get": {
         "tags": [
@@ -11610,6 +11656,9 @@
           },
           {
             "$ref": "#/parameters/includeTableSchema"
+          },
+          {
+            "$ref": "#/parameters/queryRunToken"
           }
         ],
         "produces": [
@@ -11695,6 +11744,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/queryId"
+          },
+          {
+            "$ref": "#/parameters/queryRunToken"
           },
           {
             "in": "body",
@@ -12025,6 +12077,9 @@
           },
           {
             "$ref": "#/parameters/query"
+          },
+          {
+            "$ref": "#/parameters/queryRunToken"
           }
         ],
         "produces": [
@@ -12098,6 +12153,9 @@
           },
           {
             "$ref": "#/parameters/formQuery"
+          },
+          {
+            "$ref": "#/parameters/queryRunToken"
           }
         ],
         "produces": [
@@ -12180,6 +12238,9 @@
           },
           {
             "$ref": "#/parameters/includeTableSchema"
+          },
+          {
+            "$ref": "#/parameters/queryRunToken"
           }
         ],
         "produces": [
@@ -14273,6 +14334,9 @@
   },
   "swagger": "2.0",
   "tags": [
+    {
+      "name" : "cancel"
+    },
     {
       "name": "connections"
     },
