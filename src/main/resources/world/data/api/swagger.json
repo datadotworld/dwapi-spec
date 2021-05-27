@@ -15,17 +15,17 @@
         }
       }
     },
-    "AgentHydrationDtoPublic" : {
-      "type" : "object",
-      "properties" : {
-        "id" : {
-          "type" : "string"
+    "AgentHydrationDtoPublic": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
         },
-        "avatarUrl" : {
-          "type" : "string"
+        "avatarUrl": {
+          "type": "string"
         },
-        "displayName" : {
-          "type" : "string"
+        "displayName": {
+          "type": "string"
         }
       }
     },
@@ -2215,25 +2215,25 @@
       "title": "Paginated Dataset Results",
       "type": "object"
     },
-    "PaginatedGenericResults" : {
-      "type" : "object",
-      "properties" : {
-        "count" : {
-          "type" : "integer",
-          "format" : "int32",
-          "minimum" : 0.0
+    "PaginatedGenericResults": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
         },
-        "records" : {
-          "type" : "array",
-          "items" : {
-            "type" : "object"
+        "records": {
+          "type": "array",
+          "items": {
+            "type": "object"
           }
         },
-        "next" : {
-          "type" : "string"
+        "next": {
+          "type": "string"
         },
-        "hydrations" : {
-          "$ref" : "#/definitions/SearchHydrationsPublic"
+        "hydrations": {
+          "$ref": "#/definitions/SearchHydrationsPublic"
         }
       }
     },
@@ -3014,80 +3014,107 @@
       }
     },
     "SearchHydrationsPublic": {
-      "type" : "object",
-      "properties" : {
-        "agents" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "$ref" : "#/definitions/AgentHydrationDtoPublic"
+      "type": "object",
+      "properties": {
+        "agents": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AgentHydrationDtoPublic"
           }
         }
       }
     },
-    "SearchRequest" : {
-      "type" : "object",
-      "required" : [ "query" ],
-      "properties" : {
-        "query" : {
-          "type" : "string"
+    "SearchRequest": {
+      "type": "object",
+      "required": [
+        "query"
+      ],
+      "properties": {
+        "query": {
+          "type": "string"
         },
-        "category" : {
-          "type" : "array",
-          "description" : "Filter by categories.",
-          "uniqueItems" : true,
-          "items" : {
-            "type" : "string",
-            "enum" : [ "catalogAnalysis", "catalogBusinessTerm", "catalogDataType", "catalogTable", "collection", "comment", "dataset", "datatable", "file", "insight", "integration", "project", "query" ]
+        "category": {
+          "type": "array",
+          "description": "Filter by categories.",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "catalogAnalysis",
+              "catalogBusinessTerm",
+              "catalogDataType",
+              "catalogTable",
+              "collection",
+              "comment",
+              "dataset",
+              "datatable",
+              "file",
+              "insight",
+              "integration",
+              "project",
+              "query"
+            ]
           }
         },
-        "type" : {
-          "type" : "array",
-          "description" : "Filter by type of metadata resource. Both IRI and label are accepted.",
-          "uniqueItems" : true,
-          "items" : {
-            "type" : "string"
+        "type": {
+          "type": "array",
+          "description": "Filter by type of metadata resource. Both IRI and label are accepted.",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
           }
         },
-        "owner" : {
-          "type" : "array",
-          "description" : "Filter by owners. Owners are identified by their IDs.",
-          "uniqueItems" : true,
-          "items" : {
-            "type" : "string"
+        "owner": {
+          "type": "array",
+          "description": "Filter by owners. Owners are identified by their IDs.",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
           }
         },
-        "minAccessLevel" : {
-          "type" : "string",
-          "description" : "Minimum access level to filter by.",
-          "enum" : [ "NONE", "SAML_GATED", "DISCOVER", "READ", "WRITE", "ADMIN" ]
+        "minAccessLevel": {
+          "type": "string",
+          "description": "Minimum access level to filter by.",
+          "enum": [
+            "NONE",
+            "SAML_GATED",
+            "DISCOVER",
+            "READ",
+            "WRITE",
+            "ADMIN"
+          ]
         },
-        "tag" : {
-          "type" : "array",
-          "description" : "Filter by tags.",
-          "uniqueItems" : true,
-          "items" : {
-            "type" : "string"
+        "tag": {
+          "type": "array",
+          "description": "Filter by tags.",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
           }
         },
-        "visibility" : {
-          "type" : "string",
-          "description" : "Filter by visibility.",
-          "enum" : [ "DISCOVERABLE", "OPEN", "PRIVATE" ]
+        "visibility": {
+          "type": "string",
+          "description": "Filter by visibility.",
+          "enum": [
+            "DISCOVERABLE",
+            "OPEN",
+            "PRIVATE"
+          ]
         },
-        "createdRange" : {
-          "description" : "Filter by range of date that the resource was created.",
-          "$ref" : "#/definitions/Range"
+        "createdRange": {
+          "description": "Filter by range of date that the resource was created.",
+          "$ref": "#/definitions/Range"
         },
-        "updatedRange" : {
-          "description" : "Filter by range of date that the resource was updated.",
-          "$ref" : "#/definitions/Range"
+        "updatedRange": {
+          "description": "Filter by range of date that the resource was updated.",
+          "$ref": "#/definitions/Range"
         },
-        "assetStatus" : {
-          "type" : "array",
-          "description" : "Filter by asset status label.",
-          "uniqueItems" : true,
-          "items" : {
-            "type" : "string"
+        "assetStatus": {
+          "type": "array",
+          "description": "Filter by asset status label.",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
           }
         }
       }
@@ -11956,16 +11983,18 @@
             "type": "string"
           },
           {
-            "name" : "hydration",
-            "in" : "query",
-            "required" : false,
-            "type" : "array",
-            "items" : {
-              "type" : "string",
-              "enum" : [ "agent" ]
+            "name": "hydration",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "agent"
+              ]
             },
-            "collectionFormat" : "multi"
-        	}
+            "collectionFormat": "multi"
+          }
         ],
         "responses": {
           "200": {
