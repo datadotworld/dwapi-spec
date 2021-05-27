@@ -2900,8 +2900,8 @@
           "type": "long",
           "description": "Limits the number of rows returned."
         },
-        "queryRunToken" : {
-          "type" : "string",
+        "queryRunToken": {
+          "type": "string",
           "description": "Unique token for cancelling a running query."
         }
       }
@@ -3233,8 +3233,8 @@
           "default": false,
           "description": "Specifies whether or not schema should be included with the response."
         },
-        "queryRunToken" : {
-          "type" : "string",
+        "queryRunToken": {
+          "type": "string",
           "description": "Unique token for cancelling a running query."
         }
       },
@@ -3727,10 +3727,10 @@
     },
     "queryRunToken": {
       "description": "Unique token for cancelling a running query.",
-      "in" : "query",
-      "name" : "queryruntoken",
-      "required" : false,
-      "type" : "string"
+      "in": "query",
+      "name": "queryruntoken",
+      "required": false,
+      "type": "string"
     },
     "streamId": {
       "description": "Stream unique identifier as defined by the user the first time the stream was used. Only lower case letters, numbers and dashes are allowed. Maximum length of 95 characters.",
@@ -3764,37 +3764,41 @@
     }
   },
   "paths": {
-    "/cancel" : {
-      "post" : {
-        "tags" : [ "queries" ],
-        "summary" : "Cancel a query",
-        "description" : "Cancel a running query.",
-        "operationId" : "cancel",
-        "parameters" : [
+    "/cancel": {
+      "post": {
+        "tags": [
+          "queries"
+        ],
+        "summary": "Cancel a query",
+        "description": "Cancel a running query.",
+        "operationId": "cancel",
+        "parameters": [
           {
             "$ref": "#/parameters/queryRunToken"
           }
         ],
-        "responses" : {
+        "responses": {
           "200": {
             "description": "**OK**\nThe request has succeeded."
           },
-          "400" : {
-            "description" : "Bad Request",
-            "schema" : {
-              "$ref" : "#/definitions/ErrorMessage"
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
-          "404" : {
-            "description" : "Not found",
-            "schema" : {
-              "$ref" : "#/definitions/ErrorMessage"
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
             }
           }
         },
-        "security" : [ {
-          "oauth" : [ ]
-        } ]
+        "security": [
+          {
+            "oauth": []
+          }
+        ]
       }
     },
     "/connections/{owner}": {
