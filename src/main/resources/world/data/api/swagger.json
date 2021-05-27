@@ -15,6 +15,20 @@
         }
       }
     },
+    "AgentHydrationDtoPublic": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "avatarUrl": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        }
+      }
+    },
     "AnalysisImage": {
       "type": "object",
       "properties": {
@@ -2201,6 +2215,28 @@
       "title": "Paginated Dataset Results",
       "type": "object"
     },
+    "PaginatedGenericResults": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "next": {
+          "type": "string"
+        },
+        "hydrations": {
+          "$ref": "#/definitions/SearchHydrationsPublic"
+        }
+      }
+    },
     "PaginatedInsightResults": {
       "properties": {
         "count": {
@@ -2900,8 +2936,8 @@
           "type": "long",
           "description": "Limits the number of rows returned."
         },
-        "queryRunToken" : {
-          "type" : "string",
+        "queryRunToken": {
+          "type": "string",
           "description": "Unique token for cancelling a running query."
         }
       }
@@ -2977,6 +3013,17 @@
         }
       }
     },
+    "SearchHydrationsPublic": {
+      "type": "object",
+      "properties": {
+        "agents": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AgentHydrationDtoPublic"
+          }
+        }
+      }
+    },
     "SearchRequest": {
       "type": "object",
       "required": [
@@ -2995,7 +3042,6 @@
             "enum": [
               "catalogAnalysis",
               "catalogBusinessTerm",
-              "catalogDataset",
               "catalogDataType",
               "catalogTable",
               "collection",
@@ -3008,14 +3054,6 @@
               "project",
               "query"
             ]
-          }
-        },
-        "resourceId": {
-          "type": "array",
-          "description": "Filter by resource IDs.",
-          "uniqueItems": true,
-          "items": {
-            "type": "string"
           }
         },
         "type": {
@@ -3070,6 +3108,14 @@
         "updatedRange": {
           "description": "Filter by range of date that the resource was updated.",
           "$ref": "#/definitions/Range"
+        },
+        "assetStatus": {
+          "type": "array",
+          "description": "Filter by asset status label.",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -3233,8 +3279,8 @@
           "default": false,
           "description": "Specifies whether or not schema should be included with the response."
         },
-        "queryRunToken" : {
-          "type" : "string",
+        "queryRunToken": {
+          "type": "string",
           "description": "Unique token for cancelling a running query."
         }
       },
@@ -3727,10 +3773,10 @@
     },
     "queryRunToken": {
       "description": "Unique token for cancelling a running query.",
-      "in" : "query",
-      "name" : "queryruntoken",
-      "required" : false,
-      "type" : "string"
+      "in": "query",
+      "name": "queryruntoken",
+      "required": false,
+      "type": "string"
     },
     "streamId": {
       "description": "Stream unique identifier as defined by the user the first time the stream was used. Only lower case letters, numbers and dashes are allowed. Maximum length of 95 characters.",
@@ -3764,37 +3810,41 @@
     }
   },
   "paths": {
-    "/cancel" : {
-      "post" : {
-        "tags" : [ "queries" ],
-        "summary" : "Cancel a query",
-        "description" : "Cancel a running query.",
-        "operationId" : "cancel",
-        "parameters" : [
+    "/cancel": {
+      "post": {
+        "tags": [
+          "queries"
+        ],
+        "summary": "Cancel a query",
+        "description": "Cancel a running query.",
+        "operationId": "cancel",
+        "parameters": [
           {
             "$ref": "#/parameters/queryRunToken"
           }
         ],
-        "responses" : {
+        "responses": {
           "200": {
             "description": "**OK**\nThe request has succeeded."
           },
-          "400" : {
-            "description" : "Bad Request",
-            "schema" : {
-              "$ref" : "#/definitions/ErrorMessage"
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
-          "404" : {
-            "description" : "Not found",
-            "schema" : {
-              "$ref" : "#/definitions/ErrorMessage"
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
             }
           }
         },
-        "security" : [ {
-          "oauth" : [ ]
-        } ]
+        "security": [
+          {
+            "oauth": []
+          }
+        ]
       }
     },
     "/connections/{owner}": {
@@ -11931,13 +11981,26 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "hydration",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "agent"
+              ]
+            },
+            "collectionFormat": "multi"
           }
         ],
         "responses": {
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/PaginatedSearchResultsDto"
+              "$ref": "#/definitions/PaginatedGenericResults"
             }
           },
           "400": {
