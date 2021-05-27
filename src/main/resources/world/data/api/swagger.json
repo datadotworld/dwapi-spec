@@ -15,6 +15,20 @@
         }
       }
     },
+    "AgentHydrationDtoPublic" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "avatarUrl" : {
+          "type" : "string"
+        },
+        "displayName" : {
+          "type" : "string"
+        }
+      }
+    },
     "AnalysisImage": {
       "type": "object",
       "properties": {
@@ -2201,6 +2215,28 @@
       "title": "Paginated Dataset Results",
       "type": "object"
     },
+    "PaginatedGenericResults" : {
+      "type" : "object",
+      "properties" : {
+        "count" : {
+          "type" : "integer",
+          "format" : "int32",
+          "minimum" : 0.0
+        },
+        "records" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object"
+          }
+        },
+        "next" : {
+          "type" : "string"
+        },
+        "hydrations" : {
+          "$ref" : "#/definitions/SearchHydrationsPublic"
+        }
+      }
+    },
     "PaginatedInsightResults": {
       "properties": {
         "count": {
@@ -2977,99 +3013,82 @@
         }
       }
     },
-    "SearchRequest": {
-      "type": "object",
-      "required": [
-        "query"
-      ],
-      "properties": {
-        "query": {
-          "type": "string"
+    "SearchHydrationsPublic": {
+      "type" : "object",
+      "properties" : {
+        "agents" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "$ref" : "#/definitions/AgentHydrationDtoPublic"
+          }
+        }
+      }
+    },
+    "SearchRequest" : {
+      "type" : "object",
+      "required" : [ "query" ],
+      "properties" : {
+        "query" : {
+          "type" : "string"
         },
-        "category": {
-          "type": "array",
-          "description": "Filter by categories.",
-          "uniqueItems": true,
-          "items": {
-            "type": "string",
-            "enum": [
-              "catalogAnalysis",
-              "catalogBusinessTerm",
-              "catalogDataset",
-              "catalogDataType",
-              "catalogTable",
-              "collection",
-              "comment",
-              "dataset",
-              "datatable",
-              "file",
-              "insight",
-              "integration",
-              "project",
-              "query"
-            ]
+        "category" : {
+          "type" : "array",
+          "description" : "Filter by categories.",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string",
+            "enum" : [ "catalogAnalysis", "catalogBusinessTerm", "catalogDataType", "catalogTable", "collection", "comment", "dataset", "datatable", "file", "insight", "integration", "project", "query" ]
           }
         },
-        "resourceId": {
-          "type": "array",
-          "description": "Filter by resource IDs.",
-          "uniqueItems": true,
-          "items": {
-            "type": "string"
+        "type" : {
+          "type" : "array",
+          "description" : "Filter by type of metadata resource. Both IRI and label are accepted.",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string"
           }
         },
-        "type": {
-          "type": "array",
-          "description": "Filter by type of metadata resource. Both IRI and label are accepted.",
-          "uniqueItems": true,
-          "items": {
-            "type": "string"
+        "owner" : {
+          "type" : "array",
+          "description" : "Filter by owners. Owners are identified by their IDs.",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string"
           }
         },
-        "owner": {
-          "type": "array",
-          "description": "Filter by owners. Owners are identified by their IDs.",
-          "uniqueItems": true,
-          "items": {
-            "type": "string"
+        "minAccessLevel" : {
+          "type" : "string",
+          "description" : "Minimum access level to filter by.",
+          "enum" : [ "NONE", "SAML_GATED", "DISCOVER", "READ", "WRITE", "ADMIN" ]
+        },
+        "tag" : {
+          "type" : "array",
+          "description" : "Filter by tags.",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string"
           }
         },
-        "minAccessLevel": {
-          "type": "string",
-          "description": "Minimum access level to filter by.",
-          "enum": [
-            "NONE",
-            "SAML_GATED",
-            "DISCOVER",
-            "READ",
-            "WRITE",
-            "ADMIN"
-          ]
+        "visibility" : {
+          "type" : "string",
+          "description" : "Filter by visibility.",
+          "enum" : [ "DISCOVERABLE", "OPEN", "PRIVATE" ]
         },
-        "tag": {
-          "type": "array",
-          "description": "Filter by tags.",
-          "uniqueItems": true,
-          "items": {
-            "type": "string"
+        "createdRange" : {
+          "description" : "Filter by range of date that the resource was created.",
+          "$ref" : "#/definitions/Range"
+        },
+        "updatedRange" : {
+          "description" : "Filter by range of date that the resource was updated.",
+          "$ref" : "#/definitions/Range"
+        },
+        "assetStatus" : {
+          "type" : "array",
+          "description" : "Filter by asset status label.",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string"
           }
-        },
-        "visibility": {
-          "type": "string",
-          "description": "Filter by visibility.",
-          "enum": [
-            "DISCOVERABLE",
-            "OPEN",
-            "PRIVATE"
-          ]
-        },
-        "createdRange": {
-          "description": "Filter by range of date that the resource was created.",
-          "$ref": "#/definitions/Range"
-        },
-        "updatedRange": {
-          "description": "Filter by range of date that the resource was updated.",
-          "$ref": "#/definitions/Range"
         }
       }
     },
@@ -11935,13 +11954,24 @@
             "in": "query",
             "required": false,
             "type": "string"
-          }
+          },
+          {
+            "name" : "hydration",
+            "in" : "query",
+            "required" : false,
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "enum" : [ "agent" ]
+            },
+            "collectionFormat" : "multi"
+        	}
         ],
         "responses": {
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/PaginatedSearchResultsDto"
+              "$ref": "#/definitions/PaginatedGenericResults"
             }
           },
           "400": {
