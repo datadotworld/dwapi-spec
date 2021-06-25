@@ -11,4 +11,4 @@ PAYLOAD="{
         \"CIRCLE_JOB\": \"release_build\"
     }
 }"
-curl -v -X POST -H "Content-Type: application/json" -d "${PAYLOAD}" "https://circleci.com/api/v1.1/project/github/datadotworld/dwapi-spec/tree/master?circle-token=${CIRCLE_TOKEN}"
+curl -v -X POST -H "Content-Type: application/json" -d "${PAYLOAD}" "https://circleci.com/api/v1.1/project/github/datadotworld/dwapi-spec/tree/main?circle-token=${CIRCLE_TOKEN}"

@@ -48,8 +48,8 @@ prism conduct --spec src/main/resources/world/data/api/swagger.json src/test/spe
 Make sure your fork is up-to-date and create a feature branch for your feature or bug fix.
 
 ```bash
-git checkout master
-git pull upstream master
+git checkout main
+git pull upstream main
 git checkout -b my-feature-branch
 ```
 
