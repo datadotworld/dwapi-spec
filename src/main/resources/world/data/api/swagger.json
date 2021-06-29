@@ -5426,7 +5426,7 @@
         "tags": [
           "files"
         ],
-        "summary": "Get metadata of a file",
+        "summary": "Get file description and labels",
         "description": "",
         "operationId": "getFileMetadata",
         "produces": [
@@ -5506,7 +5506,7 @@
         "tags": [
           "files"
         ],
-        "summary": "Replace metadata of a file",
+        "summary": "Replace file description and labels",
         "description": "",
         "operationId": "putFileMetadata",
         "consumes": [
@@ -5597,7 +5597,7 @@
         "tags": [
           "files"
         ],
-        "summary": "Update metadata of a file",
+        "summary": "Update file description and labels",
         "description": "",
         "operationId": "patchFileMetadata",
         "consumes": [
