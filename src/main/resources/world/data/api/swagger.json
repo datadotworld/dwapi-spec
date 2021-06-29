@@ -5427,7 +5427,7 @@
           "files"
         ],
         "summary": "Get file description and labels",
-        "description": "",
+        "description": "Get file description and labels",
         "operationId": "getFileMetadata",
         "produces": [
           "application/json"
@@ -5507,7 +5507,7 @@
           "files"
         ],
         "summary": "Replace file description and labels",
-        "description": "",
+        "description": "Replace file description and labels",
         "operationId": "putFileMetadata",
         "consumes": [
           "application/json"
@@ -5598,7 +5598,7 @@
           "files"
         ],
         "summary": "Update file description and labels",
-        "description": "",
+        "description": "Update file description and labels",
         "operationId": "patchFileMetadata",
         "consumes": [
           "application/json"
