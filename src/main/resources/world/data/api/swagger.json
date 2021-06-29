@@ -1396,54 +1396,54 @@
       "title": "File Create Request",
       "type": "object"
     },
-    "FileMetadataResponse":{
-      "type":"object",
-      "required":[
+    "FileMetadataResponse": {
+      "type": "object",
+      "required": [
         "created",
         "name",
         "updated"
       ],
-      "properties":{
-        "name":{
-          "type":"string",
-          "minLength":1,
-          "maxLength":128,
-          "pattern":"^[^/]+$"
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[^/]+$"
         },
-        "description":{
-          "type":"string",
-          "minLength":1,
-          "maxLength":120
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
         },
-        "labels":{
-          "type":"array",
-          "items":{
-            "type":"string"
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         },
-        "sizeInBytes":{
-          "type":"integer",
-          "format":"int64"
+        "sizeInBytes": {
+          "type": "integer",
+          "format": "int64"
         },
-        "created":{
-          "type":"string"
+        "created": {
+          "type": "string"
         },
-        "updated":{
-          "type":"string"
+        "updated": {
+          "type": "string"
         }
       }
     },
-    "FileMetadataUpdateRequest":{
-      "type":"object",
-      "properties":{
-        "description":{
-          "type":"string"
+    "FileMetadataUpdateRequest": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
         },
-        "labels":{
-          "type":"array",
-          "uniqueItems":true,
-          "items":{
-            "type":"string"
+        "labels": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
           }
         }
       }
@@ -5421,272 +5421,266 @@
         ]
       }
     },
-    "/datasets/{owner}/{id}/files/{file}/metadata":{
-      "get":{
-        "tags":[
+    "/datasets/{owner}/{id}/files/{file}/metadata": {
+      "get": {
+        "tags": [
           "files"
         ],
-        "summary":"Get metadata of a file.",
-        "description":"",
-        "operationId":"getFileMetadata",
-        "produces":[
+        "summary": "Get metadata of a file.",
+        "description": "",
+        "operationId": "getFileMetadata",
+        "produces": [
           "application/json"
         ],
-        "parameters":[
+        "parameters": [
           {
-            "name":"owner",
-            "in":"path",
-            "required":true,
-            "type":"string"
+            "name": "owner",
+            "in": "path",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"id",
-            "in":"path",
-            "required":true,
-            "type":"string"
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"file",
-            "in":"path",
-            "required":true,
-            "type":"string"
+            "name": "file",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
-        "responses":{
-          "200":{
-            "description":"Successfully retrieved metadata of file.",
-            "schema":{
-              "$ref":"#/definitions/FileMetadataResponse"
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved metadata of file.",
+            "schema": {
+              "$ref": "#/definitions/FileMetadataResponse"
             }
           },
-          "400":{
-            "description":"Bad request",
-            "schema":{
-              "$ref":"#/definitions/ErrorMessage"
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
-          "401":{
-            "description":"Unauthorized",
-            "schema":{
-              "$ref":"#/definitions/ErrorMessage"
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
-          "403":{
-            "description":"Forbidden",
-            "schema":{
-              "$ref":"#/definitions/ErrorMessage"
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
-          "404":{
-            "description":"Not found",
-            "schema":{
-              "$ref":"#/definitions/ErrorMessage"
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
-          "422":{
-            "description":"Bad request",
-            "schema":{
-              "$ref":"#/definitions/ErrorMessage"
+          "422": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
-          "500":{
-            "description":"Server error",
-            "schema":{
-              "$ref":"#/definitions/ErrorMessage"
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
             }
           }
         },
-        "security":[
+        "security": [
           {
-            "oauth":[
-              
-            ]
+            "oauth": []
           }
         ]
       },
-      "put":{
-        "tags":[
+      "put": {
+        "tags": [
           "files"
         ],
-        "summary":"Replace metadata of a file.",
-        "description":"",
-        "operationId":"putFileMetadata",
-        "consumes":[
+        "summary": "Replace metadata of a file.",
+        "description": "",
+        "operationId": "putFileMetadata",
+        "consumes": [
           "application/json"
         ],
-        "produces":[
+        "produces": [
           "application/json"
         ],
-        "parameters":[
+        "parameters": [
           {
-            "name":"owner",
-            "in":"path",
-            "required":true,
-            "type":"string"
+            "name": "owner",
+            "in": "path",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"id",
-            "in":"path",
-            "required":true,
-            "type":"string"
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"file",
-            "in":"path",
-            "required":true,
-            "type":"string"
+            "name": "file",
+            "in": "path",
+            "required": true,
+            "type": "string"
           },
           {
-            "in":"body",
-            "name":"body",
-            "required":true,
-            "schema":{
-              "$ref":"#/definitions/FileMetadataUpdateRequest"
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FileMetadataUpdateRequest"
             }
           }
         ],
-        "responses":{
-          "200":{
-            "description":"Successfully replaced metadata of file.",
-            "schema":{
-              "$ref":"#/definitions/SuccessMessage"
+        "responses": {
+          "200": {
+            "description": "Successfully replaced metadata of file.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
             }
           },
-          "400":{
-            "description":"Bad request",
-            "schema":{
-              "$ref":"#/definitions/ErrorMessage"
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
-          "401":{
-            "description":"Unauthorized",
-            "schema":{
-              "$ref":"#/definitions/ErrorMessage"
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
-          "403":{
-            "description":"Forbidden",
-            "schema":{
-              "$ref":"#/definitions/ErrorMessage"
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
-          "404":{
-            "description":"Not found",
-            "schema":{
-              "$ref":"#/definitions/ErrorMessage"
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
-          "422":{
-            "description":"Bad request",
-            "schema":{
-              "$ref":"#/definitions/ErrorMessage"
+          "422": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
-          "500":{
-            "description":"Server error",
-            "schema":{
-              "$ref":"#/definitions/ErrorMessage"
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
             }
           }
         },
-        "security":[
+        "security": [
           {
-            "oauth":[
-              
-            ]
+            "oauth": []
           }
         ]
       },
-      "patch":{
-        "tags":[
+      "patch": {
+        "tags": [
           "files"
         ],
-        "summary":"Update metadata of a file.",
-        "description":"",
-        "operationId":"patchFileMetadata",
-        "consumes":[
+        "summary": "Update metadata of a file.",
+        "description": "",
+        "operationId": "patchFileMetadata",
+        "consumes": [
           "application/json"
         ],
-        "produces":[
+        "produces": [
           "application/json"
         ],
-        "parameters":[
+        "parameters": [
           {
-            "name":"owner",
-            "in":"path",
-            "required":true,
-            "type":"string"
+            "name": "owner",
+            "in": "path",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"id",
-            "in":"path",
-            "required":true,
-            "type":"string"
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"file",
-            "in":"path",
-            "required":true,
-            "type":"string"
+            "name": "file",
+            "in": "path",
+            "required": true,
+            "type": "string"
           },
           {
-            "in":"body",
-            "name":"body",
-            "required":true,
-            "schema":{
-              "$ref":"#/definitions/FileMetadataUpdateRequest"
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FileMetadataUpdateRequest"
             }
           }
         ],
-        "responses":{
-          "200":{
-            "description":"Successfully updated metadata of file.",
-            "schema":{
-              "$ref":"#/definitions/SuccessMessage"
+        "responses": {
+          "200": {
+            "description": "Successfully updated metadata of file.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
             }
           },
-          "400":{
-            "description":"Bad request",
-            "schema":{
-              "$ref":"#/definitions/ErrorMessage"
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
-          "401":{
-            "description":"Unauthorized",
-            "schema":{
-              "$ref":"#/definitions/ErrorMessage"
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
-          "403":{
-            "description":"Forbidden",
-            "schema":{
-              "$ref":"#/definitions/ErrorMessage"
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
-          "404":{
-            "description":"Not found",
-            "schema":{
-              "$ref":"#/definitions/ErrorMessage"
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
-          "422":{
-            "description":"Bad request",
-            "schema":{
-              "$ref":"#/definitions/ErrorMessage"
+          "422": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
-          "500":{
-            "description":"Server error",
-            "schema":{
-              "$ref":"#/definitions/ErrorMessage"
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
             }
           }
         },
-        "security":[
+        "security": [
           {
-            "oauth":[
-              
-            ]
+            "oauth": []
           }
         ]
       }
