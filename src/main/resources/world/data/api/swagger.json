@@ -893,6 +893,9 @@
           ],
           "type": "string"
         },
+        "assetStatusIri" : {
+          "type" : "string"
+        },
         "properties": {
           "description": "Custom metadata properties. See [/toolkit/custom-metadata](/toolkit/custom-metadata) for more information.",
           "type": "object"
@@ -1032,6 +1035,9 @@
           ],
           "type": "string"
         },
+        "assetStatusIri" : {
+          "type" : "string"
+        },
         "properties": {
           "description": "Custom metadata properties. See [/toolkit/custom-metadata](/toolkit/custom-metadata) for more information.",
           "type": "object"
@@ -1106,6 +1112,9 @@
             "PRIVATE"
           ],
           "type": "string"
+        },
+        "assetStatusIri" : {
+          "type" : "string"
         },
         "properties": {
           "description": "Custom metadata properties. See [/toolkit/custom-metadata](/toolkit/custom-metadata) for more information.",
