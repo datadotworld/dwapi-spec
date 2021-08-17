@@ -893,8 +893,8 @@
           ],
           "type": "string"
         },
-        "assetStatusIri" : {
-          "type" : "string"
+        "assetStatusIri": {
+          "type": "string"
         },
         "properties": {
           "description": "Custom metadata properties. See [/toolkit/custom-metadata](/toolkit/custom-metadata) for more information.",
@@ -1035,8 +1035,8 @@
           ],
           "type": "string"
         },
-        "assetStatusIri" : {
-          "type" : "string"
+        "assetStatusIri": {
+          "type": "string"
         },
         "properties": {
           "description": "Custom metadata properties. See [/toolkit/custom-metadata](/toolkit/custom-metadata) for more information.",
@@ -1113,8 +1113,8 @@
           ],
           "type": "string"
         },
-        "assetStatusIri" : {
-          "type" : "string"
+        "assetStatusIri": {
+          "type": "string"
         },
         "properties": {
           "description": "Custom metadata properties. See [/toolkit/custom-metadata](/toolkit/custom-metadata) for more information.",
@@ -2828,12 +2828,8 @@
       "properties": {
         "relationshipType": {
           "type": "string",
-          "enum": [
-            "USES_DATASET",
-            "REFERENCE_BUSINESS_TERM",
-            "RELATED_TO_BUSINESS_TERM",
-            "USES_DATA_FROM"
-          ]
+          "format": "uri",
+          "description": "IRI of the relationship type"
         },
         "sourceDatasetId": {
           "type": "string",
@@ -2848,6 +2844,7 @@
         },
         "sourceType": {
           "type": "string",
+          "description": "Type of sourceId.",
           "enum": [
             "CATALOG",
             "ANALYSIS",
@@ -2872,6 +2869,7 @@
         },
         "targetType": {
           "type": "string",
+          "description": "Type of targetId.",
           "enum": [
             "CATALOG",
             "ANALYSIS",
