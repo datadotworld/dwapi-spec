@@ -5523,7 +5523,7 @@
           "files"
         ],
         "summary": "Update file description and labels",
-        "description": "Update file description and labels. Only fields included in the request will be updated. All omitted fields will remain untouched. Requesting change in a list replaces the entire list. Requesting a field to be null deletes all values on the field.",
+        "description": "Update file description and labels. Only elements included in the request will be updated. All omitted elements will remain untouched. Requesting change in a list replaces the entire list. Requesting a field to be null deletes all values on the field.",
         "operationId": "patchFileMetadata",
         "consumes": [
           "application/json"
