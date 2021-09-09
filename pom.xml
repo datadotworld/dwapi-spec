@@ -64,12 +64,12 @@ permissions and limitations under the License.
         <repository>
             <id>release-local</id>
             <name>Internal Releases</name>
-            <url>https://dataworld.artifactoryonline.com/dataworld/libs-release-local</url>
+            <url>https://dataworld.jfrog.io/dataworld/libs-release-local</url>
         </repository>
         <snapshotRepository>
             <id>snapshot-local</id>
             <name>Internal Snapshots</name>
-            <url>https://dataworld.artifactoryonline.com/dataworld/libs-snapshot-local</url>
+            <url>https://dataworld.jfrog.io/dataworld/libs-snapshot-local</url>
         </snapshotRepository>
     </distributionManagement>
 </project>
