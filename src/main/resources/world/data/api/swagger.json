@@ -976,6 +976,14 @@
           "minLength": 0,
           "type": "string"
         },
+        "files": {
+          "description": "Updated set of files. At dataset update time, file uploads are not supported. However, this property can be used to add files from URL or update metadata related to existing files.",
+          "items": {
+            "$ref": "#/definitions/FileCreateOrUpdateRequest"
+          },
+          "type": "array",
+          "uniqueItems": false
+        },
         "license": {
           "description": "Dataset license. Find additional info for allowed values [here](https://data.world/license-help).",
           "enum": [
@@ -1045,6 +1053,14 @@
           "maxLength": 120,
           "minLength": 0,
           "type": "string"
+        },
+        "files": {
+          "description": "Initial set of files. At dataset creation time, file uploads are not supported. However, this property can be used to add files via URL.",
+          "items": {
+            "$ref": "#/definitions/FileCreateRequest"
+          },
+          "type": "array",
+          "uniqueItems": false
         },
         "license": {
           "description": "Dataset license. Find additional info for allowed values [here](https://data.world/license-help).",
@@ -2515,6 +2531,14 @@
       "type": "object",
       "title": "Project Update Request",
       "properties": {
+        "files": {
+          "description": "Updated set of files. At project update time, file uploads are not supported. However, this property can be used to add files from URL or update metadata related to existing files. Files included in this request will be added. Previously added files will be preserved without modification.",
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/FileCreateOrUpdateRequest"
+          }
+        },
         "license": {
           "description": "Project license. Find additional info for allowed values [here](https://data.world/license-help).",
           "enum": [
@@ -2584,6 +2608,12 @@
       "title": "Project Create or Update Request",
       "type": "object",
       "properties": {
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileCreateRequest"
+          }
+        },
         "license": {
           "enum": [
             "Public Domain",
@@ -4769,6 +4799,19 @@
                 "summary": "Fake data.world basketball team players and stats. Includes 2016 and 2017 team",
                 "tags": [
                   "basketball"
+                ],
+                "files": [
+                  {
+                    "name": "DataDotWorld2017BBallTeam.csv",
+                    "source": {
+                      "url": "https://docs.google.com/spreadsheets/d/1UheyB6pxTCfLpRmIGITM0fKb8jHVEvPuajmuejxxRyE/pub?gid=1371600687&single=true&output=csv"
+                    },
+                    "description": "Purely fictitious performance data on our purely fictitious data.world basketball team.",
+                    "labels": [
+                      "raw data",
+                      "clean data"
+                    ]
+                  }
                 ]
               },
               "Example with custom metadata": {
@@ -4783,6 +4826,19 @@
                 },
                 "tags": [
                   "basketball"
+                ],
+                "files": [
+                  {
+                    "name": "DataDotWorld2017BBallTeam.csv",
+                    "source": {
+                      "url": "https://docs.google.com/spreadsheets/d/1UheyB6pxTCfLpRmIGITM0fKb8jHVEvPuajmuejxxRyE/pub?gid=1371600687&single=true&output=csv"
+                    },
+                    "description": "Purely fictitious performance data on our purely fictitious data.world basketball team.",
+                    "labels": [
+                      "raw data",
+                      "clean data"
+                    ]
+                  }
                 ]
               }
             }
@@ -4877,7 +4933,20 @@
                 "tags": [
                   "basketball"
                 ],
-                "visibility": "OPEN"
+                "visibility": "OPEN",
+                "files": [
+                  {
+                    "name": "DataDotWorld2017BBallTeam.csv",
+                    "source": {
+                      "url": "https://docs.google.com/spreadsheets/d/1UheyB6pxTCfLpRmIGITM0fKb8jHVEvPuajmuejxxRyE/pub?gid=1371600687&single=true&output=csv"
+                    },
+                    "description": "Purely fictitious performance data on our purely fictitious data.world basketball team.",
+                    "labels": [
+                      "raw data",
+                      "clean data"
+                    ]
+                  }
+                ]
               },
               "Example with custom metadata": {
                 "description": "2017 data.world basketball program",
@@ -4892,7 +4961,20 @@
                 "tags": [
                   "basketball"
                 ],
-                "visibility": "OPEN"
+                "visibility": "OPEN",
+                "files": [
+                  {
+                    "name": "DataDotWorld2017BBallTeam.csv",
+                    "source": {
+                      "url": "https://docs.google.com/spreadsheets/d/1UheyB6pxTCfLpRmIGITM0fKb8jHVEvPuajmuejxxRyE/pub?gid=1371600687&single=true&output=csv"
+                    },
+                    "description": "Purely fictitious performance data on our purely fictitious data.world basketball team.",
+                    "labels": [
+                      "raw data",
+                      "clean data"
+                    ]
+                  }
+                ]
               }
             }
           }
