@@ -1,0 +1,38 @@
+# This is a basic workflow to move the swagger.json to the dwapi-spec-stoplight repo
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - src/main/resources/world/data/api/swagger.json
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "copy-file"
+  copy-file:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Pushes swagger.json file
+        uses: dmnemec/copy_file_to_another_repo_action@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source_file: 'src/main/resources/world/data/api/swagger.json'
+          destination_repo: 'datadotworld/dwapi-spec-stoplight'
+          destination_folder: 'reference/swagger.json'
+          user_email: 'moses.smith@data.world'
+          user_name: 'moses-c-smith'
+          commit_message: 'Updating swagger.json file. Swagger.json file has been merged in dwapi-spec'          
+
