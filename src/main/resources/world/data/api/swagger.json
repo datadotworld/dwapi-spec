@@ -12769,9 +12769,12 @@
       "post": {
         "consumes": [
           "application/json-l",
-          "application/json"
+          "application/json",
+          "application/n-triples",
+          "text/turtle",
+          "application/rdf+xml"
         ],
-        "description": "Append JSON data to a stream associated with a dataset. \n\ndata.world streams are append-only by default. Alternatively, if a primary key is specified (see: `POST:/streams/{owner}/{id}/{streamId}/schema`), data.world will replace records with the same primary key value.\n\n**Streams don't need to be created before you can append data to them**. They will be created on-demand, when the first record is appended or by defining its schema.\n\nMultiple records can be appended at once by using JSON-L (`application/json-l`) as the request content type.\n\n**IMPORTANT**\n\nData uploaded to a dataset via a stream is not immediatelly processed. Instead, it is processed automatically in accordance with the dataset settings (default: daily) or as a result of calling `POST:/datasets/{owner}/{id}/sync`.\n\nOnce processed, the contents of a stream will appear as part of the respective dataset as a `.jsonl` file (e.g. `my-stream` will produce a file named `my-stream.jsonl`).",
+        "description": "Append JSON or RDF data to a stream associated with a dataset. \n\ndata.world streams are append-only by default. Alternatively, if a primary key is specified (see: `POST:/streams/{owner}/{id}/{streamId}/schema`), data.world will replace records with the same primary key value.\n\n**Streams don't need to be created before you can append data to them**. They will be created on-demand, when the first record is appended or by defining its schema.\n\nMultiple records can be appended at once by using JSON-L (`application/json-l`) as the request content type.\n\n**IMPORTANT**\n\nData uploaded to a dataset via a stream is not immediatelly processed. Instead, it is processed automatically in accordance with the dataset settings (default: daily) or as a result of calling `POST:/datasets/{owner}/{id}/sync`.\n\nOnce processed, the contents of a stream will appear as part of the respective dataset as a `.jsonl` file (e.g. `my-stream` will produce a file named `my-stream.jsonl`).\n\nRDF datatypes will be aggregated into a single RDF graph - each payload can contain an arbitrary subgraph, and the resulting graph will be the union of those graphs.",
         "operationId": "appendRecords",
         "parameters": [
           {
