@@ -415,6 +415,81 @@
         }
       }
     },
+    "CatalogGlossarySuggestRequest": {
+      "type": "object",
+      "properties": {
+        "collectionsToAdd": {
+          "type": "array",
+          "example": "Aid Option",
+          "description": "Catalog Collection to which this metadata resource is added. Required for POST and PUT.Available catalog collection can be discovered via appropriate discovery endpoints.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "collectionsToRemove": {
+          "type": "array",
+          "example": "Aid Option",
+          "description": "Catalog Collection to which this metadata resource is added. Required for POST and PUT.Available catalog collection can be discovered via appropriate discovery endpoints.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "title": {
+          "type": "string",
+          "example": "crypto.snowflake",
+          "description": "Title of the metadata resource. Required for POST and PUT.",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "typeLabel": {
+          "type": "string",
+          "example": "Tableau dashboard",
+          "description": "Indicates the type of metadata resource. Some examples of valid values are Report, Tableau dashboard, Glossary, Table, Database view etc. Default values will be assumed if not provided. Defaults to Report for analysis resources, Glossary for Glossary resources, Table for Table resources and Column for Column resources. Once specified during creation, this cannot be changed via PATCH. Only a PUT can change the type "
+        },
+        "description": {
+          "type": "string",
+          "example": "Aid given to charity is an option that can be exercised by individuals and corporations",
+          "description": "A short, but descriptive statement about the metadata resource.",
+          "minLength": 0,
+          "maxLength": 120
+        },
+        "tagsToAdd": {
+          "type": "array",
+          "example": "HumanitarianAid",
+          "description": "A collection of tags to identify the relevance of metadata resource. Tags with no spaces is defacto standard",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tagsToRemove": {
+          "type": "array",
+          "example": "HumanitarianAid",
+          "description": "A collection of tags to identify the relevance of metadata resource. Tags with no spaces is defacto standard",
+          "items": {
+            "type": "string"
+          }
+        },
+        "message": {
+          "type": "string",
+          "example": "I strongly suggest",
+          "description": "Message for the suggestion",
+          "minLength": 1,
+          "maxLength": 250
+        },
+        "properties": {
+          "type": "object",
+          "description": "Custom properties for the metadata resource mapped to API BindingsCan be simple name-value string pairs or nested values for a string name. See examples for details.",
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonNode"
+          }
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 120
+        }
+      }
+    },
     "CatalogHydrationDto": {
       "type": "object",
       "properties": {
@@ -555,6 +630,146 @@
           "items": {
             "type": "string"
           }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Custom properties for the metadata resource mapped to API BindingsCan be simple name-value string pairs or nested values for a string name. See examples for details.",
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonNode"
+          }
+        }
+      }
+    },
+    "MetadataSuggestRequest": {
+      "type": "object",
+      "properties": {
+        "collectionsToAdd": {
+          "type": "array",
+          "example": "Aid Option",
+          "description": "Catalog Collection to which this metadata resource is added. Required for POST and PUT.Available catalog collection can be discovered via appropriate discovery endpoints.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "collectionsToRemove": {
+          "type": "array",
+          "example": "Aid Option",
+          "description": "Catalog Collection to which this metadata resource is added. Required for POST and PUT.Available catalog collection can be discovered via appropriate discovery endpoints.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "title": {
+          "type": "string",
+          "example": "crypto.snowflake",
+          "description": "Title of the metadata resource. Required for POST and PUT.",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "typeLabel": {
+          "type": "string",
+          "example": "Tableau dashboard",
+          "description": "Indicates the type of metadata resource. Some examples of valid values are Report, Tableau dashboard, Glossary, Table, Database view etc. Default values will be assumed if not provided. Defaults to Report for analysis resources, Glossary for Glossary resources, Table for Table resources and Column for Column resources. Once specified during creation, this cannot be changed via PATCH. Only a PUT can change the type "
+        },
+        "description": {
+          "type": "string",
+          "example": "Aid given to charity is an option that can be exercised by individuals and corporations",
+          "description": "A short, but descriptive statement about the metadata resource.",
+          "minLength": 0,
+          "maxLength": 120
+        },
+        "tagsToAdd": {
+          "type": "array",
+          "example": "HumanitarianAid",
+          "description": "A collection of tags to identify the relevance of metadata resource. Tags with no spaces is defacto standard",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tagsToRemove": {
+          "type": "array",
+          "example": "HumanitarianAid",
+          "description": "A collection of tags to identify the relevance of metadata resource. Tags with no spaces is defacto standard",
+          "items": {
+            "type": "string"
+          }
+        },
+        "message": {
+          "type": "string",
+          "example": "I strongly suggest",
+          "description": "Message for the suggestion",
+          "minLength": 1,
+          "maxLength": 250
+        },
+        "properties": {
+          "type": "object",
+          "description": "Custom properties for the metadata resource mapped to API BindingsCan be simple name-value string pairs or nested values for a string name. See examples for details.",
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonNode"
+          }
+        }
+      }
+    },
+    "CatalogTableSuggestRequest": {
+      "type": "object",
+      "properties": {
+        "collectionsToAdd": {
+          "type": "array",
+          "example": "Aid Option",
+          "description": "Catalog Collection to which this metadata resource is added. Required for POST and PUT.Available catalog collection can be discovered via appropriate discovery endpoints.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "collectionsToRemove": {
+          "type": "array",
+          "example": "Aid Option",
+          "description": "Catalog Collection to which this metadata resource is added. Required for POST and PUT.Available catalog collection can be discovered via appropriate discovery endpoints.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "title": {
+          "type": "string",
+          "example": "crypto.snowflake",
+          "description": "Title of the metadata resource. Required for POST and PUT.",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "typeLabel": {
+          "type": "string",
+          "example": "Tableau dashboard",
+          "description": "Indicates the type of metadata resource. Some examples of valid values are Report, Tableau dashboard, Glossary, Table, Database view etc. Default values will be assumed if not provided. Defaults to Report for analysis resources, Glossary for Glossary resources, Table for Table resources and Column for Column resources. Once specified during creation, this cannot be changed via PATCH. Only a PUT can change the type "
+        },
+        "description": {
+          "type": "string",
+          "example": "Aid given to charity is an option that can be exercised by individuals and corporations",
+          "description": "A short, but descriptive statement about the metadata resource.",
+          "minLength": 0,
+          "maxLength": 120
+        },
+        "tagsToAdd": {
+          "type": "array",
+          "example": "HumanitarianAid",
+          "description": "A collection of tags to identify the relevance of metadata resource. Tags with no spaces is defacto standard",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tagsToRemove": {
+          "type": "array",
+          "example": "HumanitarianAid",
+          "description": "A collection of tags to identify the relevance of metadata resource. Tags with no spaces is defacto standard",
+          "items": {
+            "type": "string"
+          }
+        },
+        "message": {
+          "type": "string",
+          "example": "I strongly suggest",
+          "description": "Message for the suggestion",
+          "minLength": 1,
+          "maxLength": 250
         },
         "properties": {
           "type": "object",
@@ -8126,6 +8341,101 @@
         ]
       }
     },
+        "/metadata/data/sources/suggest/{owner}/{sourceid}/tables/{tableid}": {
+      "patch": {
+        "tags": [
+          "metadata/data"
+        ],
+        "summary": "Suggest changes for an existing table.",
+        "description": "",
+        "operationId": "suggestCatalogTable",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "description": "id of the user or organization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sourceid",
+            "in": "path",
+            "description": "database source id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CatalogTableSuggestRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Suggested changes to Table updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "422": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": []
+          }
+        ]
+      }
+    },
     "/metadata/data/sources/{owner}/{sourceid}/tables/{tableid}/columns": {
       "get": {
         "tags": [
@@ -8675,6 +8985,93 @@
             "oauth": [
               "user_api_read"
             ]
+          }
+        ]
+      }
+    },
+    "/metadata/analysis/suggest/{owner}/{id}": {
+      "patch": {
+        "tags": [
+          "metadata/analysis"
+        ],
+        "summary": "Suggest changes for an existing analysis",
+        "description": "",
+        "operationId": "suggestCatalogAnalysis",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MetadataSuggestRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Suggested changes to Analysis updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "422": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": []
           }
         ]
       }
@@ -9766,6 +10163,93 @@
             "oauth": [
               "user_api_write"
             ]
+          }
+        ]
+      }
+    },
+    "/metadata/glossary/suggest/{owner}/{id}": {
+      "patch": {
+        "tags": [
+          "metadata/glossary"
+        ],
+        "summary": "Suggest changes for an existing glossary.",
+        "description": "",
+        "operationId": "suggestCatalogGlossary",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CatalogGlossarySuggestRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Suggested changes to Glossary updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/SuccessMessage"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "422": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth": []
           }
         ]
       }
